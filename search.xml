@@ -43,7 +43,7 @@
 <h2 id="二、文章编辑问题"><a href="#二、文章编辑问题" class="headerlink" title="二、文章编辑问题"></a>二、文章编辑问题</h2><h3 id="显示不出分类、标签问题"><a href="#显示不出分类、标签问题" class="headerlink" title="显示不出分类、标签问题"></a>显示不出分类、标签问题</h3><h4 id="1-查看themes-next-config-yml主题配置文件"><a href="#1-查看themes-next-config-yml主题配置文件" class="headerlink" title="1.查看themes/next/_config.yml主题配置文件"></a>1.查看themes/next/_config.yml主题配置文件</h4><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/menu.png" class="" title="This is an example image">
 
 <p>打开主题配置文件<code>\_config.yml</code>，在vim编辑器内用<code>/</code>搜索<code>menu</code>，确定categories和tags是取消注释状态的</p>
-<h4 id="2-添加分类模块"><a href="#2-添加分类模块" class="headerlink" title="2.添加分类模块"></a>2.添加分类模块</h4><p>在主文件夹<code>blog</code>页面下</p>
+<h4 id="2-添加分类模块"><a href="#2-添加分类模块" class="headerlink" title="2.添加分类模块"></a>2.添加分类模块</h4><p>在主文件夹<code>Blog</code>页面下</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page categories</span><br><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure>
 <p>在source文件夹现在有了<code>categories/index.md</code>和<code>tags/index.md</code>两个新文件</p>
 <img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/categories.png" class="" title="This is an example image">
@@ -58,7 +58,7 @@
 <h3 id="Hexo博客搭建之在文章中插入图片"><a href="#Hexo博客搭建之在文章中插入图片" class="headerlink" title="Hexo博客搭建之在文章中插入图片"></a>Hexo博客搭建之在文章中插入图片</h3><h4 id="1-本地引用"><a href="#1-本地引用" class="headerlink" title="1.本地引用"></a>1.本地引用</h4><p>当中只用到少量图片时，可以将图片统一放在<code>source/images</code>文件夹中，通过markdown语法添加</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ![](&#x2F;images&#x2F;image.png)</span><br></pre></td></tr></table></figure>
 
-<h4 id="2-相对路径"><a href="#2-相对路径" class="headerlink" title="2.相对路径"></a>2.相对路径</h4><p>图片可以放在文章自己的目录中，需要先配置<code>\_config.yml</code>文件，将<code>post\_asset\_folder</code>设置为true。设置完之后，在执行<code>hexo new &quot;post\_name&quot;</code> 这个操作后，在<code>source/\_posts</code>中会自动生成<code>post\_name.md</code>和<code>post\_name</code>同名文件夹。这时候只需要将图片放在<code>post\_name</code>文件夹中，文章中可以直接使用相对路径引用了。</p>
+<h4 id="2-相对路径"><a href="#2-相对路径" class="headerlink" title="2.相对路径"></a>2.相对路径</h4><p>图片可以放在文章自己的目录中，需要先配置<code>_config.yml</code>文件，将<code>post_asset_folder</code>设置为true。设置完之后，在执行<code>hexo new &quot;post_name&quot;</code> 这个操作后，在<code>source/_posts</code>中会自动生成<code>post_name.md</code>和<code>post_name</code>同名文件夹。这时候只需要将图片放在<code>post_name</code>文件夹中，文章中可以直接使用相对路径引用了。</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ![](image.png)</span><br></pre></td></tr></table></figure>
 
 <p>但是!!重点来了，这个经典的markdown语句只能保证文章中可以显示出图片，但首页上不限时，很丑。可以同时显示的语句是:</p>
