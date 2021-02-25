@@ -32,7 +32,7 @@
 <meta property="og:image" content="http://example.com/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/test.png">
 <meta property="og:image" content="http://example.com/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/show.png">
 <meta property="article:published_time" content="2021-02-25T04:46:21.000Z">
-<meta property="article:modified_time" content="2021-02-25T13:01:34.254Z">
+<meta property="article:modified_time" content="2021-02-25T13:11:43.766Z">
 <meta property="article:author" content="odcowl">
 <meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
@@ -206,7 +206,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-02-25 12:46:21 / 修改时间：21:01:34" itemprop="dateCreated datePublished" datetime="2021-02-25T12:46:21+08:00">2021-02-25</time>
+              <time title="创建时间：2021-02-25 12:46:21 / 修改时间：21:11:43" itemprop="dateCreated datePublished" datetime="2021-02-25T12:46:21+08:00">2021-02-25</time>
             </span>
 
           
@@ -247,6 +247,17 @@
 <img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/show.png" class="" title="This is an example image">
 
 <h4 id="4-参考"><a href="#4-参考" class="headerlink" title="4.参考"></a>4.参考</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Wonz5130/article/details/84666519">Hexo搭建博客显示不出分类、标签问题</a></p>
+<h3 id="Hexo博客搭建之在文章中插入图片"><a href="#Hexo博客搭建之在文章中插入图片" class="headerlink" title="Hexo博客搭建之在文章中插入图片"></a>Hexo博客搭建之在文章中插入图片</h3><h4 id="1-本地引用"><a href="#1-本地引用" class="headerlink" title="1.本地引用"></a>1.本地引用</h4><p>当Hexo项目中只用到少量图片时，可以将图片统一放在source/images文件夹中，通过markdown语法添加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ![](&#x2F;images&#x2F;image.png)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-相对路径"><a href="#2-相对路径" class="headerlink" title="2.相对路径"></a>2.相对路径</h4><p>图片可以放在文章自己的目录中，需要先配置_config.yml文件，将post_asset_folder设置为true。设置完之后，在执行$ hexo new “post_name” 这个操作后，在source/_posts中会自动生成post_name.md和post_name同名文件夹。这时候只需要将图片放在post_name文件夹中，文章中可以直接使用相对路径引用了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ![](image.png)</span><br></pre></td></tr></table></figure>
+
+<p>但是!!重点来了，这个经典的markdown语句只能保证文章中可以显示出图片，但首页上不限时，很丑。可以同时显示的语句是:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ &#123;% asset_img exemple.png This is an example image %&#125;</span><br></pre></td></tr></table></figure>
+<p>这时候就大功告成啦！</p>
+<h4 id="3-云引用"><a href="#3-云引用" class="headerlink" title="3.云引用"></a>3.云引用</h4><p>比如一些免费的CDN服务，如Cloudinary等免费生成的url地址，直接用markdown语法引用即可。</p>
+<h4 id="4-参考-1"><a href="#4-参考-1" class="headerlink" title="4.参考"></a>4.参考</h4><p><a target="_blank" rel="noopener" href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">Hexo博客搭建之在文章中插入图片</a></p>
 
     </div>
 
@@ -358,7 +369,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%96%87%E7%AB%A0%E5%88%9B%E5%BB%BA%E5%92%8C%E5%8F%91%E5%B8%83%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">一、文章创建和发布问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8F%91%E5%B8%83-Create-a-new-Post"><span class="nav-number">1.2.</span> <span class="nav-text">创建一个新的发布 Create a new Post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%9C%8D%E5%8A%A1%E5%99%A8-Run-server"><span class="nav-number">1.3.</span> <span class="nav-text">运行服务器 Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%BB%9F%E8%AE%A1%E6%96%87%E4%BB%B6-Generate-static-files"><span class="nav-number">1.4.</span> <span class="nav-text">生成统计文件 Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%A8%8B%E7%AB%99%E7%82%B9-Deploy-to-remote-sites"><span class="nav-number">1.5.</span> <span class="nav-text">部署到远程站点 Deploy to remote sites</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%96%87%E7%AB%A0%E7%BC%96%E8%BE%91%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">二、文章编辑问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%87%BA%E5%88%86%E7%B1%BB%E3%80%81%E6%A0%87%E7%AD%BE%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">显示不出分类、标签问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%9F%A5%E7%9C%8Bthemes-next-config-yml%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.查看themes&#x2F;next&#x2F;_config.yml主题配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9D%97"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.添加分类模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%96%87%E7%AB%A0%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%A0%87%E7%AD%BE%E6%88%96%E5%88%86%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95%E5%8F%8A%E6%95%88%E6%9E%9C"><span class="nav-number">2.1.3.</span> <span class="nav-text">3.文章中添加标签或分类的方法及效果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%8F%82%E8%80%83"><span class="nav-number">2.1.4.</span> <span class="nav-text">4.参考</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%96%87%E7%AB%A0%E5%88%9B%E5%BB%BA%E5%92%8C%E5%8F%91%E5%B8%83%E9%97%AE%E9%A2%98"><span class="nav-number">1.</span> <span class="nav-text">一、文章创建和发布问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="nav-number">1.1.</span> <span class="nav-text">常用命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%96%B0%E7%9A%84%E5%8F%91%E5%B8%83-Create-a-new-Post"><span class="nav-number">1.2.</span> <span class="nav-text">创建一个新的发布 Create a new Post</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%90%E8%A1%8C%E6%9C%8D%E5%8A%A1%E5%99%A8-Run-server"><span class="nav-number">1.3.</span> <span class="nav-text">运行服务器 Run server</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%9F%E6%88%90%E7%BB%9F%E8%AE%A1%E6%96%87%E4%BB%B6-Generate-static-files"><span class="nav-number">1.4.</span> <span class="nav-text">生成统计文件 Generate static files</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%83%A8%E7%BD%B2%E5%88%B0%E8%BF%9C%E7%A8%8B%E7%AB%99%E7%82%B9-Deploy-to-remote-sites"><span class="nav-number">1.5.</span> <span class="nav-text">部署到远程站点 Deploy to remote sites</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%96%87%E7%AB%A0%E7%BC%96%E8%BE%91%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">二、文章编辑问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%98%BE%E7%A4%BA%E4%B8%8D%E5%87%BA%E5%88%86%E7%B1%BB%E3%80%81%E6%A0%87%E7%AD%BE%E9%97%AE%E9%A2%98"><span class="nav-number">2.1.</span> <span class="nav-text">显示不出分类、标签问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%9F%A5%E7%9C%8Bthemes-next-config-yml%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.查看themes&#x2F;next&#x2F;_config.yml主题配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B7%BB%E5%8A%A0%E5%88%86%E7%B1%BB%E6%A8%A1%E5%9D%97"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.添加分类模块</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%96%87%E7%AB%A0%E4%B8%AD%E6%B7%BB%E5%8A%A0%E6%A0%87%E7%AD%BE%E6%88%96%E5%88%86%E7%B1%BB%E7%9A%84%E6%96%B9%E6%B3%95%E5%8F%8A%E6%95%88%E6%9E%9C"><span class="nav-number">2.1.3.</span> <span class="nav-text">3.文章中添加标签或分类的方法及效果</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%8F%82%E8%80%83"><span class="nav-number">2.1.4.</span> <span class="nav-text">4.参考</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E4%B9%8B%E5%9C%A8%E6%96%87%E7%AB%A0%E4%B8%AD%E6%8F%92%E5%85%A5%E5%9B%BE%E7%89%87"><span class="nav-number">2.2.</span> <span class="nav-text">Hexo博客搭建之在文章中插入图片</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%9C%AC%E5%9C%B0%E5%BC%95%E7%94%A8"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.本地引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E7%9B%B8%E5%AF%B9%E8%B7%AF%E5%BE%84"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.相对路径</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E4%BA%91%E5%BC%95%E7%94%A8"><span class="nav-number">2.2.3.</span> <span class="nav-text">3.云引用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E5%8F%82%E8%80%83-1"><span class="nav-number">2.2.4.</span> <span class="nav-text">4.参考</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -427,7 +438,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共567字</span>
+  <span class="post-count">博客全站共844字</span>
 </div>
 
         
