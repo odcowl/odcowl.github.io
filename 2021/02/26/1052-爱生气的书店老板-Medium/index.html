@@ -28,7 +28,7 @@
 <meta property="og:description" content="力扣每日一题系列(2021.02.23)之爱生气的书店老板难度：中等 一、题目今天，书店老板有一家店打算试营业customers.length分钟。每分钟都有一些顾客customers[i]会进入书店，所有这些顾客都会在那一分钟结束后离开。 在某些时候，书店老板会生气。 如果书店老板在第i分钟生气，那么grumpy[i] &#x3D; 1，否则grumpy[i] &#x3D; 0。 当书店老板生气时，那一分钟的顾客就">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-02-26T04:05:26.000Z">
-<meta property="article:modified_time" content="2021-02-26T14:59:56.506Z">
+<meta property="article:modified_time" content="2021-02-26T15:01:16.563Z">
 <meta property="article:author" content="odcowl">
 <meta property="article:tag" content="滑动窗口">
 <meta name="twitter:card" content="summary">
@@ -214,7 +214,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-02-26 12:05:26 / 修改时间：22:59:56" itemprop="dateCreated datePublished" datetime="2021-02-26T12:05:26+08:00">2021-02-26</time>
+              <time title="创建时间：2021-02-26 12:05:26 / 修改时间：23:01:16" itemprop="dateCreated datePublished" datetime="2021-02-26T12:05:26+08:00">2021-02-26</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -261,8 +261,12 @@
 <ol>
 <li>算毫无作为时满意的客户数量 origin</li>
 <li>算滑动窗口X带来的改变 通过curValue的最大值resValue</li>
-<li>1 算前X个格子</li>
-<li>2 算第X到len(grumpy)个格子</li>
+</ol>
+<ul>
+<li>算前X个格子</li>
+<li>算第X到len(grumpy)个格子</li>
+</ul>
+<ol start="3">
 <li>得到结果为origin+resValue<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type customers: List[int]</span><br><span class="line">        :type grumpy: List[int]</span><br><span class="line">        :type X: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        </span><br><span class="line">        #第一步: 计算不做任何改变，满意客户的数量</span><br><span class="line">        origin &#x3D; sum(map(lambda x,y:x*y, [1-i for i in grumpy], customers))</span><br><span class="line">        </span><br><span class="line">        #第二步：计算滑动窗口里可以增加满意客户的数量</span><br><span class="line">        # 2.1 先计算前X个格子的值</span><br><span class="line">        curValue &#x3D; 0</span><br><span class="line">        for i in range(X):</span><br><span class="line">            if grumpy[i] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue +&#x3D; customers[i]</span><br><span class="line">        resValue &#x3D; curValue</span><br><span class="line">        # 2.2 开始向右滑————————————</span><br><span class="line">        for i in range(X,len(grumpy)):</span><br><span class="line">            #先验证左边（左边滑出的那个格子）是否在生气，如果在生气，需要在curValue剪掉</span><br><span class="line">            if grumpy[i-X] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue -&#x3D; customers[i-X]</span><br><span class="line">            #再验证右边（右边新增的那个格子）是否在生气，如果在生气，需要在curValue加上</span><br><span class="line">            if grumpy[i] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue +&#x3D; customers[i]</span><br><span class="line">            #判断当下curValue和史上最大curValue的关系</span><br><span class="line">            resValue &#x3D; max(resValue,curValue)</span><br><span class="line">        </span><br><span class="line">        return origin + resValue</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
