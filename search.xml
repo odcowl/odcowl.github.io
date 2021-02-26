@@ -111,32 +111,6 @@
       </categories>
   </entry>
   <entry>
-    <title>我的vim编辑器cheat sheet</title>
-    <url>/2021/02/26/%E6%88%91%E7%9A%84vim%E7%BC%96%E8%BE%91%E5%99%A8cheat-sheet/</url>
-    <content><![CDATA[<p>比较喜欢vim编辑器的极简化，所以慢慢整理了一些自己常用的命令</p>
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>动作</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>k-j-h-l</td>
-<td>代表上-下-左-右</td>
-</tr>
-<tr>
-<td>数字0</td>
-<td>回到本行开头</td>
-</tr>
-<tr>
-<td></td>
-<td></td>
-</tr>
-</tbody></table>
-]]></content>
-  </entry>
-  <entry>
     <title>Hexo搭建相关问题</title>
     <url>/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/</url>
     <content><![CDATA[<h2 id="一、文章创建和发布问题"><a href="#一、文章创建和发布问题" class="headerlink" title="一、文章创建和发布问题"></a>一、文章创建和发布问题</h2><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo g 【生成静态文件】</span><br><span class="line">$ hexo d 【部署到网站或服务器，部署之前需要先生成静态文件】</span><br><span class="line">$ hexo clean 【清除缓存文件(db.json)和已经生成的静态文件(public)】</span><br></pre></td></tr></table></figure>
@@ -184,5 +158,71 @@
       <tags>
         <tag>hexo</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>我的vim编辑器cheat sheet</title>
+    <url>/2021/02/26/%E6%88%91%E7%9A%84vim%E7%BC%96%E8%BE%91%E5%99%A8cheat-sheet/</url>
+    <content><![CDATA[<p>比较喜欢vim编辑器的极简化，所以慢慢整理了一些自己常用的命令</p>
+<h4 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>动作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>k-j-h-l</td>
+<td>代表上-下-左-右</td>
+</tr>
+<tr>
+<td>数字0</td>
+<td>回到本行开头</td>
+</tr>
+<tr>
+<td>$</td>
+<td>回到本行结尾</td>
+</tr>
+<tr>
+<td>w</td>
+<td>移到下一单词或标点的开头</td>
+</tr>
+<tr>
+<td>W</td>
+<td>移到下一单词的开头,忽略标点</td>
+</tr>
+<tr>
+<td>b</td>
+<td>移到上一单词或标点的开头</td>
+</tr>
+<tr>
+<td>B</td>
+<td>移到上一单词的开头,忽略标点</td>
+</tr>
+<tr>
+<td>nG</td>
+<td>移到第n行,注意G也是大写</td>
+</tr>
+<tr>
+<td>:n + enter键</td>
+<td>移到第n行</td>
+</tr>
+<tr>
+<td>G</td>
+<td>移到光标最后一行</td>
+</tr>
+<tr>
+<td>H</td>
+<td>移到当前屏幕的第一行</td>
+</tr>
+<tr>
+<td>L</td>
+<td>移到当前屏幕的最后一行</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+]]></content>
   </entry>
 </search>
