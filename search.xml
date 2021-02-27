@@ -1,9 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>395.至少有K个重复字符的最长子串(Medium)</title>
-    <url>/2021/02/27/395-%E8%87%B3%E5%B0%91%E6%9C%89K%E4%B8%AA%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2-Medium/</url>
-    <content><![CDATA[]]></content>
+    <title>15.三数之和(Medium)</title>
+    <url>/2021/02/26/15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C-Medium/</url>
+    <content><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给你一个包含<code>n</code>个整数的数组<code>nums</code>,判断<code>nums</code>中是否存在三个元素a,b,c，使得<code>a+b+c=0</code> ？请你找出所有和为<code>0</code>且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
+<p>示例1:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = [-1,0,1,2,-1,-4]</span><br><span class="line">输出：[[-1,-1,2],[-1,0,1]]</span><br></pre></td></tr></table></figure>
+<p>示例2:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure>
+<p>示例3:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [0]</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure>
+<p>提示：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">* 0 &lt;= nums.length &lt;= 3000</span><br><span class="line">* -10^5 &lt;= nums[i] &lt;= 10^5</span><br></pre></td></tr></table></figure>
+
+<h3 id="排序➕双指针解法"><a href="#排序➕双指针解法" class="headerlink" title="排序➕双指针解法"></a>排序➕双指针解法</h3><p>三数之和这道题我一直思路不清晰，下面的代码也只是复现别人的思路，接下来总结一下：</p>
+<ol>
+<li>边界条件判断，当<code>nums</code>不存在，或<code>len(nums)&lt;3</code>的时候，返回空集合<code>[]</code></li>
+<li>对数组进行从小到大的排序</li>
+<li>对排序后的数组开始遍历<ol>
+<li>如果<code>nums[i]&gt;0</code>,由于数组已经排序过了，那么<code>nums[i]</code>后面的<code>nums[L]</code>和<code>nums[R]</code>肯定比<code>nums[i]</code>更大，三个大于零的数字和不等于零。</li>
+<li>如果<code>nums[i]</code>和<code>nums[i-1]</code>是重复的，跳过</li>
+<li>令左指针指向<code>L = i + 1</code>, 令右指针指向<code>R = len(nums)-1</code>（其实这就是最后一位)<ul>
+<li>如果<code>nums[i]+nums[L]+nums[R]=0</code>，在答案列表里储存此组数；同时，判断<code>nums[L+1]</code>和<code>nums[L]</code>是否重复，及<code>nums[R]</code>和<code>nums[R-1]</code>是否重复，如果是的话，将<code>L，R</code>移到不再重复的位置，然后再令<code>L=L+1</code>,<code>R=R-1</code>即继续循环</li>
+<li>如果<code>nums[i]+nums[L]+nums[R]&gt;0</code>, 说明右指针太大，<code>R</code>向左移动一位, <code>R=R-1</code></li>
+<li>如果<code>nums[i]+nums[L]+nums[R]&lt;0</code>，说明左指针太小，<code>L</code>向右移动一位，<code>L=L+1</code></li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def threeSum(self, nums):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 第一步：如果nums不存在或nums不到三个元素，返回空集</span></span><br><span class="line">        <span class="keyword">if</span> not nums or len(nums) &lt; 3:</span><br><span class="line">            <span class="built_in">return</span> []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第二步：对nums从小到大进行排序</span></span><br><span class="line">        nums.sort() </span><br><span class="line">        </span><br><span class="line">        res = []</span><br><span class="line">        <span class="comment"># 第三步：对排序后的nums进行遍历</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; 0:</span><br><span class="line">                <span class="built_in">return</span>  res <span class="comment">#如果nums[i]已经大于0，因为已排序，后面不可能再有数字和nums[i]相加并等于0，返回当下答案</span></span><br><span class="line">            <span class="keyword">if</span> i &gt; 0 and nums[i] == nums[i-1]:</span><br><span class="line">                <span class="built_in">continue</span> <span class="comment">#如果nums[i]和nums[i-1]</span></span><br><span class="line">            L = i + 1 <span class="comment">#当下nums[i]的右边一位</span></span><br><span class="line">            R = len(nums) - 1 <span class="comment">#最后一位</span></span><br><span class="line">            <span class="keyword">while</span> L &lt; R: </span><br><span class="line">                <span class="keyword">if</span> nums[i]+nums[L]+nums[R] == 0:</span><br><span class="line">                    res.append([nums[i],nums[L],nums[R]])</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[L] == nums[L+1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复最右端</span></span><br><span class="line">                        L = L + 1</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[R] == nums[R-1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复的最左端</span></span><br><span class="line">                        R = R - 1</span><br><span class="line">                    L = L + 1</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和大于0，说明nums[R]太大，nums[R]向左移</span></span><br><span class="line">                <span class="keyword">elif</span> nums[i]+nums[L]+nums[R] &gt; 0:</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和小于0，说明nums[L]太小，nums[L]向右移</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    L = L + 1</span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
+
+
+
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>双指针</tag>
+      </tags>
   </entry>
   <entry>
     <title>1052.爱生气的书店老板(Medium)</title>
@@ -50,6 +86,11 @@
       </tags>
   </entry>
   <entry>
+    <title>395.至少有K个重复字符的最长子串(Medium)</title>
+    <url>/2021/02/27/395-%E8%87%B3%E5%B0%91%E6%9C%89K%E4%B8%AA%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2-Medium/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>856.转置矩阵(Easy)</title>
     <url>/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/</url>
     <content><![CDATA[<p>力扣每日一题系列(2021.02.25)之<a href="https://leetcode-cn.com/problems/transpose-matrix/">转置矩阵</a><br>难度：简单</p>
@@ -75,44 +116,52 @@
       </categories>
   </entry>
   <entry>
-    <title>15.三数之和(Medium)</title>
-    <url>/2021/02/26/15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C-Medium/</url>
-    <content><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给你一个包含<code>n</code>个整数的数组<code>nums</code>,判断<code>nums</code>中是否存在三个元素a,b,c，使得<code>a+b+c=0</code> ？请你找出所有和为<code>0</code>且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
-<p>示例1:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = [-1,0,1,2,-1,-4]</span><br><span class="line">输出：[[-1,-1,2],[-1,0,1]]</span><br></pre></td></tr></table></figure>
-<p>示例2:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure>
-<p>示例3:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [0]</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure>
-<p>提示：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">* 0 &lt;= nums.length &lt;= 3000</span><br><span class="line">* -10^5 &lt;= nums[i] &lt;= 10^5</span><br></pre></td></tr></table></figure>
+    <title>Hexo搭建相关问题</title>
+    <url>/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/</url>
+    <content><![CDATA[<h2 id="一、文章创建和发布问题"><a href="#一、文章创建和发布问题" class="headerlink" title="一、文章创建和发布问题"></a>一、文章创建和发布问题</h2><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo g 【生成静态文件】</span><br><span class="line">$ hexo d 【部署到网站或服务器，部署之前需要先生成静态文件】</span><br><span class="line">$ hexo clean 【清除缓存文件(db.json)和已经生成的静态文件(public)】</span><br></pre></td></tr></table></figure>
 
-<h3 id="排序➕双指针解法"><a href="#排序➕双指针解法" class="headerlink" title="排序➕双指针解法"></a>排序➕双指针解法</h3><p>三数之和这道题我一直思路不清晰，下面的代码也只是复现别人的思路，接下来总结一下：</p>
-<ol>
-<li>边界条件判断，当<code>nums</code>不存在，或<code>len(nums)&lt;3</code>的时候，返回空集合<code>[]</code></li>
-<li>对数组进行从小到大的排序</li>
-<li>对排序后的数组开始遍历<ol>
-<li>如果<code>nums[i]&gt;0</code>,由于数组已经排序过了，那么<code>nums[i]</code>后面的<code>nums[L]</code>和<code>nums[R]</code>肯定比<code>nums[i]</code>更大，三个大于零的数字和不等于零。</li>
-<li>如果<code>nums[i]</code>和<code>nums[i-1]</code>是重复的，跳过</li>
-<li>令左指针指向<code>L = i + 1</code>, 令右指针指向<code>R = len(nums)-1</code>（其实这就是最后一位)<ul>
-<li>如果<code>nums[i]+nums[L]+nums[R]=0</code>，在答案列表里储存此组数；同时，判断<code>nums[L+1]</code>和<code>nums[L]</code>是否重复，及<code>nums[R]</code>和<code>nums[R-1]</code>是否重复，如果是的话，将<code>L，R</code>移到不再重复的位置，然后再令<code>L=L+1</code>,<code>R=R-1</code>即继续循环</li>
-<li>如果<code>nums[i]+nums[L]+nums[R]&gt;0</code>, 说明右指针太大，<code>R</code>向左移动一位, <code>R=R-1</code></li>
-<li>如果<code>nums[i]+nums[L]+nums[R]&lt;0</code>，说明左指针太小，<code>L</code>向右移动一位，<code>L=L+1</code></li>
-</ul>
-</li>
-</ol>
-</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def threeSum(self, nums):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 第一步：如果nums不存在或nums不到三个元素，返回空集</span></span><br><span class="line">        <span class="keyword">if</span> not nums or len(nums) &lt; 3:</span><br><span class="line">            <span class="built_in">return</span> []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第二步：对nums从小到大进行排序</span></span><br><span class="line">        nums.sort() </span><br><span class="line">        </span><br><span class="line">        res = []</span><br><span class="line">        <span class="comment"># 第三步：对排序后的nums进行遍历</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; 0:</span><br><span class="line">                <span class="built_in">return</span>  res <span class="comment">#如果nums[i]已经大于0，因为已排序，后面不可能再有数字和nums[i]相加并等于0，返回当下答案</span></span><br><span class="line">            <span class="keyword">if</span> i &gt; 0 and nums[i] == nums[i-1]:</span><br><span class="line">                <span class="built_in">continue</span> <span class="comment">#如果nums[i]和nums[i-1]</span></span><br><span class="line">            L = i + 1 <span class="comment">#当下nums[i]的右边一位</span></span><br><span class="line">            R = len(nums) - 1 <span class="comment">#最后一位</span></span><br><span class="line">            <span class="keyword">while</span> L &lt; R: </span><br><span class="line">                <span class="keyword">if</span> nums[i]+nums[L]+nums[R] == 0:</span><br><span class="line">                    res.append([nums[i],nums[L],nums[R]])</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[L] == nums[L+1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复最右端</span></span><br><span class="line">                        L = L + 1</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[R] == nums[R-1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复的最左端</span></span><br><span class="line">                        R = R - 1</span><br><span class="line">                    L = L + 1</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和大于0，说明nums[R]太大，nums[R]向左移</span></span><br><span class="line">                <span class="keyword">elif</span> nums[i]+nums[L]+nums[R] &gt; 0:</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和小于0，说明nums[L]太小，nums[L]向右移</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    L = L + 1</span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
+<h3 id="创建一个新的发布-Create-a-new-Post"><a href="#创建一个新的发布-Create-a-new-Post" class="headerlink" title="创建一个新的发布 Create a new Post"></a>创建一个新的发布 Create a new Post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My new post&quot;</span></span><br></pre></td></tr></table></figure>
 
+<p>更多信息 More info<a href="https://hexo.io/docs/writing.html">writing</a></p>
+<h3 id="运行服务器-Run-server"><a href="#运行服务器-Run-server" class="headerlink" title="运行服务器 Run server"></a>运行服务器 Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
+<p>更多信息 More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="生成统计文件-Generate-static-files"><a href="#生成统计文件-Generate-static-files" class="headerlink" title="生成统计文件 Generate static files"></a>生成统计文件 Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>更多信息 More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="部署到远程站点-Deploy-to-remote-sites"><a href="#部署到远程站点-Deploy-to-remote-sites" class="headerlink" title="部署到远程站点 Deploy to remote sites"></a>部署到远程站点 Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>更多信息 More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h2 id="二、文章编辑问题"><a href="#二、文章编辑问题" class="headerlink" title="二、文章编辑问题"></a>二、文章编辑问题</h2><h3 id="显示不出分类、标签问题"><a href="#显示不出分类、标签问题" class="headerlink" title="显示不出分类、标签问题"></a>显示不出分类、标签问题</h3><h4 id="1-查看themes-next-config-yml主题配置文件"><a href="#1-查看themes-next-config-yml主题配置文件" class="headerlink" title="1.查看themes/next/_config.yml主题配置文件"></a>1.查看themes/next/_config.yml主题配置文件</h4><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/menu.png" class="" title="This is an example image">
 
+<p>打开主题配置文件<code>_config.yml</code>，在vim编辑器内用<code>/</code>搜索<code>menu</code>，确定categories和tags是取消注释状态的</p>
+<h4 id="2-添加分类模块"><a href="#2-添加分类模块" class="headerlink" title="2.添加分类模块"></a>2.添加分类模块</h4><p>在主文件夹<code>Blog</code>页面下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page categories</span><br><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure>
+<p>在source文件夹现在有了<code>categories/index.md</code>和<code>tags/index.md</code>两个新文件</p>
+<img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/categories.png" class="" title="This is an example image">
+<p>以<code>categories/index.md</code>为例子,应该自行添加第二行:<br><code>type: categories</code><br>注意:和categories中有一个空格</p>
+<h4 id="3-文章中添加标签或分类的方法及效果"><a href="#3-文章中添加标签或分类的方法及效果" class="headerlink" title="3.文章中添加标签或分类的方法及效果"></a>3.文章中添加标签或分类的方法及效果</h4><p>在创建新文章后的顶端添加categories或tags的名字，注意空格</p>
+<img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/test.png" class="" title="This is an example image">
+
+<p>最后的效果:</p>
+<img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/show.png" class="" title="This is an example image">
+
+<h4 id="4-参考"><a href="#4-参考" class="headerlink" title="4.参考"></a>4.参考</h4><p><a href="https://blog.csdn.net/Wonz5130/article/details/84666519">Hexo搭建博客显示不出分类、标签问题</a></p>
+<h3 id="Hexo博客搭建之在文章中插入图片"><a href="#Hexo博客搭建之在文章中插入图片" class="headerlink" title="Hexo博客搭建之在文章中插入图片"></a>Hexo博客搭建之在文章中插入图片</h3><h4 id="1-本地引用"><a href="#1-本地引用" class="headerlink" title="1.本地引用"></a>1.本地引用</h4><p>当中只用到少量图片时，可以将图片统一放在<code>source/images</code>文件夹中，通过markdown语法添加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ![](&#x2F;images&#x2F;image.png)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-相对路径"><a href="#2-相对路径" class="headerlink" title="2.相对路径"></a>2.相对路径</h4><p>图片可以放在文章自己的目录中，需要先配置<code>_config.yml</code>文件，将<code>post_asset_folder</code>设置为true。设置完之后，在执行<code>hexo new &quot;post_name&quot;</code> 这个操作后，在<code>source/_posts</code>中会自动生成<code>post_name.md</code>和<code>post_name</code>同名文件夹。这时候只需要将图片放在<code>post_name</code>文件夹中，文章中可以直接使用相对路径引用了。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ![](image.png)</span><br></pre></td></tr></table></figure>
+
+<p>但是!!重点来了，这个经典的markdown语句只能保证文章中可以显示出图片，但首页上不限时，很丑。可以同时显示的语句是:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ &#123;% asset_img exemple.png This is an example image %&#125;</span><br></pre></td></tr></table></figure>
+<p>这时候就大功告成啦！</p>
+<h4 id="3-云引用"><a href="#3-云引用" class="headerlink" title="3.云引用"></a>3.云引用</h4><p>比如一些免费的CDN服务，如Cloudinary等免费生成的url地址，直接用markdown语法引用即可。</p>
+<h4 id="4-参考-1"><a href="#4-参考-1" class="headerlink" title="4.参考"></a>4.参考</h4><p><a href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">Hexo博客搭建之在文章中插入图片</a></p>
 ]]></content>
       <categories>
-        <category>LeetCode</category>
+        <category>网页</category>
       </categories>
       <tags>
-        <tag>双指针</tag>
+        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -186,58 +235,10 @@
     <url>/2021/02/27/%E6%B3%95%E8%AF%AD%E8%8A%B1%E5%8D%89%E8%AF%8D%E6%B1%87/</url>
     <content><![CDATA[<h4 id="Les-fleurs"><a href="#Les-fleurs" class="headerlink" title="Les fleurs"></a>Les fleurs</h4><p>mimosa m.n 含羞草</p>
 <p><img src="https://www.google.com/url?sa=i&url=https://tw.creema.net/blog/764/detail&psig=AOvVaw04ph0t6Fvs_MVDgAS6iT3R&ust=1614513597626000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCPDruf2Biu8CFQAAAAAdAAAAABAv" alt="含羞草"></p>
+<p>含羞草（Mimosa pudica）是一种不寻常的植物，因为它通过折叠叶子来响应触摸。出于这个原因，它通常也被称为敏感植物。好奇的猫可能喜欢在这种植物的叶子上击球，因为它会响应他们俏皮的姿势。幸运的是，根据康涅狄格大学农业与自然资源学院的说法，如果你的猫决定蚕食一两片叶子，他就不会受到伤害：这种植物没有毒性。</p>
 ]]></content>
       <categories>
         <category>法语学习</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Hexo搭建相关问题</title>
-    <url>/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/</url>
-    <content><![CDATA[<h2 id="一、文章创建和发布问题"><a href="#一、文章创建和发布问题" class="headerlink" title="一、文章创建和发布问题"></a>一、文章创建和发布问题</h2><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo g 【生成静态文件】</span><br><span class="line">$ hexo d 【部署到网站或服务器，部署之前需要先生成静态文件】</span><br><span class="line">$ hexo clean 【清除缓存文件(db.json)和已经生成的静态文件(public)】</span><br></pre></td></tr></table></figure>
-
-<h3 id="创建一个新的发布-Create-a-new-Post"><a href="#创建一个新的发布-Create-a-new-Post" class="headerlink" title="创建一个新的发布 Create a new Post"></a>创建一个新的发布 Create a new Post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My new post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>更多信息 More info<a href="https://hexo.io/docs/writing.html">writing</a></p>
-<h3 id="运行服务器-Run-server"><a href="#运行服务器-Run-server" class="headerlink" title="运行服务器 Run server"></a>运行服务器 Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>更多信息 More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="生成统计文件-Generate-static-files"><a href="#生成统计文件-Generate-static-files" class="headerlink" title="生成统计文件 Generate static files"></a>生成统计文件 Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>更多信息 More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="部署到远程站点-Deploy-to-remote-sites"><a href="#部署到远程站点-Deploy-to-remote-sites" class="headerlink" title="部署到远程站点 Deploy to remote sites"></a>部署到远程站点 Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>更多信息 More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<h2 id="二、文章编辑问题"><a href="#二、文章编辑问题" class="headerlink" title="二、文章编辑问题"></a>二、文章编辑问题</h2><h3 id="显示不出分类、标签问题"><a href="#显示不出分类、标签问题" class="headerlink" title="显示不出分类、标签问题"></a>显示不出分类、标签问题</h3><h4 id="1-查看themes-next-config-yml主题配置文件"><a href="#1-查看themes-next-config-yml主题配置文件" class="headerlink" title="1.查看themes/next/_config.yml主题配置文件"></a>1.查看themes/next/_config.yml主题配置文件</h4><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/menu.png" class="" title="This is an example image">
-
-<p>打开主题配置文件<code>_config.yml</code>，在vim编辑器内用<code>/</code>搜索<code>menu</code>，确定categories和tags是取消注释状态的</p>
-<h4 id="2-添加分类模块"><a href="#2-添加分类模块" class="headerlink" title="2.添加分类模块"></a>2.添加分类模块</h4><p>在主文件夹<code>Blog</code>页面下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page categories</span><br><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure>
-<p>在source文件夹现在有了<code>categories/index.md</code>和<code>tags/index.md</code>两个新文件</p>
-<img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/categories.png" class="" title="This is an example image">
-<p>以<code>categories/index.md</code>为例子,应该自行添加第二行:<br><code>type: categories</code><br>注意:和categories中有一个空格</p>
-<h4 id="3-文章中添加标签或分类的方法及效果"><a href="#3-文章中添加标签或分类的方法及效果" class="headerlink" title="3.文章中添加标签或分类的方法及效果"></a>3.文章中添加标签或分类的方法及效果</h4><p>在创建新文章后的顶端添加categories或tags的名字，注意空格</p>
-<img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/test.png" class="" title="This is an example image">
-
-<p>最后的效果:</p>
-<img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/show.png" class="" title="This is an example image">
-
-<h4 id="4-参考"><a href="#4-参考" class="headerlink" title="4.参考"></a>4.参考</h4><p><a href="https://blog.csdn.net/Wonz5130/article/details/84666519">Hexo搭建博客显示不出分类、标签问题</a></p>
-<h3 id="Hexo博客搭建之在文章中插入图片"><a href="#Hexo博客搭建之在文章中插入图片" class="headerlink" title="Hexo博客搭建之在文章中插入图片"></a>Hexo博客搭建之在文章中插入图片</h3><h4 id="1-本地引用"><a href="#1-本地引用" class="headerlink" title="1.本地引用"></a>1.本地引用</h4><p>当中只用到少量图片时，可以将图片统一放在<code>source/images</code>文件夹中，通过markdown语法添加</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ![](&#x2F;images&#x2F;image.png)</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-相对路径"><a href="#2-相对路径" class="headerlink" title="2.相对路径"></a>2.相对路径</h4><p>图片可以放在文章自己的目录中，需要先配置<code>_config.yml</code>文件，将<code>post_asset_folder</code>设置为true。设置完之后，在执行<code>hexo new &quot;post_name&quot;</code> 这个操作后，在<code>source/_posts</code>中会自动生成<code>post_name.md</code>和<code>post_name</code>同名文件夹。这时候只需要将图片放在<code>post_name</code>文件夹中，文章中可以直接使用相对路径引用了。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ![](image.png)</span><br></pre></td></tr></table></figure>
-
-<p>但是!!重点来了，这个经典的markdown语句只能保证文章中可以显示出图片，但首页上不限时，很丑。可以同时显示的语句是:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ &#123;% asset_img exemple.png This is an example image %&#125;</span><br></pre></td></tr></table></figure>
-<p>这时候就大功告成啦！</p>
-<h4 id="3-云引用"><a href="#3-云引用" class="headerlink" title="3.云引用"></a>3.云引用</h4><p>比如一些免费的CDN服务，如Cloudinary等免费生成的url地址，直接用markdown语法引用即可。</p>
-<h4 id="4-参考-1"><a href="#4-参考-1" class="headerlink" title="4.参考"></a>4.参考</h4><p><a href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">Hexo博客搭建之在文章中插入图片</a></p>
-]]></content>
-      <categories>
-        <category>网页</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
   </entry>
 </search>
