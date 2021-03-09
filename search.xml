@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>1047.删除字符串中的所有相邻重复项(Easy)</title>
+    <url>/2021/03/09/1047-%E5%88%A0%E9%99%A4%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E7%9B%B8%E9%82%BB%E9%87%8D%E5%A4%8D%E9%A1%B9-Easy/</url>
+    <content><![CDATA[<p>LeetCode每日一题(2021.03.09)之<a href="https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/">删除字符串中的所有相邻重复项</a><br>难度：简单</p>
+<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给出由小写字母组成的字符串<code>s</code>，<strong>重复项删除操作</strong>会选择两个相邻且相同的字母，并删除它们。</p>
+<p>在<code>s</code>上反复执行重复项删除操作，直到无法继续删除。</p>
+<p>在完成所有重复项删除操作后返回最终的字符。答案保持唯一。</p>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：<span class="string">&quot;abbaca&quot;</span></span><br><span class="line">输出：<span class="string">&quot;ca&quot;</span></span><br><span class="line">解释：</span><br><span class="line">例如，在 <span class="string">&quot;abbaca&quot;</span> 中，我们可以删除 <span class="string">&quot;bb&quot;</span> 由于两字母相邻且相同，这是此时唯一可以执行删除操作的重复项。之后我们得到字符串 <span class="string">&quot;aaca&quot;</span>，其中又只有 <span class="string">&quot;aa&quot;</span> 可以执行重复项删除操作，所以最后的字符串为 <span class="string">&quot;ca&quot;</span>。</span><br></pre></td></tr></table></figure>
+
+<p>提示：</p>
+<ol>
+<li>1 &lt;= S.length &lt;= 20000</li>
+<li>S 仅由小写英文字母组成。</li>
+</ol>
+<h3 id="二、我的解法"><a href="#二、我的解法" class="headerlink" title="二、我的解法"></a>二、我的解法</h3><p><strong>思路</strong>：</p>
+<ul>
+<li><p>如从字符串abba中先删除bb，会有新的重复字符串aa出现，所以需要保存当前还未被删除的字符串，联想到<code>栈</code>这种数据结构</p>
+</li>
+<li><p>当字符串中有多组相邻重复项时，先删除哪一组不影响结果</p>
+<p><code>296ms, 11.52%; 13.4MB, 73.03%</code><br>我的小菜鸡伪栈法：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def removeDuplicates(self, S):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type S: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        res = <span class="string">&#x27; &#x27;</span></span><br><span class="line">        <span class="keyword">for</span> char <span class="keyword">in</span> S:</span><br><span class="line">            <span class="keyword">if</span> char != res[-1]:</span><br><span class="line">                res += char</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                res = res[:-1]</span><br><span class="line">        <span class="built_in">return</span> res[1:]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h3 id="三、其他的解法"><a href="#三、其他的解法" class="headerlink" title="三、其他的解法"></a>三、其他的解法</h3><h4 id="3-1-栈"><a href="#3-1-栈" class="headerlink" title="3.1 栈"></a>3.1 栈</h4><p>感觉想法差不多，官方的栈效率高多了：<br><code>52ms, 88.07%; 13.4MB, 81.74%</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def removeDuplicates(self, S: str) -&gt; str:</span><br><span class="line">        stk = list()</span><br><span class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> S:</span><br><span class="line">            <span class="keyword">if</span> stk and stk[-1] == ch:</span><br><span class="line">                stk.pop()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                stk.append(ch)</span><br><span class="line">        <span class="built_in">return</span> <span class="string">&quot;&quot;</span>.join(stk)</span><br></pre></td></tr></table></figure>
+
+<p>今天是个简单题，yeah</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>1052.爱生气的书店老板(Medium)</title>
     <url>/2021/02/26/1052-%E7%88%B1%E7%94%9F%E6%B0%94%E7%9A%84%E4%B9%A6%E5%BA%97%E8%80%81%E6%9D%BF-Medium/</url>
     <content><![CDATA[<p>力扣每日一题系列(2021.02.23)之<a href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/">爱生气的书店老板</a><br>难度：中等</p>
@@ -42,43 +79,6 @@
       </categories>
       <tags>
         <tag>滑动窗口</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>1047.删除字符串中的所有相邻重复项(Easy)</title>
-    <url>/2021/03/09/1047-%E5%88%A0%E9%99%A4%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E7%9B%B8%E9%82%BB%E9%87%8D%E5%A4%8D%E9%A1%B9-Easy/</url>
-    <content><![CDATA[<p>LeetCode每日一题(2021.03.09)之<a href="https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/">删除字符串中的所有相邻重复项</a><br>难度：简单</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给出由小写字母组成的字符串<code>s</code>，<strong>重复项删除操作</strong>会选择两个相邻且相同的字母，并删除它们。</p>
-<p>在<code>s</code>上反复执行重复项删除操作，直到无法继续删除。</p>
-<p>在完成所有重复项删除操作后返回最终的字符。答案保持唯一。</p>
-<p>示例：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：<span class="string">&quot;abbaca&quot;</span></span><br><span class="line">输出：<span class="string">&quot;ca&quot;</span></span><br><span class="line">解释：</span><br><span class="line">例如，在 <span class="string">&quot;abbaca&quot;</span> 中，我们可以删除 <span class="string">&quot;bb&quot;</span> 由于两字母相邻且相同，这是此时唯一可以执行删除操作的重复项。之后我们得到字符串 <span class="string">&quot;aaca&quot;</span>，其中又只有 <span class="string">&quot;aa&quot;</span> 可以执行重复项删除操作，所以最后的字符串为 <span class="string">&quot;ca&quot;</span>。</span><br></pre></td></tr></table></figure>
-
-<p>提示：</p>
-<ol>
-<li>1 &lt;= S.length &lt;= 20000</li>
-<li>S 仅由小写英文字母组成。</li>
-</ol>
-<h3 id="二、我的解法"><a href="#二、我的解法" class="headerlink" title="二、我的解法"></a>二、我的解法</h3><p><strong>思路</strong>：</p>
-<ul>
-<li><p>如从字符串abba中先删除bb，会有新的重复字符串aa出现，所以需要保存当前还未被删除的字符串，联想到<code>栈</code>这种数据结构</p>
-</li>
-<li><p>当字符串中有多组相邻重复项时，先删除哪一组不影响结果</p>
-<p><code>296ms, 11.52%; 13.4MB, 73.03%</code><br>我的小菜鸡伪栈法：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def removeDuplicates(self, S):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type S: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        res = <span class="string">&#x27; &#x27;</span></span><br><span class="line">        <span class="keyword">for</span> char <span class="keyword">in</span> S:</span><br><span class="line">            <span class="keyword">if</span> char != res[-1]:</span><br><span class="line">                res += char</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                res = res[:-1]</span><br><span class="line">        <span class="built_in">return</span> res[1:]</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-<h3 id="三、其他的解法"><a href="#三、其他的解法" class="headerlink" title="三、其他的解法"></a>三、其他的解法</h3><h4 id="3-1-栈"><a href="#3-1-栈" class="headerlink" title="3.1 栈"></a>3.1 栈</h4><p>感觉想法差不多，官方的栈效率高多了：<br><code>52ms, 88.07%; 13.4MB, 81.74%</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def removeDuplicates(self, S: str) -&gt; str:</span><br><span class="line">        stk = list()</span><br><span class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> S:</span><br><span class="line">            <span class="keyword">if</span> stk and stk[-1] == ch:</span><br><span class="line">                stk.pop()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                stk.append(ch)</span><br><span class="line">        <span class="built_in">return</span> <span class="string">&quot;&quot;</span>.join(stk)</span><br></pre></td></tr></table></figure>
-
-<p>今天是个简单题，yeah</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>栈</tag>
       </tags>
   </entry>
   <entry>
@@ -178,15 +178,75 @@
 <li>s 由数字、’+’、’-‘、’(‘、’)’、和 ‘ ‘ 组成</li>
 <li>s 表示一个有效的表达式</li>
 </ul>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>我看到这一题第一反应是：</p>
+<h3 id="二、我的解法（误"><a href="#二、我的解法（误" class="headerlink" title="二、我的解法（误"></a>二、我的解法（误</h3><p>我看到这一题第一反应是：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> <span class="built_in">eval</span>(s)</span><br></pre></td></tr></table></figure>
 <p>完事走人（抓回来</p>
 <p>想必LeetCode早就预见了我等无耻之人，于是乎，eval作废，我的脑子也废了，现在开始学习大神的解法。。。</p>
 <p>ps：我总感觉这题在hw的题库里好像见过也做过，但是咋一点儿印象也米有了</p>
-<h4 id="正经开始学习"><a href="#正经开始学习" class="headerlink" title="正经开始学习"></a>正经开始学习</h4>]]></content>
+<h3 id="三、真正的解法"><a href="#三、真正的解法" class="headerlink" title="三、真正的解法"></a>三、真正的解法</h3><p>这道题里有加减号，也有括号，分三部来考虑这个问题：</p>
+<ul>
+<li>不考虑括号，只考虑数字、加减号和空格</li>
+<li>考虑括号，数字，加减号和空格</li>
+<li>考虑括号，数字，加减乘除号和空格</li>
+</ul>
+<p>以下部分参考了<a href="https://leetcode-cn.com/problems/basic-calculator/solution/zhan-by-powcai-3/">powcai</a>的做法</p>
+<h4 id="3-1-不考虑括号，考虑加减号"><a href="#3-1-不考虑括号，考虑加减号" class="headerlink" title="3.1 不考虑括号，考虑加减号"></a>3.1 不考虑括号，考虑加减号</h4><p>在不考虑括号的情况时，不需要用到<code>栈</code>的思路，在顺序上也没有强行要求，要注意的一点是，看到加号或减号时，要同时考虑符号前一位的数字，和符号后一位的数字。所以用一个<code>sign</code>来记录。</p>
+<p>在下面的代码中，只有当进入<code>elif s[i].isdigit():</code>这个格子里的时候，才有真正对res进行计算的操作:<code>res+= tmp * sign</code>。这里就迎来了第二个要注意的点，有时候数字并非只是个位数。</p>
+<p>以下为实现这个操作的代码：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        res = 0</span><br><span class="line">        sign = 1</span><br><span class="line">        i = 0</span><br><span class="line">        n = len(s)</span><br><span class="line">        <span class="keyword">while</span> i&lt;n:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27; &#x27;</span>: <span class="comment">#空格跳过</span></span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                sign = -1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i].isdigit():</span><br><span class="line">                tmp = int(s[i])</span><br><span class="line">                i += 1</span><br><span class="line">                <span class="comment">#验证这是不是一个非单位数，如果是的话，进入下面的while循环</span></span><br><span class="line">                <span class="keyword">while</span> i&lt;n and s[i].isdigit(): <span class="comment">#如果数字有很多位的情况</span></span><br><span class="line">                    tmp = tmp*10 + int(s[i])</span><br><span class="line">                    i += 1</span><br><span class="line">                <span class="comment">#真正的计算操作</span></span><br><span class="line">                res += tmp * sign</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-考虑括号，考虑加减号"><a href="#3-2-考虑括号，考虑加减号" class="headerlink" title="3.2 考虑括号，考虑加减号"></a>3.2 考虑括号，考虑加减号</h4><p>这一步则是到达了这道题目所要求的部分，也正是因为括号的出现，我们需要考虑计算的先后顺序，在这里，就要运用到<code>栈</code>。</p>
+]]></content>
       <categories>
         <category>LeetCode</category>
       </categories>
+  </entry>
+  <entry>
+    <title>395.至少有K个重复字符的最长子串(Medium)</title>
+    <url>/2021/02/27/395-%E8%87%B3%E5%B0%91%E6%9C%89K%E4%B8%AA%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2-Medium/</url>
+    <content><![CDATA[<p>力扣每日一题系列(2021.02.27)之<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/">至少有K个重复字符的最长子串</a><br>难度:中等</p>
+<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个字符串<code>s</code>和一个整数<code>k</code>,请你找出<code>s</code>中的最长子串,要求该子串中的每一字符出现次数都不少于<code>k</code>.返回这一子串的长度.</p>
+<p>示例1:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;aaabb&quot;</span>, k = 3</span><br><span class="line">输出：3</span><br><span class="line">解释：最长子串为 <span class="string">&quot;aaa&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure>
+
+<p>示例2:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;ababbc&quot;</span>, k = 2</span><br><span class="line">输出：5</span><br><span class="line">解释：最长子串为 <span class="string">&quot;ababb&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 2 次， <span class="string">&#x27;b&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure>
+
+<p>提示:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 104</span><br><span class="line">s 仅由小写英文字母组成</span><br><span class="line">1 &lt;= k &lt;= 105</span><br></pre></td></tr></table></figure>
+
+<h3 id="我的解法-30-31ac"><a href="#我的解法-30-31ac" class="headerlink" title="我的解法(30/31ac)"></a>我的解法(30/31ac)</h3><p>我的想法是先设定一个判断用的函数<code>issubstring</code>用于判断每一个我截取下来的子串,在这个func里,通过<code>哈希表</code>的方法来判断字符重复次数是否大于k,如果全部大于,返回<code>True</code>否则返回<code>False</code>.</p>
+<p>同是判断两个边缘条件: 1)如果整个字符串为<code>True</code>,那就不经过下面的小循环,直接返回<code>len(s)</code> 2)如果<code>k</code>的数量大于<code>len(s)</code>那不可能满足,返回0.</p>
+<p>在接下来的循环中,具体细节如下图:</p>
+
+
+<p>但是其中<code>continue</code>这个想法是错误的,比如当下的substring可能不是符合条件的,但是后续补充了一些字符之后有可能这个substring是符合的,所以这种简化方法不可取,感觉这道题的用例并不是非常完全,最后这段代码只是遇到了特别长的用例时出现了时间问题,但没有遇到我提到的这个问题.</p>
+<p>接下来是这段代码:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        def issubstring(s,k):</span><br><span class="line">            m = &#123;&#125;</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> s:</span><br><span class="line">                <span class="keyword">if</span> char <span class="keyword">in</span> m:</span><br><span class="line">                    m[char] += 1</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    m[char] = 1</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> m:</span><br><span class="line">                <span class="keyword">if</span> m[char]&lt;k:</span><br><span class="line">                    <span class="built_in">return</span> False</span><br><span class="line">            <span class="built_in">return</span> True</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> issubstring(s,k):</span><br><span class="line">            <span class="built_in">return</span> len(s)</span><br><span class="line">        <span class="keyword">elif</span> k &gt; len(s):</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line"></span><br><span class="line">        maxlen = 0</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+k-1,len(s)):</span><br><span class="line">                subs = s[i:j+1]</span><br><span class="line">                <span class="comment">#print(subs)</span></span><br><span class="line">                <span class="keyword">if</span> issubstring(subs,k):</span><br><span class="line">                    maxlen = max(maxlen,len(subs))</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment">#这个continue的想法是错误的</span></span><br><span class="line">                    <span class="built_in">continue</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> maxlen</span><br></pre></td></tr></table></figure>
+
+<h3 id="递归做法"><a href="#递归做法" class="headerlink" title="递归做法"></a>递归做法</h3><p>依然是参考了<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/solution/jie-ben-ti-bang-zhu-da-jia-li-jie-di-gui-obla/">负雪明烛</a>的解析,这个递归我一开始有想到过,用split的方法反复切割,但是自己思路不好,就换成了上面那种做法,而且递归我一直学习的很差,得加把劲啊.</p>
+<p>先上她的原版代码:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="keyword">if</span> len(s) &lt; k:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">set</span>(s):</span><br><span class="line">            <span class="keyword">if</span> s.count(c) &lt; k:</span><br><span class="line">                <span class="built_in">return</span> max(self.longestSubstring(t, k) <span class="keyword">for</span> t <span class="keyword">in</span> s.split(c))</span><br><span class="line">        <span class="built_in">return</span> len(s)</span><br></pre></td></tr></table></figure>
+<p>接下来整理整理思路:</p>
+<ul>
+<li>递归的重点: 牢记递归函数的输入输出是什么(这里的输入是字符串,限定条件是<code>k</code>,输出是满足条件的最长字符子串长度)</li>
+<li>递归的终止条件: 如果<code>字符串s</code>的长度小于<code>k</code>,那么一定不存在符合条件的子串,直接返回0</li>
+<li>递归的调用法则: 如果一个<code>字符c</code>在<code>s</code>中出现的次数少于<code>k次</code>,那么所有包含<code>字符c</code>的子字符串一定不符合规定.所以,应该通过某种方法将<code>字符c</code>排除在外,方法:把<code>s</code>按照<code>字符c</code>分割(分割后的每一个子串都不包含<code>字符c</code>),得到很多<code>子串t</code>. 而得到的<code>t</code>,就是未来的<code>s&#39;</code>. 下一步,<code>不含字符c的子串们t</code>就是作为<code>longestSubstring(s, k)</code>的新输入,大问题分割为了小问题,形成递归.</li>
+<li>未进入递归即返回结果的情况: 如果<code>s</code>中的每个字符都满足大于<code>重复次数k</code>次的这个条件,那么直接返回<code>len(s)</code>.</li>
+</ul>
+<p>复杂度分析:</p>
+<ul>
+<li>时间复杂度: O(N*26*26) 因为函数最多执行26次(小写的26个英语字符),for循环遍历一遍是26个字符,循环里面对s分割时间的复杂度为O(N)</li>
+<li>空间复杂度: O(26*26), 函数执行26次,每次开辟26个字符的set空间</li>
+</ul>
+<p>读聪明人的代码就是茅塞顿开的感觉,特别喜欢这个刷题姐姐的讲解</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
+      </tags>
   </entry>
   <entry>
     <title>856.转置矩阵(Easy)</title>
@@ -260,53 +320,6 @@
       </categories>
       <tags>
         <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>395.至少有K个重复字符的最长子串(Medium)</title>
-    <url>/2021/02/27/395-%E8%87%B3%E5%B0%91%E6%9C%89K%E4%B8%AA%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2-Medium/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.02.27)之<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/">至少有K个重复字符的最长子串</a><br>难度:中等</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个字符串<code>s</code>和一个整数<code>k</code>,请你找出<code>s</code>中的最长子串,要求该子串中的每一字符出现次数都不少于<code>k</code>.返回这一子串的长度.</p>
-<p>示例1:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;aaabb&quot;</span>, k = 3</span><br><span class="line">输出：3</span><br><span class="line">解释：最长子串为 <span class="string">&quot;aaa&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure>
-
-<p>示例2:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;ababbc&quot;</span>, k = 2</span><br><span class="line">输出：5</span><br><span class="line">解释：最长子串为 <span class="string">&quot;ababb&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 2 次， <span class="string">&#x27;b&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure>
-
-<p>提示:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 104</span><br><span class="line">s 仅由小写英文字母组成</span><br><span class="line">1 &lt;= k &lt;= 105</span><br></pre></td></tr></table></figure>
-
-<h3 id="我的解法-30-31ac"><a href="#我的解法-30-31ac" class="headerlink" title="我的解法(30/31ac)"></a>我的解法(30/31ac)</h3><p>我的想法是先设定一个判断用的函数<code>issubstring</code>用于判断每一个我截取下来的子串,在这个func里,通过<code>哈希表</code>的方法来判断字符重复次数是否大于k,如果全部大于,返回<code>True</code>否则返回<code>False</code>.</p>
-<p>同是判断两个边缘条件: 1)如果整个字符串为<code>True</code>,那就不经过下面的小循环,直接返回<code>len(s)</code> 2)如果<code>k</code>的数量大于<code>len(s)</code>那不可能满足,返回0.</p>
-<p>在接下来的循环中,具体细节如下图:</p>
-
-
-<p>但是其中<code>continue</code>这个想法是错误的,比如当下的substring可能不是符合条件的,但是后续补充了一些字符之后有可能这个substring是符合的,所以这种简化方法不可取,感觉这道题的用例并不是非常完全,最后这段代码只是遇到了特别长的用例时出现了时间问题,但没有遇到我提到的这个问题.</p>
-<p>接下来是这段代码:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        def issubstring(s,k):</span><br><span class="line">            m = &#123;&#125;</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> s:</span><br><span class="line">                <span class="keyword">if</span> char <span class="keyword">in</span> m:</span><br><span class="line">                    m[char] += 1</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    m[char] = 1</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> m:</span><br><span class="line">                <span class="keyword">if</span> m[char]&lt;k:</span><br><span class="line">                    <span class="built_in">return</span> False</span><br><span class="line">            <span class="built_in">return</span> True</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> issubstring(s,k):</span><br><span class="line">            <span class="built_in">return</span> len(s)</span><br><span class="line">        <span class="keyword">elif</span> k &gt; len(s):</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line"></span><br><span class="line">        maxlen = 0</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+k-1,len(s)):</span><br><span class="line">                subs = s[i:j+1]</span><br><span class="line">                <span class="comment">#print(subs)</span></span><br><span class="line">                <span class="keyword">if</span> issubstring(subs,k):</span><br><span class="line">                    maxlen = max(maxlen,len(subs))</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment">#这个continue的想法是错误的</span></span><br><span class="line">                    <span class="built_in">continue</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> maxlen</span><br></pre></td></tr></table></figure>
-
-<h3 id="递归做法"><a href="#递归做法" class="headerlink" title="递归做法"></a>递归做法</h3><p>依然是参考了<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/solution/jie-ben-ti-bang-zhu-da-jia-li-jie-di-gui-obla/">负雪明烛</a>的解析,这个递归我一开始有想到过,用split的方法反复切割,但是自己思路不好,就换成了上面那种做法,而且递归我一直学习的很差,得加把劲啊.</p>
-<p>先上她的原版代码:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="keyword">if</span> len(s) &lt; k:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">set</span>(s):</span><br><span class="line">            <span class="keyword">if</span> s.count(c) &lt; k:</span><br><span class="line">                <span class="built_in">return</span> max(self.longestSubstring(t, k) <span class="keyword">for</span> t <span class="keyword">in</span> s.split(c))</span><br><span class="line">        <span class="built_in">return</span> len(s)</span><br></pre></td></tr></table></figure>
-<p>接下来整理整理思路:</p>
-<ul>
-<li>递归的重点: 牢记递归函数的输入输出是什么(这里的输入是字符串,限定条件是<code>k</code>,输出是满足条件的最长字符子串长度)</li>
-<li>递归的终止条件: 如果<code>字符串s</code>的长度小于<code>k</code>,那么一定不存在符合条件的子串,直接返回0</li>
-<li>递归的调用法则: 如果一个<code>字符c</code>在<code>s</code>中出现的次数少于<code>k次</code>,那么所有包含<code>字符c</code>的子字符串一定不符合规定.所以,应该通过某种方法将<code>字符c</code>排除在外,方法:把<code>s</code>按照<code>字符c</code>分割(分割后的每一个子串都不包含<code>字符c</code>),得到很多<code>子串t</code>. 而得到的<code>t</code>,就是未来的<code>s&#39;</code>. 下一步,<code>不含字符c的子串们t</code>就是作为<code>longestSubstring(s, k)</code>的新输入,大问题分割为了小问题,形成递归.</li>
-<li>未进入递归即返回结果的情况: 如果<code>s</code>中的每个字符都满足大于<code>重复次数k</code>次的这个条件,那么直接返回<code>len(s)</code>.</li>
-</ul>
-<p>复杂度分析:</p>
-<ul>
-<li>时间复杂度: O(N*26*26) 因为函数最多执行26次(小写的26个英语字符),for循环遍历一遍是26个字符,循环里面对s分割时间的复杂度为O(N)</li>
-<li>空间复杂度: O(26*26), 函数执行26次,每次开辟26个字符的set空间</li>
-</ul>
-<p>读聪明人的代码就是茅塞顿开的感觉,特别喜欢这个刷题姐姐的讲解</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>递归</tag>
       </tags>
   </entry>
   <entry>

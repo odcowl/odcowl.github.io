@@ -28,7 +28,7 @@
 <meta property="og:description" content="每日一题系列(2021.03.10)之基本计算器难度：困难 一、题目实现一个基本的计算器来计算一个简单的字符串表达式 s 的值。 示例1: 12输入：s &#x3D; &quot;1 + 1&quot;输出：2  示例2: 12输入：s &#x3D; &quot; 2-1 + 2 &quot;输出：3  示例3: 12输入：s &#x3D; &quot;(1+(4+5+2)-3)+(6+8)&quot;输出：23  提示：">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-03-09T09:28:30.000Z">
-<meta property="article:modified_time" content="2021-03-09T16:32:49.220Z">
+<meta property="article:modified_time" content="2021-03-09T17:31:47.738Z">
 <meta property="article:author" content="odcowl">
 <meta name="twitter:card" content="summary">
 
@@ -219,7 +219,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-10 00:32:49" itemprop="dateModified" datetime="2021-03-10T00:32:49+08:00">2021-03-10</time>
+                <time title="修改时间：2021-03-10 01:31:47" itemprop="dateModified" datetime="2021-03-10T01:31:47+08:00">2021-03-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -259,12 +259,25 @@
 <li>s 由数字、’+’、’-‘、’(‘、’)’、和 ‘ ‘ 组成</li>
 <li>s 表示一个有效的表达式</li>
 </ul>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>我看到这一题第一反应是：</p>
+<h3 id="二、我的解法（误"><a href="#二、我的解法（误" class="headerlink" title="二、我的解法（误"></a>二、我的解法（误</h3><p>我看到这一题第一反应是：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">return</span> <span class="built_in">eval</span>(s)</span><br></pre></td></tr></table></figure>
 <p>完事走人（抓回来</p>
 <p>想必LeetCode早就预见了我等无耻之人，于是乎，eval作废，我的脑子也废了，现在开始学习大神的解法。。。</p>
 <p>ps：我总感觉这题在hw的题库里好像见过也做过，但是咋一点儿印象也米有了</p>
-<h4 id="正经开始学习"><a href="#正经开始学习" class="headerlink" title="正经开始学习"></a>正经开始学习</h4>
+<h3 id="三、真正的解法"><a href="#三、真正的解法" class="headerlink" title="三、真正的解法"></a>三、真正的解法</h3><p>这道题里有加减号，也有括号，分三部来考虑这个问题：</p>
+<ul>
+<li>不考虑括号，只考虑数字、加减号和空格</li>
+<li>考虑括号，数字，加减号和空格</li>
+<li>考虑括号，数字，加减乘除号和空格</li>
+</ul>
+<p>以下部分参考了<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/basic-calculator/solution/zhan-by-powcai-3/">powcai</a>的做法</p>
+<h4 id="3-1-不考虑括号，考虑加减号"><a href="#3-1-不考虑括号，考虑加减号" class="headerlink" title="3.1 不考虑括号，考虑加减号"></a>3.1 不考虑括号，考虑加减号</h4><p>在不考虑括号的情况时，不需要用到<code>栈</code>的思路，在顺序上也没有强行要求，要注意的一点是，看到加号或减号时，要同时考虑符号前一位的数字，和符号后一位的数字。所以用一个<code>sign</code>来记录。</p>
+<p>在下面的代码中，只有当进入<code>elif s[i].isdigit():</code>这个格子里的时候，才有真正对res进行计算的操作:<code>res+= tmp * sign</code>。这里就迎来了第二个要注意的点，有时候数字并非只是个位数。</p>
+<p>以下为实现这个操作的代码：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        res = 0</span><br><span class="line">        sign = 1</span><br><span class="line">        i = 0</span><br><span class="line">        n = len(s)</span><br><span class="line">        <span class="keyword">while</span> i&lt;n:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27; &#x27;</span>: <span class="comment">#空格跳过</span></span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                sign = -1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i].isdigit():</span><br><span class="line">                tmp = int(s[i])</span><br><span class="line">                i += 1</span><br><span class="line">                <span class="comment">#验证这是不是一个非单位数，如果是的话，进入下面的while循环</span></span><br><span class="line">                <span class="keyword">while</span> i&lt;n and s[i].isdigit(): <span class="comment">#如果数字有很多位的情况</span></span><br><span class="line">                    tmp = tmp*10 + int(s[i])</span><br><span class="line">                    i += 1</span><br><span class="line">                <span class="comment">#真正的计算操作</span></span><br><span class="line">                res += tmp * sign</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-考虑括号，考虑加减号"><a href="#3-2-考虑括号，考虑加减号" class="headerlink" title="3.2 考虑括号，考虑加减号"></a>3.2 考虑括号，考虑加减号</h4><p>这一步则是到达了这道题目所要求的部分，也正是因为括号的出现，我们需要考虑计算的先后顺序，在这里，就要运用到<code>栈</code>。</p>
+
     </div>
 
     
@@ -372,7 +385,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">一、题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">解法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E7%BB%8F%E5%BC%80%E5%A7%8B%E5%AD%A6%E4%B9%A0"><span class="nav-number">2.1.</span> <span class="nav-text">正经开始学习</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">一、题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%88%91%E7%9A%84%E8%A7%A3%E6%B3%95%EF%BC%88%E8%AF%AF"><span class="nav-number">2.</span> <span class="nav-text">二、我的解法（误</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E7%9C%9F%E6%AD%A3%E7%9A%84%E8%A7%A3%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">三、真正的解法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E4%B8%8D%E8%80%83%E8%99%91%E6%8B%AC%E5%8F%B7%EF%BC%8C%E8%80%83%E8%99%91%E5%8A%A0%E5%87%8F%E5%8F%B7"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 不考虑括号，考虑加减号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E8%80%83%E8%99%91%E6%8B%AC%E5%8F%B7%EF%BC%8C%E8%80%83%E8%99%91%E5%8A%A0%E5%87%8F%E5%8F%B7"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 考虑括号，考虑加减号</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -446,7 +459,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共5.8k字</span>
+  <span class="post-count">博客全站共6.3k字</span>
 </div>
 
         
