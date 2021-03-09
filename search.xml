@@ -1,84 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>1052.爱生气的书店老板(Medium)</title>
-    <url>/2021/02/26/1052-%E7%88%B1%E7%94%9F%E6%B0%94%E7%9A%84%E4%B9%A6%E5%BA%97%E8%80%81%E6%9D%BF-Medium/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.02.23)之<a href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/">爱生气的书店老板</a><br>难度：中等</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>今天，书店老板有一家店打算试营业<code>customers.length</code>分钟。每分钟都有一些顾客<code>customers[i]</code>会进入书店，所有这些顾客都会在那一分钟结束后离开。</p>
-<p>在某些时候，书店老板会生气。 如果书店老板在第<code>i</code>分钟生气，那么<code>grumpy[i] = 1</code>，否则<code>grumpy[i] = 0</code>。 当书店老板生气时，那一分钟的顾客就会不满意，不生气则他们是满意的。</p>
-<p>书店老板知道一个秘密技巧，能抑制自己的情绪，可以让自己连续<code>X</code>分钟不生气，但却只能使用一次。</p>
-<p>请你返回这一天营业下来，最多有多少客户能够感到满意的数量。
- </p>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：customers = [1,0,1,2,1,1,7,5], grumpy = [0,1,0,1,0,1,0,1], X = 3</span><br><span class="line">输出：16</span><br><span class="line">解释：</span><br><span class="line">书店老板在最后 3 分钟保持冷静。</span><br><span class="line">感到满意的最大客户数量 = 1 + 1 + 1 + 1 + 7 + 5 = 16.</span><br></pre></td></tr></table></figure>
-<h4 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1 &lt;&#x3D; X &lt;&#x3D; customers.length &#x3D;&#x3D; grumpy.length &lt;&#x3D; 20000</span><br><span class="line">0 &lt;&#x3D; customers[i] &lt;&#x3D; 1000</span><br><span class="line">0 &lt;&#x3D; grumpy[i] &lt;&#x3D; 1</span><br></pre></td></tr></table></figure>
-<h3 id="二、我的解法"><a href="#二、我的解法" class="headerlink" title="二、我的解法"></a>二、我的解法</h3><p>我的第一个想法是利用暴力解法。（渣</p>
-<p>通过按顺序替换<code>grumpy</code>里不生气的日期，再把每个新的<code>grumpy</code>和<code>customers</code>点乘求和，保存满意客户的最大数量。注意，<code>grumpy</code>和<code>customers</code>点乘前，需要注意把<code>0（不生气）</code>替换成<code>1</code>，把<code>1（生气）</code>替换成<code>0</code>，这样才能使用点乘。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type customers: List[int]</span></span><br><span class="line"><span class="string">        :type grumpy: List[int]</span></span><br><span class="line"><span class="string">        :type X: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment">#滑动窗口</span></span><br><span class="line">        res = 0</span><br><span class="line">        <span class="comment">#先将grumpy里的1和0替换，方便后面点乘</span></span><br><span class="line">        <span class="comment">#1:不生气，服务客户 0:生气，去你娘滴</span></span><br><span class="line">        grumpy = [1-i <span class="keyword">for</span> i <span class="keyword">in</span> grumpy]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(grumpy)-X+1):</span><br><span class="line">            grumpy_now = grumpy[:i] + [1]*X + grumpy[i+X:]</span><br><span class="line">            <span class="comment">#satis：满意度列表</span></span><br><span class="line">            satis = map(lambda x,y:x*y, grumpy_now, customers)</span><br><span class="line">            <span class="comment">#保留最大res</span></span><br><span class="line">            res = max(res,sum(satis))</span><br><span class="line"></span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
-<p>但是这个解法只ac了<code>73/38</code>，查看发现是那种非常长的列表无法通过。</p>
-<h3 id="滑动窗口算法"><a href="#滑动窗口算法" class="headerlink" title="滑动窗口算法"></a>滑动窗口算法</h3><p>引用思路来自: <a href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/solution/yong-mi-mi-ji-qiao-wan-liu-zhu-zui-duo-d-py41/">负雪明烛</a></p>
-<p>依然是<code>滑动窗口</code>的思路。</p>
-<h4 id="1-解题思路"><a href="#1-解题思路" class="headerlink" title="1.解题思路"></a>1.解题思路</h4><ul>
-<li>将题目分为两部分，第一部分是不做出任何改变会留下的顾客origin，第二部分是每一个<code>不生气窗口X</code>的可以留下的本被赶走的客户数increse。</li>
-<li>得到的客户总数就是 origin + max(increse)</li>
-</ul>
-<p>按照这个思路，我又自己写了一遍代码，<code>ac100%</code>了但是执行用时5.06%…</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type customers: List[int]</span><br><span class="line">        :type grumpy: List[int]</span><br><span class="line">        :type X: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        #滑动窗口</span><br><span class="line">        increase &#x3D; 0</span><br><span class="line">        origin &#x3D; sum(map(lambda x,y:x*y, [1-i for i in grumpy], customers))</span><br><span class="line">        </span><br><span class="line">        for i in range(len(grumpy)-X+1):</span><br><span class="line">            grumpy_now, customers_now &#x3D; grumpy[i:i+X],customers[i:i+X]</span><br><span class="line">            satis &#x3D; 0</span><br><span class="line">            for j in range(len(grumpy_now)):</span><br><span class="line">                if grumpy_now[j] &#x3D;&#x3D; 1:</span><br><span class="line">                    satis +&#x3D; customers_now[j]</span><br><span class="line">            increase &#x3D; max(increase,satis)</span><br><span class="line">        return origin + increase</span><br></pre></td></tr></table></figure>
-<p>所以接下来是我学习上方参考链接的做题方法写的<code>ac100%</code>，248ms(82.24%), 15MB(47.72%)<br>总体分为：</p>
+    <title>1047.删除字符串中的所有相邻重复项(Easy)</title>
+    <url>/2021/03/09/1047-%E5%88%A0%E9%99%A4%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E7%9B%B8%E9%82%BB%E9%87%8D%E5%A4%8D%E9%A1%B9-Easy/</url>
+    <content><![CDATA[<p>LeetCode每日一题(2021.03.09)之<a href="https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/">删除字符串中的所有相邻重复项</a><br>难度：简单</p>
+<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给出由小写字母组成的字符串<code>s</code>，<strong>重复项删除操作</strong>会选择两个相邻且相同的字母，并删除它们。</p>
+<p>在<code>s</code>上反复执行重复项删除操作，直到无法继续删除。</p>
+<p>在完成所有重复项删除操作后返回最终的字符。答案保持唯一。</p>
+<p>示例：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：<span class="string">&quot;abbaca&quot;</span></span><br><span class="line">输出：<span class="string">&quot;ca&quot;</span></span><br><span class="line">解释：</span><br><span class="line">例如，在 <span class="string">&quot;abbaca&quot;</span> 中，我们可以删除 <span class="string">&quot;bb&quot;</span> 由于两字母相邻且相同，这是此时唯一可以执行删除操作的重复项。之后我们得到字符串 <span class="string">&quot;aaca&quot;</span>，其中又只有 <span class="string">&quot;aa&quot;</span> 可以执行重复项删除操作，所以最后的字符串为 <span class="string">&quot;ca&quot;</span>。</span><br></pre></td></tr></table></figure>
+
+<p>提示：</p>
 <ol>
-<li>算毫无作为时满意的客户数量 origin</li>
-<li>算滑动窗口X带来的改变 通过curValue的最大值resValue</li>
-</ol>
-<ul>
-<li>算前X个格子</li>
-<li>算第X到len(grumpy)个格子</li>
-</ul>
-<ol start="3">
-<li>得到结果为origin+resValue<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type customers: List[int]</span><br><span class="line">        :type grumpy: List[int]</span><br><span class="line">        :type X: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        </span><br><span class="line">        #第一步: 计算不做任何改变，满意客户的数量</span><br><span class="line">        origin &#x3D; sum(map(lambda x,y:x*y, [1-i for i in grumpy], customers))</span><br><span class="line">        </span><br><span class="line">        #第二步：计算滑动窗口里可以增加满意客户的数量</span><br><span class="line">        # 2.1 先计算前X个格子的值</span><br><span class="line">        curValue &#x3D; 0</span><br><span class="line">        for i in range(X):</span><br><span class="line">            if grumpy[i] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue +&#x3D; customers[i]</span><br><span class="line">        resValue &#x3D; curValue</span><br><span class="line">        # 2.2 开始向右滑————————————</span><br><span class="line">        for i in range(X,len(grumpy)):</span><br><span class="line">            #先验证左边（左边滑出的那个格子）是否在生气，如果在生气，需要在curValue剪掉</span><br><span class="line">            if grumpy[i-X] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue -&#x3D; customers[i-X]</span><br><span class="line">            #再验证右边（右边新增的那个格子）是否在生气，如果在生气，需要在curValue加上</span><br><span class="line">            if grumpy[i] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue +&#x3D; customers[i]</span><br><span class="line">            #判断当下curValue和史上最大curValue的关系</span><br><span class="line">            resValue &#x3D; max(resValue,curValue)</span><br><span class="line">        </span><br><span class="line">        return origin + resValue</span><br></pre></td></tr></table></figure>
-</li>
+<li>1 &lt;= S.length &lt;= 20000</li>
+<li>S 仅由小写英文字母组成。</li>
 </ol>
 ]]></content>
       <categories>
         <category>LeetCode</category>
       </categories>
-      <tags>
-        <tag>滑动窗口</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>131.分割回文串(Medium)</title>
-    <url>/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.03.07)之<a href="https://leetcode-cn.com/problems/palindrome-partitioning/">分割回文串</a><br>难度:中等</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个字符串<code>s</code>,请你将<code>s</code>分割成一些子串,使每个子串都是回文串.返回<code>s</code>所有可能的分割方案.<br><strong>回文串</strong>是正着读和反着读都一样的字符串.</p>
-<p>示例1:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: s=<span class="string">&quot;aab&quot;</span></span><br><span class="line">输出: [[<span class="string">&quot;a&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>],[<span class="string">&quot;aa&quot;</span>,<span class="string">&quot;b&quot;</span>]]</span><br></pre></td></tr></table></figure>
-
-<p>示例2:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;a&quot;</span></span><br><span class="line">输出: [[<span class="string">&quot;a&quot;</span>]]</span><br></pre></td></tr></table></figure>
-
-<p>提示:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 16</span><br><span class="line">s 仅由小写英文字母组成</span><br></pre></td></tr></table></figure>
-<h3 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h3><p>代码思路学习:<a href="https://leetcode-cn.com/problems/palindrome-partitioning/solution/hui-su-fa-si-lu-yu-mo-ban-by-fuxuemingzh-azhz/">负雪明烛</a></p>
-<p>题目要求返回<code>所有可能的结果</code>, 那么只能<strong>暴力搜索所有可能的解</strong>,在这种情况下可以联想到使用<code>回溯法</code>.回溯法(算法思想)可以用递归(编程方法)来实现.</p>
-<h4 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h4><p><code>回溯法</code>实际上是一个类似<code>枚举</code>的搜索尝试过程.<br>对当前搜索路径下的未探索区域进行搜索,则可能有两种情况:</p>
-<ol>
-<li>当前未搜索区域满足条件,则保存当前路径并退出当前搜索</li>
-<li>当前为搜索区域需要继续搜索,则遍历当前所有可能的选择,如果其中有选择符合要求,则把这个选择加入当前搜索路径中(递归),并继续搜索未搜索的路径</li>
-</ol>
-<p>负雪明烛版本的回溯法套用模版:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">res = []</span><br><span class="line">path = []</span><br><span class="line"></span><br><span class="line">def backtrack(未探索区域, res, path):</span><br><span class="line">    <span class="keyword">if</span> 未探索区域满足结束条件:</span><br><span class="line">        res.add(path) <span class="comment"># 深度拷贝</span></span><br><span class="line">        <span class="built_in">return</span></span><br><span class="line">    <span class="keyword">for</span> 选择 <span class="keyword">in</span> 未探索区域当前可能的选择:</span><br><span class="line">        <span class="keyword">if</span> 当前选择符合要求:</span><br><span class="line">            path.add(当前选择)</span><br><span class="line">            backtrack(新的未探索区域, res, path)</span><br><span class="line">            path.pop()</span><br></pre></td></tr></table></figure>
-
-<p>其中:<br><code>backtrack</code>表示: 未搜索区域中满足条件的所有可能路径<br><code>path</code>表示: 一条路径<br><code>res</code>表示: 搜索到满足的路径(将合格的path储存到res里)<br><code>path.pop()</code>表示: 在储存一个合格路径path后,需要将其清空,以免阻碍其他搜索</p>
-<p><strong>本题图解</strong><br> <img src="/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/IMG_0847.jpg" class="" title="This is an example image"></p>
-<h3 id="三、代码"><a href="#三、代码" class="headerlink" title="三、代码"></a>三、代码</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def partition(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: List[List[str]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        res = []</span><br><span class="line">        path = []</span><br><span class="line">        self.backtrack(s,res,path)</span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line">        </span><br><span class="line">    def backtrack(self,s,res,path):</span><br><span class="line">        <span class="comment">#指针越界,res保存这个合格的path</span></span><br><span class="line">        <span class="keyword">if</span> not s:</span><br><span class="line">            res.append(path)  </span><br><span class="line">            <span class="built_in">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(1,len(s)+1): <span class="comment">#i=1,2,3</span></span><br><span class="line">            <span class="comment">#如果当下切分满足回文串的条件</span></span><br><span class="line">            <span class="keyword">if</span> self.isSubstring(s[:i]):</span><br><span class="line">                <span class="comment">#递归:考虑剩余部分的切分方法</span></span><br><span class="line">                self.backtrack(s[i:], res, path + [s[:i]])</span><br><span class="line">                </span><br><span class="line">    def isSubstring(self, s):</span><br><span class="line">        <span class="keyword">if</span> s == s[::-1]:</span><br><span class="line">            <span class="built_in">return</span> True</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>回溯</tag>
-        <tag>递归</tag>
-      </tags>
   </entry>
   <entry>
     <title>15.三数之和(Medium)</title>
@@ -119,6 +59,67 @@
       </categories>
       <tags>
         <tag>双指针</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>856.转置矩阵(Easy)</title>
+    <url>/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/</url>
+    <content><![CDATA[<p>力扣每日一题系列(2021.02.25)之<a href="https://leetcode-cn.com/problems/transpose-matrix/">转置矩阵</a><br>难度：简单</p>
+<h2 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h2><p>给你一个二维整数数组 matrix， 返回 matrix 的 转置矩阵 。<br>矩阵的 转置 是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/10/hint_transpose.png" alt="867.转置矩阵"></p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>示例1:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ 输入: matrix&#x3D;[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">$ 输出: [[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure>
+
+<p>示例2:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br></pre></td></tr></table></figure>
+<p>提示：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">m == matrix.length</span><br><span class="line">n == matrix[i].length</span><br><span class="line">1 &lt;= m, n &lt;= 1000</span><br><span class="line">1 &lt;= m * n &lt;= 105</span><br><span class="line">-10^9 &lt;= matrix[i][j] &lt;= 10^9</span><br></pre></td></tr></table></figure>
+<h3 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h3><p>转置矩阵即将M行N列的矩阵，转换成N行M列的矩阵，注意有可能N和M并不相等，所以必须要新建一个result矩阵（否则可能会出现out of range的情况）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def transpose(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        m,n = len(matrix),len(matrix[0])</span><br><span class="line">        <span class="comment">#m为行数，n为列数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#不需要numpy的矩阵建造方法</span></span><br><span class="line">        new_matrix = [[0 <span class="keyword">for</span> i <span class="keyword">in</span> range(m)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                new_matrix[i][j] = matrix[j][i]</span><br><span class="line">        <span class="built_in">return</span> new_matrix</span><br></pre></td></tr></table></figure>
+<p>这道题的意思就是原来的每一行转换成了后来的每一列，为了数学关系上更清晰，下面图片为解析。可以看出，对于一个相同的元素，新地址（坐标）和旧地址（坐标）就是横纵轴交换的关系：</p>
+<img src="/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/jiexi.png" class="" title="This is an example image">
+
+<p>一个错误的思路：（这个思路就是没有考虑到新矩阵的大小关系）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">	for j in range(i,m):</span><br><span class="line">		matrix[i][j], matrix[j][i] &#x3D;  matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>131.分割回文串(Medium)</title>
+    <url>/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/</url>
+    <content><![CDATA[<p>力扣每日一题系列(2021.03.07)之<a href="https://leetcode-cn.com/problems/palindrome-partitioning/">分割回文串</a><br>难度:中等</p>
+<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个字符串<code>s</code>,请你将<code>s</code>分割成一些子串,使每个子串都是回文串.返回<code>s</code>所有可能的分割方案.<br><strong>回文串</strong>是正着读和反着读都一样的字符串.</p>
+<p>示例1:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: s=<span class="string">&quot;aab&quot;</span></span><br><span class="line">输出: [[<span class="string">&quot;a&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>],[<span class="string">&quot;aa&quot;</span>,<span class="string">&quot;b&quot;</span>]]</span><br></pre></td></tr></table></figure>
+
+<p>示例2:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;a&quot;</span></span><br><span class="line">输出: [[<span class="string">&quot;a&quot;</span>]]</span><br></pre></td></tr></table></figure>
+
+<p>提示:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 16</span><br><span class="line">s 仅由小写英文字母组成</span><br></pre></td></tr></table></figure>
+<h3 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h3><p>代码思路学习:<a href="https://leetcode-cn.com/problems/palindrome-partitioning/solution/hui-su-fa-si-lu-yu-mo-ban-by-fuxuemingzh-azhz/">负雪明烛</a></p>
+<p>题目要求返回<code>所有可能的结果</code>, 那么只能<strong>暴力搜索所有可能的解</strong>,在这种情况下可以联想到使用<code>回溯法</code>.回溯法(算法思想)可以用递归(编程方法)来实现.</p>
+<h4 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h4><p><code>回溯法</code>实际上是一个类似<code>枚举</code>的搜索尝试过程.<br>对当前搜索路径下的未探索区域进行搜索,则可能有两种情况:</p>
+<ol>
+<li>当前未搜索区域满足条件,则保存当前路径并退出当前搜索</li>
+<li>当前为搜索区域需要继续搜索,则遍历当前所有可能的选择,如果其中有选择符合要求,则把这个选择加入当前搜索路径中(递归),并继续搜索未搜索的路径</li>
+</ol>
+<p>负雪明烛版本的回溯法套用模版:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">res = []</span><br><span class="line">path = []</span><br><span class="line"></span><br><span class="line">def backtrack(未探索区域, res, path):</span><br><span class="line">    <span class="keyword">if</span> 未探索区域满足结束条件:</span><br><span class="line">        res.add(path) <span class="comment"># 深度拷贝</span></span><br><span class="line">        <span class="built_in">return</span></span><br><span class="line">    <span class="keyword">for</span> 选择 <span class="keyword">in</span> 未探索区域当前可能的选择:</span><br><span class="line">        <span class="keyword">if</span> 当前选择符合要求:</span><br><span class="line">            path.add(当前选择)</span><br><span class="line">            backtrack(新的未探索区域, res, path)</span><br><span class="line">            path.pop()</span><br></pre></td></tr></table></figure>
+
+<p>其中:<br><code>backtrack</code>表示: 未搜索区域中满足条件的所有可能路径<br><code>path</code>表示: 一条路径<br><code>res</code>表示: 搜索到满足的路径(将合格的path储存到res里)<br><code>path.pop()</code>表示: 在储存一个合格路径path后,需要将其清空,以免阻碍其他搜索</p>
+<p><strong>本题图解</strong><br> <img src="/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/IMG_0847.jpg" class="" title="This is an example image"></p>
+<h3 id="三、代码"><a href="#三、代码" class="headerlink" title="三、代码"></a>三、代码</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def partition(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: List[List[str]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        res = []</span><br><span class="line">        path = []</span><br><span class="line">        self.backtrack(s,res,path)</span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line">        </span><br><span class="line">    def backtrack(self,s,res,path):</span><br><span class="line">        <span class="comment">#指针越界,res保存这个合格的path</span></span><br><span class="line">        <span class="keyword">if</span> not s:</span><br><span class="line">            res.append(path)  </span><br><span class="line">            <span class="built_in">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(1,len(s)+1): <span class="comment">#i=1,2,3</span></span><br><span class="line">            <span class="comment">#如果当下切分满足回文串的条件</span></span><br><span class="line">            <span class="keyword">if</span> self.isSubstring(s[:i]):</span><br><span class="line">                <span class="comment">#递归:考虑剩余部分的切分方法</span></span><br><span class="line">                self.backtrack(s[i:], res, path + [s[:i]])</span><br><span class="line">                </span><br><span class="line">    def isSubstring(self, s):</span><br><span class="line">        <span class="keyword">if</span> s == s[::-1]:</span><br><span class="line">            <span class="built_in">return</span> True</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>回溯</tag>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
@@ -166,80 +167,6 @@
       </categories>
       <tags>
         <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>856.转置矩阵(Easy)</title>
-    <url>/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.02.25)之<a href="https://leetcode-cn.com/problems/transpose-matrix/">转置矩阵</a><br>难度：简单</p>
-<h2 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h2><p>给你一个二维整数数组 matrix， 返回 matrix 的 转置矩阵 。<br>矩阵的 转置 是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p>
-<p><img src="https://assets.leetcode.com/uploads/2021/02/10/hint_transpose.png" alt="867.转置矩阵"></p>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>示例1:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ 输入: matrix&#x3D;[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">$ 输出: [[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure>
-
-<p>示例2:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br></pre></td></tr></table></figure>
-<p>提示：</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">m == matrix.length</span><br><span class="line">n == matrix[i].length</span><br><span class="line">1 &lt;= m, n &lt;= 1000</span><br><span class="line">1 &lt;= m * n &lt;= 105</span><br><span class="line">-10^9 &lt;= matrix[i][j] &lt;= 10^9</span><br></pre></td></tr></table></figure>
-<h3 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h3><p>转置矩阵即将M行N列的矩阵，转换成N行M列的矩阵，注意有可能N和M并不相等，所以必须要新建一个result矩阵（否则可能会出现out of range的情况）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def transpose(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        m,n = len(matrix),len(matrix[0])</span><br><span class="line">        <span class="comment">#m为行数，n为列数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#不需要numpy的矩阵建造方法</span></span><br><span class="line">        new_matrix = [[0 <span class="keyword">for</span> i <span class="keyword">in</span> range(m)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                new_matrix[i][j] = matrix[j][i]</span><br><span class="line">        <span class="built_in">return</span> new_matrix</span><br></pre></td></tr></table></figure>
-<p>这道题的意思就是原来的每一行转换成了后来的每一列，为了数学关系上更清晰，下面图片为解析。可以看出，对于一个相同的元素，新地址（坐标）和旧地址（坐标）就是横纵轴交换的关系：</p>
-<img src="/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/jiexi.png" class="" title="This is an example image">
-
-<p>一个错误的思路：（这个思路就是没有考虑到新矩阵的大小关系）</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">	for j in range(i,m):</span><br><span class="line">		matrix[i][j], matrix[j][i] &#x3D;  matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Hexo搭建相关问题</title>
-    <url>/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/</url>
-    <content><![CDATA[<h2 id="一、文章创建和发布问题"><a href="#一、文章创建和发布问题" class="headerlink" title="一、文章创建和发布问题"></a>一、文章创建和发布问题</h2><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo g 【生成静态文件】</span><br><span class="line">$ hexo d 【部署到网站或服务器，部署之前需要先生成静态文件】</span><br><span class="line">$ hexo clean 【清除缓存文件(db.json)和已经生成的静态文件(public)】</span><br></pre></td></tr></table></figure>
-
-<h3 id="创建一个新的发布-Create-a-new-Post"><a href="#创建一个新的发布-Create-a-new-Post" class="headerlink" title="创建一个新的发布 Create a new Post"></a>创建一个新的发布 Create a new Post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My new post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>更多信息 More info<a href="https://hexo.io/docs/writing.html">writing</a></p>
-<h3 id="运行服务器-Run-server"><a href="#运行服务器-Run-server" class="headerlink" title="运行服务器 Run server"></a>运行服务器 Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>更多信息 More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="生成统计文件-Generate-static-files"><a href="#生成统计文件-Generate-static-files" class="headerlink" title="生成统计文件 Generate static files"></a>生成统计文件 Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>更多信息 More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="部署到远程站点-Deploy-to-remote-sites"><a href="#部署到远程站点-Deploy-to-remote-sites" class="headerlink" title="部署到远程站点 Deploy to remote sites"></a>部署到远程站点 Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>更多信息 More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<h2 id="二、文章编辑问题"><a href="#二、文章编辑问题" class="headerlink" title="二、文章编辑问题"></a>二、文章编辑问题</h2><h3 id="显示不出分类、标签问题"><a href="#显示不出分类、标签问题" class="headerlink" title="显示不出分类、标签问题"></a>显示不出分类、标签问题</h3><h4 id="1-查看themes-next-config-yml主题配置文件"><a href="#1-查看themes-next-config-yml主题配置文件" class="headerlink" title="1.查看themes/next/_config.yml主题配置文件"></a>1.查看themes/next/_config.yml主题配置文件</h4><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/menu.png" class="" title="This is an example image">
-
-<p>打开主题配置文件<code>_config.yml</code>，在vim编辑器内用<code>/</code>搜索<code>menu</code>，确定categories和tags是取消注释状态的</p>
-<h4 id="2-添加分类模块"><a href="#2-添加分类模块" class="headerlink" title="2.添加分类模块"></a>2.添加分类模块</h4><p>在主文件夹<code>Blog</code>页面下</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page categories</span><br><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure>
-<p>在source文件夹现在有了<code>categories/index.md</code>和<code>tags/index.md</code>两个新文件</p>
-<img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/categories.png" class="" title="This is an example image">
-<p>以<code>categories/index.md</code>为例子,应该自行添加第二行:<br><code>type: categories</code><br>注意:和categories中有一个空格</p>
-<h4 id="3-文章中添加标签或分类的方法及效果"><a href="#3-文章中添加标签或分类的方法及效果" class="headerlink" title="3.文章中添加标签或分类的方法及效果"></a>3.文章中添加标签或分类的方法及效果</h4><p>在创建新文章后的顶端添加categories或tags的名字，注意空格</p>
-<img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/test.png" class="" title="This is an example image">
-
-<p>最后的效果:</p>
-<img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/show.png" class="" title="This is an example image">
-
-<h4 id="4-参考"><a href="#4-参考" class="headerlink" title="4.参考"></a>4.参考</h4><p><a href="https://blog.csdn.net/Wonz5130/article/details/84666519">Hexo搭建博客显示不出分类、标签问题</a></p>
-<h3 id="Hexo博客搭建之在文章中插入图片"><a href="#Hexo博客搭建之在文章中插入图片" class="headerlink" title="Hexo博客搭建之在文章中插入图片"></a>Hexo博客搭建之在文章中插入图片</h3><h4 id="1-本地引用"><a href="#1-本地引用" class="headerlink" title="1.本地引用"></a>1.本地引用</h4><p>当中只用到少量图片时，可以将图片统一放在<code>source/images</code>文件夹中，通过markdown语法添加</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ![](&#x2F;images&#x2F;image.png)</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-相对路径"><a href="#2-相对路径" class="headerlink" title="2.相对路径"></a>2.相对路径</h4><p>图片可以放在文章自己的目录中，需要先配置<code>_config.yml</code>文件，将<code>post_asset_folder</code>设置为true。设置完之后，在执行<code>hexo new &quot;post_name&quot;</code> 这个操作后，在<code>source/_posts</code>中会自动生成<code>post_name.md</code>和<code>post_name</code>同名文件夹。这时候只需要将图片放在<code>post_name</code>文件夹中，文章中可以直接使用相对路径引用了。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ![](image.png)</span><br></pre></td></tr></table></figure>
-
-<p>但是!!重点来了，这个经典的markdown语句只能保证文章中可以显示出图片，但首页上不限时，很丑。可以同时显示的语句是:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ &#123;% asset_img exemple.png This is an example image %&#125;</span><br></pre></td></tr></table></figure>
-<p>这时候就大功告成啦！</p>
-<h4 id="3-云引用"><a href="#3-云引用" class="headerlink" title="3.云引用"></a>3.云引用</h4><p>比如一些免费的CDN服务，如Cloudinary等免费生成的url地址，直接用markdown语法引用即可。</p>
-<h4 id="4-参考-1"><a href="#4-参考-1" class="headerlink" title="4.参考"></a>4.参考</h4><p><a href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">Hexo博客搭建之在文章中插入图片</a></p>
-]]></content>
-      <categories>
-        <category>网页</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
       </tags>
   </entry>
   <entry>
@@ -307,6 +234,99 @@
 </tr>
 </tbody></table>
 ]]></content>
+  </entry>
+  <entry>
+    <title>Hexo搭建相关问题</title>
+    <url>/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/</url>
+    <content><![CDATA[<h2 id="一、文章创建和发布问题"><a href="#一、文章创建和发布问题" class="headerlink" title="一、文章创建和发布问题"></a>一、文章创建和发布问题</h2><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo g 【生成静态文件】</span><br><span class="line">$ hexo d 【部署到网站或服务器，部署之前需要先生成静态文件】</span><br><span class="line">$ hexo clean 【清除缓存文件(db.json)和已经生成的静态文件(public)】</span><br></pre></td></tr></table></figure>
+
+<h3 id="创建一个新的发布-Create-a-new-Post"><a href="#创建一个新的发布-Create-a-new-Post" class="headerlink" title="创建一个新的发布 Create a new Post"></a>创建一个新的发布 Create a new Post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My new post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>更多信息 More info<a href="https://hexo.io/docs/writing.html">writing</a></p>
+<h3 id="运行服务器-Run-server"><a href="#运行服务器-Run-server" class="headerlink" title="运行服务器 Run server"></a>运行服务器 Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>更多信息 More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="生成统计文件-Generate-static-files"><a href="#生成统计文件-Generate-static-files" class="headerlink" title="生成统计文件 Generate static files"></a>生成统计文件 Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>更多信息 More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="部署到远程站点-Deploy-to-remote-sites"><a href="#部署到远程站点-Deploy-to-remote-sites" class="headerlink" title="部署到远程站点 Deploy to remote sites"></a>部署到远程站点 Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>更多信息 More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h2 id="二、文章编辑问题"><a href="#二、文章编辑问题" class="headerlink" title="二、文章编辑问题"></a>二、文章编辑问题</h2><h3 id="显示不出分类、标签问题"><a href="#显示不出分类、标签问题" class="headerlink" title="显示不出分类、标签问题"></a>显示不出分类、标签问题</h3><h4 id="1-查看themes-next-config-yml主题配置文件"><a href="#1-查看themes-next-config-yml主题配置文件" class="headerlink" title="1.查看themes/next/_config.yml主题配置文件"></a>1.查看themes/next/_config.yml主题配置文件</h4><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/menu.png" class="" title="This is an example image">
+
+<p>打开主题配置文件<code>_config.yml</code>，在vim编辑器内用<code>/</code>搜索<code>menu</code>，确定categories和tags是取消注释状态的</p>
+<h4 id="2-添加分类模块"><a href="#2-添加分类模块" class="headerlink" title="2.添加分类模块"></a>2.添加分类模块</h4><p>在主文件夹<code>Blog</code>页面下</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page categories</span><br><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure>
+<p>在source文件夹现在有了<code>categories/index.md</code>和<code>tags/index.md</code>两个新文件</p>
+<img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/categories.png" class="" title="This is an example image">
+<p>以<code>categories/index.md</code>为例子,应该自行添加第二行:<br><code>type: categories</code><br>注意:和categories中有一个空格</p>
+<h4 id="3-文章中添加标签或分类的方法及效果"><a href="#3-文章中添加标签或分类的方法及效果" class="headerlink" title="3.文章中添加标签或分类的方法及效果"></a>3.文章中添加标签或分类的方法及效果</h4><p>在创建新文章后的顶端添加categories或tags的名字，注意空格</p>
+<img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/test.png" class="" title="This is an example image">
+
+<p>最后的效果:</p>
+<img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/show.png" class="" title="This is an example image">
+
+<h4 id="4-参考"><a href="#4-参考" class="headerlink" title="4.参考"></a>4.参考</h4><p><a href="https://blog.csdn.net/Wonz5130/article/details/84666519">Hexo搭建博客显示不出分类、标签问题</a></p>
+<h3 id="Hexo博客搭建之在文章中插入图片"><a href="#Hexo博客搭建之在文章中插入图片" class="headerlink" title="Hexo博客搭建之在文章中插入图片"></a>Hexo博客搭建之在文章中插入图片</h3><h4 id="1-本地引用"><a href="#1-本地引用" class="headerlink" title="1.本地引用"></a>1.本地引用</h4><p>当中只用到少量图片时，可以将图片统一放在<code>source/images</code>文件夹中，通过markdown语法添加</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ![](&#x2F;images&#x2F;image.png)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-相对路径"><a href="#2-相对路径" class="headerlink" title="2.相对路径"></a>2.相对路径</h4><p>图片可以放在文章自己的目录中，需要先配置<code>_config.yml</code>文件，将<code>post_asset_folder</code>设置为true。设置完之后，在执行<code>hexo new &quot;post_name&quot;</code> 这个操作后，在<code>source/_posts</code>中会自动生成<code>post_name.md</code>和<code>post_name</code>同名文件夹。这时候只需要将图片放在<code>post_name</code>文件夹中，文章中可以直接使用相对路径引用了。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ![](image.png)</span><br></pre></td></tr></table></figure>
+
+<p>但是!!重点来了，这个经典的markdown语句只能保证文章中可以显示出图片，但首页上不限时，很丑。可以同时显示的语句是:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ &#123;% asset_img exemple.png This is an example image %&#125;</span><br></pre></td></tr></table></figure>
+<p>这时候就大功告成啦！</p>
+<h4 id="3-云引用"><a href="#3-云引用" class="headerlink" title="3.云引用"></a>3.云引用</h4><p>比如一些免费的CDN服务，如Cloudinary等免费生成的url地址，直接用markdown语法引用即可。</p>
+<h4 id="4-参考-1"><a href="#4-参考-1" class="headerlink" title="4.参考"></a>4.参考</h4><p><a href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">Hexo博客搭建之在文章中插入图片</a></p>
+]]></content>
+      <categories>
+        <category>网页</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1052.爱生气的书店老板(Medium)</title>
+    <url>/2021/02/26/1052-%E7%88%B1%E7%94%9F%E6%B0%94%E7%9A%84%E4%B9%A6%E5%BA%97%E8%80%81%E6%9D%BF-Medium/</url>
+    <content><![CDATA[<p>力扣每日一题系列(2021.02.23)之<a href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/">爱生气的书店老板</a><br>难度：中等</p>
+<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>今天，书店老板有一家店打算试营业<code>customers.length</code>分钟。每分钟都有一些顾客<code>customers[i]</code>会进入书店，所有这些顾客都会在那一分钟结束后离开。</p>
+<p>在某些时候，书店老板会生气。 如果书店老板在第<code>i</code>分钟生气，那么<code>grumpy[i] = 1</code>，否则<code>grumpy[i] = 0</code>。 当书店老板生气时，那一分钟的顾客就会不满意，不生气则他们是满意的。</p>
+<p>书店老板知道一个秘密技巧，能抑制自己的情绪，可以让自己连续<code>X</code>分钟不生气，但却只能使用一次。</p>
+<p>请你返回这一天营业下来，最多有多少客户能够感到满意的数量。
+ </p>
+<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：customers = [1,0,1,2,1,1,7,5], grumpy = [0,1,0,1,0,1,0,1], X = 3</span><br><span class="line">输出：16</span><br><span class="line">解释：</span><br><span class="line">书店老板在最后 3 分钟保持冷静。</span><br><span class="line">感到满意的最大客户数量 = 1 + 1 + 1 + 1 + 7 + 5 = 16.</span><br></pre></td></tr></table></figure>
+<h4 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1 &lt;&#x3D; X &lt;&#x3D; customers.length &#x3D;&#x3D; grumpy.length &lt;&#x3D; 20000</span><br><span class="line">0 &lt;&#x3D; customers[i] &lt;&#x3D; 1000</span><br><span class="line">0 &lt;&#x3D; grumpy[i] &lt;&#x3D; 1</span><br></pre></td></tr></table></figure>
+<h3 id="二、我的解法"><a href="#二、我的解法" class="headerlink" title="二、我的解法"></a>二、我的解法</h3><p>我的第一个想法是利用暴力解法。（渣</p>
+<p>通过按顺序替换<code>grumpy</code>里不生气的日期，再把每个新的<code>grumpy</code>和<code>customers</code>点乘求和，保存满意客户的最大数量。注意，<code>grumpy</code>和<code>customers</code>点乘前，需要注意把<code>0（不生气）</code>替换成<code>1</code>，把<code>1（生气）</code>替换成<code>0</code>，这样才能使用点乘。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type customers: List[int]</span></span><br><span class="line"><span class="string">        :type grumpy: List[int]</span></span><br><span class="line"><span class="string">        :type X: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment">#滑动窗口</span></span><br><span class="line">        res = 0</span><br><span class="line">        <span class="comment">#先将grumpy里的1和0替换，方便后面点乘</span></span><br><span class="line">        <span class="comment">#1:不生气，服务客户 0:生气，去你娘滴</span></span><br><span class="line">        grumpy = [1-i <span class="keyword">for</span> i <span class="keyword">in</span> grumpy]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(grumpy)-X+1):</span><br><span class="line">            grumpy_now = grumpy[:i] + [1]*X + grumpy[i+X:]</span><br><span class="line">            <span class="comment">#satis：满意度列表</span></span><br><span class="line">            satis = map(lambda x,y:x*y, grumpy_now, customers)</span><br><span class="line">            <span class="comment">#保留最大res</span></span><br><span class="line">            res = max(res,sum(satis))</span><br><span class="line"></span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
+<p>但是这个解法只ac了<code>73/38</code>，查看发现是那种非常长的列表无法通过。</p>
+<h3 id="滑动窗口算法"><a href="#滑动窗口算法" class="headerlink" title="滑动窗口算法"></a>滑动窗口算法</h3><p>引用思路来自: <a href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/solution/yong-mi-mi-ji-qiao-wan-liu-zhu-zui-duo-d-py41/">负雪明烛</a></p>
+<p>依然是<code>滑动窗口</code>的思路。</p>
+<h4 id="1-解题思路"><a href="#1-解题思路" class="headerlink" title="1.解题思路"></a>1.解题思路</h4><ul>
+<li>将题目分为两部分，第一部分是不做出任何改变会留下的顾客origin，第二部分是每一个<code>不生气窗口X</code>的可以留下的本被赶走的客户数increse。</li>
+<li>得到的客户总数就是 origin + max(increse)</li>
+</ul>
+<p>按照这个思路，我又自己写了一遍代码，<code>ac100%</code>了但是执行用时5.06%…</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type customers: List[int]</span><br><span class="line">        :type grumpy: List[int]</span><br><span class="line">        :type X: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        #滑动窗口</span><br><span class="line">        increase &#x3D; 0</span><br><span class="line">        origin &#x3D; sum(map(lambda x,y:x*y, [1-i for i in grumpy], customers))</span><br><span class="line">        </span><br><span class="line">        for i in range(len(grumpy)-X+1):</span><br><span class="line">            grumpy_now, customers_now &#x3D; grumpy[i:i+X],customers[i:i+X]</span><br><span class="line">            satis &#x3D; 0</span><br><span class="line">            for j in range(len(grumpy_now)):</span><br><span class="line">                if grumpy_now[j] &#x3D;&#x3D; 1:</span><br><span class="line">                    satis +&#x3D; customers_now[j]</span><br><span class="line">            increase &#x3D; max(increase,satis)</span><br><span class="line">        return origin + increase</span><br></pre></td></tr></table></figure>
+<p>所以接下来是我学习上方参考链接的做题方法写的<code>ac100%</code>，248ms(82.24%), 15MB(47.72%)<br>总体分为：</p>
+<ol>
+<li>算毫无作为时满意的客户数量 origin</li>
+<li>算滑动窗口X带来的改变 通过curValue的最大值resValue</li>
+</ol>
+<ul>
+<li>算前X个格子</li>
+<li>算第X到len(grumpy)个格子</li>
+</ul>
+<ol start="3">
+<li>得到结果为origin+resValue<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type customers: List[int]</span><br><span class="line">        :type grumpy: List[int]</span><br><span class="line">        :type X: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        </span><br><span class="line">        #第一步: 计算不做任何改变，满意客户的数量</span><br><span class="line">        origin &#x3D; sum(map(lambda x,y:x*y, [1-i for i in grumpy], customers))</span><br><span class="line">        </span><br><span class="line">        #第二步：计算滑动窗口里可以增加满意客户的数量</span><br><span class="line">        # 2.1 先计算前X个格子的值</span><br><span class="line">        curValue &#x3D; 0</span><br><span class="line">        for i in range(X):</span><br><span class="line">            if grumpy[i] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue +&#x3D; customers[i]</span><br><span class="line">        resValue &#x3D; curValue</span><br><span class="line">        # 2.2 开始向右滑————————————</span><br><span class="line">        for i in range(X,len(grumpy)):</span><br><span class="line">            #先验证左边（左边滑出的那个格子）是否在生气，如果在生气，需要在curValue剪掉</span><br><span class="line">            if grumpy[i-X] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue -&#x3D; customers[i-X]</span><br><span class="line">            #再验证右边（右边新增的那个格子）是否在生气，如果在生气，需要在curValue加上</span><br><span class="line">            if grumpy[i] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue +&#x3D; customers[i]</span><br><span class="line">            #判断当下curValue和史上最大curValue的关系</span><br><span class="line">            resValue &#x3D; max(resValue,curValue)</span><br><span class="line">        </span><br><span class="line">        return origin + resValue</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>滑动窗口</tag>
+      </tags>
   </entry>
   <entry>
     <title>法语花卉词汇</title>
