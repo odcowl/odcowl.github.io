@@ -20,21 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="LeetCode之整数反转难度：简单 一、题目给你一个 32 位的有符号整数 x ，返回 x 中每位上的数字反转后的结果。 如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。 假设环境不允许存储 64 位整数（有符号或无符号）。 示例 1：12输入：x &#x3D; 123输出：321 示例 2：12输入：x &#x3D; -123输出：-321 示例 3：12">
+  <meta name="description" content="每日一题(2021.03.11)之基本计算器难度：中等 一、题目给你一个字符串表达式 s ，请你实现一个基本计算器来计算并返回它的值。 整数除法仅保留整数部分。 示例 1：12输入：s &#x3D; &quot;3+2*2&quot;输出：7 示例 2：12输入：s &#x3D; &quot; 3&#x2F;2 &quot;输出：1 示例 3：12输入：s &#x3D; &quot; 3+5 &#x2F; 2 &quot;输出：5 提示：  1">
 <meta property="og:type" content="article">
-<meta property="og:title" content="7.整数反转(Easy)">
-<meta property="og:url" content="http://example.com/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/index.html">
+<meta property="og:title" content="227.基本计算器2(Medium)">
+<meta property="og:url" content="http://example.com/2021/03/10/227-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E6%9C%BA2-Medium/index.html">
 <meta property="og:site_name" content="odcowl的个人博客">
-<meta property="og:description" content="LeetCode之整数反转难度：简单 一、题目给你一个 32 位的有符号整数 x ，返回 x 中每位上的数字反转后的结果。 如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。 假设环境不允许存储 64 位整数（有符号或无符号）。 示例 1：12输入：x &#x3D; 123输出：321 示例 2：12输入：x &#x3D; -123输出：-321 示例 3：12">
+<meta property="og:description" content="每日一题(2021.03.11)之基本计算器难度：中等 一、题目给你一个字符串表达式 s ，请你实现一个基本计算器来计算并返回它的值。 整数除法仅保留整数部分。 示例 1：12输入：s &#x3D; &quot;3+2*2&quot;输出：7 示例 2：12输入：s &#x3D; &quot; 3&#x2F;2 &quot;输出：1 示例 3：12输入：s &#x3D; &quot; 3+5 &#x2F; 2 &quot;输出：5 提示：  1">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/1610776376-AunReA-%E6%95%B0%E5%AD%97%E5%8F%8D%E8%BD%AC.jpeg">
-<meta property="article:published_time" content="2021-03-10T04:31:46.000Z">
-<meta property="article:modified_time" content="2021-03-10T11:46:00.245Z">
+<meta property="article:published_time" content="2021-03-10T15:18:41.000Z">
+<meta property="article:modified_time" content="2021-03-10T22:24:07.970Z">
 <meta property="article:author" content="odcowl">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/1610776376-AunReA-%E6%95%B0%E5%AD%97%E5%8F%8D%E8%BD%AC.jpeg">
 
-<link rel="canonical" href="http://example.com/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/">
+<link rel="canonical" href="http://example.com/2021/03/10/227-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E6%9C%BA2-Medium/">
 
 
 <script id="page-configurations">
@@ -47,7 +45,7 @@
   };
 </script>
 
-  <title>7.整数反转(Easy) | odcowl的个人博客</title>
+  <title>227.基本计算器2(Medium) | odcowl的个人博客</title>
   
 
 
@@ -193,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/10/227-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E6%9C%BA2-Medium/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -206,7 +204,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          7.整数反转(Easy)
+          227.基本计算器2(Medium)
         </h1>
 
         <div class="post-meta">
@@ -215,10 +213,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-03-10 12:31:46 / 修改时间：19:46:00" itemprop="dateCreated datePublished" datetime="2021-03-10T12:31:46+08:00">2021-03-10</time>
+              <time title="创建时间：2021-03-10 23:18:41" itemprop="dateCreated datePublished" datetime="2021-03-10T23:18:41+08:00">2021-03-10</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-11 06:24:07" itemprop="dateModified" datetime="2021-03-11T06:24:07+08:00">2021-03-11</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -240,26 +244,24 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>LeetCode之<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-integer/">整数反转</a><br>难度：简单</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个 32 位的有符号整数 x ，返回 x 中每位上的数字反转后的结果。</p>
-<p>如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。</p>
-<p>假设环境不允许存储 64 位整数（有符号或无符号）。</p>
-<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：x = 123</span><br><span class="line">输出：321</span><br></pre></td></tr></table></figure></p>
-<p>示例 2：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：x &#x3D; -123</span><br><span class="line">输出：-321</span><br></pre></td></tr></table></figure></p>
-<p>示例 3：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：x = 120</span><br><span class="line">输出：21</span><br></pre></td></tr></table></figure></p>
-<p>示例 4：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：x = 0</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure></p>
+        <p>每日一题(2021.03.11)之<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/basic-calculator-ii/">基本计算器</a><br>难度：中等</p>
+<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个字符串表达式 <code>s</code> ，请你实现一个基本计算器来计算并返回它的值。</p>
+<p>整数除法仅保留整数部分。</p>
+<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;3+2*2&quot;</span></span><br><span class="line">输出：7</span><br></pre></td></tr></table></figure></p>
+<p>示例 2：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 3/2 &quot;</span></span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure></p>
+<p>示例 3：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 3+5 / 2 &quot;</span></span><br><span class="line">输出：5</span><br></pre></td></tr></table></figure></p>
 <p>提示：</p>
-<p><code>-2**31 &lt;= x &lt;= 2**31 - 1</code></p>
-<h3 id="二、我的解法"><a href="#二、我的解法" class="headerlink" title="二、我的解法"></a>二、我的解法</h3><p><code>24ms, 83.28%; 12.9MB, 76.51%</code></p>
-<p>因为在Python里，<code>int</code>没有长度，所以将其转换为<code>str</code>来获得其长度信息，代码很简单，主要是为了在第三部分学习他人<strong>简洁的代码</strong>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def reverse(self, x):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type x: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        flag = False</span><br><span class="line">        <span class="keyword">if</span> x &lt; 0:</span><br><span class="line">            flag = True</span><br><span class="line">            x = -x</span><br><span class="line">        </span><br><span class="line">        n = len(str(x))</span><br><span class="line">        res = 0</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i,ch <span class="keyword">in</span> enumerate(str(x)[::-1]):</span><br><span class="line">            res += int(ch) * (10 ** (n-i-1))</span><br><span class="line"></span><br><span class="line">        res = -res <span class="keyword">if</span> flag <span class="keyword">else</span> res</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> -2**31&lt;res&lt;2**31-1:</span><br><span class="line">            <span class="built_in">return</span> res</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br></pre></td></tr></table></figure>
-<h3 id="三、他人的解法"><a href="#三、他人的解法" class="headerlink" title="三、他人的解法"></a>三、他人的解法</h3><p>如下参考<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-integer/solution/jin-tian-xiao-bai-jie-ti-ta-lai-liao-by-cuive/">Will</a></p>
- <img src="/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/1610776376-AunReA-%E6%95%B0%E5%AD%97%E5%8F%8D%E8%BD%AC.jpeg" class="">
-<p>例子：1234 =&gt; 4321</p>
-<p>这是一个4位的数字，个位数转换后变成了千位，十位变成了百位…</p>
-<p>但是在这道题中，输入数字x的大小无法确定</p>
-<p>思路为每次截取x的最后一位，按照倍数变化操作，通过while来完成</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">	def reverse(self, x):</span><br><span class="line">		a = 0</span><br><span class="line">		<span class="keyword">while</span> x!=0:</span><br><span class="line">			<span class="keyword">if</span> x&gt;0:</span><br><span class="line">				a=a*10+x%10</span><br><span class="line">				x = x//10</span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				a=a*10+x%-10</span><br><span class="line">				x = -(x//-10)</span><br><span class="line">		<span class="built_in">return</span> a if-2**31&lt;a&lt;2**31-1 <span class="keyword">else</span> 0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>1 &lt;= s.length &lt;= 3 * 10^5</li>
+<li>s 由整数和算符 (‘+’, ‘-‘, ‘*‘, ‘/‘) 组成，中间由一些空格隔开</li>
+<li>s 表示一个 有效表达式</li>
+<li>表达式中的所有整数都是非负整数，且在范围 [0, 2^31 - 1] 内</li>
+<li>题目数据保证答案是一个 32-bit 整数</li>
+</ul>
+<h3 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h3><p>好亲切的连环题(误 而且一看还是个medium,比起昨天hard的残虐，稍微松了一口气。。。</p>
+<p>凭着脑海里昨日学习的记忆，五分钟内我先写下了这样一个不知好歹的，没有ac的答案</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        sign = 0 <span class="comment"># 0 =&gt; +, 1 =&gt; - , 2 =&gt; *, 3 =&gt; /</span></span><br><span class="line">        res = 0</span><br><span class="line">        n = len(s)</span><br><span class="line">        i = 0</span><br><span class="line">        <span class="keyword">while</span> i&lt;n:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27; &#x27;</span>:</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                sign = 0</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">                sign = 2</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;/&#x27;</span>:</span><br><span class="line">                sign = 3</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i].isdigit():</span><br><span class="line">                tmp = int(s[i])</span><br><span class="line">                i += 1</span><br><span class="line">                <span class="keyword">while</span> i&lt;n and s[i].isdigit():</span><br><span class="line">                    tmp += tmp*10 + int(s[i])</span><br><span class="line">                    i += 1</span><br><span class="line">                <span class="keyword">if</span> sign == 0:</span><br><span class="line">                    res += tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 1:</span><br><span class="line">                    res -= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 2:</span><br><span class="line">                    res *= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 3:</span><br><span class="line">                    res /= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
+<p>这个答案在遇到第一个示例<code>s=&quot;3+3*2</code>时就通过不了了，据愚蠢的我发现，是忘记了乘除法比加减法优先计算了。。。高兴的太早:(回小学重新做人</p>
 
     </div>
 
@@ -275,7 +277,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://example.com/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/" title="7.整数反转(Easy)">http://example.com/2021/03/10/7-整数反转-Easy/</a>
+    <a href="http://example.com/2021/03/10/227-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E6%9C%BA2-Medium/" title="227.基本计算器2(Medium)">http://example.com/2021/03/10/227-基本计算机2-Medium/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -292,12 +294,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/03/09/224-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8-Hard/" rel="prev" title="224.基本计算器(Hard)">
-      <i class="fa fa-chevron-left"></i> 224.基本计算器(Hard)
+    <a href="/2021/03/10/%E5%A3%B0%E5%AD%A6%E5%8F%82%E6%95%B0-%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2STFT/" rel="prev" title="短时傅里叶变换STFT及Python/Matlab实现">
+      <i class="fa fa-chevron-left"></i> 短时傅里叶变换STFT及Python/Matlab实现
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/03/10/%E5%A3%B0%E5%AD%A6%E5%8F%82%E6%95%B0-%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2STFT/" rel="next" title="短时傅里叶变换STFT及Python/Matlab实现">
-      短时傅里叶变换STFT及Python/Matlab实现 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/03/10/%E5%A3%B0%E5%AD%A6%E5%8F%82%E6%95%B0-%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2STFT/2020-10-23%2011-54-46/" rel="next" title="">
+       <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -371,7 +373,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">一、题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%88%91%E7%9A%84%E8%A7%A3%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">二、我的解法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BB%96%E4%BA%BA%E7%9A%84%E8%A7%A3%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">三、他人的解法</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">一、题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%88%91%E7%9A%84%E8%A7%A3%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">我的解法</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 

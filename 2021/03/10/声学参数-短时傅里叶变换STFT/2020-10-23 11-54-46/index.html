@@ -1,446 +1,236 @@
-<?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title>1047.删除字符串中的所有相邻重复项(Easy)</title>
-    <url>/2021/03/09/1047-%E5%88%A0%E9%99%A4%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E7%9B%B8%E9%82%BB%E9%87%8D%E5%A4%8D%E9%A1%B9-Easy/</url>
-    <content><![CDATA[<p>LeetCode每日一题(2021.03.09)之<a href="https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/">删除字符串中的所有相邻重复项</a><br>难度：简单</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给出由小写字母组成的字符串<code>s</code>，<strong>重复项删除操作</strong>会选择两个相邻且相同的字母，并删除它们。</p>
-<p>在<code>s</code>上反复执行重复项删除操作，直到无法继续删除。</p>
-<p>在完成所有重复项删除操作后返回最终的字符。答案保持唯一。</p>
-<p>示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：<span class="string">&quot;abbaca&quot;</span></span><br><span class="line">输出：<span class="string">&quot;ca&quot;</span></span><br><span class="line">解释：</span><br><span class="line">例如，在 <span class="string">&quot;abbaca&quot;</span> 中，我们可以删除 <span class="string">&quot;bb&quot;</span> 由于两字母相邻且相同，这是此时唯一可以执行删除操作的重复项。之后我们得到字符串 <span class="string">&quot;aaca&quot;</span>，其中又只有 <span class="string">&quot;aa&quot;</span> 可以执行重复项删除操作，所以最后的字符串为 <span class="string">&quot;ca&quot;</span>。</span><br></pre></td></tr></table></figure></p>
-<p>提示：</p>
-<ol>
-<li>1 &lt;= S.length &lt;= 20000</li>
-<li>S 仅由小写英文字母组成。</li>
-</ol>
-<h3 id="二、我的解法"><a href="#二、我的解法" class="headerlink" title="二、我的解法"></a>二、我的解法</h3><p><strong>思路</strong>：</p>
-<ul>
-<li>如从字符串abba中先删除bb，会有新的重复字符串aa出现，所以需要保存当前还未被删除的字符串，联想到<code>栈</code>这种数据结构</li>
-<li>当字符串中有多组相邻重复项时，先删除哪一组不影响结果</li>
-</ul>
-<p><code>296ms, 11.52%; 13.4MB, 73.03%</code><br>我的小菜鸡伪栈法：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def removeDuplicates(self, S):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type S: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        res = <span class="string">&#x27; &#x27;</span></span><br><span class="line">        <span class="keyword">for</span> char <span class="keyword">in</span> S:</span><br><span class="line">            <span class="keyword">if</span> char != res[-1]:</span><br><span class="line">                res += char</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                res = res[:-1]</span><br><span class="line">        <span class="built_in">return</span> res[1:]</span><br></pre></td></tr></table></figure></p>
-<h3 id="三、其他的解法"><a href="#三、其他的解法" class="headerlink" title="三、其他的解法"></a>三、其他的解法</h3><h4 id="3-1-栈"><a href="#3-1-栈" class="headerlink" title="3.1 栈"></a>3.1 栈</h4><p>感觉想法差不多，官方的栈效率高多了：<br><code>52ms, 88.07%; 13.4MB, 81.74%</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def removeDuplicates(self, S: str) -&gt; str:</span><br><span class="line">        stk = list()</span><br><span class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> S:</span><br><span class="line">            <span class="keyword">if</span> stk and stk[-1] == ch:</span><br><span class="line">                stk.pop()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                stk.append(ch)</span><br><span class="line">        <span class="built_in">return</span> <span class="string">&quot;&quot;</span>.join(stk)</span><br></pre></td></tr></table></figure>
-<p>今天是个简单题，yeah</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>栈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>15.三数之和(Medium)</title>
-    <url>/2021/02/26/15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C-Medium/</url>
-    <content><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给你一个包含<code>n</code>个整数的数组<code>nums</code>,判断<code>nums</code>中是否存在三个元素a,b,c，使得<code>a+b+c=0</code> ？请你找出所有和为<code>0</code>且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
-<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = [-1,0,1,2,-1,-4]</span><br><span class="line">输出：[[-1,-1,2],[-1,0,1]]</span><br></pre></td></tr></table></figure><br>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>示例3:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [0]</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">* 0 &lt;= nums.length &lt;= 3000</span><br><span class="line">* -10^5 &lt;= nums[i] &lt;= 10^5</span><br></pre></td></tr></table></figure></p>
-<h3 id="排序➕双指针解法"><a href="#排序➕双指针解法" class="headerlink" title="排序➕双指针解法"></a>排序➕双指针解法</h3><p>三数之和这道题我一直思路不清晰，下面的代码也只是复现别人的思路，接下来总结一下：</p>
-<ol>
-<li>边界条件判断，当<code>nums</code>不存在，或<code>len(nums)&lt;3</code>的时候，返回空集合<code>[]</code></li>
-<li>对数组进行从小到大的排序</li>
-<li>对排序后的数组开始遍历<ol>
-<li>如果<code>nums[i]&gt;0</code>,由于数组已经排序过了，那么<code>nums[i]</code>后面的<code>nums[L]</code>和<code>nums[R]</code>肯定比<code>nums[i]</code>更大，三个大于零的数字和不等于零。</li>
-<li>如果<code>nums[i]</code>和<code>nums[i-1]</code>是重复的，跳过</li>
-<li>令左指针指向<code>L = i + 1</code>, 令右指针指向<code>R = len(nums)-1</code>（其实这就是最后一位)<ul>
-<li>如果<code>nums[i]+nums[L]+nums[R]=0</code>，在答案列表里储存此组数；同时，判断<code>nums[L+1]</code>和<code>nums[L]</code>是否重复，及<code>nums[R]</code>和<code>nums[R-1]</code>是否重复，如果是的话，将<code>L，R</code>移到不再重复的位置，然后再令<code>L=L+1</code>,<code>R=R-1</code>即继续循环</li>
-<li>如果<code>nums[i]+nums[L]+nums[R]&gt;0</code>, 说明右指针太大，<code>R</code>向左移动一位, <code>R=R-1</code></li>
-<li>如果<code>nums[i]+nums[L]+nums[R]&lt;0</code>，说明左指针太小，<code>L</code>向右移动一位，<code>L=L+1</code></li>
-</ul>
-</li>
-</ol>
-</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def threeSum(self, nums):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 第一步：如果nums不存在或nums不到三个元素，返回空集</span></span><br><span class="line">        <span class="keyword">if</span> not nums or len(nums) &lt; 3:</span><br><span class="line">            <span class="built_in">return</span> []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第二步：对nums从小到大进行排序</span></span><br><span class="line">        nums.sort() </span><br><span class="line">        </span><br><span class="line">        res = []</span><br><span class="line">        <span class="comment"># 第三步：对排序后的nums进行遍历</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; 0:</span><br><span class="line">                <span class="built_in">return</span>  res <span class="comment">#如果nums[i]已经大于0，因为已排序，后面不可能再有数字和nums[i]相加并等于0，返回当下答案</span></span><br><span class="line">            <span class="keyword">if</span> i &gt; 0 and nums[i] == nums[i-1]:</span><br><span class="line">                <span class="built_in">continue</span> <span class="comment">#如果nums[i]和nums[i-1]</span></span><br><span class="line">            L = i + 1 <span class="comment">#当下nums[i]的右边一位</span></span><br><span class="line">            R = len(nums) - 1 <span class="comment">#最后一位</span></span><br><span class="line">            <span class="keyword">while</span> L &lt; R: </span><br><span class="line">                <span class="keyword">if</span> nums[i]+nums[L]+nums[R] == 0:</span><br><span class="line">                    res.append([nums[i],nums[L],nums[R]])</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[L] == nums[L+1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复最右端</span></span><br><span class="line">                        L = L + 1</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[R] == nums[R-1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复的最左端</span></span><br><span class="line">                        R = R - 1</span><br><span class="line">                    L = L + 1</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和大于0，说明nums[R]太大，nums[R]向左移</span></span><br><span class="line">                <span class="keyword">elif</span> nums[i]+nums[L]+nums[R] &gt; 0:</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和小于0，说明nums[L]太小，nums[L]向右移</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    L = L + 1</span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>双指针</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>224.基本计算器(Hard)</title>
-    <url>/2021/03/09/224-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8-Hard/</url>
-    <content><![CDATA[<p>每日一题系列(2021.03.10)之<a href="https://leetcode-cn.com/problems/basic-calculator/">基本计算器</a><br>难度：困难</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>实现一个基本的计算器来计算一个简单的字符串表达式 s 的值。</p>
-<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;1 + 1&quot;</span></span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 2-1 + 2 &quot;</span></span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure></p>
-<p>示例3:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;(1+(4+5+2)-3)+(6+8)&quot;</span></span><br><span class="line">输出：23</span><br></pre></td></tr></table></figure></p>
-<p>提示：</p>
-<ul>
-<li>1 &lt;= s.length &lt;= 3 * 10^5</li>
-<li>s 由数字、+、-、(、)、和   组成</li>
-<li>s 表示一个有效的表达式</li>
-</ul>
-<h3 id="二、我的解法（误"><a href="#二、我的解法（误" class="headerlink" title="二、我的解法（误"></a>二、我的解法（误</h3><p>我看到这一题第一反应是：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> <span class="built_in">eval</span>(s)</span><br></pre></td></tr></table></figure><br>完事走人（抓回来</p>
-<p>想必LeetCode早就预见了我等无耻之人，于是乎，eval作废，我的脑子也废了，现在开始学习大神的解法。。。</p>
-<p>ps：我总感觉这题在hw的题库里好像见过也做过，但是咋一点儿印象也米有了</p>
-<h3 id="三、真正的解法"><a href="#三、真正的解法" class="headerlink" title="三、真正的解法"></a>三、真正的解法</h3><p>这道题里有加减号，也有括号，分三部来考虑这个问题：</p>
-<ul>
-<li>不考虑括号，只考虑数字、加减号和空格</li>
-<li>考虑括号，数字，加减号和空格</li>
-<li>考虑括号，数字，加减乘除号和空格</li>
-</ul>
-<p>以下部分参考了<a href="https://leetcode-cn.com/problems/basic-calculator/solution/zhan-by-powcai-3/">powcai</a>的做法</p>
-<h4 id="3-1-不考虑括号，考虑加减号"><a href="#3-1-不考虑括号，考虑加减号" class="headerlink" title="3.1 不考虑括号，考虑加减号"></a>3.1 不考虑括号，考虑加减号</h4><p>在不考虑括号的情况时，不需要用到<code>栈</code>的思路，在顺序上也没有强行要求，要注意的一点是，看到加号或减号时，要同时考虑符号前一位的数字，和符号后一位的数字。所以用一个<code>sign</code>来记录。</p>
-<p>在下面的代码中，只有当进入<code>elif s[i].isdigit():</code>这个格子里的时候，才有真正对res进行计算的操作:<code>res+= tmp * sign</code>。这里就迎来了第二个要注意的点，有时候数字并非只是个位数。</p>
-<p>以下为实现这个操作的代码：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        res = 0</span><br><span class="line">        sign = 1</span><br><span class="line">        i = 0</span><br><span class="line">        n = len(s)</span><br><span class="line">        <span class="keyword">while</span> i&lt;n:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27; &#x27;</span>: <span class="comment">#空格跳过</span></span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                sign = -1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i].isdigit():</span><br><span class="line">                tmp = int(s[i])</span><br><span class="line">                i += 1</span><br><span class="line">                <span class="comment">#验证这是不是一个非单位数，如果是的话，进入下面的while循环</span></span><br><span class="line">                <span class="keyword">while</span> i&lt;n and s[i].isdigit(): <span class="comment">#如果数字有很多位的情况</span></span><br><span class="line">                    tmp = tmp*10 + int(s[i])</span><br><span class="line">                    i += 1</span><br><span class="line">                <span class="comment">#真正的计算操作</span></span><br><span class="line">                res += tmp * sign</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure></p>
-<h4 id="3-2-考虑括号，考虑加减号"><a href="#3-2-考虑括号，考虑加减号" class="headerlink" title="3.2 考虑括号，考虑加减号"></a>3.2 考虑括号，考虑加减号</h4><p>这一步则是到达了这道题目所要求的部分，也正是因为括号的出现，我们需要考虑计算的先后顺序，在这里，就要运用到<code>栈</code>。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        res = 0</span><br><span class="line">        sign = 1</span><br><span class="line">        i = 0</span><br><span class="line">        n = len(s)</span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">while</span> i&lt;n:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27; &#x27;</span>: <span class="comment">#空格跳过</span></span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                sign = -1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">                stack.append(res)</span><br><span class="line">                stack.append(sign)</span><br><span class="line">                res = 0</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;)&#x27;</span>:</span><br><span class="line">                res = res * stack.pop() + stack.pop()</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i].isdigit():</span><br><span class="line">                tmp = int(s[i])</span><br><span class="line">                i += 1</span><br><span class="line">                <span class="comment">#验证这是不是一个非单位数，如果是的话，进入下面的while循环</span></span><br><span class="line">                <span class="keyword">while</span> i&lt;n and s[i].isdigit(): <span class="comment">#如果数字有很多位的情况</span></span><br><span class="line">                    tmp = tmp*10 + int(s[i])</span><br><span class="line">                    i += 1</span><br><span class="line">                <span class="comment">#真正的计算操作</span></span><br><span class="line">                res += tmp * sign</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure></p>
-<p>在这等一波负雪明烛的做法。。。</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>227.基本计算器2(Medium)</title>
-    <url>/2021/03/10/227-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E6%9C%BA2-Medium/</url>
-    <content><![CDATA[<p>每日一题(2021.03.11)之<a href="https://leetcode-cn.com/problems/basic-calculator-ii/">基本计算器</a><br>难度：中等</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个字符串表达式 <code>s</code> ，请你实现一个基本计算器来计算并返回它的值。</p>
-<p>整数除法仅保留整数部分。</p>
-<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;3+2*2&quot;</span></span><br><span class="line">输出：7</span><br></pre></td></tr></table></figure></p>
-<p>示例 2：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 3/2 &quot;</span></span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure></p>
-<p>示例 3：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 3+5 / 2 &quot;</span></span><br><span class="line">输出：5</span><br></pre></td></tr></table></figure></p>
-<p>提示：</p>
-<ul>
-<li>1 &lt;= s.length &lt;= 3 * 10^5</li>
-<li>s 由整数和算符 (‘+’, ‘-‘, ‘*‘, ‘/‘) 组成，中间由一些空格隔开</li>
-<li>s 表示一个 有效表达式</li>
-<li>表达式中的所有整数都是非负整数，且在范围 [0, 2^31 - 1] 内</li>
-<li>题目数据保证答案是一个 32-bit 整数</li>
-</ul>
-<h3 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h3><p>好亲切的连环题(误 而且一看还是个medium,比起昨天hard的残虐，稍微松了一口气。。。</p>
-<p>凭着脑海里昨日学习的记忆，五分钟内我先写下了这样一个不知好歹的，没有ac的答案</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        sign = 0 <span class="comment"># 0 =&gt; +, 1 =&gt; - , 2 =&gt; *, 3 =&gt; /</span></span><br><span class="line">        res = 0</span><br><span class="line">        n = len(s)</span><br><span class="line">        i = 0</span><br><span class="line">        <span class="keyword">while</span> i&lt;n:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27; &#x27;</span>:</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                sign = 0</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">                sign = 2</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;/&#x27;</span>:</span><br><span class="line">                sign = 3</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i].isdigit():</span><br><span class="line">                tmp = int(s[i])</span><br><span class="line">                i += 1</span><br><span class="line">                <span class="keyword">while</span> i&lt;n and s[i].isdigit():</span><br><span class="line">                    tmp += tmp*10 + int(s[i])</span><br><span class="line">                    i += 1</span><br><span class="line">                <span class="keyword">if</span> sign == 0:</span><br><span class="line">                    res += tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 1:</span><br><span class="line">                    res -= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 2:</span><br><span class="line">                    res *= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 3:</span><br><span class="line">                    res /= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
-<p>这个答案在遇到第一个示例<code>s=&quot;3+3*2</code>时就通过不了了，据愚蠢的我发现，是忘记了乘除法比加减法优先计算了。。。高兴的太早:(回小学重新做人</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>131.分割回文串(Medium)</title>
-    <url>/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.03.07)之<a href="https://leetcode-cn.com/problems/palindrome-partitioning/">分割回文串</a><br>难度:中等</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个字符串<code>s</code>,请你将<code>s</code>分割成一些子串,使每个子串都是回文串.返回<code>s</code>所有可能的分割方案.<br><strong>回文串</strong>是正着读和反着读都一样的字符串.</p>
-<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: s=<span class="string">&quot;aab&quot;</span></span><br><span class="line">输出: [[<span class="string">&quot;a&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>],[<span class="string">&quot;aa&quot;</span>,<span class="string">&quot;b&quot;</span>]]</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;a&quot;</span></span><br><span class="line">输出: [[<span class="string">&quot;a&quot;</span>]]</span><br></pre></td></tr></table></figure></p>
-<p>提示:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 16</span><br><span class="line">s 仅由小写英文字母组成</span><br></pre></td></tr></table></figure></p>
-<h3 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h3><p>代码思路学习:<a href="https://leetcode-cn.com/problems/palindrome-partitioning/solution/hui-su-fa-si-lu-yu-mo-ban-by-fuxuemingzh-azhz/">负雪明烛</a></p>
-<p>题目要求返回<code>所有可能的结果</code>, 那么只能<strong>暴力搜索所有可能的解</strong>,在这种情况下可以联想到使用<code>回溯法</code>.回溯法(算法思想)可以用递归(编程方法)来实现.</p>
-<h4 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h4><p><code>回溯法</code>实际上是一个类似<code>枚举</code>的搜索尝试过程.<br>对当前搜索路径下的未探索区域进行搜索,则可能有两种情况:</p>
-<ol>
-<li>当前未搜索区域满足条件,则保存当前路径并退出当前搜索</li>
-<li>当前为搜索区域需要继续搜索,则遍历当前所有可能的选择,如果其中有选择符合要求,则把这个选择加入当前搜索路径中(递归),并继续搜索未搜索的路径</li>
-</ol>
-<p>负雪明烛版本的回溯法套用模版:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">res = []</span><br><span class="line">path = []</span><br><span class="line"></span><br><span class="line">def backtrack(未探索区域, res, path):</span><br><span class="line">    <span class="keyword">if</span> 未探索区域满足结束条件:</span><br><span class="line">        res.add(path) <span class="comment"># 深度拷贝</span></span><br><span class="line">        <span class="built_in">return</span></span><br><span class="line">    <span class="keyword">for</span> 选择 <span class="keyword">in</span> 未探索区域当前可能的选择:</span><br><span class="line">        <span class="keyword">if</span> 当前选择符合要求:</span><br><span class="line">            path.add(当前选择)</span><br><span class="line">            backtrack(新的未探索区域, res, path)</span><br><span class="line">            path.pop()</span><br></pre></td></tr></table></figure></p>
-<p>其中:<br><code>backtrack</code>表示: 未搜索区域中满足条件的所有可能路径<br><code>path</code>表示: 一条路径<br><code>res</code>表示: 搜索到满足的路径(将合格的path储存到res里)<br><code>path.pop()</code>表示: 在储存一个合格路径path后,需要将其清空,以免阻碍其他搜索</p>
-<p><strong>本题图解</strong><br> <img src="/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/IMG_0847.jpg" class="" title="This is an example image"></p>
-<h3 id="三、代码"><a href="#三、代码" class="headerlink" title="三、代码"></a>三、代码</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def partition(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: List[List[str]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        res = []</span><br><span class="line">        path = []</span><br><span class="line">        self.backtrack(s,res,path)</span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line">        </span><br><span class="line">    def backtrack(self,s,res,path):</span><br><span class="line">        <span class="comment">#指针越界,res保存这个合格的path</span></span><br><span class="line">        <span class="keyword">if</span> not s:</span><br><span class="line">            res.append(path)  </span><br><span class="line">            <span class="built_in">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(1,len(s)+1): <span class="comment">#i=1,2,3</span></span><br><span class="line">            <span class="comment">#如果当下切分满足回文串的条件</span></span><br><span class="line">            <span class="keyword">if</span> self.isSubstring(s[:i]):</span><br><span class="line">                <span class="comment">#递归:考虑剩余部分的切分方法</span></span><br><span class="line">                self.backtrack(s[i:], res, path + [s[:i]])</span><br><span class="line">                </span><br><span class="line">    def isSubstring(self, s):</span><br><span class="line">        <span class="keyword">if</span> s == s[::-1]:</span><br><span class="line">            <span class="built_in">return</span> True</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>回溯</tag>
-        <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>7.整数反转(Easy)</title>
-    <url>/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/</url>
-    <content><![CDATA[<p>LeetCode之<a href="https://leetcode-cn.com/problems/reverse-integer/">整数反转</a><br>难度：简单</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个 32 位的有符号整数 x ，返回 x 中每位上的数字反转后的结果。</p>
-<p>如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。</p>
-<p>假设环境不允许存储 64 位整数（有符号或无符号）。</p>
-<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：x = 123</span><br><span class="line">输出：321</span><br></pre></td></tr></table></figure></p>
-<p>示例 2：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：x &#x3D; -123</span><br><span class="line">输出：-321</span><br></pre></td></tr></table></figure></p>
-<p>示例 3：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：x = 120</span><br><span class="line">输出：21</span><br></pre></td></tr></table></figure></p>
-<p>示例 4：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：x = 0</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure></p>
-<p>提示：</p>
-<p><code>-2**31 &lt;= x &lt;= 2**31 - 1</code></p>
-<h3 id="二、我的解法"><a href="#二、我的解法" class="headerlink" title="二、我的解法"></a>二、我的解法</h3><p><code>24ms, 83.28%; 12.9MB, 76.51%</code></p>
-<p>因为在Python里，<code>int</code>没有长度，所以将其转换为<code>str</code>来获得其长度信息，代码很简单，主要是为了在第三部分学习他人<strong>简洁的代码</strong>。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def reverse(self, x):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type x: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        flag = False</span><br><span class="line">        <span class="keyword">if</span> x &lt; 0:</span><br><span class="line">            flag = True</span><br><span class="line">            x = -x</span><br><span class="line">        </span><br><span class="line">        n = len(str(x))</span><br><span class="line">        res = 0</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i,ch <span class="keyword">in</span> enumerate(str(x)[::-1]):</span><br><span class="line">            res += int(ch) * (10 ** (n-i-1))</span><br><span class="line"></span><br><span class="line">        res = -res <span class="keyword">if</span> flag <span class="keyword">else</span> res</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> -2**31&lt;res&lt;2**31-1:</span><br><span class="line">            <span class="built_in">return</span> res</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br></pre></td></tr></table></figure>
-<h3 id="三、他人的解法"><a href="#三、他人的解法" class="headerlink" title="三、他人的解法"></a>三、他人的解法</h3><p>如下参考<a href="https://leetcode-cn.com/problems/reverse-integer/solution/jin-tian-xiao-bai-jie-ti-ta-lai-liao-by-cuive/">Will</a></p>
- <img src="/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/1610776376-AunReA-%E6%95%B0%E5%AD%97%E5%8F%8D%E8%BD%AC.jpeg" class="">
-<p>例子：1234 =&gt; 4321</p>
-<p>这是一个4位的数字，个位数转换后变成了千位，十位变成了百位…</p>
-<p>但是在这道题中，输入数字x的大小无法确定</p>
-<p>思路为每次截取x的最后一位，按照倍数变化操作，通过while来完成</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">	def reverse(self, x):</span><br><span class="line">		a = 0</span><br><span class="line">		<span class="keyword">while</span> x!=0:</span><br><span class="line">			<span class="keyword">if</span> x&gt;0:</span><br><span class="line">				a=a*10+x%10</span><br><span class="line">				x = x//10</span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				a=a*10+x%-10</span><br><span class="line">				x = -(x//-10)</span><br><span class="line">		<span class="built_in">return</span> a if-2**31&lt;a&lt;2**31-1 <span class="keyword">else</span> 0</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>856.转置矩阵(Easy)</title>
-    <url>/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.02.25)之<a href="https://leetcode-cn.com/problems/transpose-matrix/">转置矩阵</a><br>难度：简单</p>
-<h2 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h2><p>给你一个二维整数数组 matrix， 返回 matrix 的 转置矩阵 。<br>矩阵的 转置 是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p>
-<p><img src="https://assets.leetcode.com/uploads/2021/02/10/hint_transpose.png" alt="867.转置矩阵"></p>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>示例1:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ 输入: matrix&#x3D;[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">$ 输出: [[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">m == matrix.length</span><br><span class="line">n == matrix[i].length</span><br><span class="line">1 &lt;= m, n &lt;= 1000</span><br><span class="line">1 &lt;= m * n &lt;= 105</span><br><span class="line">-10^9 &lt;= matrix[i][j] &lt;= 10^9</span><br></pre></td></tr></table></figure></p>
-<h3 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h3><p>转置矩阵即将M行N列的矩阵，转换成N行M列的矩阵，注意有可能N和M并不相等，所以必须要新建一个result矩阵（否则可能会出现out of range的情况）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def transpose(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        m,n = len(matrix),len(matrix[0])</span><br><span class="line">        <span class="comment">#m为行数，n为列数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#不需要numpy的矩阵建造方法</span></span><br><span class="line">        new_matrix = [[0 <span class="keyword">for</span> i <span class="keyword">in</span> range(m)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                new_matrix[i][j] = matrix[j][i]</span><br><span class="line">        <span class="built_in">return</span> new_matrix</span><br></pre></td></tr></table></figure>
-<p>这道题的意思就是原来的每一行转换成了后来的每一列，为了数学关系上更清晰，下面图片为解析。可以看出，对于一个相同的元素，新地址（坐标）和旧地址（坐标）就是横纵轴交换的关系：<br><img src="/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/jiexi.png" class="" title="This is an example image"></p>
-<p>一个错误的思路：（这个思路就是没有考虑到新矩阵的大小关系）<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">	for j in range(i,m):</span><br><span class="line">		matrix[i][j], matrix[j][i] &#x3D;  matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure></p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>395.至少有K个重复字符的最长子串(Medium)</title>
-    <url>/2021/02/27/395-%E8%87%B3%E5%B0%91%E6%9C%89K%E4%B8%AA%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2-Medium/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.02.27)之<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/">至少有K个重复字符的最长子串</a><br>难度:中等</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个字符串<code>s</code>和一个整数<code>k</code>,请你找出<code>s</code>中的最长子串,要求该子串中的每一字符出现次数都不少于<code>k</code>.返回这一子串的长度.</p>
-<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;aaabb&quot;</span>, k = 3</span><br><span class="line">输出：3</span><br><span class="line">解释：最长子串为 <span class="string">&quot;aaa&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;ababbc&quot;</span>, k = 2</span><br><span class="line">输出：5</span><br><span class="line">解释：最长子串为 <span class="string">&quot;ababb&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 2 次， <span class="string">&#x27;b&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure></p>
-<p>提示:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 104</span><br><span class="line">s 仅由小写英文字母组成</span><br><span class="line">1 &lt;= k &lt;= 105</span><br></pre></td></tr></table></figure></p>
-<h3 id="我的解法-30-31ac"><a href="#我的解法-30-31ac" class="headerlink" title="我的解法(30/31ac)"></a>我的解法(30/31ac)</h3><p>我的想法是先设定一个判断用的函数<code>issubstring</code>用于判断每一个我截取下来的子串,在这个func里,通过<code>哈希表</code>的方法来判断字符重复次数是否大于k,如果全部大于,返回<code>True</code>否则返回<code>False</code>.</p>
-<p>同是判断两个边缘条件: 1)如果整个字符串为<code>True</code>,那就不经过下面的小循环,直接返回<code>len(s)</code> 2)如果<code>k</code>的数量大于<code>len(s)</code>那不可能满足,返回0.</p>
-<p>在接下来的循环中,具体细节如下图:<br></p>
-<p>但是其中<code>continue</code>这个想法是错误的,比如当下的substring可能不是符合条件的,但是后续补充了一些字符之后有可能这个substring是符合的,所以这种简化方法不可取,感觉这道题的用例并不是非常完全,最后这段代码只是遇到了特别长的用例时出现了时间问题,但没有遇到我提到的这个问题.</p>
-<p>接下来是这段代码:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        def issubstring(s,k):</span><br><span class="line">            m = &#123;&#125;</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> s:</span><br><span class="line">                <span class="keyword">if</span> char <span class="keyword">in</span> m:</span><br><span class="line">                    m[char] += 1</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    m[char] = 1</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> m:</span><br><span class="line">                <span class="keyword">if</span> m[char]&lt;k:</span><br><span class="line">                    <span class="built_in">return</span> False</span><br><span class="line">            <span class="built_in">return</span> True</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> issubstring(s,k):</span><br><span class="line">            <span class="built_in">return</span> len(s)</span><br><span class="line">        <span class="keyword">elif</span> k &gt; len(s):</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line"></span><br><span class="line">        maxlen = 0</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+k-1,len(s)):</span><br><span class="line">                subs = s[i:j+1]</span><br><span class="line">                <span class="comment">#print(subs)</span></span><br><span class="line">                <span class="keyword">if</span> issubstring(subs,k):</span><br><span class="line">                    maxlen = max(maxlen,len(subs))</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment">#这个continue的想法是错误的</span></span><br><span class="line">                    <span class="built_in">continue</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> maxlen</span><br></pre></td></tr></table></figure></p>
-<h3 id="递归做法"><a href="#递归做法" class="headerlink" title="递归做法"></a>递归做法</h3><p>依然是参考了<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/solution/jie-ben-ti-bang-zhu-da-jia-li-jie-di-gui-obla/">负雪明烛</a>的解析,这个递归我一开始有想到过,用split的方法反复切割,但是自己思路不好,就换成了上面那种做法,而且递归我一直学习的很差,得加把劲啊.</p>
-<p>先上她的原版代码:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="keyword">if</span> len(s) &lt; k:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">set</span>(s):</span><br><span class="line">            <span class="keyword">if</span> s.count(c) &lt; k:</span><br><span class="line">                <span class="built_in">return</span> max(self.longestSubstring(t, k) <span class="keyword">for</span> t <span class="keyword">in</span> s.split(c))</span><br><span class="line">        <span class="built_in">return</span> len(s)</span><br></pre></td></tr></table></figure><br>接下来整理整理思路:</p>
-<ul>
-<li>递归的重点: 牢记递归函数的输入输出是什么(这里的输入是字符串,限定条件是<code>k</code>,输出是满足条件的最长字符子串长度)</li>
-<li>递归的终止条件: 如果<code>字符串s</code>的长度小于<code>k</code>,那么一定不存在符合条件的子串,直接返回0</li>
-<li>递归的调用法则: 如果一个<code>字符c</code>在<code>s</code>中出现的次数少于<code>k次</code>,那么所有包含<code>字符c</code>的子字符串一定不符合规定.所以,应该通过某种方法将<code>字符c</code>排除在外,方法:把<code>s</code>按照<code>字符c</code>分割(分割后的每一个子串都不包含<code>字符c</code>),得到很多<code>子串t</code>. 而得到的<code>t</code>,就是未来的<code>s&#39;</code>. 下一步,<code>不含字符c的子串们t</code>就是作为<code>longestSubstring(s, k)</code>的新输入,大问题分割为了小问题,形成递归.</li>
-<li>未进入递归即返回结果的情况: 如果<code>s</code>中的每个字符都满足大于<code>重复次数k</code>次的这个条件,那么直接返回<code>len(s)</code>.</li>
-</ul>
-<p>复杂度分析:</p>
-<ul>
-<li>时间复杂度: O(N*26*26) 因为函数最多执行26次(小写的26个英语字符),for循环遍历一遍是26个字符,循环里面对s分割时间的复杂度为O(N)</li>
-<li>空间复杂度: O(26*26), 函数执行26次,每次开辟26个字符的set空间</li>
-</ul>
-<p>读聪明人的代码就是茅塞顿开的感觉,特别喜欢这个刷题姐姐的讲解</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>短时傅里叶变换STFT及Python/Matlab实现</title>
-    <url>/2021/03/10/%E5%A3%B0%E5%AD%A6%E5%8F%82%E6%95%B0-%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2STFT/</url>
-    <content><![CDATA[<p>一天一个<strong>声学参数</strong>之短时傅里叶变换STFT及其Python和Matlab的实现，在C++稍微上手一点儿后来补充C++的版本。</p>
-<h3 id="1-原理"><a href="#1-原理" class="headerlink" title="1. 原理"></a>1. 原理</h3><p>短时傅里叶变换(Short Time Fourier Transform, STFT)是一个用于语音信号处理的通用工具(时频分析方法）。短时傅立叶变化的过程是<strong>把一个较长的时间信号分成相同长度的更短的段落，在每个更短的段上计算傅立叶变换</strong>。</p>
-<p>在实现时，短时傅里叶变换的计算实际上是一系列加窗数字信号的快速傅里叶变换(Fast Fourier Transform, FFT)，其中窗口随时间”滑动Slide“或”跳跃Hop”。</p>
-<h4 id="为什么要用STFT"><a href="#为什么要用STFT" class="headerlink" title="为什么要用STFT"></a>为什么要用STFT</h4><p>短时傅里叶变换主要用于分析<strong>非平稳信号</strong>。非平稳信号由于波形的变化没有规律，也没有<strong>瞬间频率</strong>的概念，不能直接使用快速傅里叶变换。<strong>加窗</strong>使信号平稳化（从时间上截断，使得短时间内波形没有显著变化），于是可以对加窗的分段信号一段一段的使用FFT。也可以说，STFT得到的是按时间顺序排列的n段信号的频谱。</p>
-<h4 id="STFT的频率分辨率和时间分辨率"><a href="#STFT的频率分辨率和时间分辨率" class="headerlink" title="STFT的频率分辨率和时间分辨率"></a>STFT的频率分辨率和时间分辨率</h4><p>在短时傅里叶变化过程中，窗的长度决定频谱图的时间分辨率和频率分辨率，窗长越长，截取的信号越长，频率分辨率越高，时间分辨率越差。在STFT中，时间分辨率和频率分辨率不可兼得，应该按照具体需求取舍。<strong>换句话说</strong>，窄窗口时间分辨率高、频率分辨率低，宽窗口时间分辨率低、频率分辨率高。对于时变的非稳态信号，高频适合小窗口，低频适合大窗口。</p>
-<h4 id="STFT的物理和数学公式"><a href="#STFT的物理和数学公式" class="headerlink" title="STFT的物理和数学公式"></a>STFT的物理和数学公式</h4><p>短时傅里叶变换过程：将信号与一个窗函数想成，再进行一维的傅里叶变换。并通过窗函数的滑动得到一系列变化结果。</p>
-<p>公式：<br><img src="/2021/03/10/%E5%A3%B0%E5%AD%A6%E5%8F%82%E6%95%B0-%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2STFT/STFT1.png" class=""></p>
-<p>其中，<code>z(t)</code>为原信号函数，<code>g(t)</code>为窗函数。</p>
-<p>为了方便计算机处理，一般将信号离散化： <code>z(t) =&gt; z(n)</code>:</p>
-<img src="/2021/03/10/%E5%A3%B0%E5%AD%A6%E5%8F%82%E6%95%B0-%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2STFT/STFT2.png" class="">
-<h3 id="STFT的编程实现过程"><a href="#STFT的编程实现过程" class="headerlink" title="STFT的编程实现过程"></a>STFT的编程实现过程</h3><h4 id="基于Matlab的实现过程（未验证）"><a href="#基于Matlab的实现过程（未验证）" class="headerlink" title="基于Matlab的实现过程（未验证）"></a>基于Matlab的实现过程（未验证）</h4><ul>
-<li>第一步：确定相关参数</li>
-</ul>
-<p><strong>参数主要包括</strong>：原信号，窗函数类型，窗长，重叠点数，采样频率，傅里叶点数等</p>
-<p>其中，傅里叶点数主要用在傅里叶变化过程中，当信号长度小于傅里叶点数时，系统会自动进行补零，然后再进行快速傅里叶变换（FFT）。</p>
-<ul>
-<li>第二步：计算窗滑动的次数</li>
-</ul>
-<p>计算<code>信号的长度nx</code>，并根据<code>信号长度nx</code>、<code>窗长WinLen</code>以及<code>窗口之间的重叠点数OverLap</code>计算出需要<code>窗口滑动的次数n</code>。同时，也是源信号分成多少个短信号的列数。</p>
-<script type="math/tex; mode=display">\pi</script><p>n = fix((nx-overlap)/(WinLen-overlap))<br>(fix是matlab里的取整函数)</p>
-<ul>
-<li>第三步：确定每一列的值，得到一个<code>列数为n，行数为WinLen的矩阵Fig</code></li>
-</ul>
-<p>col_index = (0:(t-1))*(WinLen-noverlap)<br>rowindex = (1:WinLen)’</p>
-<p>xin = zeros(frame_length,t);<br>xin(:) = x(rowindex(:,ones(1,t))+colindex(ones(WinLen,1),:）);</p>
-<ul>
-<li>第四步：把转换为列向量的窗函数扩展为n列的矩阵w，并对矩阵Fig和w进行点乘，并对点乘的结果进行快速傅里叶变换，得到时频矩阵。</li>
-</ul>
-<p>xin = win(:,ones(1,t)).*xin;</p>
-<ul>
-<li>第五步：根据时频矩阵，输出频谱图</li>
-</ul>
-<p>完整代码（代码待补充）：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure></p>
-<p>以上参考<a href="https://blog.csdn.net/zhaoyinhui0802/article/details/53048362">短时傅里叶变化原理解</a></p>
-<h4 id="基于Python的实现过程"><a href="#基于Python的实现过程" class="headerlink" title="基于Python的实现过程"></a>基于Python的实现过程</h4><p>在程序中， <code>frame\_size</code>是被分成较短信号的帧的大小。在语音处理中，帧大小通常在20-40ms，这里设置25ms，即frame_size=0.025.</p>
-<p><code>frame_stride</code>为相邻帧的滑动尺寸/跳跃尺寸，通常帧的滑动尺寸在10ms到20ms之间，这里设置初始化为10ms，即frame_stride=0.01，此刻，相邻帧的<code>交叠大小</code>为15ms。</p>
-<p>窗函数采用<code>汉明窗函数(Hamming Function)</code>。</p>
-<p>在每一帧，进行512点的快速傅里叶变换，即<code>NFFT=512</code> </p>
-<p>以上参考<a href="https://www.cnblogs.com/klchang/p/9280509.html">短时傅里叶变换(Short Time Fourier Transform)原理及 Python 实现</a></p>
-]]></content>
-      <categories>
-        <category>声学参数</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>1052.爱生气的书店老板(Medium)</title>
-    <url>/2021/02/26/1052-%E7%88%B1%E7%94%9F%E6%B0%94%E7%9A%84%E4%B9%A6%E5%BA%97%E8%80%81%E6%9D%BF-Medium/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.02.23)之<a href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/">爱生气的书店老板</a><br>难度：中等</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>今天，书店老板有一家店打算试营业<code>customers.length</code>分钟。每分钟都有一些顾客<code>customers[i]</code>会进入书店，所有这些顾客都会在那一分钟结束后离开。</p>
-<p>在某些时候，书店老板会生气。 如果书店老板在第<code>i</code>分钟生气，那么<code>grumpy[i] = 1</code>，否则<code>grumpy[i] = 0</code>。 当书店老板生气时，那一分钟的顾客就会不满意，不生气则他们是满意的。</p>
-<p>书店老板知道一个秘密技巧，能抑制自己的情绪，可以让自己连续<code>X</code>分钟不生气，但却只能使用一次。</p>
-<p>请你返回这一天营业下来，最多有多少客户能够感到满意的数量。</p>
-<h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：customers = [1,0,1,2,1,1,7,5], grumpy = [0,1,0,1,0,1,0,1], X = 3</span><br><span class="line">输出：16</span><br><span class="line">解释：</span><br><span class="line">书店老板在最后 3 分钟保持冷静。</span><br><span class="line">感到满意的最大客户数量 = 1 + 1 + 1 + 1 + 7 + 5 = 16.</span><br></pre></td></tr></table></figure>
-<h4 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1 &lt;&#x3D; X &lt;&#x3D; customers.length &#x3D;&#x3D; grumpy.length &lt;&#x3D; 20000</span><br><span class="line">0 &lt;&#x3D; customers[i] &lt;&#x3D; 1000</span><br><span class="line">0 &lt;&#x3D; grumpy[i] &lt;&#x3D; 1</span><br></pre></td></tr></table></figure>
-<h3 id="二、我的解法"><a href="#二、我的解法" class="headerlink" title="二、我的解法"></a>二、我的解法</h3><p>我的第一个想法是利用暴力解法。（渣</p>
-<p>通过按顺序替换<code>grumpy</code>里不生气的日期，再把每个新的<code>grumpy</code>和<code>customers</code>点乘求和，保存满意客户的最大数量。注意，<code>grumpy</code>和<code>customers</code>点乘前，需要注意把<code>0（不生气）</code>替换成<code>1</code>，把<code>1（生气）</code>替换成<code>0</code>，这样才能使用点乘。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type customers: List[int]</span></span><br><span class="line"><span class="string">        :type grumpy: List[int]</span></span><br><span class="line"><span class="string">        :type X: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment">#滑动窗口</span></span><br><span class="line">        res = 0</span><br><span class="line">        <span class="comment">#先将grumpy里的1和0替换，方便后面点乘</span></span><br><span class="line">        <span class="comment">#1:不生气，服务客户 0:生气，去你娘滴</span></span><br><span class="line">        grumpy = [1-i <span class="keyword">for</span> i <span class="keyword">in</span> grumpy]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(grumpy)-X+1):</span><br><span class="line">            grumpy_now = grumpy[:i] + [1]*X + grumpy[i+X:]</span><br><span class="line">            <span class="comment">#satis：满意度列表</span></span><br><span class="line">            satis = map(lambda x,y:x*y, grumpy_now, customers)</span><br><span class="line">            <span class="comment">#保留最大res</span></span><br><span class="line">            res = max(res,sum(satis))</span><br><span class="line"></span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure><br>但是这个解法只ac了<code>73/38</code>，查看发现是那种非常长的列表无法通过。</p>
-<h3 id="滑动窗口算法"><a href="#滑动窗口算法" class="headerlink" title="滑动窗口算法"></a>滑动窗口算法</h3><p>引用思路来自: <a href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/solution/yong-mi-mi-ji-qiao-wan-liu-zhu-zui-duo-d-py41/">负雪明烛</a></p>
-<p>依然是<code>滑动窗口</code>的思路。</p>
-<h4 id="1-解题思路"><a href="#1-解题思路" class="headerlink" title="1.解题思路"></a>1.解题思路</h4><ul>
-<li>将题目分为两部分，第一部分是不做出任何改变会留下的顾客origin，第二部分是每一个<code>不生气窗口X</code>的可以留下的本被赶走的客户数increse。</li>
-<li>得到的客户总数就是 origin + max(increse)</li>
-</ul>
-<p>按照这个思路，我又自己写了一遍代码，<code>ac100%</code>了但是执行用时5.06%…<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type customers: List[int]</span><br><span class="line">        :type grumpy: List[int]</span><br><span class="line">        :type X: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        #滑动窗口</span><br><span class="line">        increase &#x3D; 0</span><br><span class="line">        origin &#x3D; sum(map(lambda x,y:x*y, [1-i for i in grumpy], customers))</span><br><span class="line">        </span><br><span class="line">        for i in range(len(grumpy)-X+1):</span><br><span class="line">            grumpy_now, customers_now &#x3D; grumpy[i:i+X],customers[i:i+X]</span><br><span class="line">            satis &#x3D; 0</span><br><span class="line">            for j in range(len(grumpy_now)):</span><br><span class="line">                if grumpy_now[j] &#x3D;&#x3D; 1:</span><br><span class="line">                    satis +&#x3D; customers_now[j]</span><br><span class="line">            increase &#x3D; max(increase,satis)</span><br><span class="line">        return origin + increase</span><br></pre></td></tr></table></figure><br>所以接下来是我学习上方参考链接的做题方法写的<code>ac100%</code>，248ms(82.24%), 15MB(47.72%)<br>总体分为：</p>
-<ol>
-<li>算毫无作为时满意的客户数量 origin</li>
-<li>算滑动窗口X带来的改变 通过curValue的最大值resValue</li>
-</ol>
-<ul>
-<li>算前X个格子</li>
-<li>算第X到len(grumpy)个格子</li>
-</ul>
-<ol>
-<li>得到结果为origin+resValue<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type customers: List[int]</span><br><span class="line">        :type grumpy: List[int]</span><br><span class="line">        :type X: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        </span><br><span class="line">        #第一步: 计算不做任何改变，满意客户的数量</span><br><span class="line">        origin &#x3D; sum(map(lambda x,y:x*y, [1-i for i in grumpy], customers))</span><br><span class="line">        </span><br><span class="line">        #第二步：计算滑动窗口里可以增加满意客户的数量</span><br><span class="line">        # 2.1 先计算前X个格子的值</span><br><span class="line">        curValue &#x3D; 0</span><br><span class="line">        for i in range(X):</span><br><span class="line">            if grumpy[i] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue +&#x3D; customers[i]</span><br><span class="line">        resValue &#x3D; curValue</span><br><span class="line">        # 2.2 开始向右滑————————————</span><br><span class="line">        for i in range(X,len(grumpy)):</span><br><span class="line">            #先验证左边（左边滑出的那个格子）是否在生气，如果在生气，需要在curValue剪掉</span><br><span class="line">            if grumpy[i-X] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue -&#x3D; customers[i-X]</span><br><span class="line">            #再验证右边（右边新增的那个格子）是否在生气，如果在生气，需要在curValue加上</span><br><span class="line">            if grumpy[i] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue +&#x3D; customers[i]</span><br><span class="line">            #判断当下curValue和史上最大curValue的关系</span><br><span class="line">            resValue &#x3D; max(resValue,curValue)</span><br><span class="line">        </span><br><span class="line">        return origin + resValue</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>滑动窗口</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>我的vim编辑器cheat sheet</title>
-    <url>/2021/02/26/%E6%88%91%E7%9A%84vim%E7%BC%96%E8%BE%91%E5%99%A8cheat-sheet/</url>
-    <content><![CDATA[<p>比较喜欢vim编辑器的极简化，所以慢慢整理了一些自己常用的命令</p>
-<h4 id="移动光标"><a href="#移动光标" class="headerlink" title="移动光标"></a>移动光标</h4><div class="table-container">
-<table>
-<thead>
-<tr>
-<th>命令</th>
-<th>动作</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>k-j-h-l</td>
-<td>代表上-下-左-右</td>
-</tr>
-<tr>
-<td>数字0</td>
-<td>回到本行开头</td>
-</tr>
-<tr>
-<td>$</td>
-<td>回到本行结尾</td>
-</tr>
-<tr>
-<td>w</td>
-<td>移到下一单词或标点的开头</td>
-</tr>
-<tr>
-<td>W</td>
-<td>移到下一单词的开头,忽略标点</td>
-</tr>
-<tr>
-<td>b</td>
-<td>移到上一单词或标点的开头</td>
-</tr>
-<tr>
-<td>B</td>
-<td>移到上一单词的开头,忽略标点</td>
-</tr>
-<tr>
-<td>nG</td>
-<td>移到第n行,注意G也是大写</td>
-</tr>
-<tr>
-<td>:n + enter键</td>
-<td>移到第n行</td>
-</tr>
-<tr>
-<td>G</td>
-<td>移到光标最后一行</td>
-</tr>
-<tr>
-<td>H</td>
-<td>移到当前屏幕的第一行</td>
-</tr>
-<tr>
-<td>L</td>
-<td>移到当前屏幕的最后一行</td>
-</tr>
-</tbody>
-</table>
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="panda-hybrid-force-vision-contr">
+<meta property="og:type" content="article">
+<meta property="og:title" content="odcowl的个人博客">
+<meta property="og:url" content="http://example.com/2021/03/10/%E5%A3%B0%E5%AD%A6%E5%8F%82%E6%95%B0-%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2STFT/2020-10-23%2011-54-46/index.html">
+<meta property="og:site_name" content="odcowl的个人博客">
+<meta property="og:description" content="panda-hybrid-force-vision-contr">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://github.githubassets.com/images/search-key-slash.svg">
+<meta property="article:published_time" content="2021-03-10T20:15:50.986Z">
+<meta property="article:modified_time" content="2021-03-10T20:15:50.987Z">
+<meta property="article:author" content="odcowl">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.githubassets.com/images/search-key-slash.svg">
+
+<link rel="canonical" href="http://example.com/2021/03/10/%E5%A3%B0%E5%AD%A6%E5%8F%82%E6%95%B0-%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2STFT/2020-10-23%2011-54-46/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title> | odcowl的个人博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">odcowl的个人博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">柴米油盐烟火气</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
 </div>
-]]></content>
-  </entry>
-  <entry>
-    <title>法语花卉词汇</title>
-    <url>/2021/02/27/%E6%B3%95%E8%AF%AD%E8%8A%B1%E5%8D%89%E8%AF%8D%E6%B1%87/</url>
-    <content><![CDATA[<h2 id="Les-fleurs-en-francais"><a href="#Les-fleurs-en-francais" class="headerlink" title="Les fleurs en français"></a>Les fleurs en français</h2><p><strong>mimosa n.m 含羞草</strong></p>
-<img src="/2021/02/27/%E6%B3%95%E8%AF%AD%E8%8A%B1%E5%8D%89%E8%AF%8D%E6%B1%87/13292-mimosa-dhiver-le-gaulois-6.jpeg" class="" title="This is an example image">
-<p>含羞草（Mimosa pudica）是一种不寻常的植物，因为它通过折叠叶子来响应触摸。出于这个原因，它通常也被称为敏感植物。好奇的猫可能喜欢在这种植物的叶子上击球，因为它会响应他们俏皮的姿势。幸运的是，根据康涅狄格大学农业与自然资源学院的说法，如果你的猫决定蚕食一两片叶子，他就不会受到伤害：这种植物没有毒性。</p>
-<p><em>Le langage des fleurs</em></p>
-<blockquote>
-<p>Jaune lumière, le mimosa est riche de significations : on le compare naturellement au soleil. Il symbolise également la magnificence, l’élégance, la tendresse et délivre un message d’amitié.</p>
-<p>含羞草淡淡的黄色，有着丰富的含义：我们它与太阳相比较。它象征着华丽，优雅，温柔并传递着友谊的信息。</p>
-</blockquote>
-<hr>
-<p><strong>tulipe n.f 郁金香</strong></p>
-<img src="/2021/02/27/%E6%B3%95%E8%AF%AD%E8%8A%B1%E5%8D%89%E8%AF%8D%E6%B1%87/tulipe-135728.jpg" class="">
-<p>郁金香，百合科郁金香属的多年草本植物，花期是4-5月。</p>
-<p>郁金香对猫咪有毒，临床症状为呕吐，抑郁，腹泻，过度分泌唾液。球茎中毒素浓度最高。</p>
-<p><em>Le dangage des fleurs 花语</em></p>
-<blockquote>
-<p>Dans le langage des fleurs, la tulipe symbolise d’une manière générale l’amour, mais avec des nuances qui varient selon sa couleur. Pourpre, elle incarne la royauté. Blanche, elle demande le pardon.<br>在郁金香的花语中，它一般象征着爱情，但因其颜色不同还有细微差别。比如紫色，代表着皇家气派；而纯白，则是为了表达歉意，请求原谅。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>法语学习</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>Hexo搭建相关问题</title>
-    <url>/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/</url>
-    <content><![CDATA[<h2 id="一、文章创建和发布问题"><a href="#一、文章创建和发布问题" class="headerlink" title="一、文章创建和发布问题"></a>一、文章创建和发布问题</h2><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo g 【生成静态文件】</span><br><span class="line">$ hexo d 【部署到网站或服务器，部署之前需要先生成静态文件】</span><br><span class="line">$ hexo clean 【清除缓存文件(db.json)和已经生成的静态文件(public)】</span><br></pre></td></tr></table></figure>
-<h3 id="创建一个新的发布-Create-a-new-Post"><a href="#创建一个新的发布-Create-a-new-Post" class="headerlink" title="创建一个新的发布 Create a new Post"></a>创建一个新的发布 Create a new Post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My new post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>更多信息 More info<a href="https://hexo.io/docs/writing.html">writing</a></p>
-<h3 id="运行服务器-Run-server"><a href="#运行服务器-Run-server" class="headerlink" title="运行服务器 Run server"></a>运行服务器 Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>更多信息 More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="生成统计文件-Generate-static-files"><a href="#生成统计文件-Generate-static-files" class="headerlink" title="生成统计文件 Generate static files"></a>生成统计文件 Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>更多信息 More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="部署到远程站点-Deploy-to-remote-sites"><a href="#部署到远程站点-Deploy-to-remote-sites" class="headerlink" title="部署到远程站点 Deploy to remote sites"></a>部署到远程站点 Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>更多信息 More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<h2 id="二、文章编辑问题"><a href="#二、文章编辑问题" class="headerlink" title="二、文章编辑问题"></a>二、文章编辑问题</h2><h3 id="显示不出分类、标签问题"><a href="#显示不出分类、标签问题" class="headerlink" title="显示不出分类、标签问题"></a>显示不出分类、标签问题</h3><h4 id="1-查看themes-next-config-yml主题配置文件"><a href="#1-查看themes-next-config-yml主题配置文件" class="headerlink" title="1.查看themes/next/_config.yml主题配置文件"></a>1.查看themes/next/_config.yml主题配置文件</h4><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/menu.png" class="" title="This is an example image">
-<p>打开主题配置文件<code>_config.yml</code>，在vim编辑器内用<code>/</code>搜索<code>menu</code>，确定categories和tags是取消注释状态的</p>
-<h4 id="2-添加分类模块"><a href="#2-添加分类模块" class="headerlink" title="2.添加分类模块"></a>2.添加分类模块</h4><p>在主文件夹<code>Blog</code>页面下<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page categories</span><br><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure><br>在source文件夹现在有了<code>categories/index.md</code>和<code>tags/index.md</code>两个新文件<br><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/categories.png" class="" title="This is an example image"><br>以<code>categories/index.md</code>为例子,应该自行添加第二行:<br><code>type: categories</code><br>注意:和categories中有一个空格</p>
-<h4 id="3-文章中添加标签或分类的方法及效果"><a href="#3-文章中添加标签或分类的方法及效果" class="headerlink" title="3.文章中添加标签或分类的方法及效果"></a>3.文章中添加标签或分类的方法及效果</h4><p>在创建新文章后的顶端添加categories或tags的名字，注意空格<br><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/test.png" class="" title="This is an example image"></p>
-<p>最后的效果:<br><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/show.png" class="" title="This is an example image"></p>
-<h4 id="4-参考"><a href="#4-参考" class="headerlink" title="4.参考"></a>4.参考</h4><p><a href="https://blog.csdn.net/Wonz5130/article/details/84666519">Hexo搭建博客显示不出分类、标签问题</a></p>
-<h3 id="Hexo博客搭建之在文章中插入图片"><a href="#Hexo博客搭建之在文章中插入图片" class="headerlink" title="Hexo博客搭建之在文章中插入图片"></a>Hexo博客搭建之在文章中插入图片</h3><h4 id="1-本地引用"><a href="#1-本地引用" class="headerlink" title="1.本地引用"></a>1.本地引用</h4><p>当中只用到少量图片时，可以将图片统一放在<code>source/images</code>文件夹中，通过markdown语法添加<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ![](&#x2F;images&#x2F;image.png)</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-相对路径"><a href="#2-相对路径" class="headerlink" title="2.相对路径"></a>2.相对路径</h4><p>图片可以放在文章自己的目录中，需要先配置<code>_config.yml</code>文件，将<code>post_asset_folder</code>设置为true。设置完之后，在执行<code>hexo new &quot;post_name&quot;</code> 这个操作后，在<code>source/_posts</code>中会自动生成<code>post_name.md</code>和<code>post_name</code>同名文件夹。这时候只需要将图片放在<code>post_name</code>文件夹中，文章中可以直接使用相对路径引用了。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ![](image.png)</span><br></pre></td></tr></table></figure>
-<p>但是!!重点来了，这个经典的markdown语句只能保证文章中可以显示出图片，但首页上不限时，很丑。可以同时显示的语句是:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ &#123;% asset_img exemple.png This is an example image %&#125;</span><br></pre></td></tr></table></figure><br>这时候就大功告成啦！</p>
-<h4 id="3-云引用"><a href="#3-云引用" class="headerlink" title="3.云引用"></a>3.云引用</h4><p>比如一些免费的CDN服务，如Cloudinary等免费生成的url地址，直接用markdown语法引用即可。</p>
-<h4 id="4-参考-1"><a href="#4-参考-1" class="headerlink" title="4.参考"></a>4.参考</h4><p><a href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">Hexo博客搭建之在文章中插入图片</a></p>
-]]></content>
-      <categories>
-        <category>网页</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2021/03/10/%E5%A3%B0%E5%AD%A6%E5%8F%82%E6%95%B0-%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2STFT/2020-10-23%2011-54-46/</url>
-    <content><![CDATA[
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/about/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/10/%E5%A3%B0%E5%AD%A6%E5%8F%82%E6%95%B0-%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2STFT/2020-10-23%2011-54-46/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="odcowl">
+      <meta itemprop="description" content="wechat odcowl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="odcowl的个人博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-11 04:15:50" itemprop="dateCreated datePublished" datetime="2021-03-11T04:15:50+08:00">2021-03-11</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        
 
 
 
@@ -595,7 +385,7 @@
             <header class="Header-old header-logged-out js-details-container Details position-relative f4 py-2" role="banner">
   <div class="container-xl d-lg-flex flex-items-center p-responsive">
     <div class="d-flex flex-justify-between flex-items-center">
-        <a class="mr-4" href="https://github.com/" aria-label="Homepage" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark">
+        <a class="mr-4" target="_blank" rel="noopener" href="https://github.com/" aria-label="Homepage" data-ga-click="(Logged out) Header, go to homepage, icon:logo-wordmark">
           <svg height="32" class="octicon octicon-mark-github color-text-white" viewBox="0 0 16 16" version="1.1" width="32" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
         </a>
 
@@ -681,17 +471,17 @@
                       <li class="edge-item-fix"><a href="/topics" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to Topics">Topics <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
                         <li class="edge-item-fix"><a href="/collections" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to Collections">Collections <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
                       <li class="edge-item-fix"><a href="/trending" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to Trending">Trending <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
-                      <li class="edge-item-fix"><a href="https://lab.github.com/" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to Learning lab">Learning Lab <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
-                      <li class="edge-item-fix"><a href="https://opensource.guide" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to Open source guides">Open source guides <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
+                      <li class="edge-item-fix"><a target="_blank" rel="noopener" href="https://lab.github.com/" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to Learning lab">Learning Lab <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
+                      <li class="edge-item-fix"><a target="_blank" rel="noopener" href="https://opensource.guide" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to Open source guides">Open source guides <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
                     </ul>
 
                     <h4 class="color-text-tertiary text-normal text-mono f5 mb-2 border-lg-top pt-lg-3">Connect with others</h4>
                     <ul class="list-style-none mb-0">
-                      <li class="edge-item-fix"><a href="https://github.com/readme" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover">The ReadME Project <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
-                      <li class="edge-item-fix"><a href="https://github.com/events" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to Events">Events <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
-                      <li class="edge-item-fix"><a href="https://github.community" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to Community forum">Community forum <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
-                      <li class="edge-item-fix"><a href="https://education.github.com" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to GitHub Education">GitHub Education <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
-                      <li class="edge-item-fix"><a href="https://stars.github.com" class="py-2 pb-0 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to GitHub Stars Program">GitHub Stars program <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
+                      <li class="edge-item-fix"><a target="_blank" rel="noopener" href="https://github.com/readme" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover">The ReadME Project <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
+                      <li class="edge-item-fix"><a target="_blank" rel="noopener" href="https://github.com/events" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to Events">Events <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
+                      <li class="edge-item-fix"><a target="_blank" rel="noopener" href="https://github.community" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to Community forum">Community forum <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
+                      <li class="edge-item-fix"><a target="_blank" rel="noopener" href="https://education.github.com" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to GitHub Education">GitHub Education <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
+                      <li class="edge-item-fix"><a target="_blank" rel="noopener" href="https://stars.github.com" class="py-2 pb-0 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to GitHub Stars Program">GitHub Stars program <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
                     </ul>
                   </div>
                 </details>
@@ -715,12 +505,12 @@
 
                     <ul class="list-style-none mb-3">
                       <li class="edge-item-fix"><a href="/pricing#feature-comparison" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to Compare plans">Compare plans <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
-                      <li class="edge-item-fix"><a href="https://enterprise.github.com/contact" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to Contact Sales">Contact Sales <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
+                      <li class="edge-item-fix"><a target="_blank" rel="noopener" href="https://enterprise.github.com/contact" class="py-2 lh-condensed-ultra d-block Link--secondary no-underline f5 Bump-link--hover" data-ga-click="(Logged out) Header, go to Contact Sales">Contact Sales <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
                     </ul>
 
                     <ul class="list-style-none mb-0 border-lg-top pt-lg-3">
                       <li class="edge-item-fix"><a href="/nonprofit" class="py-2 lh-condensed-ultra d-block no-underline Link--primary no-underline h5 Bump-link--hover" data-ga-click="(Logged out) Header, go to Nonprofits">Nonprofit <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
-                      <li class="edge-item-fix"><a href="https://education.github.com" class="py-2 pb-0 lh-condensed-ultra d-block no-underline Link--primary no-underline h5 Bump-link--hover"  data-ga-click="(Logged out) Header, go to Education">Education <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
+                      <li class="edge-item-fix"><a target="_blank" rel="noopener" href="https://education.github.com" class="py-2 pb-0 lh-condensed-ultra d-block no-underline Link--primary no-underline h5 Bump-link--hover"  data-ga-click="(Logged out) Header, go to Education">Education <span class="Bump-link-symbol float-right text-normal color-text-tertiary pr-3">&rarr;</span></a></li>
                     </ul>
                   </div>
                 </details>
@@ -1231,7 +1021,7 @@
             </div>
 
             <template data-target="ref-selector.itemTemplate">
-              <a href="https://github.com/StephaneSobucki/panda-hybrid-force-vision-control/blob//resultats2/resultats/josh/comanip/class/1/2020-10-23%2011-54-46.mkv" class="SelectMenu-item" role="menuitemradio" rel="nofollow" aria-checked="" data-index="">
+              <a target="_blank" href="https://github.com/StephaneSobucki/panda-hybrid-force-vision-control/blob//resultats2/resultats/josh/comanip/class/1/2020-10-23%2011-54-46.mkv" class="SelectMenu-item" role="menuitemradio" rel="nofollow noopener" aria-checked="" data-index="">
                 <svg class="octicon octicon-check SelectMenu-icon SelectMenu-icon--check" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg>
                 <span class="flex-1 css-truncate css-truncate-overflow "></span>
                 <span hidden="" class="Label Label--secondary flex-self-start">default</span> 
@@ -1263,7 +1053,7 @@
             </template>
 
             <template data-target="ref-selector.itemTemplate">
-              <a href="https://github.com/StephaneSobucki/panda-hybrid-force-vision-control/blob//resultats2/resultats/josh/comanip/class/1/2020-10-23%2011-54-46.mkv" class="SelectMenu-item" role="menuitemradio" rel="nofollow" aria-checked="" data-index="">
+              <a target="_blank" href="https://github.com/StephaneSobucki/panda-hybrid-force-vision-control/blob//resultats2/resultats/josh/comanip/class/1/2020-10-23%2011-54-46.mkv" class="SelectMenu-item" role="menuitemradio" rel="nofollow noopener" aria-checked="" data-index="">
                 <svg class="octicon octicon-check SelectMenu-icon SelectMenu-icon--check" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg>
                 <span class="flex-1 css-truncate css-truncate-overflow "></span>
                 <span hidden="" class="Label Label--secondary flex-self-start">default</span>
@@ -1374,7 +1164,7 @@
     <div>
           <a class="btn-octicon tooltipped tooltipped-nw js-remove-unless-platform"
              data-platforms="windows,mac"
-             href="https://desktop.github.com"
+             target="_blank" rel="noopener" href="https://desktop.github.com"
              aria-label="Open this file in GitHub Desktop"
              data-ga-click="Repository, open with desktop">
               <svg class="octicon octicon-device-desktop" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M1.75 2.5h12.5a.25.25 0 01.25.25v7.5a.25.25 0 01-.25.25H1.75a.25.25 0 01-.25-.25v-7.5a.25.25 0 01.25-.25zM14.25 1H1.75A1.75 1.75 0 000 2.75v7.5C0 11.216.784 12 1.75 12h3.727c-.1 1.041-.52 1.872-1.292 2.757A.75.75 0 004.75 16h6.5a.75.75 0 00.565-1.243c-.772-.885-1.193-1.716-1.292-2.757h3.727A1.75 1.75 0 0016 10.25v-7.5A1.75 1.75 0 0014.25 1zM9.018 12H6.982a5.72 5.72 0 01-.765 2.5h3.566a5.72 5.72 0 01-.765-2.5z"></path></svg>
@@ -1430,23 +1220,23 @@
   <div class="position-relative d-flex flex-row-reverse flex-lg-row flex-wrap flex-lg-nowrap flex-justify-center flex-lg-justify-between pt-6 pb-2 mt-6 f6 color-text-secondary border-top color-border-secondary ">
     <ul class="list-style-none d-flex flex-wrap col-12 col-lg-5 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
       <li class="mr-3 mr-lg-0">&copy; 2021 GitHub, Inc.</li>
-        <li class="mr-3 mr-lg-0"><a data-ga-click="Footer, go to terms, text:terms" href="https://github.com/site/terms">Terms</a></li>
-        <li class="mr-3 mr-lg-0"><a data-ga-click="Footer, go to privacy, text:privacy" href="https://github.com/site/privacy">Privacy</a></li>
-        <li class="mr-3 mr-lg-0"><a data-ga-click="Footer, go to security, text:security" href="https://github.com/security">Security</a></li>
-        <li class="mr-3 mr-lg-0"><a href="https://www.githubstatus.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
-        <li><a data-ga-click="Footer, go to help, text:Docs" href="https://docs.github.com">Docs</a></li>
+        <li class="mr-3 mr-lg-0"><a data-ga-click="Footer, go to terms, text:terms" target="_blank" rel="noopener" href="https://github.com/site/terms">Terms</a></li>
+        <li class="mr-3 mr-lg-0"><a data-ga-click="Footer, go to privacy, text:privacy" target="_blank" rel="noopener" href="https://github.com/site/privacy">Privacy</a></li>
+        <li class="mr-3 mr-lg-0"><a data-ga-click="Footer, go to security, text:security" target="_blank" rel="noopener" href="https://github.com/security">Security</a></li>
+        <li class="mr-3 mr-lg-0"><a target="_blank" rel="noopener" href="https://www.githubstatus.com/" data-ga-click="Footer, go to status, text:status">Status</a></li>
+        <li><a data-ga-click="Footer, go to help, text:Docs" target="_blank" rel="noopener" href="https://docs.github.com">Docs</a></li>
     </ul>
 
-    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mx-lg-4" href="https://github.com">
+    <a aria-label="Homepage" title="GitHub" class="footer-octicon d-none d-lg-block mx-lg-4" target="_blank" rel="noopener" href="https://github.com">
       <svg height="24" class="octicon octicon-mark-github" viewBox="0 0 16 16" version="1.1" width="24" aria-hidden="true"><path fill-rule="evenodd" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
 </a>
     <ul class="list-style-none d-flex flex-wrap col-12 col-lg-5 flex-justify-center flex-lg-justify-between mb-2 mb-lg-0">
-        <li class="mr-3 mr-lg-0"><a href="https://support.github.com" data-ga-click="Footer, go to contact, text:contact">Contact GitHub</a></li>
-        <li class="mr-3 mr-lg-0"><a href="https://github.com/pricing" data-ga-click="Footer, go to Pricing, text:Pricing">Pricing</a></li>
-      <li class="mr-3 mr-lg-0"><a href="https://docs.github.com" data-ga-click="Footer, go to api, text:api">API</a></li>
-      <li class="mr-3 mr-lg-0"><a href="https://services.github.com" data-ga-click="Footer, go to training, text:training">Training</a></li>
-        <li class="mr-3 mr-lg-0"><a href="https://github.blog" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
-        <li><a data-ga-click="Footer, go to about, text:about" href="https://github.com/about">About</a></li>
+        <li class="mr-3 mr-lg-0"><a target="_blank" rel="noopener" href="https://support.github.com" data-ga-click="Footer, go to contact, text:contact">Contact GitHub</a></li>
+        <li class="mr-3 mr-lg-0"><a target="_blank" rel="noopener" href="https://github.com/pricing" data-ga-click="Footer, go to Pricing, text:Pricing">Pricing</a></li>
+      <li class="mr-3 mr-lg-0"><a target="_blank" rel="noopener" href="https://docs.github.com" data-ga-click="Footer, go to api, text:api">API</a></li>
+      <li class="mr-3 mr-lg-0"><a target="_blank" rel="noopener" href="https://services.github.com" data-ga-click="Footer, go to training, text:training">Training</a></li>
+        <li class="mr-3 mr-lg-0"><a target="_blank" rel="noopener" href="https://github.blog" data-ga-click="Footer, go to blog, text:blog">Blog</a></li>
+        <li><a data-ga-click="Footer, go to about, text:about" target="_blank" rel="noopener" href="https://github.com/about">About</a></li>
     </ul>
   </div>
   <div class="d-flex flex-justify-center pb-6">
@@ -1494,6 +1284,259 @@
   </body>
 </html>
 
-]]></content>
-  </entry>
-</search>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>odcowl
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://example.com/2021/03/10/%E5%A3%B0%E5%AD%A6%E5%8F%82%E6%95%B0-%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2STFT/2020-10-23%2011-54-46/" title="">http://example.com/2021/03/10/声学参数-短时傅里叶变换STFT/2020-10-23 11-54-46/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/10/227-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E6%9C%BA2-Medium/" rel="prev" title="227.基本计算器2(Medium)">
+      <i class="fa fa-chevron-left"></i> 227.基本计算器2(Medium)
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+
+  
+  
+  
+
+
+   <div>
+     <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:24px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+
+
+   </div>
+
+
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Learn and contribute</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Connect with others</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#js-repo-pjax-container"><span class="nav-number"></span> <span class="nav-text">
+    
+    
+      StephaneSobucki
+    
+    &#x2F;
+  
+    panda-hybrid-force-vision-control
+  
+  
+</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#blob-path"><span class="nav-number"></span> <span class="nav-text">
+        panda-hybrid-force-vision-control&#x2F;resultats2&#x2F;resultats&#x2F;josh&#x2F;comanip&#x2F;class&#x2F;1&#x2F;2020-10-23 11-54-46.mkv
+      </span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="odcowl"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">odcowl</p>
+  <div class="site-description" itemprop="description">wechat odcowl</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">14</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/odcowl" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;odcowl" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/odcowl" title="Wechat → odcowl"><i class="fab fa-weixin fa-fw"></i>Wechat</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2021-2 – 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">odcowl</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+<div class="theme-info">
+  <div class="powered-by"></div>
+  <span class="post-count">博客全站共8.7k字</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
