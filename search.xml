@@ -367,6 +367,17 @@
       </tags>
   </entry>
   <entry>
+    <title>短时傅里叶变换STFT及Python/Matlab实现</title>
+    <url>/2021/03/10/%E5%A3%B0%E5%AD%A6%E5%8F%82%E6%95%B0-%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2STFT/</url>
+    <content><![CDATA[<h3 id="1-原理"><a href="#1-原理" class="headerlink" title="1. 原理"></a>1. 原理</h3><p>短时傅里叶变换(Short Time Fourier Transform, STFT)是一个用于语音信号处理的通用工具。短时傅立叶变化的过程是<strong>把一个较长的时间信号分成相同长度的更短的段落，在每个更短的段上计算傅立叶变换</strong>。</p>
+<p>在实现时，短时傅里叶变换的计算实际上是一系列加窗数字信号的快速傅里叶变换(Fast Fourier Transform, FFT)，其中窗口随时间”滑动Slide“或”跳跃Hop”。</p>
+<p>短时傅里叶变换主要用于分析<strong>非平稳信号</strong>。非平稳信号由于波形的变化没有规律，也没有<strong>瞬间频率</strong>的概念，不能直接使用快速傅里叶变换。<strong>加窗</strong>使信号平稳化（从时间上截断，使得短时间内波形没有显著变化），于是可以对加窗的分段信号一段一段的使用FFT。也可以说，STFT得到的是按时间顺序排列的n段信号的频谱。</p>
+]]></content>
+      <categories>
+        <category>声学参数</category>
+      </categories>
+  </entry>
+  <entry>
     <title>我的vim编辑器cheat sheet</title>
     <url>/2021/02/26/%E6%88%91%E7%9A%84vim%E7%BC%96%E8%BE%91%E5%99%A8cheat-sheet/</url>
     <content><![CDATA[<p>比较喜欢vim编辑器的极简化，所以慢慢整理了一些自己常用的命令</p>
