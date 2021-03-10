@@ -295,7 +295,8 @@
 <li>第二步：计算窗滑动的次数</li>
 </ul>
 <p>计算<code>信号的长度nx</code>，并根据<code>信号长度nx</code>、<code>窗长WinLen</code>以及<code>窗口之间的重叠点数OverLap</code>计算出需要<code>窗口滑动的次数n</code>。同时，也是源信号分成多少个短信号的列数。</p>
-<script type="math/tex; mode=display">\pi</script><ul>
+<script type="math/tex; mode=display">\pi</script><p>n = fix((nx-overlap)/(WinLen-overlap))</p>
+<ul>
 <li>第三步：确定每一列的值，得到一个<code>列数为n，行数为WinLen的矩阵Fig</code></li>
 </ul>
 <p>col_index = (0:(t-1))*(WinLen-noverlap)<br>rowindex = (1:WinLen)’</p>
