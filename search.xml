@@ -252,6 +252,47 @@
       </tags>
   </entry>
   <entry>
+    <title>7.整数反转(Easy)</title>
+    <url>/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/</url>
+    <content><![CDATA[<p>LeetCode之<a href="https://leetcode-cn.com/problems/reverse-integer/">整数反转</a><br>难度：简单</p>
+<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个 32 位的有符号整数 x ，返回 x 中每位上的数字反转后的结果。</p>
+<p>如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。</p>
+<p>假设环境不允许存储 64 位整数（有符号或无符号）。
+ </p>
+<p>示例 1：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：x = 123</span><br><span class="line">输出：321</span><br></pre></td></tr></table></figure>
+
+
+<p>示例 2：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：x &#x3D; -123</span><br><span class="line">输出：-321</span><br></pre></td></tr></table></figure>
+
+<p>示例 3：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：x = 120</span><br><span class="line">输出：21</span><br></pre></td></tr></table></figure>
+
+<p>示例 4：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：x = 0</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure>
+
+<p>提示：</p>
+<p><code>-2**31 &lt;= x &lt;= 2**31 - 1</code></p>
+<h3 id="二、我的解法"><a href="#二、我的解法" class="headerlink" title="二、我的解法"></a>二、我的解法</h3><p><code>24ms, 83.28%; 12.9MB, 76.51%</code></p>
+<p>因为在Python里，<code>int</code>没有长度，所以将其转换为<code>str</code>来获得其长度信息，代码很简单，主要是为了在第三部分学习他人<strong>简洁的代码</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def reverse(self, x):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type x: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        flag = False</span><br><span class="line">        <span class="keyword">if</span> x &lt; 0:</span><br><span class="line">            flag = True</span><br><span class="line">            x = -x</span><br><span class="line">        </span><br><span class="line">        n = len(str(x))</span><br><span class="line">        res = 0</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i,ch <span class="keyword">in</span> enumerate(str(x)[::-1]):</span><br><span class="line">            res += int(ch) * (10 ** (n-i-1))</span><br><span class="line"></span><br><span class="line">        res = -res <span class="keyword">if</span> flag <span class="keyword">else</span> res</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> -2**31&lt;res&lt;2**31-1:</span><br><span class="line">            <span class="built_in">return</span> res</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="三、他人的解法"><a href="#三、他人的解法" class="headerlink" title="三、他人的解法"></a>三、他人的解法</h3><p>如下参考<a href="https://leetcode-cn.com/problems/reverse-integer/solution/jin-tian-xiao-bai-jie-ti-ta-lai-liao-by-cuive/">Will</a></p>
+ <img src="/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/1610776376-AunReA-%E6%95%B0%E5%AD%97%E5%8F%8D%E8%BD%AC.jpeg" class="">
+
+<p>例子：1234 =&gt; 4321</p>
+<p>这是一个4位的数字，个位数转换后变成了千位，十位变成了百位…</p>
+<p>但是在这道题中，输入数字x的大小无法确定</p>
+<p>思路为每次截取x的最后一位，按照倍数变化操作，通过while来完成</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">	def reverse(self, x):</span><br><span class="line">		a = 0</span><br><span class="line">		<span class="keyword">while</span> x!=0:</span><br><span class="line">			<span class="keyword">if</span> x&gt;0:</span><br><span class="line">				a=a*10+x%10</span><br><span class="line">				x = x//10</span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				a=a*10+x%-10</span><br><span class="line">				x = -(x//-10)</span><br><span class="line">		<span class="built_in">return</span> a if-2**31&lt;a&lt;2**31-1 <span class="keyword">else</span> 0</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
     <title>856.转置矩阵(Easy)</title>
     <url>/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/</url>
     <content><![CDATA[<p>力扣每日一题系列(2021.02.25)之<a href="https://leetcode-cn.com/problems/transpose-matrix/">转置矩阵</a><br>难度：简单</p>
