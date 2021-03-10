@@ -74,7 +74,9 @@
   </style>
 </noscript>
 
-</head>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
 
 <body itemscope itemtype="http://schema.org/WebPage">
   <div class="container use-motion">
@@ -241,41 +243,24 @@
 
       
           <h2 id="一、文章创建和发布问题"><a href="#一、文章创建和发布问题" class="headerlink" title="一、文章创建和发布问题"></a>一、文章创建和发布问题</h2><h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo g 【生成静态文件】</span><br><span class="line">$ hexo d 【部署到网站或服务器，部署之前需要先生成静态文件】</span><br><span class="line">$ hexo clean 【清除缓存文件(db.json)和已经生成的静态文件(public)】</span><br></pre></td></tr></table></figure>
-
 <h3 id="创建一个新的发布-Create-a-new-Post"><a href="#创建一个新的发布-Create-a-new-Post" class="headerlink" title="创建一个新的发布 Create a new Post"></a>创建一个新的发布 Create a new Post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My new post&quot;</span></span><br></pre></td></tr></table></figure>
-
 <p>更多信息 More info<a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">writing</a></p>
 <h3 id="运行服务器-Run-server"><a href="#运行服务器-Run-server" class="headerlink" title="运行服务器 Run server"></a>运行服务器 Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
 <p>更多信息 More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
 <h3 id="生成统计文件-Generate-static-files"><a href="#生成统计文件-Generate-static-files" class="headerlink" title="生成统计文件 Generate static files"></a>生成统计文件 Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 <p>更多信息 More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
 <h3 id="部署到远程站点-Deploy-to-remote-sites"><a href="#部署到远程站点-Deploy-to-remote-sites" class="headerlink" title="部署到远程站点 Deploy to remote sites"></a>部署到远程站点 Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>更多信息 More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 <h2 id="二、文章编辑问题"><a href="#二、文章编辑问题" class="headerlink" title="二、文章编辑问题"></a>二、文章编辑问题</h2><h3 id="显示不出分类、标签问题"><a href="#显示不出分类、标签问题" class="headerlink" title="显示不出分类、标签问题"></a>显示不出分类、标签问题</h3><h4 id="1-查看themes-next-config-yml主题配置文件"><a href="#1-查看themes-next-config-yml主题配置文件" class="headerlink" title="1.查看themes/next/_config.yml主题配置文件"></a>1.查看themes/next/_config.yml主题配置文件</h4><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/menu.png" class="" title="This is an example image">
-
 <p>打开主题配置文件<code>_config.yml</code>，在vim编辑器内用<code>/</code>搜索<code>menu</code>，确定categories和tags是取消注释状态的</p>
-<h4 id="2-添加分类模块"><a href="#2-添加分类模块" class="headerlink" title="2.添加分类模块"></a>2.添加分类模块</h4><p>在主文件夹<code>Blog</code>页面下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page categories</span><br><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure>
-<p>在source文件夹现在有了<code>categories/index.md</code>和<code>tags/index.md</code>两个新文件</p>
-<img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/categories.png" class="" title="This is an example image">
-<p>以<code>categories/index.md</code>为例子,应该自行添加第二行:<br><code>type: categories</code><br>注意:和categories中有一个空格</p>
-<h4 id="3-文章中添加标签或分类的方法及效果"><a href="#3-文章中添加标签或分类的方法及效果" class="headerlink" title="3.文章中添加标签或分类的方法及效果"></a>3.文章中添加标签或分类的方法及效果</h4><p>在创建新文章后的顶端添加categories或tags的名字，注意空格</p>
-<img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/test.png" class="" title="This is an example image">
-
-<p>最后的效果:</p>
-<img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/show.png" class="" title="This is an example image">
-
+<h4 id="2-添加分类模块"><a href="#2-添加分类模块" class="headerlink" title="2.添加分类模块"></a>2.添加分类模块</h4><p>在主文件夹<code>Blog</code>页面下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new page categories</span><br><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure><br>在source文件夹现在有了<code>categories/index.md</code>和<code>tags/index.md</code>两个新文件<br><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/categories.png" class="" title="This is an example image"><br>以<code>categories/index.md</code>为例子,应该自行添加第二行:<br><code>type: categories</code><br>注意:和categories中有一个空格</p>
+<h4 id="3-文章中添加标签或分类的方法及效果"><a href="#3-文章中添加标签或分类的方法及效果" class="headerlink" title="3.文章中添加标签或分类的方法及效果"></a>3.文章中添加标签或分类的方法及效果</h4><p>在创建新文章后的顶端添加categories或tags的名字，注意空格<br><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/test.png" class="" title="This is an example image"></p>
+<p>最后的效果:<br><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/show.png" class="" title="This is an example image"></p>
 <h4 id="4-参考"><a href="#4-参考" class="headerlink" title="4.参考"></a>4.参考</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Wonz5130/article/details/84666519">Hexo搭建博客显示不出分类、标签问题</a></p>
-<h3 id="Hexo博客搭建之在文章中插入图片"><a href="#Hexo博客搭建之在文章中插入图片" class="headerlink" title="Hexo博客搭建之在文章中插入图片"></a>Hexo博客搭建之在文章中插入图片</h3><h4 id="1-本地引用"><a href="#1-本地引用" class="headerlink" title="1.本地引用"></a>1.本地引用</h4><p>当中只用到少量图片时，可以将图片统一放在<code>source/images</code>文件夹中，通过markdown语法添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ![](&#x2F;images&#x2F;image.png)</span><br></pre></td></tr></table></figure>
-
+<h3 id="Hexo博客搭建之在文章中插入图片"><a href="#Hexo博客搭建之在文章中插入图片" class="headerlink" title="Hexo博客搭建之在文章中插入图片"></a>Hexo博客搭建之在文章中插入图片</h3><h4 id="1-本地引用"><a href="#1-本地引用" class="headerlink" title="1.本地引用"></a>1.本地引用</h4><p>当中只用到少量图片时，可以将图片统一放在<code>source/images</code>文件夹中，通过markdown语法添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ![](&#x2F;images&#x2F;image.png)</span><br></pre></td></tr></table></figure></p>
 <h4 id="2-相对路径"><a href="#2-相对路径" class="headerlink" title="2.相对路径"></a>2.相对路径</h4><p>图片可以放在文章自己的目录中，需要先配置<code>_config.yml</code>文件，将<code>post_asset_folder</code>设置为true。设置完之后，在执行<code>hexo new &quot;post_name&quot;</code> 这个操作后，在<code>source/_posts</code>中会自动生成<code>post_name.md</code>和<code>post_name</code>同名文件夹。这时候只需要将图片放在<code>post_name</code>文件夹中，文章中可以直接使用相对路径引用了。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ![](image.png)</span><br></pre></td></tr></table></figure>
-
-<p>但是!!重点来了，这个经典的markdown语句只能保证文章中可以显示出图片，但首页上不限时，很丑。可以同时显示的语句是:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ &#123;% asset_img exemple.png This is an example image %&#125;</span><br></pre></td></tr></table></figure>
-<p>这时候就大功告成啦！</p>
+<p>但是!!重点来了，这个经典的markdown语句只能保证文章中可以显示出图片，但首页上不限时，很丑。可以同时显示的语句是:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ &#123;% asset_img exemple.png This is an example image %&#125;</span><br></pre></td></tr></table></figure><br>这时候就大功告成啦！</p>
 <h4 id="3-云引用"><a href="#3-云引用" class="headerlink" title="3.云引用"></a>3.云引用</h4><p>比如一些免费的CDN服务，如Cloudinary等免费生成的url地址，直接用markdown语法引用即可。</p>
 <h4 id="4-参考-1"><a href="#4-参考-1" class="headerlink" title="4.参考"></a>4.参考</h4><p><a target="_blank" rel="noopener" href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">Hexo博客搭建之在文章中插入图片</a></p>
 
@@ -358,20 +343,12 @@
           <p>力扣每日一题系列(2021.02.25)之<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/transpose-matrix/">转置矩阵</a><br>难度：简单</p>
 <h2 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h2><p>给你一个二维整数数组 matrix， 返回 matrix 的 转置矩阵 。<br>矩阵的 转置 是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p>
 <p><img src="https://assets.leetcode.com/uploads/2021/02/10/hint_transpose.png" alt="867.转置矩阵"></p>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>示例1:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ 输入: matrix&#x3D;[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">$ 输出: [[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure>
-
-<p>示例2:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br></pre></td></tr></table></figure>
-<p>提示：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">m == matrix.length</span><br><span class="line">n == matrix[i].length</span><br><span class="line">1 &lt;= m, n &lt;= 1000</span><br><span class="line">1 &lt;= m * n &lt;= 105</span><br><span class="line">-10^9 &lt;= matrix[i][j] &lt;= 10^9</span><br></pre></td></tr></table></figure>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>示例1:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ 输入: matrix&#x3D;[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">$ 输出: [[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure></p>
+<p>示例2:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">m == matrix.length</span><br><span class="line">n == matrix[i].length</span><br><span class="line">1 &lt;= m, n &lt;= 1000</span><br><span class="line">1 &lt;= m * n &lt;= 105</span><br><span class="line">-10^9 &lt;= matrix[i][j] &lt;= 10^9</span><br></pre></td></tr></table></figure></p>
 <h3 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h3><p>转置矩阵即将M行N列的矩阵，转换成N行M列的矩阵，注意有可能N和M并不相等，所以必须要新建一个result矩阵（否则可能会出现out of range的情况）</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def transpose(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        m,n = len(matrix),len(matrix[0])</span><br><span class="line">        <span class="comment">#m为行数，n为列数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#不需要numpy的矩阵建造方法</span></span><br><span class="line">        new_matrix = [[0 <span class="keyword">for</span> i <span class="keyword">in</span> range(m)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                new_matrix[i][j] = matrix[j][i]</span><br><span class="line">        <span class="built_in">return</span> new_matrix</span><br></pre></td></tr></table></figure>
-<p>这道题的意思就是原来的每一行转换成了后来的每一列，为了数学关系上更清晰，下面图片为解析。可以看出，对于一个相同的元素，新地址（坐标）和旧地址（坐标）就是横纵轴交换的关系：</p>
-<img src="/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/jiexi.png" class="" title="This is an example image">
-
-<p>一个错误的思路：（这个思路就是没有考虑到新矩阵的大小关系）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">	for j in range(i,m):</span><br><span class="line">		matrix[i][j], matrix[j][i] &#x3D;  matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure>
+<p>这道题的意思就是原来的每一行转换成了后来的每一列，为了数学关系上更清晰，下面图片为解析。可以看出，对于一个相同的元素，新地址（坐标）和旧地址（坐标）就是横纵轴交换的关系：<br><img src="/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/jiexi.png" class="" title="This is an example image"></p>
+<p>一个错误的思路：（这个思路就是没有考虑到新矩阵的大小关系）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">	for j in range(i,m):</span><br><span class="line">		matrix[i][j], matrix[j][i] &#x3D;  matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -520,7 +497,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共7.4k字</span>
+  <span class="post-count">博客全站共7.6k字</span>
 </div>
 
         
