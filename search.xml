@@ -70,34 +70,6 @@
       </tags>
   </entry>
   <entry>
-    <title>131.分割回文串(Medium)</title>
-    <url>/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.03.07)之<a href="https://leetcode-cn.com/problems/palindrome-partitioning/">分割回文串</a><br>难度:中等</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个字符串<code>s</code>,请你将<code>s</code>分割成一些子串,使每个子串都是回文串.返回<code>s</code>所有可能的分割方案.<br><strong>回文串</strong>是正着读和反着读都一样的字符串.</p>
-<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: s=<span class="string">&quot;aab&quot;</span></span><br><span class="line">输出: [[<span class="string">&quot;a&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>],[<span class="string">&quot;aa&quot;</span>,<span class="string">&quot;b&quot;</span>]]</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;a&quot;</span></span><br><span class="line">输出: [[<span class="string">&quot;a&quot;</span>]]</span><br></pre></td></tr></table></figure></p>
-<p>提示:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 16</span><br><span class="line">s 仅由小写英文字母组成</span><br></pre></td></tr></table></figure></p>
-<h3 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h3><p>代码思路学习:<a href="https://leetcode-cn.com/problems/palindrome-partitioning/solution/hui-su-fa-si-lu-yu-mo-ban-by-fuxuemingzh-azhz/">负雪明烛</a></p>
-<p>题目要求返回<code>所有可能的结果</code>, 那么只能<strong>暴力搜索所有可能的解</strong>,在这种情况下可以联想到使用<code>回溯法</code>.回溯法(算法思想)可以用递归(编程方法)来实现.</p>
-<h4 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h4><p><code>回溯法</code>实际上是一个类似<code>枚举</code>的搜索尝试过程.<br>对当前搜索路径下的未探索区域进行搜索,则可能有两种情况:</p>
-<ol>
-<li>当前未搜索区域满足条件,则保存当前路径并退出当前搜索</li>
-<li>当前为搜索区域需要继续搜索,则遍历当前所有可能的选择,如果其中有选择符合要求,则把这个选择加入当前搜索路径中(递归),并继续搜索未搜索的路径</li>
-</ol>
-<p>负雪明烛版本的回溯法套用模版:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">res = []</span><br><span class="line">path = []</span><br><span class="line"></span><br><span class="line">def backtrack(未探索区域, res, path):</span><br><span class="line">    <span class="keyword">if</span> 未探索区域满足结束条件:</span><br><span class="line">        res.add(path) <span class="comment"># 深度拷贝</span></span><br><span class="line">        <span class="built_in">return</span></span><br><span class="line">    <span class="keyword">for</span> 选择 <span class="keyword">in</span> 未探索区域当前可能的选择:</span><br><span class="line">        <span class="keyword">if</span> 当前选择符合要求:</span><br><span class="line">            path.add(当前选择)</span><br><span class="line">            backtrack(新的未探索区域, res, path)</span><br><span class="line">            path.pop()</span><br></pre></td></tr></table></figure></p>
-<p>其中:<br><code>backtrack</code>表示: 未搜索区域中满足条件的所有可能路径<br><code>path</code>表示: 一条路径<br><code>res</code>表示: 搜索到满足的路径(将合格的path储存到res里)<br><code>path.pop()</code>表示: 在储存一个合格路径path后,需要将其清空,以免阻碍其他搜索</p>
-<p><strong>本题图解</strong><br> <img src="/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/IMG_0847.jpg" class="" title="This is an example image"></p>
-<h3 id="三、代码"><a href="#三、代码" class="headerlink" title="三、代码"></a>三、代码</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def partition(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: List[List[str]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        res = []</span><br><span class="line">        path = []</span><br><span class="line">        self.backtrack(s,res,path)</span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line">        </span><br><span class="line">    def backtrack(self,s,res,path):</span><br><span class="line">        <span class="comment">#指针越界,res保存这个合格的path</span></span><br><span class="line">        <span class="keyword">if</span> not s:</span><br><span class="line">            res.append(path)  </span><br><span class="line">            <span class="built_in">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(1,len(s)+1): <span class="comment">#i=1,2,3</span></span><br><span class="line">            <span class="comment">#如果当下切分满足回文串的条件</span></span><br><span class="line">            <span class="keyword">if</span> self.isSubstring(s[:i]):</span><br><span class="line">                <span class="comment">#递归:考虑剩余部分的切分方法</span></span><br><span class="line">                self.backtrack(s[i:], res, path + [s[:i]])</span><br><span class="line">                </span><br><span class="line">    def isSubstring(self, s):</span><br><span class="line">        <span class="keyword">if</span> s == s[::-1]:</span><br><span class="line">            <span class="built_in">return</span> True</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>回溯</tag>
-        <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>15.三数之和(Medium)</title>
     <url>/2021/02/26/15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C-Medium/</url>
     <content><![CDATA[<h3 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h3><p>给你一个包含<code>n</code>个整数的数组<code>nums</code>,判断<code>nums</code>中是否存在三个元素a,b,c，使得<code>a+b+c=0</code> ？请你找出所有和为<code>0</code>且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
@@ -218,6 +190,93 @@
       <categories>
         <category>LeetCode</category>
       </categories>
+  </entry>
+  <entry>
+    <title>331.验证二叉树的前序序列化(Medium)</title>
+    <url>/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/</url>
+    <content><![CDATA[<p>LeetCode每日一题系列（2021.03.12)之<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree">验证二叉树的前序序列化</a><br>难度：中等</p>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>序列化二叉树的一种方法是使用前序遍历。当我们遇到一个非空节点时，我们可以记录下这个节点的值。如果它是一个空节点，我们可以使用一个标记值记录，例如<code>#</code>。</p>
+<pre><code> _9_
+/   \
+</code></pre><p>   3     2<br>  / \   / \<br> 4   1  #  6<br>/ \ / \   / \</p>
+<h1 id=""><a href="#" class="headerlink" title="# # #   #"></a># # #   #</h1><p>例如，上面的二叉树可以被序列化为字符串<code>&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</code>，其中 # 代表一个空节点。</p>
+<p>给定一串以逗号分隔的序列，验证它是否是正确的二叉树的前序序列化。编写一个在不重构树的条件下的可行算法。</p>
+<p>每个以逗号分隔的字符或为一个整数或为一个表示 null 指针的 ‘#’ 。</p>
+<p>你可以认为输入格式总是有效的，例如它永远不会包含两个连续的逗号，比如 “1,,3” 。</p>
+<p>示例 1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: <span class="string">&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</span></span><br><span class="line">输出: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<p>示例 2:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: &quot;1,#&quot;</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure></p>
+<p>示例 3:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: <span class="string">&quot;9,#,#,1&quot;</span></span><br><span class="line">输出: <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>还是参考<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/solution/pai-an-jiao-jue-de-liang-chong-jie-fa-zh-66nt/">负雪明烛大神</a>的两种解法。</p>
+<p>我做了好长时间这道题，一直卡在了一种case上：<br>当char已经遍历完，最后三个字符刚好是符合<code>9,#,#</code>转换为<code>#</code>这种情况的，但由于我没有利用好while导致一直没有得到正确的答案，而且代码又臭又长，深感水平太差啊。。。</p>
+<h4 id="利用栈的做法"><a href="#利用栈的做法" class="headerlink" title="利用栈的做法"></a>利用栈的做法</h4><p>首先要明确的是树的<strong>前序遍历</strong>是按照<code>根节点，左子树，右子树</code>的顺序来排列的，那<code>9,#,#</code>代表一个两个孩子都为空的节点，即它是一个<code>叶子节点</code>；当一个节点不是<code>叶子节点</code>时，有两种情况：1）两个孩子都非#（空）2）一个孩子为空，一个孩子不为空。</p>
+<p>这道题的重点思路来了：</p>
+<ul>
+<li>把有效的<code>叶子节点</code>用<code>#</code>代替，比如把<code>4##</code>换成<code>#</code>。</li>
+</ul>
+<p>具体操作流程示例如下：</p>
+<p>如输入： “9,3,4,#,#,1,#,#,2,#,6,#,#” ，当遇到 x,#,# 的时候，就把它变为 #。</p>
+<p>模拟一遍过程：</p>
+<p>[9,3,4,#,#] =&gt; [9,3,#]，继续<br>[9,3,#,1,#,#] =&gt; [9,3,#,#] =&gt; [9,#] ，继续<br>[9,#2,#,6,#,#] =&gt; [9,#,2,#,#] =&gt; [9,#,#] =&gt; [#]，结束<br>下面的动画模拟了”9,3,4,#,#,1,#,#,#”的操作过程：</p>
+<p><img src="https://pic.leetcode-cn.com/1615551708-uxodPT-331.gif" alt="动图"></p>
+<p>代码比较简单，最需要注意的还是这个for循环里精准的while：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isValidSerialization(self, preorder):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type preorder: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> preorder.split(<span class="string">&#x27;,&#x27;</span>):</span><br><span class="line">            stack.append(node)</span><br><span class="line">            <span class="keyword">while</span> len(stack) &gt;= 3 and stack[-1] == <span class="string">&#x27;#&#x27;</span> and stack[-2] == <span class="string">&#x27;#&#x27;</span> and stack[-3].isdigit():</span><br><span class="line">                stack = stack[:-3] <span class="comment">#stack.pop(),stack.pop(),stack.pop()</span></span><br><span class="line">                stack.append(<span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> len(stack) == 1 and stack.pop() == <span class="string">&#x27;#&#x27;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度:O(N)</li>
+<li>空间复杂度:O(N)</li>
+</ul>
+<h4 id="计算入度出度-（还未掌握）"><a href="#计算入度出度-（还未掌握）" class="headerlink" title="计算入度出度 （还未掌握）"></a>计算入度出度 （还未掌握）</h4><p>背景知识：</p>
+<ul>
+<li><strong>入度</strong>: 有多少个节点指向它</li>
+<li><strong>出度</strong>：它指向多少个节点</li>
+</ul>
+<p>在树中，<code>所有节点的入度之和等于出度之和</code>。故，可以通过这个特点判断输入序列是否为有效的！</p>
+<p>在一棵二叉树中：</p>
+<ul>
+<li>每个空节点（ “#” ）会提供 0 个出度和 1 个入度。</li>
+<li>每个非空节点会提供 2 个出度和 1 个入度（根节点的入度是 0）。</li>
+</ul>
+<p><img src="https://pic.leetcode-cn.com/1615552473-UUReDo-331%E8%BD%AC%E5%9B%BE%E7%89%87.003.jpeg" alt="image"></p>
+<p>我们只要把字符串遍历一次，每个节点都累加 diff = 出度 - 入度 。在遍历到任何一个节点的时候，要求diff &gt;= 0，原因是还没遍历到该节点的子节点，所以此时的出度应该大于等于入度。当所有节点遍历完成之后，整棵树的 diff == 0 。</p>
+<p>这里解释一下为什么下面的代码中 diff 的初始化为 1。因为，我们加入一个非空节点时，都会对 diff 先减去 1（入度），再加上 2（出度）。但是由于根节点没有父节点，所以其入度为 0，出度为 2。因此 diff 初始化为 1，是为了在加入根节点的时候，diff 先减去 1（入度），再加上 2（出度），此时 diff 正好应该是2.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isValidSerialization(self, preorder):</span><br><span class="line">        nodes = preorder.split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">        diff = 1</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> nodes:</span><br><span class="line">            diff -= 1</span><br><span class="line">            <span class="keyword">if</span> diff &lt; 0:</span><br><span class="line">                <span class="built_in">return</span> False</span><br><span class="line">            <span class="keyword">if</span> node != <span class="string">&#x27;#&#x27;</span>:</span><br><span class="line">                diff += 2</span><br><span class="line">        <span class="built_in">return</span> diff == 0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>时间复杂度：O(N)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>131.分割回文串(Medium)</title>
+    <url>/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/</url>
+    <content><![CDATA[<p>力扣每日一题系列(2021.03.07)之<a href="https://leetcode-cn.com/problems/palindrome-partitioning/">分割回文串</a><br>难度:中等</p>
+<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个字符串<code>s</code>,请你将<code>s</code>分割成一些子串,使每个子串都是回文串.返回<code>s</code>所有可能的分割方案.<br><strong>回文串</strong>是正着读和反着读都一样的字符串.</p>
+<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: s=<span class="string">&quot;aab&quot;</span></span><br><span class="line">输出: [[<span class="string">&quot;a&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>],[<span class="string">&quot;aa&quot;</span>,<span class="string">&quot;b&quot;</span>]]</span><br></pre></td></tr></table></figure></p>
+<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;a&quot;</span></span><br><span class="line">输出: [[<span class="string">&quot;a&quot;</span>]]</span><br></pre></td></tr></table></figure></p>
+<p>提示:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 16</span><br><span class="line">s 仅由小写英文字母组成</span><br></pre></td></tr></table></figure></p>
+<h3 id="二、题解"><a href="#二、题解" class="headerlink" title="二、题解"></a>二、题解</h3><p>代码思路学习:<a href="https://leetcode-cn.com/problems/palindrome-partitioning/solution/hui-su-fa-si-lu-yu-mo-ban-by-fuxuemingzh-azhz/">负雪明烛</a></p>
+<p>题目要求返回<code>所有可能的结果</code>, 那么只能<strong>暴力搜索所有可能的解</strong>,在这种情况下可以联想到使用<code>回溯法</code>.回溯法(算法思想)可以用递归(编程方法)来实现.</p>
+<h4 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h4><p><code>回溯法</code>实际上是一个类似<code>枚举</code>的搜索尝试过程.<br>对当前搜索路径下的未探索区域进行搜索,则可能有两种情况:</p>
+<ol>
+<li>当前未搜索区域满足条件,则保存当前路径并退出当前搜索</li>
+<li>当前为搜索区域需要继续搜索,则遍历当前所有可能的选择,如果其中有选择符合要求,则把这个选择加入当前搜索路径中(递归),并继续搜索未搜索的路径</li>
+</ol>
+<p>负雪明烛版本的回溯法套用模版:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">res = []</span><br><span class="line">path = []</span><br><span class="line"></span><br><span class="line">def backtrack(未探索区域, res, path):</span><br><span class="line">    <span class="keyword">if</span> 未探索区域满足结束条件:</span><br><span class="line">        res.add(path) <span class="comment"># 深度拷贝</span></span><br><span class="line">        <span class="built_in">return</span></span><br><span class="line">    <span class="keyword">for</span> 选择 <span class="keyword">in</span> 未探索区域当前可能的选择:</span><br><span class="line">        <span class="keyword">if</span> 当前选择符合要求:</span><br><span class="line">            path.add(当前选择)</span><br><span class="line">            backtrack(新的未探索区域, res, path)</span><br><span class="line">            path.pop()</span><br></pre></td></tr></table></figure></p>
+<p>其中:<br><code>backtrack</code>表示: 未搜索区域中满足条件的所有可能路径<br><code>path</code>表示: 一条路径<br><code>res</code>表示: 搜索到满足的路径(将合格的path储存到res里)<br><code>path.pop()</code>表示: 在储存一个合格路径path后,需要将其清空,以免阻碍其他搜索</p>
+<p><strong>本题图解</strong><br> <img src="/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/IMG_0847.jpg" class="" title="This is an example image"></p>
+<h3 id="三、代码"><a href="#三、代码" class="headerlink" title="三、代码"></a>三、代码</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def partition(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: List[List[str]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        res = []</span><br><span class="line">        path = []</span><br><span class="line">        self.backtrack(s,res,path)</span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line">        </span><br><span class="line">    def backtrack(self,s,res,path):</span><br><span class="line">        <span class="comment">#指针越界,res保存这个合格的path</span></span><br><span class="line">        <span class="keyword">if</span> not s:</span><br><span class="line">            res.append(path)  </span><br><span class="line">            <span class="built_in">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(1,len(s)+1): <span class="comment">#i=1,2,3</span></span><br><span class="line">            <span class="comment">#如果当下切分满足回文串的条件</span></span><br><span class="line">            <span class="keyword">if</span> self.isSubstring(s[:i]):</span><br><span class="line">                <span class="comment">#递归:考虑剩余部分的切分方法</span></span><br><span class="line">                self.backtrack(s[i:], res, path + [s[:i]])</span><br><span class="line">                </span><br><span class="line">    def isSubstring(self, s):</span><br><span class="line">        <span class="keyword">if</span> s == s[::-1]:</span><br><span class="line">            <span class="built_in">return</span> True</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>回溯</tag>
+        <tag>递归</tag>
+      </tags>
   </entry>
   <entry>
     <title>395.至少有K个重复字符的最长子串(Medium)</title>
