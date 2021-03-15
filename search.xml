@@ -224,10 +224,8 @@
     <url>/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/</url>
     <content><![CDATA[<p>LeetCode每日一题系列（2021.03.12)之<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree">验证二叉树的前序序列化</a><br>难度：中等</p>
 <h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>序列化二叉树的一种方法是使用前序遍历。当我们遇到一个非空节点时，我们可以记录下这个节点的值。如果它是一个空节点，我们可以使用一个标记值记录，例如<code>#</code>。</p>
-<pre><code> _9_
-/   \
-</code></pre><p>   3     2<br>  / \   / \<br> 4   1  #  6<br>/ \ / \   / \</p>
-<h1 id=""><a href="#" class="headerlink" title="# # #   #"></a># # #   #</h1><p>例如，上面的二叉树可以被序列化为字符串<code>&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</code>，其中 # 代表一个空节点。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">     _9_</span><br><span class="line">    /   \</span><br><span class="line">   3     2</span><br><span class="line">  / \   / \</span><br><span class="line"> 4   1  <span class="comment">#  6</span></span><br><span class="line">/ \ / \   / \</span><br><span class="line"><span class="comment"># # # #   # #</span></span><br></pre></td></tr></table></figure>
+<p>例如，上面的二叉树可以被序列化为字符串<code>&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</code>，其中 # 代表一个空节点。</p>
 <p>给定一串以逗号分隔的序列，验证它是否是正确的二叉树的前序序列化。编写一个在不重构树的条件下的可行算法。</p>
 <p>每个以逗号分隔的字符或为一个整数或为一个表示 null 指针的 ‘#’ 。</p>
 <p>你可以认为输入格式总是有效的，例如它永远不会包含两个连续的逗号，比如 “1,,3” 。</p>
@@ -245,7 +243,7 @@
 <p>如输入： “9,3,4,#,#,1,#,#,2,#,6,#,#” ，当遇到 x,#,# 的时候，就把它变为 #。</p>
 <p>模拟一遍过程：</p>
 <p>[9,3,4,#,#] =&gt; [9,3,#]，继续<br>[9,3,#,1,#,#] =&gt; [9,3,#,#] =&gt; [9,#] ，继续<br>[9,#2,#,6,#,#] =&gt; [9,#,2,#,#] =&gt; [9,#,#] =&gt; [#]，结束<br>下面的动画模拟了”9,3,4,#,#,1,#,#,#”的操作过程：</p>
-<p><img src="https://pic.leetcode-cn.com/1615551708-uxodPT-331.gif" alt="动图"></p>
+<img src="/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/1615551708-uxodPT-331.gif" class="">
 <p>代码比较简单，最需要注意的还是这个for循环里精准的while：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isValidSerialization(self, preorder):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type preorder: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> preorder.split(<span class="string">&#x27;,&#x27;</span>):</span><br><span class="line">            stack.append(node)</span><br><span class="line">            <span class="keyword">while</span> len(stack) &gt;= 3 and stack[-1] == <span class="string">&#x27;#&#x27;</span> and stack[-2] == <span class="string">&#x27;#&#x27;</span> and stack[-3].isdigit():</span><br><span class="line">                stack = stack[:-3] <span class="comment">#stack.pop(),stack.pop(),stack.pop()</span></span><br><span class="line">                stack.append(<span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> len(stack) == 1 and stack.pop() == <span class="string">&#x27;#&#x27;</span></span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度:O(N)</li>
