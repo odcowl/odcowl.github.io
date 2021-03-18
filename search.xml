@@ -128,68 +128,6 @@
       </tags>
   </entry>
   <entry>
-    <title>224.基本计算器(Hard)</title>
-    <url>/2021/03/09/224-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8-Hard/</url>
-    <content><![CDATA[<p>每日一题系列(2021.03.10)之<a href="https://leetcode-cn.com/problems/basic-calculator/">基本计算器</a><br>难度：困难</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>实现一个基本的计算器来计算一个简单的字符串表达式 s 的值。</p>
-<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;1 + 1&quot;</span></span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 2-1 + 2 &quot;</span></span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure></p>
-<p>示例3:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;(1+(4+5+2)-3)+(6+8)&quot;</span></span><br><span class="line">输出：23</span><br></pre></td></tr></table></figure></p>
-<p>提示：</p>
-<ul>
-<li>1 &lt;= s.length &lt;= 3 * 10^5</li>
-<li>s 由数字、+、-、(、)、和   组成</li>
-<li>s 表示一个有效的表达式</li>
-</ul>
-<h3 id="二、我的解法（误"><a href="#二、我的解法（误" class="headerlink" title="二、我的解法（误"></a>二、我的解法（误</h3><p>我看到这一题第一反应是：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> <span class="built_in">eval</span>(s)</span><br></pre></td></tr></table></figure><br>完事走人（抓回来</p>
-<p>想必LeetCode早就预见了我等无耻之人，于是乎，eval作废，我的脑子也废了，现在开始学习大神的解法。。。</p>
-<p>ps：我总感觉这题在hw的题库里好像见过也做过，但是咋一点儿印象也米有了</p>
-<h3 id="三、真正的解法"><a href="#三、真正的解法" class="headerlink" title="三、真正的解法"></a>三、真正的解法</h3><p>这道题里有加减号，也有括号，分三部来考虑这个问题：</p>
-<ul>
-<li>不考虑括号，只考虑数字、加减号和空格</li>
-<li>考虑括号，数字，加减号和空格</li>
-<li>考虑括号，数字，加减乘除号和空格</li>
-</ul>
-<p>以下部分参考了<a href="https://leetcode-cn.com/problems/basic-calculator/solution/zhan-by-powcai-3/">powcai</a>的做法</p>
-<h4 id="不考虑括号，考虑加减号"><a href="#不考虑括号，考虑加减号" class="headerlink" title="不考虑括号，考虑加减号"></a>不考虑括号，考虑加减号</h4><p>在不考虑括号的情况时，不需要用到<code>栈</code>的思路，在顺序上也没有强行要求，要注意的一点是，看到加号或减号时，要同时考虑符号前一位的数字，和符号后一位的数字。所以用一个<code>sign</code>来记录。</p>
-<p>在下面的代码中，只有当进入<code>elif s[i].isdigit():</code>这个格子里的时候，才有真正对res进行计算的操作:<code>res+= tmp * sign</code>。这里就迎来了第二个要注意的点，有时候数字并非只是个位数。</p>
-<p>以下为实现这个操作的代码：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        res = 0</span><br><span class="line">        sign = 1</span><br><span class="line">        i = 0</span><br><span class="line">        n = len(s)</span><br><span class="line">        <span class="keyword">while</span> i&lt;n:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27; &#x27;</span>: <span class="comment">#空格跳过</span></span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                sign = -1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i].isdigit():</span><br><span class="line">                tmp = int(s[i])</span><br><span class="line">                i += 1</span><br><span class="line">                <span class="comment">#验证这是不是一个非单位数，如果是的话，进入下面的while循环</span></span><br><span class="line">                <span class="keyword">while</span> i&lt;n and s[i].isdigit(): <span class="comment">#如果数字有很多位的情况</span></span><br><span class="line">                    tmp = tmp*10 + int(s[i])</span><br><span class="line">                    i += 1</span><br><span class="line">                <span class="comment">#真正的计算操作</span></span><br><span class="line">                res += tmp * sign</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure></p>
-<h4 id="考虑括号，考虑加减号（第一种做法）"><a href="#考虑括号，考虑加减号（第一种做法）" class="headerlink" title="考虑括号，考虑加减号（第一种做法）"></a>考虑括号，考虑加减号（第一种做法）</h4><p>这一步则是到达了这道题目所要求的部分，也正是因为括号的出现，我们需要考虑计算的先后顺序，在这里，就要运用到<code>栈</code>。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        res = 0</span><br><span class="line">        sign = 1</span><br><span class="line">        i = 0</span><br><span class="line">        n = len(s)</span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">while</span> i&lt;n:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27; &#x27;</span>: <span class="comment">#空格跳过</span></span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                sign = -1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">                stack.append(res)</span><br><span class="line">                stack.append(sign)</span><br><span class="line">                res = 0</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;)&#x27;</span>:</span><br><span class="line">                res = res * stack.pop() + stack.pop()</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i].isdigit():</span><br><span class="line">                tmp = int(s[i])</span><br><span class="line">                i += 1</span><br><span class="line">                <span class="comment">#验证这是不是一个非单位数，如果是的话，进入下面的while循环</span></span><br><span class="line">                <span class="keyword">while</span> i&lt;n and s[i].isdigit(): <span class="comment">#如果数字有很多位的情况</span></span><br><span class="line">                    tmp = tmp*10 + int(s[i])</span><br><span class="line">                    i += 1</span><br><span class="line">                <span class="comment">#真正的计算操作</span></span><br><span class="line">                res += tmp * sign</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure></p>
-<h4 id="考虑括号，考虑加减号（负雪明烛）"><a href="#考虑括号，考虑加减号（负雪明烛）" class="headerlink" title="考虑括号，考虑加减号（负雪明烛）"></a>考虑括号，考虑加减号（负雪明烛）</h4><p><a href="https://leetcode-cn.com/problems/basic-calculator/solution/ru-he-xiang-dao-yong-zhan-si-lu-lai-zi-y-gpca/">负雪明烛</a></p>
-<p>用<code>栈</code>来实现递归。</p>
-<p>一个表达式可以分为三个部分：左边表达式①，运算符③，右边表达式②</p>
-<p>左边和右边的表达式可以是一个数字，也可以是一个括号包起来的表达式；运算符可以是加减。</p>
-<p>先计算左边的表达式，再计算右边表达式，最后根据运算符，计算 ① 和② 的运算。</p>
-<p>以<code>&quot;(1+(4+5+2)-3)+(6+8)&quot;</code>为例：</p>
-<img src="/2021/03/09/224-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8-Hard/1615341430-TjSiGC-224.001.jpeg" class="">
-<p>编程思路即：先计算左边的表达式① ，把①的结果和运算符③保存在栈内，再计算右边的表达式②，最后计算① 和②的运算。</p>
-<p>在有括号的情况下，栈顶保留的是最里层嵌套的运算，弹出栈的时候，正好先计算最里层括号的，再计算外边括号的。</p>
-<p>代码：</p>
-<ul>
-<li>res 表示左边表达式除去栈内保存元素的计算结果；</li>
-<li>sign 表示运算符；</li>
-<li>num 表示当前遇到的数字，会更新到 res 中；</li>
-<li>用栈保存遇到左括号时前面计算好了的结果和运算符。</li>
-</ul>
-<p>操作的步骤是：</p>
-<ul>
-<li>如果当前是数字，那么更新计算当前数字；</li>
-<li>如果当前是操作符+或者-，那么需要更新计算当前计算的结果 res，并把当前数字 num 设为 0，sign 设为正负，重新开始；</li>
-<li>如果当前是 ( ，那么说明遇到了右边的表达式，而后面的小括号里的内容需要优先计算，所以要把 res，sign 进栈，更新 res 和 sign 为新的开始；</li>
-<li>如果当前是 ) ，那么说明右边的表达式结束，即当前括号里的内容已经计算完毕，所以要把之前的结果出栈，然后计算整个式子的结果；</li>
-<li>最后，当所有数字结束的时候，需要把最后的一个 num 也更新到 res 中。</li>
-</ul>
-<img src="/2021/03/09/224-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8-Hard/1615341467-gaVtdq-224.002.jpeg" class="">
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        res, num, sign = 0, 0, 1</span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> c.isdigit():</span><br><span class="line">                num = 10 * num + int(c)</span><br><span class="line">            <span class="keyword">elif</span> c == <span class="string">&quot;+&quot;</span> or c == <span class="string">&quot;-&quot;</span>:</span><br><span class="line">                res += sign * num</span><br><span class="line">                num = 0</span><br><span class="line">                sign = 1 <span class="keyword">if</span> c == <span class="string">&quot;+&quot;</span> <span class="keyword">else</span> -1</span><br><span class="line">            <span class="keyword">elif</span> c == <span class="string">&quot;(&quot;</span>:</span><br><span class="line">                stack.append(res)</span><br><span class="line">                stack.append(sign)</span><br><span class="line">                res = 0</span><br><span class="line">                sign = 1</span><br><span class="line">            <span class="keyword">elif</span> c == <span class="string">&quot;)&quot;</span>:</span><br><span class="line">                res += sign * num</span><br><span class="line">                num = 0</span><br><span class="line">                res *= stack.pop()</span><br><span class="line">                res += stack.pop()</span><br><span class="line">        res += sign * num</span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>栈</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>227.基本计算器2(Medium)</title>
     <url>/2021/03/10/227-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E6%9C%BA2-Medium/</url>
     <content><![CDATA[<p>每日一题(2021.03.11)之<a href="https://leetcode-cn.com/problems/basic-calculator-ii/">基本计算器</a><br>难度：中等</p>
@@ -220,99 +158,6 @@
       </categories>
   </entry>
   <entry>
-    <title>331.验证二叉树的前序序列化(Medium)</title>
-    <url>/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/</url>
-    <content><![CDATA[<p>LeetCode每日一题系列（2021.03.12)之<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree">验证二叉树的前序序列化</a><br>难度：中等</p>
-<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>序列化二叉树的一种方法是使用前序遍历。当我们遇到一个非空节点时，我们可以记录下这个节点的值。如果它是一个空节点，我们可以使用一个标记值记录，例如<code>#</code>。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">     _9_</span><br><span class="line">    /   \</span><br><span class="line">   3     2</span><br><span class="line">  / \   / \</span><br><span class="line"> 4   1  <span class="comment">#  6</span></span><br><span class="line">/ \ / \   / \</span><br><span class="line"><span class="comment"># # # #   # #</span></span><br></pre></td></tr></table></figure>
-<p>例如，上面的二叉树可以被序列化为字符串<code>&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</code>，其中 # 代表一个空节点。</p>
-<p>给定一串以逗号分隔的序列，验证它是否是正确的二叉树的前序序列化。编写一个在不重构树的条件下的可行算法。</p>
-<p>每个以逗号分隔的字符或为一个整数或为一个表示 null 指针的 ‘#’ 。</p>
-<p>你可以认为输入格式总是有效的，例如它永远不会包含两个连续的逗号，比如 “1,,3” 。</p>
-<p>示例 1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: <span class="string">&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</span></span><br><span class="line">输出: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>示例 2:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: &quot;1,#&quot;</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure></p>
-<p>示例 3:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: <span class="string">&quot;9,#,#,1&quot;</span></span><br><span class="line">输出: <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>还是参考<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/solution/pai-an-jiao-jue-de-liang-chong-jie-fa-zh-66nt/">负雪明烛大神</a>的两种解法。</p>
-<p>我做了好长时间这道题，一直卡在了一种case上：<br>当char已经遍历完，最后三个字符刚好是符合<code>9,#,#</code>转换为<code>#</code>这种情况的，但由于我没有利用好while导致一直没有得到正确的答案，而且代码又臭又长，深感水平太差啊。。。</p>
-<h4 id="利用栈的做法"><a href="#利用栈的做法" class="headerlink" title="利用栈的做法"></a>利用栈的做法</h4><p>首先要明确的是树的<strong>前序遍历</strong>是按照<code>根节点，左子树，右子树</code>的顺序来排列的，那<code>9,#,#</code>代表一个两个孩子都为空的节点，即它是一个<code>叶子节点</code>；当一个节点不是<code>叶子节点</code>时，有两种情况：1）两个孩子都非#（空）2）一个孩子为空，一个孩子不为空。</p>
-<p>这道题的重点思路来了：</p>
-<ul>
-<li>把有效的<code>叶子节点</code>用<code>#</code>代替，比如把<code>4##</code>换成<code>#</code>。</li>
-</ul>
-<p>具体操作流程示例如下：</p>
-<p>如输入： “9,3,4,#,#,1,#,#,2,#,6,#,#” ，当遇到 x,#,# 的时候，就把它变为 #。</p>
-<p>模拟一遍过程：</p>
-<p>[9,3,4,#,#] =&gt; [9,3,#]，继续<br>[9,3,#,1,#,#] =&gt; [9,3,#,#] =&gt; [9,#] ，继续<br>[9,#2,#,6,#,#] =&gt; [9,#,2,#,#] =&gt; [9,#,#] =&gt; [#]，结束<br>下面的动画模拟了”9,3,4,#,#,1,#,#,#”的操作过程：</p>
-<img src="/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/1615551708-uxodPT-331.gif" class="">
-<p>代码比较简单，最需要注意的还是这个for循环里精准的while：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isValidSerialization(self, preorder):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type preorder: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> preorder.split(<span class="string">&#x27;,&#x27;</span>):</span><br><span class="line">            stack.append(node)</span><br><span class="line">            <span class="keyword">while</span> len(stack) &gt;= 3 and stack[-1] == <span class="string">&#x27;#&#x27;</span> and stack[-2] == <span class="string">&#x27;#&#x27;</span> and stack[-3].isdigit():</span><br><span class="line">                stack = stack[:-3] <span class="comment">#stack.pop(),stack.pop(),stack.pop()</span></span><br><span class="line">                stack.append(<span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> len(stack) == 1 and stack.pop() == <span class="string">&#x27;#&#x27;</span></span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>时间复杂度:O(N)</li>
-<li>空间复杂度:O(N)</li>
-</ul>
-<h4 id="计算入度出度-（还未掌握）"><a href="#计算入度出度-（还未掌握）" class="headerlink" title="计算入度出度 （还未掌握）"></a>计算入度出度 （还未掌握）</h4><p>除了负雪明烛用了这个办法，另外一个超棒的博主<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/solution/shou-hua-tu-jie-cong-ling-yi-ge-jiao-du-2rnzg/">笨猪爆破组</a>也是写的这个方法，等待学习！</p>
-<p>背景知识：</p>
-<ul>
-<li><strong>入度</strong>: 有多少个节点指向它</li>
-<li><strong>出度</strong>：它指向多少个节点</li>
-</ul>
-<p>在树中，<code>所有节点的入度之和等于出度之和</code>。故，可以通过这个特点判断输入序列是否为有效的！</p>
-<p>在一棵二叉树中：</p>
-<ul>
-<li>每个空节点（ “#” ）会提供 0 个出度和 1 个入度。</li>
-<li>每个非空节点会提供 2 个出度和 1 个入度（根节点的入度是 0）。</li>
-</ul>
-<p><img src="https://pic.leetcode-cn.com/1615552473-UUReDo-331%E8%BD%AC%E5%9B%BE%E7%89%87.003.jpeg" alt="image"></p>
-<p>我们只要把字符串遍历一次，每个节点都累加 diff = 出度 - 入度 。在遍历到任何一个节点的时候，要求diff &gt;= 0，原因是还没遍历到该节点的子节点，所以此时的出度应该大于等于入度。当所有节点遍历完成之后，整棵树的 diff == 0 。</p>
-<p>这里解释一下为什么下面的代码中 diff 的初始化为 1。因为，我们加入一个非空节点时，都会对 diff 先减去 1（入度），再加上 2（出度）。但是由于根节点没有父节点，所以其入度为 0，出度为 2。因此 diff 初始化为 1，是为了在加入根节点的时候，diff 先减去 1（入度），再加上 2（出度），此时 diff 正好应该是2.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isValidSerialization(self, preorder):</span><br><span class="line">        nodes = preorder.split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">        diff = 1</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> nodes:</span><br><span class="line">            diff -= 1</span><br><span class="line">            <span class="keyword">if</span> diff &lt; 0:</span><br><span class="line">                <span class="built_in">return</span> False</span><br><span class="line">            <span class="keyword">if</span> node != <span class="string">&#x27;#&#x27;</span>:</span><br><span class="line">                diff += 2</span><br><span class="line">        <span class="built_in">return</span> diff == 0</span><br></pre></td></tr></table></figure>
-<ul>
-<li>时间复杂度：O(N)</li>
-<li>空间复杂度：O(1)</li>
-</ul>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>栈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>395.至少有K个重复字符的最长子串(Medium)</title>
-    <url>/2021/02/27/395-%E8%87%B3%E5%B0%91%E6%9C%89K%E4%B8%AA%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2-Medium/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.02.27)之<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/">至少有K个重复字符的最长子串</a><br>难度:中等</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个字符串<code>s</code>和一个整数<code>k</code>,请你找出<code>s</code>中的最长子串,要求该子串中的每一字符出现次数都不少于<code>k</code>.返回这一子串的长度.</p>
-<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;aaabb&quot;</span>, k = 3</span><br><span class="line">输出：3</span><br><span class="line">解释：最长子串为 <span class="string">&quot;aaa&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;ababbc&quot;</span>, k = 2</span><br><span class="line">输出：5</span><br><span class="line">解释：最长子串为 <span class="string">&quot;ababb&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 2 次， <span class="string">&#x27;b&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure></p>
-<p>提示:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 104</span><br><span class="line">s 仅由小写英文字母组成</span><br><span class="line">1 &lt;= k &lt;= 105</span><br></pre></td></tr></table></figure></p>
-<h3 id="我的解法-30-31ac"><a href="#我的解法-30-31ac" class="headerlink" title="我的解法(30/31ac)"></a>我的解法(30/31ac)</h3><p>我的想法是先设定一个判断用的函数<code>issubstring</code>用于判断每一个我截取下来的子串,在这个func里,通过<code>哈希表</code>的方法来判断字符重复次数是否大于k,如果全部大于,返回<code>True</code>否则返回<code>False</code>.</p>
-<p>同是判断两个边缘条件: 1)如果整个字符串为<code>True</code>,那就不经过下面的小循环,直接返回<code>len(s)</code> 2)如果<code>k</code>的数量大于<code>len(s)</code>那不可能满足,返回0.</p>
-<p>在接下来的循环中,具体细节如下图:<br></p>
-<p>但是其中<code>continue</code>这个想法是错误的,比如当下的substring可能不是符合条件的,但是后续补充了一些字符之后有可能这个substring是符合的,所以这种简化方法不可取,感觉这道题的用例并不是非常完全,最后这段代码只是遇到了特别长的用例时出现了时间问题,但没有遇到我提到的这个问题.</p>
-<p>接下来是这段代码:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        def issubstring(s,k):</span><br><span class="line">            m = &#123;&#125;</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> s:</span><br><span class="line">                <span class="keyword">if</span> char <span class="keyword">in</span> m:</span><br><span class="line">                    m[char] += 1</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    m[char] = 1</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> m:</span><br><span class="line">                <span class="keyword">if</span> m[char]&lt;k:</span><br><span class="line">                    <span class="built_in">return</span> False</span><br><span class="line">            <span class="built_in">return</span> True</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> issubstring(s,k):</span><br><span class="line">            <span class="built_in">return</span> len(s)</span><br><span class="line">        <span class="keyword">elif</span> k &gt; len(s):</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line"></span><br><span class="line">        maxlen = 0</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+k-1,len(s)):</span><br><span class="line">                subs = s[i:j+1]</span><br><span class="line">                <span class="comment">#print(subs)</span></span><br><span class="line">                <span class="keyword">if</span> issubstring(subs,k):</span><br><span class="line">                    maxlen = max(maxlen,len(subs))</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment">#这个continue的想法是错误的</span></span><br><span class="line">                    <span class="built_in">continue</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> maxlen</span><br></pre></td></tr></table></figure></p>
-<h3 id="递归做法"><a href="#递归做法" class="headerlink" title="递归做法"></a>递归做法</h3><p>依然是参考了<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/solution/jie-ben-ti-bang-zhu-da-jia-li-jie-di-gui-obla/">负雪明烛</a>的解析,这个递归我一开始有想到过,用split的方法反复切割,但是自己思路不好,就换成了上面那种做法,而且递归我一直学习的很差,得加把劲啊.</p>
-<p>先上她的原版代码:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="keyword">if</span> len(s) &lt; k:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">set</span>(s):</span><br><span class="line">            <span class="keyword">if</span> s.count(c) &lt; k:</span><br><span class="line">                <span class="built_in">return</span> max(self.longestSubstring(t, k) <span class="keyword">for</span> t <span class="keyword">in</span> s.split(c))</span><br><span class="line">        <span class="built_in">return</span> len(s)</span><br></pre></td></tr></table></figure><br>接下来整理整理思路:</p>
-<ul>
-<li>递归的重点: 牢记递归函数的输入输出是什么(这里的输入是字符串,限定条件是<code>k</code>,输出是满足条件的最长字符子串长度)</li>
-<li>递归的终止条件: 如果<code>字符串s</code>的长度小于<code>k</code>,那么一定不存在符合条件的子串,直接返回0</li>
-<li>递归的调用法则: 如果一个<code>字符c</code>在<code>s</code>中出现的次数少于<code>k次</code>,那么所有包含<code>字符c</code>的子字符串一定不符合规定.所以,应该通过某种方法将<code>字符c</code>排除在外,方法:把<code>s</code>按照<code>字符c</code>分割(分割后的每一个子串都不包含<code>字符c</code>),得到很多<code>子串t</code>. 而得到的<code>t</code>,就是未来的<code>s&#39;</code>. 下一步,<code>不含字符c的子串们t</code>就是作为<code>longestSubstring(s, k)</code>的新输入,大问题分割为了小问题,形成递归.</li>
-<li>未进入递归即返回结果的情况: 如果<code>s</code>中的每个字符都满足大于<code>重复次数k</code>次的这个条件,那么直接返回<code>len(s)</code>.</li>
-</ul>
-<p>复杂度分析:</p>
-<ul>
-<li>时间复杂度: O(N*26*26) 因为函数最多执行26次(小写的26个英语字符),for循环遍历一遍是26个字符,循环里面对s分割时间的复杂度为O(N)</li>
-<li>空间复杂度: O(26*26), 函数执行26次,每次开辟26个字符的set空间</li>
-</ul>
-<p>读聪明人的代码就是茅塞顿开的感觉,特别喜欢这个刷题姐姐的讲解</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>54.螺旋矩阵(Medium)</title>
     <url>/2021/03/17/54-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-Medium/</url>
     <content><![CDATA[<p>LeetCode每日一题(2021.03.15)之<a href="https://leetcode-cn.com/problems/spiral-matrix/">螺旋矩阵</a><br>难度：中等</p>
@@ -330,7 +175,7 @@
 <li>1 &lt;= m, n &lt;= 10</li>
 <li>-100 &lt;= matrix[i][j] &lt;= 100</li>
 </ul>
-<h3 id="解法1"><a href="#解法1" class="headerlink" title="解法1"></a>解法1</h3><p><img src="https://leetcode-cn.com/problems/spiral-matrix/solution/ju-zhen-bian-li-wen-ti-de-si-bu-qu-by-fu-91za/" alt="负雪明烛"></p>
+<h3 id="解法1"><a href="#解法1" class="headerlink" title="解法1"></a>解法1</h3><p><a href="https://leetcode-cn.com/problems/spiral-matrix/solution/ju-zhen-bian-li-wen-ti-de-si-bu-qu-by-fu-91za/">负雪明烛</a></p>
 <h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>在<strong>打印矩阵</strong>类似的题目中，要考虑以下几个问题：</p>
 <ul>
 <li>起始位置</li>
@@ -371,6 +216,41 @@
       </categories>
       <tags>
         <tag>打印矩阵</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>395.至少有K个重复字符的最长子串(Medium)</title>
+    <url>/2021/02/27/395-%E8%87%B3%E5%B0%91%E6%9C%89K%E4%B8%AA%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2-Medium/</url>
+    <content><![CDATA[<p>力扣每日一题系列(2021.02.27)之<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/">至少有K个重复字符的最长子串</a><br>难度:中等</p>
+<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个字符串<code>s</code>和一个整数<code>k</code>,请你找出<code>s</code>中的最长子串,要求该子串中的每一字符出现次数都不少于<code>k</code>.返回这一子串的长度.</p>
+<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;aaabb&quot;</span>, k = 3</span><br><span class="line">输出：3</span><br><span class="line">解释：最长子串为 <span class="string">&quot;aaa&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure></p>
+<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;ababbc&quot;</span>, k = 2</span><br><span class="line">输出：5</span><br><span class="line">解释：最长子串为 <span class="string">&quot;ababb&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 2 次， <span class="string">&#x27;b&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure></p>
+<p>提示:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 104</span><br><span class="line">s 仅由小写英文字母组成</span><br><span class="line">1 &lt;= k &lt;= 105</span><br></pre></td></tr></table></figure></p>
+<h3 id="我的解法-30-31ac"><a href="#我的解法-30-31ac" class="headerlink" title="我的解法(30/31ac)"></a>我的解法(30/31ac)</h3><p>我的想法是先设定一个判断用的函数<code>issubstring</code>用于判断每一个我截取下来的子串,在这个func里,通过<code>哈希表</code>的方法来判断字符重复次数是否大于k,如果全部大于,返回<code>True</code>否则返回<code>False</code>.</p>
+<p>同是判断两个边缘条件: 1)如果整个字符串为<code>True</code>,那就不经过下面的小循环,直接返回<code>len(s)</code> 2)如果<code>k</code>的数量大于<code>len(s)</code>那不可能满足,返回0.</p>
+<p>在接下来的循环中,具体细节如下图:<br></p>
+<p>但是其中<code>continue</code>这个想法是错误的,比如当下的substring可能不是符合条件的,但是后续补充了一些字符之后有可能这个substring是符合的,所以这种简化方法不可取,感觉这道题的用例并不是非常完全,最后这段代码只是遇到了特别长的用例时出现了时间问题,但没有遇到我提到的这个问题.</p>
+<p>接下来是这段代码:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        def issubstring(s,k):</span><br><span class="line">            m = &#123;&#125;</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> s:</span><br><span class="line">                <span class="keyword">if</span> char <span class="keyword">in</span> m:</span><br><span class="line">                    m[char] += 1</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    m[char] = 1</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> m:</span><br><span class="line">                <span class="keyword">if</span> m[char]&lt;k:</span><br><span class="line">                    <span class="built_in">return</span> False</span><br><span class="line">            <span class="built_in">return</span> True</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> issubstring(s,k):</span><br><span class="line">            <span class="built_in">return</span> len(s)</span><br><span class="line">        <span class="keyword">elif</span> k &gt; len(s):</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line"></span><br><span class="line">        maxlen = 0</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+k-1,len(s)):</span><br><span class="line">                subs = s[i:j+1]</span><br><span class="line">                <span class="comment">#print(subs)</span></span><br><span class="line">                <span class="keyword">if</span> issubstring(subs,k):</span><br><span class="line">                    maxlen = max(maxlen,len(subs))</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment">#这个continue的想法是错误的</span></span><br><span class="line">                    <span class="built_in">continue</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> maxlen</span><br></pre></td></tr></table></figure></p>
+<h3 id="递归做法"><a href="#递归做法" class="headerlink" title="递归做法"></a>递归做法</h3><p>依然是参考了<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/solution/jie-ben-ti-bang-zhu-da-jia-li-jie-di-gui-obla/">负雪明烛</a>的解析,这个递归我一开始有想到过,用split的方法反复切割,但是自己思路不好,就换成了上面那种做法,而且递归我一直学习的很差,得加把劲啊.</p>
+<p>先上她的原版代码:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="keyword">if</span> len(s) &lt; k:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">set</span>(s):</span><br><span class="line">            <span class="keyword">if</span> s.count(c) &lt; k:</span><br><span class="line">                <span class="built_in">return</span> max(self.longestSubstring(t, k) <span class="keyword">for</span> t <span class="keyword">in</span> s.split(c))</span><br><span class="line">        <span class="built_in">return</span> len(s)</span><br></pre></td></tr></table></figure><br>接下来整理整理思路:</p>
+<ul>
+<li>递归的重点: 牢记递归函数的输入输出是什么(这里的输入是字符串,限定条件是<code>k</code>,输出是满足条件的最长字符子串长度)</li>
+<li>递归的终止条件: 如果<code>字符串s</code>的长度小于<code>k</code>,那么一定不存在符合条件的子串,直接返回0</li>
+<li>递归的调用法则: 如果一个<code>字符c</code>在<code>s</code>中出现的次数少于<code>k次</code>,那么所有包含<code>字符c</code>的子字符串一定不符合规定.所以,应该通过某种方法将<code>字符c</code>排除在外,方法:把<code>s</code>按照<code>字符c</code>分割(分割后的每一个子串都不包含<code>字符c</code>),得到很多<code>子串t</code>. 而得到的<code>t</code>,就是未来的<code>s&#39;</code>. 下一步,<code>不含字符c的子串们t</code>就是作为<code>longestSubstring(s, k)</code>的新输入,大问题分割为了小问题,形成递归.</li>
+<li>未进入递归即返回结果的情况: 如果<code>s</code>中的每个字符都满足大于<code>重复次数k</code>次的这个条件,那么直接返回<code>len(s)</code>.</li>
+</ul>
+<p>复杂度分析:</p>
+<ul>
+<li>时间复杂度: O(N*26*26) 因为函数最多执行26次(小写的26个英语字符),for循环遍历一遍是26个字符,循环里面对s分割时间的复杂度为O(N)</li>
+<li>空间复杂度: O(26*26), 函数执行26次,每次开辟26个字符的set空间</li>
+</ul>
+<p>读聪明人的代码就是茅塞顿开的感觉,特别喜欢这个刷题姐姐的讲解</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
@@ -596,5 +476,125 @@
       <categories>
         <category>法语学习</category>
       </categories>
+  </entry>
+  <entry>
+    <title>331.验证二叉树的前序序列化(Medium)</title>
+    <url>/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/</url>
+    <content><![CDATA[<p>LeetCode每日一题系列（2021.03.12)之<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree">验证二叉树的前序序列化</a><br>难度：中等</p>
+<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>序列化二叉树的一种方法是使用前序遍历。当我们遇到一个非空节点时，我们可以记录下这个节点的值。如果它是一个空节点，我们可以使用一个标记值记录，例如<code>#</code>。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">     _9_</span><br><span class="line">    /   \</span><br><span class="line">   3     2</span><br><span class="line">  / \   / \</span><br><span class="line"> 4   1  <span class="comment">#  6</span></span><br><span class="line">/ \ / \   / \</span><br><span class="line"><span class="comment"># # # #   # #</span></span><br></pre></td></tr></table></figure>
+<p>例如，上面的二叉树可以被序列化为字符串<code>&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</code>，其中 # 代表一个空节点。</p>
+<p>给定一串以逗号分隔的序列，验证它是否是正确的二叉树的前序序列化。编写一个在不重构树的条件下的可行算法。</p>
+<p>每个以逗号分隔的字符或为一个整数或为一个表示 null 指针的 ‘#’ 。</p>
+<p>你可以认为输入格式总是有效的，例如它永远不会包含两个连续的逗号，比如 “1,,3” 。</p>
+<p>示例 1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: <span class="string">&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</span></span><br><span class="line">输出: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<p>示例 2:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: &quot;1,#&quot;</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure></p>
+<p>示例 3:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: <span class="string">&quot;9,#,#,1&quot;</span></span><br><span class="line">输出: <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>还是参考<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/solution/pai-an-jiao-jue-de-liang-chong-jie-fa-zh-66nt/">负雪明烛大神</a>的两种解法。</p>
+<p>我做了好长时间这道题，一直卡在了一种case上：<br>当char已经遍历完，最后三个字符刚好是符合<code>9,#,#</code>转换为<code>#</code>这种情况的，但由于我没有利用好while导致一直没有得到正确的答案，而且代码又臭又长，深感水平太差啊。。。</p>
+<h4 id="利用栈的做法"><a href="#利用栈的做法" class="headerlink" title="利用栈的做法"></a>利用栈的做法</h4><p>首先要明确的是树的<strong>前序遍历</strong>是按照<code>根节点，左子树，右子树</code>的顺序来排列的，那<code>9,#,#</code>代表一个两个孩子都为空的节点，即它是一个<code>叶子节点</code>；当一个节点不是<code>叶子节点</code>时，有两种情况：1）两个孩子都非#（空）2）一个孩子为空，一个孩子不为空。</p>
+<p>这道题的重点思路来了：</p>
+<ul>
+<li>把有效的<code>叶子节点</code>用<code>#</code>代替，比如把<code>4##</code>换成<code>#</code>。</li>
+</ul>
+<p>具体操作流程示例如下：</p>
+<p>如输入： “9,3,4,#,#,1,#,#,2,#,6,#,#” ，当遇到 x,#,# 的时候，就把它变为 #。</p>
+<p>模拟一遍过程：</p>
+<p>[9,3,4,#,#] =&gt; [9,3,#]，继续<br>[9,3,#,1,#,#] =&gt; [9,3,#,#] =&gt; [9,#] ，继续<br>[9,#2,#,6,#,#] =&gt; [9,#,2,#,#] =&gt; [9,#,#] =&gt; [#]，结束<br>下面的动画模拟了”9,3,4,#,#,1,#,#,#”的操作过程：</p>
+<img src="/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/1615551708-uxodPT-331.gif" class="">
+<p>代码比较简单，最需要注意的还是这个for循环里精准的while：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isValidSerialization(self, preorder):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type preorder: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> preorder.split(<span class="string">&#x27;,&#x27;</span>):</span><br><span class="line">            stack.append(node)</span><br><span class="line">            <span class="keyword">while</span> len(stack) &gt;= 3 and stack[-1] == <span class="string">&#x27;#&#x27;</span> and stack[-2] == <span class="string">&#x27;#&#x27;</span> and stack[-3].isdigit():</span><br><span class="line">                stack = stack[:-3] <span class="comment">#stack.pop(),stack.pop(),stack.pop()</span></span><br><span class="line">                stack.append(<span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> len(stack) == 1 and stack.pop() == <span class="string">&#x27;#&#x27;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度:O(N)</li>
+<li>空间复杂度:O(N)</li>
+</ul>
+<h4 id="计算入度出度-（还未掌握）"><a href="#计算入度出度-（还未掌握）" class="headerlink" title="计算入度出度 （还未掌握）"></a>计算入度出度 （还未掌握）</h4><p>除了负雪明烛用了这个办法，另外一个超棒的博主<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/solution/shou-hua-tu-jie-cong-ling-yi-ge-jiao-du-2rnzg/">笨猪爆破组</a>也是写的这个方法，等待学习！</p>
+<p>背景知识：</p>
+<ul>
+<li><strong>入度</strong>: 有多少个节点指向它</li>
+<li><strong>出度</strong>：它指向多少个节点</li>
+</ul>
+<p>在树中，<code>所有节点的入度之和等于出度之和</code>。故，可以通过这个特点判断输入序列是否为有效的！</p>
+<p>在一棵二叉树中：</p>
+<ul>
+<li>每个空节点（ “#” ）会提供 0 个出度和 1 个入度。</li>
+<li>每个非空节点会提供 2 个出度和 1 个入度（根节点的入度是 0）。</li>
+</ul>
+<p><img src="https://pic.leetcode-cn.com/1615552473-UUReDo-331%E8%BD%AC%E5%9B%BE%E7%89%87.003.jpeg" alt="image"></p>
+<p>我们只要把字符串遍历一次，每个节点都累加 diff = 出度 - 入度 。在遍历到任何一个节点的时候，要求diff &gt;= 0，原因是还没遍历到该节点的子节点，所以此时的出度应该大于等于入度。当所有节点遍历完成之后，整棵树的 diff == 0 。</p>
+<p>这里解释一下为什么下面的代码中 diff 的初始化为 1。因为，我们加入一个非空节点时，都会对 diff 先减去 1（入度），再加上 2（出度）。但是由于根节点没有父节点，所以其入度为 0，出度为 2。因此 diff 初始化为 1，是为了在加入根节点的时候，diff 先减去 1（入度），再加上 2（出度），此时 diff 正好应该是2.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isValidSerialization(self, preorder):</span><br><span class="line">        nodes = preorder.split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">        diff = 1</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> nodes:</span><br><span class="line">            diff -= 1</span><br><span class="line">            <span class="keyword">if</span> diff &lt; 0:</span><br><span class="line">                <span class="built_in">return</span> False</span><br><span class="line">            <span class="keyword">if</span> node != <span class="string">&#x27;#&#x27;</span>:</span><br><span class="line">                diff += 2</span><br><span class="line">        <span class="built_in">return</span> diff == 0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>时间复杂度：O(N)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>224.基本计算器(Hard)</title>
+    <url>/2021/03/09/224-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8-Hard/</url>
+    <content><![CDATA[<p>每日一题系列(2021.03.10)之<a href="https://leetcode-cn.com/problems/basic-calculator/">基本计算器</a><br>难度：困难</p>
+<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>实现一个基本的计算器来计算一个简单的字符串表达式 s 的值。</p>
+<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;1 + 1&quot;</span></span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure></p>
+<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 2-1 + 2 &quot;</span></span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure></p>
+<p>示例3:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;(1+(4+5+2)-3)+(6+8)&quot;</span></span><br><span class="line">输出：23</span><br></pre></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>1 &lt;= s.length &lt;= 3 * 10^5</li>
+<li>s 由数字、+、-、(、)、和   组成</li>
+<li>s 表示一个有效的表达式</li>
+</ul>
+<h3 id="二、我的解法（误"><a href="#二、我的解法（误" class="headerlink" title="二、我的解法（误"></a>二、我的解法（误</h3><p>我看到这一题第一反应是：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">return</span> <span class="built_in">eval</span>(s)</span><br></pre></td></tr></table></figure><br>完事走人（抓回来</p>
+<p>想必LeetCode早就预见了我等无耻之人，于是乎，eval作废，我的脑子也废了，现在开始学习大神的解法。。。</p>
+<p>ps：我总感觉这题在hw的题库里好像见过也做过，但是咋一点儿印象也米有了</p>
+<h3 id="三、真正的解法"><a href="#三、真正的解法" class="headerlink" title="三、真正的解法"></a>三、真正的解法</h3><p>这道题里有加减号，也有括号，分三部来考虑这个问题：</p>
+<ul>
+<li>不考虑括号，只考虑数字、加减号和空格</li>
+<li>考虑括号，数字，加减号和空格</li>
+<li>考虑括号，数字，加减乘除号和空格</li>
+</ul>
+<p>以下部分参考了<a href="https://leetcode-cn.com/problems/basic-calculator/solution/zhan-by-powcai-3/">powcai</a>的做法</p>
+<h4 id="不考虑括号，考虑加减号"><a href="#不考虑括号，考虑加减号" class="headerlink" title="不考虑括号，考虑加减号"></a>不考虑括号，考虑加减号</h4><p>在不考虑括号的情况时，不需要用到<code>栈</code>的思路，在顺序上也没有强行要求，要注意的一点是，看到加号或减号时，要同时考虑符号前一位的数字，和符号后一位的数字。所以用一个<code>sign</code>来记录。</p>
+<p>在下面的代码中，只有当进入<code>elif s[i].isdigit():</code>这个格子里的时候，才有真正对res进行计算的操作:<code>res+= tmp * sign</code>。这里就迎来了第二个要注意的点，有时候数字并非只是个位数。</p>
+<p>以下为实现这个操作的代码：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        res = 0</span><br><span class="line">        sign = 1</span><br><span class="line">        i = 0</span><br><span class="line">        n = len(s)</span><br><span class="line">        <span class="keyword">while</span> i&lt;n:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27; &#x27;</span>: <span class="comment">#空格跳过</span></span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                sign = -1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i].isdigit():</span><br><span class="line">                tmp = int(s[i])</span><br><span class="line">                i += 1</span><br><span class="line">                <span class="comment">#验证这是不是一个非单位数，如果是的话，进入下面的while循环</span></span><br><span class="line">                <span class="keyword">while</span> i&lt;n and s[i].isdigit(): <span class="comment">#如果数字有很多位的情况</span></span><br><span class="line">                    tmp = tmp*10 + int(s[i])</span><br><span class="line">                    i += 1</span><br><span class="line">                <span class="comment">#真正的计算操作</span></span><br><span class="line">                res += tmp * sign</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure></p>
+<h4 id="考虑括号，考虑加减号（第一种做法）"><a href="#考虑括号，考虑加减号（第一种做法）" class="headerlink" title="考虑括号，考虑加减号（第一种做法）"></a>考虑括号，考虑加减号（第一种做法）</h4><p>这一步则是到达了这道题目所要求的部分，也正是因为括号的出现，我们需要考虑计算的先后顺序，在这里，就要运用到<code>栈</code>。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        res = 0</span><br><span class="line">        sign = 1</span><br><span class="line">        i = 0</span><br><span class="line">        n = len(s)</span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">while</span> i&lt;n:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27; &#x27;</span>: <span class="comment">#空格跳过</span></span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                sign = -1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;(&#x27;</span>:</span><br><span class="line">                stack.append(res)</span><br><span class="line">                stack.append(sign)</span><br><span class="line">                res = 0</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;)&#x27;</span>:</span><br><span class="line">                res = res * stack.pop() + stack.pop()</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i].isdigit():</span><br><span class="line">                tmp = int(s[i])</span><br><span class="line">                i += 1</span><br><span class="line">                <span class="comment">#验证这是不是一个非单位数，如果是的话，进入下面的while循环</span></span><br><span class="line">                <span class="keyword">while</span> i&lt;n and s[i].isdigit(): <span class="comment">#如果数字有很多位的情况</span></span><br><span class="line">                    tmp = tmp*10 + int(s[i])</span><br><span class="line">                    i += 1</span><br><span class="line">                <span class="comment">#真正的计算操作</span></span><br><span class="line">                res += tmp * sign</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure></p>
+<h4 id="考虑括号，考虑加减号（负雪明烛）"><a href="#考虑括号，考虑加减号（负雪明烛）" class="headerlink" title="考虑括号，考虑加减号（负雪明烛）"></a>考虑括号，考虑加减号（负雪明烛）</h4><p><a href="https://leetcode-cn.com/problems/basic-calculator/solution/ru-he-xiang-dao-yong-zhan-si-lu-lai-zi-y-gpca/">负雪明烛</a></p>
+<p>用<code>栈</code>来实现递归。</p>
+<p>一个表达式可以分为三个部分：左边表达式①，运算符③，右边表达式②</p>
+<p>左边和右边的表达式可以是一个数字，也可以是一个括号包起来的表达式；运算符可以是加减。</p>
+<p>先计算左边的表达式，再计算右边表达式，最后根据运算符，计算 ① 和② 的运算。</p>
+<p>以<code>&quot;(1+(4+5+2)-3)+(6+8)&quot;</code>为例：</p>
+<img src="/2021/03/09/224-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8-Hard/1615341430-TjSiGC-224.001.jpeg" class="">
+<p>编程思路即：先计算左边的表达式① ，把①的结果和运算符③保存在栈内，再计算右边的表达式②，最后计算① 和②的运算。</p>
+<p>在有括号的情况下，栈顶保留的是最里层嵌套的运算，弹出栈的时候，正好先计算最里层括号的，再计算外边括号的。</p>
+<p>代码：</p>
+<ul>
+<li>res 表示左边表达式除去栈内保存元素的计算结果；</li>
+<li>sign 表示运算符；</li>
+<li>num 表示当前遇到的数字，会更新到 res 中；</li>
+<li>用栈保存遇到左括号时前面计算好了的结果和运算符。</li>
+</ul>
+<p>操作的步骤是：</p>
+<ul>
+<li>如果当前是数字，那么更新计算当前数字；</li>
+<li>如果当前是操作符+或者-，那么需要更新计算当前计算的结果 res，并把当前数字 num 设为 0，sign 设为正负，重新开始；</li>
+<li>如果当前是 ( ，那么说明遇到了右边的表达式，而后面的小括号里的内容需要优先计算，所以要把 res，sign 进栈，更新 res 和 sign 为新的开始；</li>
+<li>如果当前是 ) ，那么说明右边的表达式结束，即当前括号里的内容已经计算完毕，所以要把之前的结果出栈，然后计算整个式子的结果；</li>
+<li>最后，当所有数字结束的时候，需要把最后的一个 num 也更新到 res 中。</li>
+</ul>
+<img src="/2021/03/09/224-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8-Hard/1615341467-gaVtdq-224.002.jpeg" class="">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        res, num, sign = 0, 0, 1</span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> c.isdigit():</span><br><span class="line">                num = 10 * num + int(c)</span><br><span class="line">            <span class="keyword">elif</span> c == <span class="string">&quot;+&quot;</span> or c == <span class="string">&quot;-&quot;</span>:</span><br><span class="line">                res += sign * num</span><br><span class="line">                num = 0</span><br><span class="line">                sign = 1 <span class="keyword">if</span> c == <span class="string">&quot;+&quot;</span> <span class="keyword">else</span> -1</span><br><span class="line">            <span class="keyword">elif</span> c == <span class="string">&quot;(&quot;</span>:</span><br><span class="line">                stack.append(res)</span><br><span class="line">                stack.append(sign)</span><br><span class="line">                res = 0</span><br><span class="line">                sign = 1</span><br><span class="line">            <span class="keyword">elif</span> c == <span class="string">&quot;)&quot;</span>:</span><br><span class="line">                res += sign * num</span><br><span class="line">                num = 0</span><br><span class="line">                res *= stack.pop()</span><br><span class="line">                res += stack.pop()</span><br><span class="line">        res += sign * num</span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>栈</tag>
+      </tags>
   </entry>
 </search>
