@@ -202,7 +202,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/" class="post-title-link" itemprop="url">92.反转链表2(Medium)</a>
+            <a href="/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/" class="post-title-link" itemprop="url">92.反转链表2(Medium)-未掌握</a>
         </h2>
 
         <div class="post-meta">
@@ -211,10 +211,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-03-18 11:55:07 / 修改时间：19:03:21" itemprop="dateCreated datePublished" datetime="2021-03-18T11:55:07+08:00">2021-03-18</time>
+              <time title="创建时间：2021-03-18 11:55:07" itemprop="dateCreated datePublished" datetime="2021-03-18T11:55:07+08:00">2021-03-18</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-19 00:38:29" itemprop="dateModified" datetime="2021-03-19T00:38:29+08:00">2021-03-19</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -251,7 +257,8 @@
 <li>1 &lt;= left &lt;= right &lt;= n</li>
 </ul>
 <p><strong>进阶</strong>：<br>你可以使用一趟扫描完成反转吗？</p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line">class Solution(object):</span><br><span class="line">    def reverseBetween(self, head, left, right):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :type left: int</span></span><br><span class="line"><span class="string">        :type right: int</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        count = 1</span><br><span class="line">        </span><br><span class="line">        dummy = ListNode(0)</span><br><span class="line">        dummy.next = head</span><br><span class="line">        </span><br><span class="line">        pre = dummy</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> pre.next and count &lt; left:</span><br><span class="line">            pre = pre.next</span><br><span class="line">            count += 1</span><br><span class="line"></span><br><span class="line">        cur = pre.next</span><br><span class="line">        tail = cur</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> cur and count &lt;= right:</span><br><span class="line">            nxt = cur.next</span><br><span class="line">            cur.next = pre.next</span><br><span class="line">            pre.next = cur</span><br><span class="line">            tail.next = nxt</span><br><span class="line">            cur = nxt</span><br><span class="line">            count += 1</span><br><span class="line">        <span class="built_in">return</span> dummy.next</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -305,7 +312,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-18 18:49:34" itemprop="dateModified" datetime="2021-03-18T18:49:34+08:00">2021-03-18</time>
+                <time title="修改时间：2021-03-18 23:19:24" itemprop="dateModified" datetime="2021-03-18T23:19:24+08:00">2021-03-18</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1330,7 +1337,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共11.5k字</span>
+  <span class="post-count">博客全站共11.6k字</span>
 </div>
 
         
