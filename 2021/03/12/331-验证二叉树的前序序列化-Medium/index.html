@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="LeetCode每日一题系列（2021.03.12)之验证二叉树的前序序列化难度：中等 题目序列化二叉树的一种方法是使用前序遍历。当我们遇到一个非空节点时，我们可以记录下这个节点的值。如果它是一个空节点，我们可以使用一个标记值记录，例如#。 1234567     _9_    &#x2F;   \   3     2  &#x2F; \   &#x2F; \ 4   1  #  6&#x2F; \ &#x2F; \   &#x2F; \# # # #">
+  <meta name="description" content="LeetCode每日一题系列（2021.03.12)之验证二叉树的前序序列化难度：中等 0.0.1. 题目序列化二叉树的一种方法是使用前序遍历。当我们遇到一个非空节点时，我们可以记录下这个节点的值。如果它是一个空节点，我们可以使用一个标记值记录，例如#。 1234567     _9_    &#x2F;   \   3     2  &#x2F; \   &#x2F; \ 4   1  #  6&#x2F; \ &#x2F; \   &#x2F; \#">
 <meta property="og:type" content="article">
 <meta property="og:title" content="331.验证二叉树的前序序列化(Medium)">
 <meta property="og:url" content="http://example.com/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/index.html">
 <meta property="og:site_name" content="odcowl的个人博客">
-<meta property="og:description" content="LeetCode每日一题系列（2021.03.12)之验证二叉树的前序序列化难度：中等 题目序列化二叉树的一种方法是使用前序遍历。当我们遇到一个非空节点时，我们可以记录下这个节点的值。如果它是一个空节点，我们可以使用一个标记值记录，例如#。 1234567     _9_    &#x2F;   \   3     2  &#x2F; \   &#x2F; \ 4   1  #  6&#x2F; \ &#x2F; \   &#x2F; \# # # #">
+<meta property="og:description" content="LeetCode每日一题系列（2021.03.12)之验证二叉树的前序序列化难度：中等 0.0.1. 题目序列化二叉树的一种方法是使用前序遍历。当我们遇到一个非空节点时，我们可以记录下这个节点的值。如果它是一个空节点，我们可以使用一个标记值记录，例如#。 1234567     _9_    &#x2F;   \   3     2  &#x2F; \   &#x2F; \ 4   1  #  6&#x2F; \ &#x2F; \   &#x2F; \#">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/1615551708-uxodPT-331.gif">
 <meta property="og:image" content="https://pic.leetcode-cn.com/1615552473-UUReDo-331%E8%BD%AC%E5%9B%BE%E7%89%87.003.jpeg">
@@ -249,7 +249,7 @@
 
       
         <p>LeetCode每日一题系列（2021.03.12)之<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree">验证二叉树的前序序列化</a><br>难度：中等</p>
-<h3 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h3><p>序列化二叉树的一种方法是使用前序遍历。当我们遇到一个非空节点时，我们可以记录下这个节点的值。如果它是一个空节点，我们可以使用一个标记值记录，例如<code>#</code>。</p>
+<h3 id="题目">0.0.1. 题目</h3><p>序列化二叉树的一种方法是使用前序遍历。当我们遇到一个非空节点时，我们可以记录下这个节点的值。如果它是一个空节点，我们可以使用一个标记值记录，例如<code>#</code>。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">     _9_</span><br><span class="line">    /   \</span><br><span class="line">   3     2</span><br><span class="line">  / \   / \</span><br><span class="line"> 4   1  <span class="comment">#  6</span></span><br><span class="line">/ \ / \   / \</span><br><span class="line"><span class="comment"># # # #   # #</span></span><br></pre></td></tr></table></figure>
 <p>例如，上面的二叉树可以被序列化为字符串<code>&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</code>，其中 # 代表一个空节点。</p>
 <p>给定一串以逗号分隔的序列，验证它是否是正确的二叉树的前序序列化。编写一个在不重构树的条件下的可行算法。</p>
@@ -258,9 +258,9 @@
 <p>示例 1:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: <span class="string">&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</span></span><br><span class="line">输出: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
 <p>示例 2:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: &quot;1,#&quot;</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure></p>
 <p>示例 3:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: <span class="string">&quot;9,#,#,1&quot;</span></span><br><span class="line">输出: <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>还是参考<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/solution/pai-an-jiao-jue-de-liang-chong-jie-fa-zh-66nt/">负雪明烛大神</a>的两种解法。</p>
+<h3 id="解法">0.0.2. 解法</h3><p>还是参考<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/solution/pai-an-jiao-jue-de-liang-chong-jie-fa-zh-66nt/">负雪明烛大神</a>的两种解法。</p>
 <p>我做了好长时间这道题，一直卡在了一种case上：<br>当char已经遍历完，最后三个字符刚好是符合<code>9,#,#</code>转换为<code>#</code>这种情况的，但由于我没有利用好while导致一直没有得到正确的答案，而且代码又臭又长，深感水平太差啊。。。</p>
-<h4 id="利用栈的做法"><a href="#利用栈的做法" class="headerlink" title="利用栈的做法"></a>利用栈的做法</h4><p>首先要明确的是树的<strong>前序遍历</strong>是按照<code>根节点，左子树，右子树</code>的顺序来排列的，那<code>9,#,#</code>代表一个两个孩子都为空的节点，即它是一个<code>叶子节点</code>；当一个节点不是<code>叶子节点</code>时，有两种情况：1）两个孩子都非#（空）2）一个孩子为空，一个孩子不为空。</p>
+<h4 id="利用栈的做法">0.0.2.1. 利用栈的做法</h4><p>首先要明确的是树的<strong>前序遍历</strong>是按照<code>根节点，左子树，右子树</code>的顺序来排列的，那<code>9,#,#</code>代表一个两个孩子都为空的节点，即它是一个<code>叶子节点</code>；当一个节点不是<code>叶子节点</code>时，有两种情况：1）两个孩子都非#（空）2）一个孩子为空，一个孩子不为空。</p>
 <p>这道题的重点思路来了：</p>
 <ul>
 <li>把有效的<code>叶子节点</code>用<code>#</code>代替，比如把<code>4##</code>换成<code>#</code>。</li>
@@ -269,13 +269,13 @@
 <p>如输入： “9,3,4,#,#,1,#,#,2,#,6,#,#” ，当遇到 x,#,# 的时候，就把它变为 #。</p>
 <p>模拟一遍过程：</p>
 <p>[9,3,4,#,#] =&gt; [9,3,#]，继续<br>[9,3,#,1,#,#] =&gt; [9,3,#,#] =&gt; [9,#] ，继续<br>[9,#2,#,6,#,#] =&gt; [9,#,2,#,#] =&gt; [9,#,#] =&gt; [#]，结束<br>下面的动画模拟了”9,3,4,#,#,1,#,#,#”的操作过程：</p>
-<img src="/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/1615551708-uxodPT-331.gif" class="">
+<img src="/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/1615551708-uxodPT-331.gif" class>
 <p>代码比较简单，最需要注意的还是这个for循环里精准的while：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isValidSerialization(self, preorder):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type preorder: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> preorder.split(<span class="string">&#x27;,&#x27;</span>):</span><br><span class="line">            stack.append(node)</span><br><span class="line">            <span class="keyword">while</span> len(stack) &gt;= 3 and stack[-1] == <span class="string">&#x27;#&#x27;</span> and stack[-2] == <span class="string">&#x27;#&#x27;</span> and stack[-3].isdigit():</span><br><span class="line">                stack = stack[:-3] <span class="comment">#stack.pop(),stack.pop(),stack.pop()</span></span><br><span class="line">                stack.append(<span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> len(stack) == 1 and stack.pop() == <span class="string">&#x27;#&#x27;</span></span><br></pre></td></tr></table></figure></p>
 <ul>
 <li>时间复杂度:O(N)</li>
 <li>空间复杂度:O(N)</li>
 </ul>
-<h4 id="计算入度出度-（还未掌握）"><a href="#计算入度出度-（还未掌握）" class="headerlink" title="计算入度出度 （还未掌握）"></a>计算入度出度 （还未掌握）</h4><p>除了负雪明烛用了这个办法，另外一个超棒的博主<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/solution/shou-hua-tu-jie-cong-ling-yi-ge-jiao-du-2rnzg/">笨猪爆破组</a>也是写的这个方法，等待学习！</p>
+<h4 id="计算入度出度-（还未掌握）">0.0.2.2. 计算入度出度 （还未掌握）</h4><p>除了负雪明烛用了这个办法，另外一个超棒的博主<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/solution/shou-hua-tu-jie-cong-ling-yi-ge-jiao-du-2rnzg/">笨猪爆破组</a>也是写的这个方法，等待学习！</p>
 <p>背景知识：</p>
 <ul>
 <li><strong>入度</strong>: 有多少个节点指向它</li>
@@ -409,7 +409,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">解法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E6%A0%88%E7%9A%84%E5%81%9A%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">利用栈的做法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%85%A5%E5%BA%A6%E5%87%BA%E5%BA%A6-%EF%BC%88%E8%BF%98%E6%9C%AA%E6%8E%8C%E6%8F%A1%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">计算入度出度 （还未掌握）</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">0.0.1. 题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">0.0.2. 解法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%A9%E7%94%A8%E6%A0%88%E7%9A%84%E5%81%9A%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">0.0.2.1. 利用栈的做法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%85%A5%E5%BA%A6%E5%87%BA%E5%BA%A6-%EF%BC%88%E8%BF%98%E6%9C%AA%E6%8E%8C%E6%8F%A1%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">0.0.2.2. 计算入度出度 （还未掌握）</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -483,7 +483,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共12.9k字</span>
+  <span class="post-count">博客全站共13.2k字</span>
 </div>
 
         
