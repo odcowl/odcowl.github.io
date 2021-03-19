@@ -20,12 +20,12 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="LeetCode之整数反转难度：简单 -1-100: 一、题目给你一个 32 位的有符号整数 x ，返回 x 中每位上的数字反转后的结果。 如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。 假设环境不允许存储 64 位整数（有符号或无符号）。 示例 1：12输入：x &#x3D; 123输出：321 示例 2：12输入：x &#x3D; -123输出：-321">
+  <meta name="description" content="LeetCode之整数反转难度：简单 0.0.1. 一、题目给你一个 32 位的有符号整数 x ，返回 x 中每位上的数字反转后的结果。 如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。 假设环境不允许存储 64 位整数（有符号或无符号）。 示例 1：12输入：x &#x3D; 123输出：321 示例 2：12输入：x &#x3D; -123输出：-321">
 <meta property="og:type" content="article">
 <meta property="og:title" content="7.整数反转(Easy)">
 <meta property="og:url" content="http://example.com/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/index.html">
 <meta property="og:site_name" content="odcowl的个人博客">
-<meta property="og:description" content="LeetCode之整数反转难度：简单 -1-100: 一、题目给你一个 32 位的有符号整数 x ，返回 x 中每位上的数字反转后的结果。 如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。 假设环境不允许存储 64 位整数（有符号或无符号）。 示例 1：12输入：x &#x3D; 123输出：321 示例 2：12输入：x &#x3D; -123输出：-321">
+<meta property="og:description" content="LeetCode之整数反转难度：简单 0.0.1. 一、题目给你一个 32 位的有符号整数 x ，返回 x 中每位上的数字反转后的结果。 如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。 假设环境不允许存储 64 位整数（有符号或无符号）。 示例 1：12输入：x &#x3D; 123输出：321 示例 2：12输入：x &#x3D; -123输出：-321">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/1610776376-AunReA-%E6%95%B0%E5%AD%97%E5%8F%8D%E8%BD%AC.jpeg">
 <meta property="article:published_time" content="2021-03-10T04:31:46.000Z">
@@ -241,7 +241,7 @@
 
       
         <p>LeetCode之<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-integer/">整数反转</a><br>难度：简单</p>
-<h3 id="一、题目">-1-100: 一、题目</h3><p>给你一个 32 位的有符号整数 x ，返回 x 中每位上的数字反转后的结果。</p>
+<h3 id="一、题目">0.0.1. 一、题目</h3><p>给你一个 32 位的有符号整数 x ，返回 x 中每位上的数字反转后的结果。</p>
 <p>如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。</p>
 <p>假设环境不允许存储 64 位整数（有符号或无符号）。</p>
 <p>示例 1：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：x = 123</span><br><span class="line">输出：321</span><br></pre></td></tr></table></figure></p>
@@ -250,10 +250,10 @@
 <p>示例 4：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：x = 0</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure></p>
 <p>提示：</p>
 <p><code>-2**31 &lt;= x &lt;= 2**31 - 1</code></p>
-<h3 id="二、我的解法">-1-101: 二、我的解法</h3><p><code>24ms, 83.28%; 12.9MB, 76.51%</code></p>
+<h3 id="二、我的解法">0.0.2. 二、我的解法</h3><p><code>24ms, 83.28%; 12.9MB, 76.51%</code></p>
 <p>因为在Python里，<code>int</code>没有长度，所以将其转换为<code>str</code>来获得其长度信息，代码很简单，主要是为了在第三部分学习他人<strong>简洁的代码</strong>。</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def reverse(self, x):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type x: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        flag = False</span><br><span class="line">        <span class="keyword">if</span> x &lt; 0:</span><br><span class="line">            flag = True</span><br><span class="line">            x = -x</span><br><span class="line">        </span><br><span class="line">        n = len(str(x))</span><br><span class="line">        res = 0</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i,ch <span class="keyword">in</span> enumerate(str(x)[::-1]):</span><br><span class="line">            res += int(ch) * (10 ** (n-i-1))</span><br><span class="line"></span><br><span class="line">        res = -res <span class="keyword">if</span> flag <span class="keyword">else</span> res</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> -2**31&lt;res&lt;2**31-1:</span><br><span class="line">            <span class="built_in">return</span> res</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br></pre></td></tr></table></figure>
-<h3 id="三、他人的解法">-1-102: 三、他人的解法</h3><p>如下参考<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-integer/solution/jin-tian-xiao-bai-jie-ti-ta-lai-liao-by-cuive/">Will</a></p>
+<h3 id="三、他人的解法">0.0.3. 三、他人的解法</h3><p>如下参考<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-integer/solution/jin-tian-xiao-bai-jie-ti-ta-lai-liao-by-cuive/">Will</a></p>
  <img src="/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/1610776376-AunReA-%E6%95%B0%E5%AD%97%E5%8F%8D%E8%BD%AC.jpeg" class>
 <p>例子：1234 =&gt; 4321</p>
 <p>这是一个4位的数字，个位数转换后变成了千位，十位变成了百位…</p>
@@ -371,7 +371,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">-1-100: 一、题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%88%91%E7%9A%84%E8%A7%A3%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">-1-101: 二、我的解法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BB%96%E4%BA%BA%E7%9A%84%E8%A7%A3%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">-1-102: 三、他人的解法</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E9%A2%98%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">0.0.1. 一、题目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E6%88%91%E7%9A%84%E8%A7%A3%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">0.0.2. 二、我的解法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E4%BB%96%E4%BA%BA%E7%9A%84%E8%A7%A3%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">0.0.3. 三、他人的解法</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -445,7 +445,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共14.7k字</span>
+  <span class="post-count">博客全站共15.7k字</span>
 </div>
 
         
