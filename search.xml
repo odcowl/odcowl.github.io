@@ -1,36 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>1047.删除字符串中的所有相邻重复项(Easy)</title>
-    <url>/2021/03/09/1047-%E5%88%A0%E9%99%A4%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E7%9B%B8%E9%82%BB%E9%87%8D%E5%A4%8D%E9%A1%B9-Easy/</url>
-    <content><![CDATA[<p>LeetCode每日一题(2021.03.09)之<a href="https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/">删除字符串中的所有相邻重复项</a><br>难度：简单</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给出由小写字母组成的字符串<code>s</code>，<strong>重复项删除操作</strong>会选择两个相邻且相同的字母，并删除它们。</p>
-<p>在<code>s</code>上反复执行重复项删除操作，直到无法继续删除。</p>
-<p>在完成所有重复项删除操作后返回最终的字符。答案保持唯一。</p>
-<p>示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：<span class="string">&quot;abbaca&quot;</span></span><br><span class="line">输出：<span class="string">&quot;ca&quot;</span></span><br><span class="line">解释：</span><br><span class="line">例如，在 <span class="string">&quot;abbaca&quot;</span> 中，我们可以删除 <span class="string">&quot;bb&quot;</span> 由于两字母相邻且相同，这是此时唯一可以执行删除操作的重复项。之后我们得到字符串 <span class="string">&quot;aaca&quot;</span>，其中又只有 <span class="string">&quot;aa&quot;</span> 可以执行重复项删除操作，所以最后的字符串为 <span class="string">&quot;ca&quot;</span>。</span><br></pre></td></tr></table></figure></p>
-<p>提示：</p>
-<ol>
-<li>1 &lt;= S.length &lt;= 20000</li>
-<li>S 仅由小写英文字母组成。</li>
-</ol>
-<h3 id="二、我的解法"><a href="#二、我的解法" class="headerlink" title="二、我的解法"></a>二、我的解法</h3><p><strong>思路</strong>：</p>
-<ul>
-<li>如从字符串abba中先删除bb，会有新的重复字符串aa出现，所以需要保存当前还未被删除的字符串，联想到<code>栈</code>这种数据结构</li>
-<li>当字符串中有多组相邻重复项时，先删除哪一组不影响结果</li>
-</ul>
-<p><code>296ms, 11.52%; 13.4MB, 73.03%</code><br>我的小菜鸡伪栈法：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def removeDuplicates(self, S):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type S: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        res = <span class="string">&#x27; &#x27;</span></span><br><span class="line">        <span class="keyword">for</span> char <span class="keyword">in</span> S:</span><br><span class="line">            <span class="keyword">if</span> char != res[-1]:</span><br><span class="line">                res += char</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                res = res[:-1]</span><br><span class="line">        <span class="built_in">return</span> res[1:]</span><br></pre></td></tr></table></figure></p>
-<h3 id="三、其他的解法"><a href="#三、其他的解法" class="headerlink" title="三、其他的解法"></a>三、其他的解法</h3><h4 id="3-1-栈"><a href="#3-1-栈" class="headerlink" title="3.1 栈"></a>3.1 栈</h4><p>感觉想法差不多，官方的栈效率高多了：<br><code>52ms, 88.07%; 13.4MB, 81.74%</code></p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def removeDuplicates(self, S: str) -&gt; str:</span><br><span class="line">        stk = list()</span><br><span class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> S:</span><br><span class="line">            <span class="keyword">if</span> stk and stk[-1] == ch:</span><br><span class="line">                stk.pop()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                stk.append(ch)</span><br><span class="line">        <span class="built_in">return</span> <span class="string">&quot;&quot;</span>.join(stk)</span><br></pre></td></tr></table></figure>
-<p>今天是个简单题，yeah</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>栈</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>1052.爱生气的书店老板(Medium)</title>
     <url>/2021/02/26/1052-%E7%88%B1%E7%94%9F%E6%B0%94%E7%9A%84%E4%B9%A6%E5%BA%97%E8%80%81%E6%9D%BF-Medium/</url>
     <content><![CDATA[<p>力扣每日一题系列(2021.02.23)之<a href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/">爱生气的书店老板</a><br>难度：中等</p>
@@ -67,6 +37,36 @@
       </categories>
       <tags>
         <tag>滑动窗口</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1047.删除字符串中的所有相邻重复项(Easy)</title>
+    <url>/2021/03/09/1047-%E5%88%A0%E9%99%A4%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E7%9B%B8%E9%82%BB%E9%87%8D%E5%A4%8D%E9%A1%B9-Easy/</url>
+    <content><![CDATA[<p>LeetCode每日一题(2021.03.09)之<a href="https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/">删除字符串中的所有相邻重复项</a><br>难度：简单</p>
+<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给出由小写字母组成的字符串<code>s</code>，<strong>重复项删除操作</strong>会选择两个相邻且相同的字母，并删除它们。</p>
+<p>在<code>s</code>上反复执行重复项删除操作，直到无法继续删除。</p>
+<p>在完成所有重复项删除操作后返回最终的字符。答案保持唯一。</p>
+<p>示例：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：<span class="string">&quot;abbaca&quot;</span></span><br><span class="line">输出：<span class="string">&quot;ca&quot;</span></span><br><span class="line">解释：</span><br><span class="line">例如，在 <span class="string">&quot;abbaca&quot;</span> 中，我们可以删除 <span class="string">&quot;bb&quot;</span> 由于两字母相邻且相同，这是此时唯一可以执行删除操作的重复项。之后我们得到字符串 <span class="string">&quot;aaca&quot;</span>，其中又只有 <span class="string">&quot;aa&quot;</span> 可以执行重复项删除操作，所以最后的字符串为 <span class="string">&quot;ca&quot;</span>。</span><br></pre></td></tr></table></figure></p>
+<p>提示：</p>
+<ol>
+<li>1 &lt;= S.length &lt;= 20000</li>
+<li>S 仅由小写英文字母组成。</li>
+</ol>
+<h3 id="二、我的解法"><a href="#二、我的解法" class="headerlink" title="二、我的解法"></a>二、我的解法</h3><p><strong>思路</strong>：</p>
+<ul>
+<li>如从字符串abba中先删除bb，会有新的重复字符串aa出现，所以需要保存当前还未被删除的字符串，联想到<code>栈</code>这种数据结构</li>
+<li>当字符串中有多组相邻重复项时，先删除哪一组不影响结果</li>
+</ul>
+<p><code>296ms, 11.52%; 13.4MB, 73.03%</code><br>我的小菜鸡伪栈法：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def removeDuplicates(self, S):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type S: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        res = <span class="string">&#x27; &#x27;</span></span><br><span class="line">        <span class="keyword">for</span> char <span class="keyword">in</span> S:</span><br><span class="line">            <span class="keyword">if</span> char != res[-1]:</span><br><span class="line">                res += char</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                res = res[:-1]</span><br><span class="line">        <span class="built_in">return</span> res[1:]</span><br></pre></td></tr></table></figure></p>
+<h3 id="三、其他的解法"><a href="#三、其他的解法" class="headerlink" title="三、其他的解法"></a>三、其他的解法</h3><h4 id="3-1-栈"><a href="#3-1-栈" class="headerlink" title="3.1 栈"></a>3.1 栈</h4><p>感觉想法差不多，官方的栈效率高多了：<br><code>52ms, 88.07%; 13.4MB, 81.74%</code></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def removeDuplicates(self, S: str) -&gt; str:</span><br><span class="line">        stk = list()</span><br><span class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> S:</span><br><span class="line">            <span class="keyword">if</span> stk and stk[-1] == ch:</span><br><span class="line">                stk.pop()</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                stk.append(ch)</span><br><span class="line">        <span class="built_in">return</span> <span class="string">&quot;&quot;</span>.join(stk)</span><br></pre></td></tr></table></figure>
+<p>今天是个简单题，yeah</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>栈</tag>
       </tags>
   </entry>
   <entry>
@@ -126,6 +126,36 @@
       <tags>
         <tag>双指针</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>227.基本计算器2(Medium)</title>
+    <url>/2021/03/10/227-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E6%9C%BA2-Medium/</url>
+    <content><![CDATA[<p>每日一题(2021.03.11)之<a href="https://leetcode-cn.com/problems/basic-calculator-ii/">基本计算器</a><br>难度：中等</p>
+<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个字符串表达式 <code>s</code> ，请你实现一个基本计算器来计算并返回它的值。</p>
+<p>整数除法仅保留整数部分。</p>
+<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;3+2*2&quot;</span></span><br><span class="line">输出：7</span><br></pre></td></tr></table></figure></p>
+<p>示例 2：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 3/2 &quot;</span></span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure></p>
+<p>示例 3：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 3+5 / 2 &quot;</span></span><br><span class="line">输出：5</span><br></pre></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>1 &lt;= s.length &lt;= 3 * 10^5</li>
+<li>s 由整数和算符 (‘+’, ‘-‘, ‘*‘, ‘/‘) 组成，中间由一些空格隔开</li>
+<li>s 表示一个 有效表达式</li>
+<li>表达式中的所有整数都是非负整数，且在范围 [0, 2^31 - 1] 内</li>
+<li>题目数据保证答案是一个 32-bit 整数</li>
+</ul>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>好亲切的连环题(误 而且一看还是个medium,比起昨天hard的残虐，稍微松了一口气。。。<br>凭着脑海里昨日的记忆，欣喜若狂的写下这个愚蠢的答案。。。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        sign = 0 <span class="comment"># 0 =&gt; +, 1 =&gt; - , 2 =&gt; *, 3 =&gt; /</span></span><br><span class="line">        res = 0</span><br><span class="line">        n = len(s)</span><br><span class="line">        i = 0</span><br><span class="line">        <span class="keyword">while</span> i&lt;n:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27; &#x27;</span>:</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                sign = 0</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">                sign = 2</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;/&#x27;</span>:</span><br><span class="line">                sign = 3</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i].isdigit():</span><br><span class="line">                tmp = int(s[i])</span><br><span class="line">                i += 1</span><br><span class="line">                <span class="keyword">while</span> i&lt;n and s[i].isdigit():</span><br><span class="line">                    tmp += tmp*10 + int(s[i])</span><br><span class="line">                    i += 1</span><br><span class="line">                <span class="keyword">if</span> sign == 0:</span><br><span class="line">                    res += tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 1:</span><br><span class="line">                    res -= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 2:</span><br><span class="line">                    res *= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 3:</span><br><span class="line">                    res /= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure><br>这个答案在遇到第一个示例<code>s=&quot;3+3*2</code>时就通过不了了，忘记了乘除法比加减法优先计算了。。。这就叫做乐极生悲吗</p>
+<p>然后我又不识好歹的写下了这个答案逃之夭夭</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="built_in">return</span> <span class="built_in">eval</span>(s)</span><br></pre></td></tr></table></figure>
+<p>说正经的，当有加减乘除四种运算符时，考虑运算符优先级别，所以<strong>思路</strong>就是利用<code>栈</code>，假如遇到的是<code>数字</code>、<code>+</code>、<code>-</code>号时直接入栈（<code>-</code>换成<code>-num</code>入栈，之后就可以用<code>sum(stack)</code>返回结果了。遇到<code>*</code>,<code>/</code>的时候先把栈顶弹出，计算完结果后再保存回栈顶。</p>
+<p>这里要注意一个python的细节，<code>//</code>和<code>/</code>的定义不同。<code>//</code>为向下取整，比如<code>(-3)//2 = -2</code>。我们不需要取整，<code>-(abs(一个负数)/num)</code>通过这个方式，就可以正确求职。</p>
+<p>思路代码参考<a href="https://leetcode-cn.com/problems/basic-calculator-ii/solution/xian-cheng-chu-zai-jia-jian-yong-zhan-ba-hplr/">负雪明烛</a> 这肯定是个小天使姐姐</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        stack = []</span><br><span class="line">        pre_op = <span class="string">&#x27;+&#x27;</span></span><br><span class="line">        num = 0</span><br><span class="line">        <span class="keyword">for</span> i,each <span class="keyword">in</span> enumerate(s):</span><br><span class="line">            <span class="keyword">if</span> each.isdigit():</span><br><span class="line">                num = num*10 + int(each)</span><br><span class="line">            <span class="keyword">if</span> i == len(s)-1 or each <span class="keyword">in</span> <span class="string">&#x27;+-*/&#x27;</span>:</span><br><span class="line">                <span class="keyword">if</span> pre_op == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                    stack.append(num)</span><br><span class="line">                <span class="keyword">elif</span> pre_op == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                    stack.append(-num)</span><br><span class="line">                <span class="keyword">elif</span> pre_op == <span class="string">&#x27;*&#x27;</span>:<span class="comment">#遇到乘法，栈顶跳出计算，结果再储存</span></span><br><span class="line">                    stack.append(stack.pop()*num)</span><br><span class="line">                <span class="keyword">elif</span> pre_op == <span class="string">&#x27;/&#x27;</span>:<span class="comment">#遇到除法，栈顶跳出计算，结果再储存</span></span><br><span class="line">                    top = stack.pop()</span><br><span class="line">                    <span class="keyword">if</span> top &lt; 0:</span><br><span class="line">						<span class="comment">#这句稍有不同</span></span><br><span class="line">                        stack.append(-(abs(top)/num))</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        stack.append(top//num)</span><br><span class="line">                pre_op = each</span><br><span class="line">                num = 0</span><br><span class="line"></span><br><span class="line">        <span class="comment">#由于栈内只有数字了（减法用负数表示），直接求和</span></span><br><span class="line">        <span class="built_in">return</span> sum(stack)</span><br></pre></td></tr></table></figure>
+<p>这道题比起昨天的hard模式不是非常难，但是也是细节满满，学到了</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
   </entry>
   <entry>
     <title>224.基本计算器(Hard)</title>
@@ -188,36 +218,6 @@
       <tags>
         <tag>栈</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>227.基本计算器2(Medium)</title>
-    <url>/2021/03/10/227-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E6%9C%BA2-Medium/</url>
-    <content><![CDATA[<p>每日一题(2021.03.11)之<a href="https://leetcode-cn.com/problems/basic-calculator-ii/">基本计算器</a><br>难度：中等</p>
-<h3 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h3><p>给你一个字符串表达式 <code>s</code> ，请你实现一个基本计算器来计算并返回它的值。</p>
-<p>整数除法仅保留整数部分。</p>
-<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;3+2*2&quot;</span></span><br><span class="line">输出：7</span><br></pre></td></tr></table></figure></p>
-<p>示例 2：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 3/2 &quot;</span></span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure></p>
-<p>示例 3：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 3+5 / 2 &quot;</span></span><br><span class="line">输出：5</span><br></pre></td></tr></table></figure></p>
-<p>提示：</p>
-<ul>
-<li>1 &lt;= s.length &lt;= 3 * 10^5</li>
-<li>s 由整数和算符 (‘+’, ‘-‘, ‘*‘, ‘/‘) 组成，中间由一些空格隔开</li>
-<li>s 表示一个 有效表达式</li>
-<li>表达式中的所有整数都是非负整数，且在范围 [0, 2^31 - 1] 内</li>
-<li>题目数据保证答案是一个 32-bit 整数</li>
-</ul>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>好亲切的连环题(误 而且一看还是个medium,比起昨天hard的残虐，稍微松了一口气。。。<br>凭着脑海里昨日的记忆，欣喜若狂的写下这个愚蠢的答案。。。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        sign = 0 <span class="comment"># 0 =&gt; +, 1 =&gt; - , 2 =&gt; *, 3 =&gt; /</span></span><br><span class="line">        res = 0</span><br><span class="line">        n = len(s)</span><br><span class="line">        i = 0</span><br><span class="line">        <span class="keyword">while</span> i&lt;n:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27; &#x27;</span>:</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                sign = 0</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">                sign = 2</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;/&#x27;</span>:</span><br><span class="line">                sign = 3</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i].isdigit():</span><br><span class="line">                tmp = int(s[i])</span><br><span class="line">                i += 1</span><br><span class="line">                <span class="keyword">while</span> i&lt;n and s[i].isdigit():</span><br><span class="line">                    tmp += tmp*10 + int(s[i])</span><br><span class="line">                    i += 1</span><br><span class="line">                <span class="keyword">if</span> sign == 0:</span><br><span class="line">                    res += tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 1:</span><br><span class="line">                    res -= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 2:</span><br><span class="line">                    res *= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 3:</span><br><span class="line">                    res /= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure><br>这个答案在遇到第一个示例<code>s=&quot;3+3*2</code>时就通过不了了，忘记了乘除法比加减法优先计算了。。。这就叫做乐极生悲吗</p>
-<p>然后我又不识好歹的写下了这个答案逃之夭夭</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="built_in">return</span> <span class="built_in">eval</span>(s)</span><br></pre></td></tr></table></figure>
-<p>说正经的，当有加减乘除四种运算符时，考虑运算符优先级别，所以<strong>思路</strong>就是利用<code>栈</code>，假如遇到的是<code>数字</code>、<code>+</code>、<code>-</code>号时直接入栈（<code>-</code>换成<code>-num</code>入栈，之后就可以用<code>sum(stack)</code>返回结果了。遇到<code>*</code>,<code>/</code>的时候先把栈顶弹出，计算完结果后再保存回栈顶。</p>
-<p>这里要注意一个python的细节，<code>//</code>和<code>/</code>的定义不同。<code>//</code>为向下取整，比如<code>(-3)//2 = -2</code>。我们不需要取整，<code>-(abs(一个负数)/num)</code>通过这个方式，就可以正确求职。</p>
-<p>思路代码参考<a href="https://leetcode-cn.com/problems/basic-calculator-ii/solution/xian-cheng-chu-zai-jia-jian-yong-zhan-ba-hplr/">负雪明烛</a> 这肯定是个小天使姐姐</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        stack = []</span><br><span class="line">        pre_op = <span class="string">&#x27;+&#x27;</span></span><br><span class="line">        num = 0</span><br><span class="line">        <span class="keyword">for</span> i,each <span class="keyword">in</span> enumerate(s):</span><br><span class="line">            <span class="keyword">if</span> each.isdigit():</span><br><span class="line">                num = num*10 + int(each)</span><br><span class="line">            <span class="keyword">if</span> i == len(s)-1 or each <span class="keyword">in</span> <span class="string">&#x27;+-*/&#x27;</span>:</span><br><span class="line">                <span class="keyword">if</span> pre_op == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                    stack.append(num)</span><br><span class="line">                <span class="keyword">elif</span> pre_op == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                    stack.append(-num)</span><br><span class="line">                <span class="keyword">elif</span> pre_op == <span class="string">&#x27;*&#x27;</span>:<span class="comment">#遇到乘法，栈顶跳出计算，结果再储存</span></span><br><span class="line">                    stack.append(stack.pop()*num)</span><br><span class="line">                <span class="keyword">elif</span> pre_op == <span class="string">&#x27;/&#x27;</span>:<span class="comment">#遇到除法，栈顶跳出计算，结果再储存</span></span><br><span class="line">                    top = stack.pop()</span><br><span class="line">                    <span class="keyword">if</span> top &lt; 0:</span><br><span class="line">						<span class="comment">#这句稍有不同</span></span><br><span class="line">                        stack.append(-(abs(top)/num))</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        stack.append(top//num)</span><br><span class="line">                pre_op = each</span><br><span class="line">                num = 0</span><br><span class="line"></span><br><span class="line">        <span class="comment">#由于栈内只有数字了（减法用负数表示），直接求和</span></span><br><span class="line">        <span class="built_in">return</span> sum(stack)</span><br></pre></td></tr></table></figure>
-<p>这道题比起昨天的hard模式不是非常难，但是也是细节满满，学到了</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
   </entry>
   <entry>
     <title>331.验证二叉树的前序序列化(Medium)</title>
@@ -374,6 +374,23 @@
       </tags>
   </entry>
   <entry>
+    <title>856.转置矩阵(Easy)</title>
+    <url>/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/</url>
+    <content><![CDATA[<p>力扣每日一题系列(2021.02.25)之<a href="https://leetcode-cn.com/problems/transpose-matrix/">转置矩阵</a><br>难度：简单</p>
+<h2 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h2><p>给你一个二维整数数组 matrix， 返回 matrix 的 转置矩阵 。<br>矩阵的 转置 是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/10/hint_transpose.png" alt="867.转置矩阵"></p>
+<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>示例1:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ 输入: matrix&#x3D;[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">$ 输出: [[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure></p>
+<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">m == matrix.length</span><br><span class="line">n == matrix[i].length</span><br><span class="line">1 &lt;= m, n &lt;= 1000</span><br><span class="line">1 &lt;= m * n &lt;= 105</span><br><span class="line">-10^9 &lt;= matrix[i][j] &lt;= 10^9</span><br></pre></td></tr></table></figure></p>
+<h3 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h3><p>转置矩阵即将M行N列的矩阵，转换成N行M列的矩阵，注意有可能N和M并不相等，所以必须要新建一个result矩阵（否则可能会出现out of range的情况）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def transpose(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        m,n = len(matrix),len(matrix[0])</span><br><span class="line">        <span class="comment">#m为行数，n为列数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#不需要numpy的矩阵建造方法</span></span><br><span class="line">        new_matrix = [[0 <span class="keyword">for</span> i <span class="keyword">in</span> range(m)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                new_matrix[i][j] = matrix[j][i]</span><br><span class="line">        <span class="built_in">return</span> new_matrix</span><br></pre></td></tr></table></figure>
+<p>这道题的意思就是原来的每一行转换成了后来的每一列，为了数学关系上更清晰，下面图片为解析。可以看出，对于一个相同的元素，新地址（坐标）和旧地址（坐标）就是横纵轴交换的关系：<br><img src="/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/jiexi.png" class="" title="This is an example image"></p>
+<p>一个错误的思路：（这个思路就是没有考虑到新矩阵的大小关系）<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">	for j in range(i,m):</span><br><span class="line">		matrix[i][j], matrix[j][i] &#x3D;  matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
     <title>7.整数反转(Easy)</title>
     <url>/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/</url>
     <content><![CDATA[<p>LeetCode之<a href="https://leetcode-cn.com/problems/reverse-integer/">整数反转</a><br>难度：简单</p>
@@ -400,50 +417,6 @@
       <categories>
         <category>LeetCode</category>
       </categories>
-  </entry>
-  <entry>
-    <title>856.转置矩阵(Easy)</title>
-    <url>/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.02.25)之<a href="https://leetcode-cn.com/problems/transpose-matrix/">转置矩阵</a><br>难度：简单</p>
-<h2 id="一、题目"><a href="#一、题目" class="headerlink" title="一、题目"></a>一、题目</h2><p>给你一个二维整数数组 matrix， 返回 matrix 的 转置矩阵 。<br>矩阵的 转置 是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p>
-<p><img src="https://assets.leetcode.com/uploads/2021/02/10/hint_transpose.png" alt="867.转置矩阵"></p>
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><p>示例1:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ 输入: matrix&#x3D;[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">$ 输出: [[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">m == matrix.length</span><br><span class="line">n == matrix[i].length</span><br><span class="line">1 &lt;= m, n &lt;= 1000</span><br><span class="line">1 &lt;= m * n &lt;= 105</span><br><span class="line">-10^9 &lt;= matrix[i][j] &lt;= 10^9</span><br></pre></td></tr></table></figure></p>
-<h3 id="我的解法"><a href="#我的解法" class="headerlink" title="我的解法"></a>我的解法</h3><p>转置矩阵即将M行N列的矩阵，转换成N行M列的矩阵，注意有可能N和M并不相等，所以必须要新建一个result矩阵（否则可能会出现out of range的情况）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def transpose(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        m,n = len(matrix),len(matrix[0])</span><br><span class="line">        <span class="comment">#m为行数，n为列数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#不需要numpy的矩阵建造方法</span></span><br><span class="line">        new_matrix = [[0 <span class="keyword">for</span> i <span class="keyword">in</span> range(m)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                new_matrix[i][j] = matrix[j][i]</span><br><span class="line">        <span class="built_in">return</span> new_matrix</span><br></pre></td></tr></table></figure>
-<p>这道题的意思就是原来的每一行转换成了后来的每一列，为了数学关系上更清晰，下面图片为解析。可以看出，对于一个相同的元素，新地址（坐标）和旧地址（坐标）就是横纵轴交换的关系：<br><img src="/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/jiexi.png" class="" title="This is an example image"></p>
-<p>一个错误的思路：（这个思路就是没有考虑到新矩阵的大小关系）<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">	for j in range(i,m):</span><br><span class="line">		matrix[i][j], matrix[j][i] &#x3D;  matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure></p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>92.反转链表2(Medium)-未掌握</title>
-    <url>/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/</url>
-    <content><![CDATA[<p>LeetCode每日一题(2021.03.18)之<a href="https://leetcode-cn.com/problems/reverse-linked-list-ii/">反转链表2</a></p>
-<p>给你单链表的头指针 head 和两个整数 left 和 right ，其中 left &lt;= right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。</p>
-<p>示例1:</p>
-<img src="/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/rev2ex2.jpeg" class="">
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5], left = 2, right = 4</span><br><span class="line">输出：[1,4,3,2,5]</span><br></pre></td></tr></table></figure>
-<p>示例2:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：head = [5], left = 1, right = 1</span><br><span class="line">输出：[5]</span><br></pre></td></tr></table></figure>
-<p><strong>提示</strong>：</p>
-<ul>
-<li>链表中节点数目为 n</li>
-<li>1 &lt;= n &lt;= 500</li>
-<li>-500 &lt;= Node.val &lt;= 500</li>
-<li>1 &lt;= left &lt;= right &lt;= n</li>
-</ul>
-<p><strong>进阶</strong>：<br>你可以使用一趟扫描完成反转吗？</p>
-<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line">class Solution(object):</span><br><span class="line">    def reverseBetween(self, head, left, right):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :type left: int</span></span><br><span class="line"><span class="string">        :type right: int</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        count = 1</span><br><span class="line">        </span><br><span class="line">        dummy = ListNode(0)</span><br><span class="line">        dummy.next = head</span><br><span class="line">        </span><br><span class="line">        pre = dummy</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> pre.next and count &lt; left:</span><br><span class="line">            pre = pre.next</span><br><span class="line">            count += 1</span><br><span class="line"></span><br><span class="line">        cur = pre.next</span><br><span class="line">        tail = cur</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> cur and count &lt;= right:</span><br><span class="line">            nxt = cur.next</span><br><span class="line">            cur.next = pre.next</span><br><span class="line">            pre.next = cur</span><br><span class="line">            tail.next = nxt</span><br><span class="line">            cur = nxt</span><br><span class="line">            count += 1</span><br><span class="line">        <span class="built_in">return</span> dummy.next</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>链表</tag>
-      </tags>
   </entry>
   <entry>
     <title>Hexo搭建相关问题</title>
@@ -475,6 +448,33 @@
       </categories>
       <tags>
         <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>92.反转链表2(Medium)-未掌握</title>
+    <url>/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/</url>
+    <content><![CDATA[<p>LeetCode每日一题(2021.03.18)之<a href="https://leetcode-cn.com/problems/reverse-linked-list-ii/">反转链表2</a></p>
+<p>给你单链表的头指针 head 和两个整数 left 和 right ，其中 left &lt;= right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。</p>
+<p>示例1:</p>
+<img src="/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/rev2ex2.jpeg" class="">
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5], left = 2, right = 4</span><br><span class="line">输出：[1,4,3,2,5]</span><br></pre></td></tr></table></figure>
+<p>示例2:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：head = [5], left = 1, right = 1</span><br><span class="line">输出：[5]</span><br></pre></td></tr></table></figure>
+<p><strong>提示</strong>：</p>
+<ul>
+<li>链表中节点数目为 n</li>
+<li>1 &lt;= n &lt;= 500</li>
+<li>-500 &lt;= Node.val &lt;= 500</li>
+<li>1 &lt;= left &lt;= right &lt;= n</li>
+</ul>
+<p><strong>进阶</strong>：<br>你可以使用一趟扫描完成反转吗？</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line">class Solution(object):</span><br><span class="line">    def reverseBetween(self, head, left, right):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :type left: int</span></span><br><span class="line"><span class="string">        :type right: int</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        count = 1</span><br><span class="line">        </span><br><span class="line">        dummy = ListNode(0)</span><br><span class="line">        dummy.next = head</span><br><span class="line">        </span><br><span class="line">        pre = dummy</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> pre.next and count &lt; left:</span><br><span class="line">            pre = pre.next</span><br><span class="line">            count += 1</span><br><span class="line"></span><br><span class="line">        cur = pre.next</span><br><span class="line">        tail = cur</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> cur and count &lt;= right:</span><br><span class="line">            nxt = cur.next</span><br><span class="line">            cur.next = pre.next</span><br><span class="line">            pre.next = cur</span><br><span class="line">            tail.next = nxt</span><br><span class="line">            cur = nxt</span><br><span class="line">            count += 1</span><br><span class="line">        <span class="built_in">return</span> dummy.next</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
       </tags>
   </entry>
   <entry>
@@ -651,6 +651,41 @@
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># print(head) </span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;</span></span><br><span class="line">cur = ListNode(9)</span><br><span class="line">cur.next = head</span><br><span class="line">head = cur</span><br><span class="line"><span class="comment"># print(head)</span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 9, next: ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;&#125;</span></span><br></pre></td></tr></table></figure>
 <h4 id="单链表在末尾添加结点"><a href="#单链表在末尾添加结点" class="headerlink" title="单链表在末尾添加结点"></a>单链表在末尾添加结点</h4><p>从<code>[23,6,15]</code>到<code>[23,6,15,9]</code>：</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># print(head) </span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;</span></span><br><span class="line">cur = ListNode(9)</span><br><span class="line">dum = head</span><br><span class="line"><span class="keyword">while</span> head.next:</span><br><span class="line">    head = head.next</span><br><span class="line">head.next = cur</span><br><span class="line">head = dum</span><br><span class="line"><span class="comment"># print(head)</span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: ListNode&#123;val: 9, next: None&#125;&#125;&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="单链表的删除操作"><a href="#单链表的删除操作" class="headerlink" title="单链表的删除操作"></a>单链表的删除操作</h2><h4 id="删除单链表中的一个结点"><a href="#删除单链表中的一个结点" class="headerlink" title="删除单链表中的一个结点"></a>删除单链表中的一个结点</h4><p>如果我们想从单链表中删除现有结点<code>cur</code>，可以分两步完成</p>
+<ul>
+<li>找到cur的上一个结点<code>prev</code>及其下一个结点<code>next</code>：</li>
+</ul>
+<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-26-at-203558.png" class="">
+<ul>
+<li>接下来链接<code>prev</code>到cur的下一个节点<code>next</code></li>
+</ul>
+<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-26-at-203640.png" class="">
+<p>在第一步中，我们需要找出<code>prev</code>和<code>next</code>，使用<code>cur</code>的参考字段很容易找出next，但是我们必须从头结点遍历链表以找出<code>prev</code>，它的平均时间是<code>O(N)</code>，其中N是链表的长度。因此，删除结点的时间复杂度将是<code>O(N)</code>。</p>
+<p>示例：</p>
+<p>尝试把结点6从链表中删去：</p>
+<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-12-at-152754.png" class="">
+<ul>
+<li><p>从头遍历链表，直到我们找到前一个结点<code>prev</code>即结点23</p>
+</li>
+<li><p>将<code>prev</code>（结点23）与<code>next</code>（结点15）链接</p>
+</li>
+</ul>
+
+<p>另外一个更清晰的解释：</p>
+<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/1613757478-NBOvjn-Picture1.png" class="">
+<p>参考：<a href="https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/solution/mian-shi-ti-18-shan-chu-lian-biao-de-jie-dian-sh-2/">18.删除链表的节点</a></p>
+<ul>
+<li>特例处理： 当应删除头节点 head 时，直接返回 head.next 即可。</li>
+<li>初始化： pre = head , cur = head.next 。</li>
+<li>定位节点： 当 cur 为空 或 cur 节点值等于 val 时跳出。</li>
+<li>保存当前节点索引，即 pre = cur 。</li>
+<li>遍历下一节点，即 cur = cur.next 。</li>
+<li>删除节点： 若 cur 指向某节点，则执行 pre.next = cur.next ；若 cur 指向 nullnull ，代表链表中不包含值为 val 的节点。</li>
+<li>返回值： 返回链表头部节点 head 即可。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># print(head)</span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;</span></span><br><span class="line"><span class="keyword">if</span> head.val == val:</span><br><span class="line">    <span class="built_in">return</span> head.next</span><br><span class="line">pre, cur = head, head.next</span><br><span class="line"><span class="keyword">while</span> cur and cur.val != val:</span><br><span class="line">    pre, cur = cur, cur.next</span><br><span class="line"><span class="keyword">if</span> cur:</span><br><span class="line">    pre.next = cur.next</span><br><span class="line"><span class="built_in">return</span> head</span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 15, next: None&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="删除链表头结点"><a href="#删除链表头结点" class="headerlink" title="删除链表头结点"></a>删除链表头结点</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># print(head)</span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;</span></span><br><span class="line"><span class="keyword">if</span> head.val == val:</span><br><span class="line">    <span class="built_in">return</span> head.next</span><br><span class="line"><span class="comment"># ListNode&#123;ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="删除最后一个结点"><a href="#删除最后一个结点" class="headerlink" title="删除最后一个结点"></a>删除最后一个结点</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># head = ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;</span></span><br><span class="line">dummy = pre = head</span><br><span class="line"><span class="keyword">while</span> pre.next.next:</span><br><span class="line">    pre = pre.next</span><br><span class="line">pre.next = None</span><br><span class="line"><span class="built_in">return</span> dummy </span><br><span class="line"><span class="comment"># dummy = ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: None&#125;&#125;</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>数据结构</category>

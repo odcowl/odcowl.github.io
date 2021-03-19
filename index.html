@@ -219,7 +219,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-19 01:26:39" itemprop="dateModified" datetime="2021-03-19T01:26:39+08:00">2021-03-19</time>
+                <time title="修改时间：2021-03-19 21:28:44" itemprop="dateModified" datetime="2021-03-19T21:28:44+08:00">2021-03-19</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -291,6 +291,41 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># print(head) </span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;</span></span><br><span class="line">cur = ListNode(9)</span><br><span class="line">cur.next = head</span><br><span class="line">head = cur</span><br><span class="line"><span class="comment"># print(head)</span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 9, next: ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;&#125;</span></span><br></pre></td></tr></table></figure>
 <h4 id="单链表在末尾添加结点"><a href="#单链表在末尾添加结点" class="headerlink" title="单链表在末尾添加结点"></a>单链表在末尾添加结点</h4><p>从<code>[23,6,15]</code>到<code>[23,6,15,9]</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># print(head) </span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;</span></span><br><span class="line">cur = ListNode(9)</span><br><span class="line">dum = head</span><br><span class="line"><span class="keyword">while</span> head.next:</span><br><span class="line">    head = head.next</span><br><span class="line">head.next = cur</span><br><span class="line">head = dum</span><br><span class="line"><span class="comment"># print(head)</span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: ListNode&#123;val: 9, next: None&#125;&#125;&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<h2 id="单链表的删除操作"><a href="#单链表的删除操作" class="headerlink" title="单链表的删除操作"></a>单链表的删除操作</h2><h4 id="删除单链表中的一个结点"><a href="#删除单链表中的一个结点" class="headerlink" title="删除单链表中的一个结点"></a>删除单链表中的一个结点</h4><p>如果我们想从单链表中删除现有结点<code>cur</code>，可以分两步完成</p>
+<ul>
+<li>找到cur的上一个结点<code>prev</code>及其下一个结点<code>next</code>：</li>
+</ul>
+<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-26-at-203558.png" class="">
+<ul>
+<li>接下来链接<code>prev</code>到cur的下一个节点<code>next</code></li>
+</ul>
+<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-26-at-203640.png" class="">
+<p>在第一步中，我们需要找出<code>prev</code>和<code>next</code>，使用<code>cur</code>的参考字段很容易找出next，但是我们必须从头结点遍历链表以找出<code>prev</code>，它的平均时间是<code>O(N)</code>，其中N是链表的长度。因此，删除结点的时间复杂度将是<code>O(N)</code>。</p>
+<p>示例：</p>
+<p>尝试把结点6从链表中删去：</p>
+<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-12-at-152754.png" class="">
+<ul>
+<li><p>从头遍历链表，直到我们找到前一个结点<code>prev</code>即结点23</p>
+</li>
+<li><p>将<code>prev</code>（结点23）与<code>next</code>（结点15）链接</p>
+</li>
+</ul>
+
+<p>另外一个更清晰的解释：</p>
+<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/1613757478-NBOvjn-Picture1.png" class="">
+<p>参考：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/solution/mian-shi-ti-18-shan-chu-lian-biao-de-jie-dian-sh-2/">18.删除链表的节点</a></p>
+<ul>
+<li>特例处理： 当应删除头节点 head 时，直接返回 head.next 即可。</li>
+<li>初始化： pre = head , cur = head.next 。</li>
+<li>定位节点： 当 cur 为空 或 cur 节点值等于 val 时跳出。</li>
+<li>保存当前节点索引，即 pre = cur 。</li>
+<li>遍历下一节点，即 cur = cur.next 。</li>
+<li>删除节点： 若 cur 指向某节点，则执行 pre.next = cur.next ；若 cur 指向 nullnull ，代表链表中不包含值为 val 的节点。</li>
+<li>返回值： 返回链表头部节点 head 即可。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># print(head)</span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;</span></span><br><span class="line"><span class="keyword">if</span> head.val == val:</span><br><span class="line">    <span class="built_in">return</span> head.next</span><br><span class="line">pre, cur = head, head.next</span><br><span class="line"><span class="keyword">while</span> cur and cur.val != val:</span><br><span class="line">    pre, cur = cur, cur.next</span><br><span class="line"><span class="keyword">if</span> cur:</span><br><span class="line">    pre.next = cur.next</span><br><span class="line"><span class="built_in">return</span> head</span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 15, next: None&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="删除链表头结点"><a href="#删除链表头结点" class="headerlink" title="删除链表头结点"></a>删除链表头结点</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># print(head)</span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;</span></span><br><span class="line"><span class="keyword">if</span> head.val == val:</span><br><span class="line">    <span class="built_in">return</span> head.next</span><br><span class="line"><span class="comment"># ListNode&#123;ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="删除最后一个结点"><a href="#删除最后一个结点" class="headerlink" title="删除最后一个结点"></a>删除最后一个结点</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># head = ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;</span></span><br><span class="line">dummy = pre = head</span><br><span class="line"><span class="keyword">while</span> pre.next.next:</span><br><span class="line">    pre = pre.next</span><br><span class="line">pre.next = None</span><br><span class="line"><span class="built_in">return</span> dummy </span><br><span class="line"><span class="comment"># dummy = ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: None&#125;&#125;</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -1370,7 +1405,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共12.4k字</span>
+  <span class="post-count">博客全站共12.9k字</span>
 </div>
 
         
