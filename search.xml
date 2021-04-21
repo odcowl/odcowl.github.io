@@ -484,15 +484,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>向Hexo博客插入Jupyter Notebook的办法</title>
-    <url>/2021/03/12/%E5%90%91Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5Jupyter-Notebook%E7%9A%84%E5%8A%9E%E6%B3%95/</url>
-    <content><![CDATA[<p>如何把jupyter放在hexo博客中<a href="https://github.com/qiliux/hexo-jupyter-notebook">链接</a><br>向 Hexo 博客中插入 Jupyter Notebook <a href="https://blog.csdn.net/The_last_knight/article/details/109391184">链接</a></p>
-]]></content>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>短时傅里叶变换STFT及Python/Matlab实现</title>
     <url>/2021/03/10/%E5%A3%B0%E5%AD%A6%E5%8F%82%E6%95%B0-%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2STFT/</url>
     <content><![CDATA[<p>一天一个<strong>声学参数</strong>之短时傅里叶变换STFT及其Python和Matlab的实现，在C++稍微上手一点儿后来补充C++的版本。</p>
@@ -538,6 +529,15 @@
       <categories>
         <category>声学参数</category>
       </categories>
+  </entry>
+  <entry>
+    <title>向Hexo博客插入Jupyter Notebook的办法</title>
+    <url>/2021/03/12/%E5%90%91Hexo%E5%8D%9A%E5%AE%A2%E6%8F%92%E5%85%A5Jupyter-Notebook%E7%9A%84%E5%8A%9E%E6%B3%95/</url>
+    <content><![CDATA[<p>如何把jupyter放在hexo博客中<a href="https://github.com/qiliux/hexo-jupyter-notebook">链接</a><br>向 Hexo 博客中插入 Jupyter Notebook <a href="https://blog.csdn.net/The_last_knight/article/details/109391184">链接</a></p>
+]]></content>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
   </entry>
   <entry>
     <title>我的vim编辑器cheat sheet</title>
@@ -604,6 +604,15 @@
 </table>
 </div>
 ]]></content>
+  </entry>
+  <entry>
+    <title>我的读书笔记\_杏仁</title>
+    <url>/2021/04/21/%E6%88%91%E7%9A%84%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%9D%8F%E4%BB%81/</url>
+    <content><![CDATA[<p>{ %asset_img fengmian.jpg %}</p>
+]]></content>
+      <categories>
+        <category>杏仁</category>
+      </categories>
   </entry>
   <entry>
     <title>法语花卉词汇</title>
