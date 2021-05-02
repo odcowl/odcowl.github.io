@@ -220,6 +220,67 @@
       </categories>
   </entry>
   <entry>
+    <title>54.螺旋矩阵(Medium)</title>
+    <url>/2021/03/17/54-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-Medium/</url>
+    <content><![CDATA[<p>LeetCode每日一题(2021.03.15)之<a href="https://leetcode-cn.com/problems/spiral-matrix/">螺旋矩阵</a><br>难度：中等</p>
+<h3 id="题目">0.0.1. 题目</h3><p>给你一个 m 行 n 列的矩阵 matrix ，请按照 顺时针螺旋顺序 ，返回矩阵中的所有元素。</p>
+<p>示例1:</p>
+<img src="/2021/03/17/54-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-Medium/spiral1.jpeg" class>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">输出：[1,2,3,6,9,8,7,4,5]</span><br></pre></td></tr></table></figure>
+<p>示例2:</p>
+<img src="/2021/03/17/54-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-Medium/spiral.jpeg" class>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]</span><br><span class="line">输出：[1,2,3,4,8,12,11,10,9,5,6,7]</span><br></pre></td></tr></table></figure>
+<p>提示：</p>
+<ul>
+<li>m == matrix.length</li>
+<li>n == matrix[i].length</li>
+<li>1 &lt;= m, n &lt;= 10</li>
+<li>-100 &lt;= matrix[i][j] &lt;= 100</li>
+</ul>
+<h3 id="解法1">0.0.2. 解法1</h3><p><a href="https://leetcode-cn.com/problems/spiral-matrix/solution/ju-zhen-bian-li-wen-ti-de-si-bu-qu-by-fu-91za/">负雪明烛</a></p>
+<h4 id="思路">0.0.2.1. 思路</h4><p>在<strong>打印矩阵</strong>类似的题目中，要考虑以下几个问题：</p>
+<ul>
+<li>起始位置</li>
+<li>移动方向</li>
+<li>边界</li>
+<li>结束条件</li>
+</ul>
+<h5 id="起始位置">0.0.2.1.1. 起始位置</h5><p><strong>螺旋矩阵</strong>的遍历起始于矩阵的左上角<code>(0,0)</code>。</p>
+<h5 id="移动方向">0.0.2.1.2. 移动方向</h5><p>起始位置的下一个移动方向是向右。在遍历的过程中，移动的方向是固定的：</p>
+<ul>
+<li>右</li>
+<li>下</li>
+<li>左</li>
+<li>上</li>
+</ul>
+<p>移动的方向按照上面的顺序进行，每次移动到了<strong>边界</strong>，才会更改方向，但<strong>边界并不是固定的</strong>。</p>
+<h5 id="边界">0.0.2.1.3. 边界</h5><p>本题中，<strong>边界</strong>随着遍历的过程而改变，已经遍历过的位置不再遍历，边界会越来越小。</p>
+<p>规则是：<strong>如果当前行（列）遍历结束后，就把这一行（列）的边界向内移动一格。</strong></p>
+<p>以下面的图为例，<code>up, down, left, right</code> 分别表示四个方向的边界，初始时分别指向矩阵的四个边界。如果我们把第一行遍历结束（遍历到了右边界），此时需要修改新的移动方向为向下、并且把上边界 <code>up</code> 下移一格，即从<code>旧up</code> 位置移动到 <code>新up</code> 位置。</p>
+<img src="/2021/03/17/54-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-Medium/upleft.jpeg" class>
+<p>当绕了一圈后，从下向上走到 <code>新up</code> 边界的时候，此时需要<code>修改新的移动方向为向右</code>、并且<code>把左边界 left 下移一格</code>，即从 旧<code>left</code> 位置移动到 <code>新left</code> 位置。</p>
+
+<h5 id="结束条件">0.0.2.1.4. 结束条件</h5><p>螺旋遍历的结束条件是所有的位置都被遍历到。</p>
+<h4 id="代码">0.0.2.2. 代码</h4><ul>
+<li><code>up, down, left, right</code> 分别表示四个方向的边界</li>
+<li><code>x,y</code> 表示当前位置</li>
+<li><code>dirs</code> 表示移动的方向是<code>右，下，左，上</code></li>
+<li>cur_d 表示当前的移动方向的下标，dirs[cur_d] 就是下一个方向需要怎么修改 x, y。</li>
+<li><code>cur\_d == 0 and y == right</code> 表示当前的移动方向是向右，并且到达了右边界，此时将移动方向更改为向下，并且上边界 up 向下移动一格。</li>
+<li>结束条件是结果数组 res 的元素个数能与 matrix 中的元素个数</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def spiralOrder(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 排除边界条件</span></span><br><span class="line">        <span class="keyword">if</span> not matrix or not matrix[0]: <span class="built_in">return</span> []</span><br><span class="line">        M, N = len(matrix), len(matrix[0]) <span class="comment"># M =&gt; 行数， N =&gt; 列数</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">#定义四个方向的边界</span></span><br><span class="line">        left, right, up, down = 0, N-1, 0, M-1</span><br><span class="line">        <span class="comment">#定义当前位置</span></span><br><span class="line">        x, y = 0, 0</span><br><span class="line">        <span class="comment">#定义四个移动方向 [右，下，左，上]</span></span><br><span class="line">        <span class="built_in">dirs</span> = [(0, 1), (1, 0), (0, -1), (-1, 0)]</span><br><span class="line"></span><br><span class="line">        res = []</span><br><span class="line">        cur_d = 0</span><br><span class="line"></span><br><span class="line">        <span class="comment">#当res里的数量不等于M*N时</span></span><br><span class="line">        <span class="keyword">while</span> len(res) != M * N:</span><br><span class="line">            res.append(matrix[x][y])</span><br><span class="line">            <span class="keyword">if</span> cur_d == 0 and y == right:</span><br><span class="line">                cur_d += 1</span><br><span class="line">                up += 1</span><br><span class="line">            <span class="keyword">elif</span> cur_d == 1 and x == down:</span><br><span class="line">                cur_d += 1</span><br><span class="line">                right -= 1</span><br><span class="line">            <span class="keyword">elif</span> cur_d == 2 and y == left:</span><br><span class="line">                cur_d += 1</span><br><span class="line">                down -= 1</span><br><span class="line">            <span class="keyword">elif</span> cur_d == 3 and x == up:</span><br><span class="line">                cur_d += 1</span><br><span class="line">                left += 1</span><br><span class="line">            cur_d %= 4</span><br><span class="line">            x += <span class="built_in">dirs</span>[cur_d][0]</span><br><span class="line">            y += <span class="built_in">dirs</span>[cur_d][1]</span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h3 id="解法2-（利用zip函数）">0.0.3. 解法2 （利用zip函数）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def spiralOrder(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">while</span> matrix:</span><br><span class="line">            res += matrix.pop(0)  <span class="comment">#每次提取第一排元素</span></span><br><span class="line">            matrix = list(zip(*matrix))[::-1]   <span class="comment">#将剩余的元素进行逆时针旋转九十度</span></span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
+<p>更喜欢第二种解法 :)</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>打印矩阵</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>331.验证二叉树的前序序列化(Medium)</title>
     <url>/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/</url>
     <content><![CDATA[<p>LeetCode每日一题系列（2021.03.12)之<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree">验证二叉树的前序序列化</a><br>难度：中等</p>
@@ -310,67 +371,6 @@
       </categories>
       <tags>
         <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>54.螺旋矩阵(Medium)</title>
-    <url>/2021/03/17/54-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-Medium/</url>
-    <content><![CDATA[<p>LeetCode每日一题(2021.03.15)之<a href="https://leetcode-cn.com/problems/spiral-matrix/">螺旋矩阵</a><br>难度：中等</p>
-<h3 id="题目">0.0.1. 题目</h3><p>给你一个 m 行 n 列的矩阵 matrix ，请按照 顺时针螺旋顺序 ，返回矩阵中的所有元素。</p>
-<p>示例1:</p>
-<img src="/2021/03/17/54-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-Medium/spiral1.jpeg" class>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">输出：[1,2,3,6,9,8,7,4,5]</span><br></pre></td></tr></table></figure>
-<p>示例2:</p>
-<img src="/2021/03/17/54-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-Medium/spiral.jpeg" class>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]</span><br><span class="line">输出：[1,2,3,4,8,12,11,10,9,5,6,7]</span><br></pre></td></tr></table></figure>
-<p>提示：</p>
-<ul>
-<li>m == matrix.length</li>
-<li>n == matrix[i].length</li>
-<li>1 &lt;= m, n &lt;= 10</li>
-<li>-100 &lt;= matrix[i][j] &lt;= 100</li>
-</ul>
-<h3 id="解法1">0.0.2. 解法1</h3><p><a href="https://leetcode-cn.com/problems/spiral-matrix/solution/ju-zhen-bian-li-wen-ti-de-si-bu-qu-by-fu-91za/">负雪明烛</a></p>
-<h4 id="思路">0.0.2.1. 思路</h4><p>在<strong>打印矩阵</strong>类似的题目中，要考虑以下几个问题：</p>
-<ul>
-<li>起始位置</li>
-<li>移动方向</li>
-<li>边界</li>
-<li>结束条件</li>
-</ul>
-<h5 id="起始位置">0.0.2.1.1. 起始位置</h5><p><strong>螺旋矩阵</strong>的遍历起始于矩阵的左上角<code>(0,0)</code>。</p>
-<h5 id="移动方向">0.0.2.1.2. 移动方向</h5><p>起始位置的下一个移动方向是向右。在遍历的过程中，移动的方向是固定的：</p>
-<ul>
-<li>右</li>
-<li>下</li>
-<li>左</li>
-<li>上</li>
-</ul>
-<p>移动的方向按照上面的顺序进行，每次移动到了<strong>边界</strong>，才会更改方向，但<strong>边界并不是固定的</strong>。</p>
-<h5 id="边界">0.0.2.1.3. 边界</h5><p>本题中，<strong>边界</strong>随着遍历的过程而改变，已经遍历过的位置不再遍历，边界会越来越小。</p>
-<p>规则是：<strong>如果当前行（列）遍历结束后，就把这一行（列）的边界向内移动一格。</strong></p>
-<p>以下面的图为例，<code>up, down, left, right</code> 分别表示四个方向的边界，初始时分别指向矩阵的四个边界。如果我们把第一行遍历结束（遍历到了右边界），此时需要修改新的移动方向为向下、并且把上边界 <code>up</code> 下移一格，即从<code>旧up</code> 位置移动到 <code>新up</code> 位置。</p>
-<img src="/2021/03/17/54-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-Medium/upleft.jpeg" class>
-<p>当绕了一圈后，从下向上走到 <code>新up</code> 边界的时候，此时需要<code>修改新的移动方向为向右</code>、并且<code>把左边界 left 下移一格</code>，即从 旧<code>left</code> 位置移动到 <code>新left</code> 位置。</p>
-
-<h5 id="结束条件">0.0.2.1.4. 结束条件</h5><p>螺旋遍历的结束条件是所有的位置都被遍历到。</p>
-<h4 id="代码">0.0.2.2. 代码</h4><ul>
-<li><code>up, down, left, right</code> 分别表示四个方向的边界</li>
-<li><code>x,y</code> 表示当前位置</li>
-<li><code>dirs</code> 表示移动的方向是<code>右，下，左，上</code></li>
-<li>cur_d 表示当前的移动方向的下标，dirs[cur_d] 就是下一个方向需要怎么修改 x, y。</li>
-<li><code>cur\_d == 0 and y == right</code> 表示当前的移动方向是向右，并且到达了右边界，此时将移动方向更改为向下，并且上边界 up 向下移动一格。</li>
-<li>结束条件是结果数组 res 的元素个数能与 matrix 中的元素个数</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def spiralOrder(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 排除边界条件</span></span><br><span class="line">        <span class="keyword">if</span> not matrix or not matrix[0]: <span class="built_in">return</span> []</span><br><span class="line">        M, N = len(matrix), len(matrix[0]) <span class="comment"># M =&gt; 行数， N =&gt; 列数</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">#定义四个方向的边界</span></span><br><span class="line">        left, right, up, down = 0, N-1, 0, M-1</span><br><span class="line">        <span class="comment">#定义当前位置</span></span><br><span class="line">        x, y = 0, 0</span><br><span class="line">        <span class="comment">#定义四个移动方向 [右，下，左，上]</span></span><br><span class="line">        <span class="built_in">dirs</span> = [(0, 1), (1, 0), (0, -1), (-1, 0)]</span><br><span class="line"></span><br><span class="line">        res = []</span><br><span class="line">        cur_d = 0</span><br><span class="line"></span><br><span class="line">        <span class="comment">#当res里的数量不等于M*N时</span></span><br><span class="line">        <span class="keyword">while</span> len(res) != M * N:</span><br><span class="line">            res.append(matrix[x][y])</span><br><span class="line">            <span class="keyword">if</span> cur_d == 0 and y == right:</span><br><span class="line">                cur_d += 1</span><br><span class="line">                up += 1</span><br><span class="line">            <span class="keyword">elif</span> cur_d == 1 and x == down:</span><br><span class="line">                cur_d += 1</span><br><span class="line">                right -= 1</span><br><span class="line">            <span class="keyword">elif</span> cur_d == 2 and y == left:</span><br><span class="line">                cur_d += 1</span><br><span class="line">                down -= 1</span><br><span class="line">            <span class="keyword">elif</span> cur_d == 3 and x == up:</span><br><span class="line">                cur_d += 1</span><br><span class="line">                left += 1</span><br><span class="line">            cur_d %= 4</span><br><span class="line">            x += <span class="built_in">dirs</span>[cur_d][0]</span><br><span class="line">            y += <span class="built_in">dirs</span>[cur_d][1]</span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<h3 id="解法2-（利用zip函数）">0.0.3. 解法2 （利用zip函数）</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def spiralOrder(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[int]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        res = []</span><br><span class="line">        <span class="keyword">while</span> matrix:</span><br><span class="line">            res += matrix.pop(0)  <span class="comment">#每次提取第一排元素</span></span><br><span class="line">            matrix = list(zip(*matrix))[::-1]   <span class="comment">#将剩余的元素进行逆时针旋转九十度</span></span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
-<p>更喜欢第二种解法 :)</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>打印矩阵</tag>
       </tags>
   </entry>
   <entry>
@@ -686,8 +686,9 @@
 <p>或许是父母的无心之言，老师的恨铁不成钢，朋友之间的无心玩笑。</p>
 <p>我从来都认为自己厌恶承受过的语言暴力，并暗自许诺绝对不要成为这样子的人。</p>
 <p>但是现实是，在我的情绪波动时，我嘴里却吐出来不好听的语句。</p>
-<p>所以我希望读这本书，本就是浅薄的被题目所吸引。</p>
-<p>希望书读百遍，其义自现。不求甚解，只求生活中多一个引以为戒的参照物。</p>
+<p>所以我希望读这本书，本就是被题目所吸引。</p>
+<p>不求甚解，只求说话的时候多一个引以为戒的参照物。</p>
+<p>至于美国人的书喜欢啰啰嗦嗦的…这点倒是让阅读没那么痛苦 ^^</p>
 ]]></content>
       <categories>
         <category>2021读书笔记</category>
