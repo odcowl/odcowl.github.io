@@ -220,41 +220,6 @@
       </categories>
   </entry>
   <entry>
-    <title>395.至少有K个重复字符的最长子串(Medium)</title>
-    <url>/2021/02/27/395-%E8%87%B3%E5%B0%91%E6%9C%89K%E4%B8%AA%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2-Medium/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.02.27)之<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/">至少有K个重复字符的最长子串</a><br>难度:中等</p>
-<h3 id="一、题目">0.0.1. 一、题目</h3><p>给你一个字符串<code>s</code>和一个整数<code>k</code>,请你找出<code>s</code>中的最长子串,要求该子串中的每一字符出现次数都不少于<code>k</code>.返回这一子串的长度.</p>
-<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;aaabb&quot;</span>, k = 3</span><br><span class="line">输出：3</span><br><span class="line">解释：最长子串为 <span class="string">&quot;aaa&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;ababbc&quot;</span>, k = 2</span><br><span class="line">输出：5</span><br><span class="line">解释：最长子串为 <span class="string">&quot;ababb&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 2 次， <span class="string">&#x27;b&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure></p>
-<p>提示:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 104</span><br><span class="line">s 仅由小写英文字母组成</span><br><span class="line">1 &lt;= k &lt;= 105</span><br></pre></td></tr></table></figure></p>
-<h3 id="我的解法-30-31ac">0.0.2. 我的解法(30/31ac)</h3><p>我的想法是先设定一个判断用的函数<code>issubstring</code>用于判断每一个我截取下来的子串,在这个func里,通过<code>哈希表</code>的方法来判断字符重复次数是否大于k,如果全部大于,返回<code>True</code>否则返回<code>False</code>.</p>
-<p>同是判断两个边缘条件: 1)如果整个字符串为<code>True</code>,那就不经过下面的小循环,直接返回<code>len(s)</code> 2)如果<code>k</code>的数量大于<code>len(s)</code>那不可能满足,返回0.</p>
-<p>在接下来的循环中,具体细节如下图:<br></p>
-<p>但是其中<code>continue</code>这个想法是错误的,比如当下的substring可能不是符合条件的,但是后续补充了一些字符之后有可能这个substring是符合的,所以这种简化方法不可取,感觉这道题的用例并不是非常完全,最后这段代码只是遇到了特别长的用例时出现了时间问题,但没有遇到我提到的这个问题.</p>
-<p>接下来是这段代码:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        def issubstring(s,k):</span><br><span class="line">            m = &#123;&#125;</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> s:</span><br><span class="line">                <span class="keyword">if</span> char <span class="keyword">in</span> m:</span><br><span class="line">                    m[char] += 1</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    m[char] = 1</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> m:</span><br><span class="line">                <span class="keyword">if</span> m[char]&lt;k:</span><br><span class="line">                    <span class="built_in">return</span> False</span><br><span class="line">            <span class="built_in">return</span> True</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> issubstring(s,k):</span><br><span class="line">            <span class="built_in">return</span> len(s)</span><br><span class="line">        <span class="keyword">elif</span> k &gt; len(s):</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line"></span><br><span class="line">        maxlen = 0</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+k-1,len(s)):</span><br><span class="line">                subs = s[i:j+1]</span><br><span class="line">                <span class="comment">#print(subs)</span></span><br><span class="line">                <span class="keyword">if</span> issubstring(subs,k):</span><br><span class="line">                    maxlen = max(maxlen,len(subs))</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment">#这个continue的想法是错误的</span></span><br><span class="line">                    <span class="built_in">continue</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> maxlen</span><br></pre></td></tr></table></figure></p>
-<h3 id="递归做法">0.0.3. 递归做法</h3><p>依然是参考了<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/solution/jie-ben-ti-bang-zhu-da-jia-li-jie-di-gui-obla/">负雪明烛</a>的解析,这个递归我一开始有想到过,用split的方法反复切割,但是自己思路不好,就换成了上面那种做法,而且递归我一直学习的很差,得加把劲啊.</p>
-<p>先上她的原版代码:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="keyword">if</span> len(s) &lt; k:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">set</span>(s):</span><br><span class="line">            <span class="keyword">if</span> s.count(c) &lt; k:</span><br><span class="line">                <span class="built_in">return</span> max(self.longestSubstring(t, k) <span class="keyword">for</span> t <span class="keyword">in</span> s.split(c))</span><br><span class="line">        <span class="built_in">return</span> len(s)</span><br></pre></td></tr></table></figure><br>接下来整理整理思路:</p>
-<ul>
-<li>递归的重点: 牢记递归函数的输入输出是什么(这里的输入是字符串,限定条件是<code>k</code>,输出是满足条件的最长字符子串长度)</li>
-<li>递归的终止条件: 如果<code>字符串s</code>的长度小于<code>k</code>,那么一定不存在符合条件的子串,直接返回0</li>
-<li>递归的调用法则: 如果一个<code>字符c</code>在<code>s</code>中出现的次数少于<code>k次</code>,那么所有包含<code>字符c</code>的子字符串一定不符合规定.所以,应该通过某种方法将<code>字符c</code>排除在外,方法:把<code>s</code>按照<code>字符c</code>分割(分割后的每一个子串都不包含<code>字符c</code>),得到很多<code>子串t</code>. 而得到的<code>t</code>,就是未来的<code>s&#39;</code>. 下一步,<code>不含字符c的子串们t</code>就是作为<code>longestSubstring(s, k)</code>的新输入,大问题分割为了小问题,形成递归.</li>
-<li>未进入递归即返回结果的情况: 如果<code>s</code>中的每个字符都满足大于<code>重复次数k</code>次的这个条件,那么直接返回<code>len(s)</code>.</li>
-</ul>
-<p>复杂度分析:</p>
-<ul>
-<li>时间复杂度: O(N*26*26) 因为函数最多执行26次(小写的26个英语字符),for循环遍历一遍是26个字符,循环里面对s分割时间的复杂度为O(N)</li>
-<li>空间复杂度: O(26*26), 函数执行26次,每次开辟26个字符的set空间</li>
-</ul>
-<p>读聪明人的代码就是茅塞顿开的感觉,特别喜欢这个刷题姐姐的讲解</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>331.验证二叉树的前序序列化(Medium)</title>
     <url>/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/</url>
     <content><![CDATA[<p>LeetCode每日一题系列（2021.03.12)之<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree">验证二叉树的前序序列化</a><br>难度：中等</p>
@@ -310,6 +275,41 @@
       </categories>
       <tags>
         <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>395.至少有K个重复字符的最长子串(Medium)</title>
+    <url>/2021/02/27/395-%E8%87%B3%E5%B0%91%E6%9C%89K%E4%B8%AA%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2-Medium/</url>
+    <content><![CDATA[<p>力扣每日一题系列(2021.02.27)之<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/">至少有K个重复字符的最长子串</a><br>难度:中等</p>
+<h3 id="一、题目">0.0.1. 一、题目</h3><p>给你一个字符串<code>s</code>和一个整数<code>k</code>,请你找出<code>s</code>中的最长子串,要求该子串中的每一字符出现次数都不少于<code>k</code>.返回这一子串的长度.</p>
+<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;aaabb&quot;</span>, k = 3</span><br><span class="line">输出：3</span><br><span class="line">解释：最长子串为 <span class="string">&quot;aaa&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure></p>
+<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;ababbc&quot;</span>, k = 2</span><br><span class="line">输出：5</span><br><span class="line">解释：最长子串为 <span class="string">&quot;ababb&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 2 次， <span class="string">&#x27;b&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure></p>
+<p>提示:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 104</span><br><span class="line">s 仅由小写英文字母组成</span><br><span class="line">1 &lt;= k &lt;= 105</span><br></pre></td></tr></table></figure></p>
+<h3 id="我的解法-30-31ac">0.0.2. 我的解法(30/31ac)</h3><p>我的想法是先设定一个判断用的函数<code>issubstring</code>用于判断每一个我截取下来的子串,在这个func里,通过<code>哈希表</code>的方法来判断字符重复次数是否大于k,如果全部大于,返回<code>True</code>否则返回<code>False</code>.</p>
+<p>同是判断两个边缘条件: 1)如果整个字符串为<code>True</code>,那就不经过下面的小循环,直接返回<code>len(s)</code> 2)如果<code>k</code>的数量大于<code>len(s)</code>那不可能满足,返回0.</p>
+<p>在接下来的循环中,具体细节如下图:<br></p>
+<p>但是其中<code>continue</code>这个想法是错误的,比如当下的substring可能不是符合条件的,但是后续补充了一些字符之后有可能这个substring是符合的,所以这种简化方法不可取,感觉这道题的用例并不是非常完全,最后这段代码只是遇到了特别长的用例时出现了时间问题,但没有遇到我提到的这个问题.</p>
+<p>接下来是这段代码:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        def issubstring(s,k):</span><br><span class="line">            m = &#123;&#125;</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> s:</span><br><span class="line">                <span class="keyword">if</span> char <span class="keyword">in</span> m:</span><br><span class="line">                    m[char] += 1</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    m[char] = 1</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> m:</span><br><span class="line">                <span class="keyword">if</span> m[char]&lt;k:</span><br><span class="line">                    <span class="built_in">return</span> False</span><br><span class="line">            <span class="built_in">return</span> True</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> issubstring(s,k):</span><br><span class="line">            <span class="built_in">return</span> len(s)</span><br><span class="line">        <span class="keyword">elif</span> k &gt; len(s):</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line"></span><br><span class="line">        maxlen = 0</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+k-1,len(s)):</span><br><span class="line">                subs = s[i:j+1]</span><br><span class="line">                <span class="comment">#print(subs)</span></span><br><span class="line">                <span class="keyword">if</span> issubstring(subs,k):</span><br><span class="line">                    maxlen = max(maxlen,len(subs))</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment">#这个continue的想法是错误的</span></span><br><span class="line">                    <span class="built_in">continue</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> maxlen</span><br></pre></td></tr></table></figure></p>
+<h3 id="递归做法">0.0.3. 递归做法</h3><p>依然是参考了<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/solution/jie-ben-ti-bang-zhu-da-jia-li-jie-di-gui-obla/">负雪明烛</a>的解析,这个递归我一开始有想到过,用split的方法反复切割,但是自己思路不好,就换成了上面那种做法,而且递归我一直学习的很差,得加把劲啊.</p>
+<p>先上她的原版代码:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="keyword">if</span> len(s) &lt; k:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">set</span>(s):</span><br><span class="line">            <span class="keyword">if</span> s.count(c) &lt; k:</span><br><span class="line">                <span class="built_in">return</span> max(self.longestSubstring(t, k) <span class="keyword">for</span> t <span class="keyword">in</span> s.split(c))</span><br><span class="line">        <span class="built_in">return</span> len(s)</span><br></pre></td></tr></table></figure><br>接下来整理整理思路:</p>
+<ul>
+<li>递归的重点: 牢记递归函数的输入输出是什么(这里的输入是字符串,限定条件是<code>k</code>,输出是满足条件的最长字符子串长度)</li>
+<li>递归的终止条件: 如果<code>字符串s</code>的长度小于<code>k</code>,那么一定不存在符合条件的子串,直接返回0</li>
+<li>递归的调用法则: 如果一个<code>字符c</code>在<code>s</code>中出现的次数少于<code>k次</code>,那么所有包含<code>字符c</code>的子字符串一定不符合规定.所以,应该通过某种方法将<code>字符c</code>排除在外,方法:把<code>s</code>按照<code>字符c</code>分割(分割后的每一个子串都不包含<code>字符c</code>),得到很多<code>子串t</code>. 而得到的<code>t</code>,就是未来的<code>s&#39;</code>. 下一步,<code>不含字符c的子串们t</code>就是作为<code>longestSubstring(s, k)</code>的新输入,大问题分割为了小问题,形成递归.</li>
+<li>未进入递归即返回结果的情况: 如果<code>s</code>中的每个字符都满足大于<code>重复次数k</code>次的这个条件,那么直接返回<code>len(s)</code>.</li>
+</ul>
+<p>复杂度分析:</p>
+<ul>
+<li>时间复杂度: O(N*26*26) 因为函数最多执行26次(小写的26个英语字符),for循环遍历一遍是26个字符,循环里面对s分割时间的复杂度为O(N)</li>
+<li>空间复杂度: O(26*26), 函数执行26次,每次开辟26个字符的set空间</li>
+</ul>
+<p>读聪明人的代码就是茅塞顿开的感觉,特别喜欢这个刷题姐姐的讲解</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
@@ -482,11 +482,11 @@
     <url>/2021/05/02/Toeic%E5%A4%87%E8%80%83%E8%AE%B0%E5%BD%95/</url>
     <content><![CDATA[<h3 id="碎碎念">0.0.1. 碎碎念</h3><p>近日本来想赶着回国前把托业考下来，结果机票熔断了，这就是后话了…</p>
 <p>匆忙的报了4.30号的托业，加上super express correction一共170欧，考点在93区的centrex。</p>
-<p><a href="https://www.etsglobal.org/fr/fr/session/search/ile-de-france/paris?testTypeIds[]=100291&amp;date=2021-05-02&amp;showMap=false">报名地址查询：</a></p>
+<p><a href="https://www.etsglobal.org/fr/fr/session/search/ile-de-france/paris?testTypeIds[]=100291&amp;date=2021-05-02&amp;showMap=false">报名地址查询</a></p>
 <p>找工作的时候一直没有一个上得了台面的英语成绩，多年前裸考的雅思5.5写了还不如不写QAQ</p>
 <p>分享一个托业的语法句型题目pdf：</p>
 <img src="/2021/05/02/Toeic%E5%A4%87%E8%80%83%E8%AE%B0%E5%BD%95/109.pdf" class>
-<div class="pdfobject-container" data-target="/109.pdf" data-height="500px"></div>
+<div class="pdfobject-container" data-target="109.pdf" data-height="500px"></div>
 <p>当天13点考完，16点多成绩就发到邮件了，速度超快 930/990，也大于国内六级了，终于有一个普通人都有的英语成绩可以写在cv上了QAQ</p>
 <img src="/2021/05/02/Toeic%E5%A4%87%E8%80%83%E8%AE%B0%E5%BD%95/note.png" class>
 <h3 id="备考真题的网站">0.0.2. 备考真题的网站</h3><p><a href="https://www.bilibili.com/video/BV1fh411S7VH/">2021最新托业全套练习</a></p>
