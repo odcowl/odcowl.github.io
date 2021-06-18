@@ -188,6 +188,99 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="odcowl">
+      <meta itemprop="description" content="wechat odcowl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="odcowl的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/" class="post-title-link" itemprop="url">131.分割回文串(Medium)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-08 12:08:37" itemprop="dateCreated datePublished" datetime="2021-03-08T12:08:37+08:00">2021-03-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-09 00:59:26" itemprop="dateModified" datetime="2021-03-09T00:59:26+08:00">2021-03-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>力扣每日一题系列(2021.03.07)之<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-partitioning/">分割回文串</a><br>难度:中等</p>
+<h3 id="一、题目">0.0.1. 一、题目</h3><p>给你一个字符串<code>s</code>,请你将<code>s</code>分割成一些子串,使每个子串都是回文串.返回<code>s</code>所有可能的分割方案.<br><strong>回文串</strong>是正着读和反着读都一样的字符串.</p>
+<p>示例1:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: s=<span class="string">&quot;aab&quot;</span></span><br><span class="line">输出: [[<span class="string">&quot;a&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>],[<span class="string">&quot;aa&quot;</span>,<span class="string">&quot;b&quot;</span>]]</span><br></pre></td></tr></table></figure></p>
+<p>示例2:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;a&quot;</span></span><br><span class="line">输出: [[<span class="string">&quot;a&quot;</span>]]</span><br></pre></td></tr></table></figure></p>
+<p>提示:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 16</span><br><span class="line">s 仅由小写英文字母组成</span><br></pre></td></tr></table></figure></p>
+<h3 id="二、题解">0.0.2. 二、题解</h3><p>代码思路学习:<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/palindrome-partitioning/solution/hui-su-fa-si-lu-yu-mo-ban-by-fuxuemingzh-azhz/">负雪明烛</a></p>
+<p>题目要求返回<code>所有可能的结果</code>, 那么只能<strong>暴力搜索所有可能的解</strong>,在这种情况下可以联想到使用<code>回溯法</code>.回溯法(算法思想)可以用递归(编程方法)来实现.</p>
+<h4 id="回溯法">0.0.2.1. 回溯法</h4><p><code>回溯法</code>实际上是一个类似<code>枚举</code>的搜索尝试过程.<br>对当前搜索路径下的未探索区域进行搜索,则可能有两种情况:</p>
+<ol>
+<li>当前未搜索区域满足条件,则保存当前路径并退出当前搜索</li>
+<li>当前为搜索区域需要继续搜索,则遍历当前所有可能的选择,如果其中有选择符合要求,则把这个选择加入当前搜索路径中(递归),并继续搜索未搜索的路径</li>
+</ol>
+<p>负雪明烛版本的回溯法套用模版:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">res = []</span><br><span class="line">path = []</span><br><span class="line"></span><br><span class="line">def backtrack(未探索区域, res, path):</span><br><span class="line">    <span class="keyword">if</span> 未探索区域满足结束条件:</span><br><span class="line">        res.add(path) <span class="comment"># 深度拷贝</span></span><br><span class="line">        <span class="built_in">return</span></span><br><span class="line">    <span class="keyword">for</span> 选择 <span class="keyword">in</span> 未探索区域当前可能的选择:</span><br><span class="line">        <span class="keyword">if</span> 当前选择符合要求:</span><br><span class="line">            path.add(当前选择)</span><br><span class="line">            backtrack(新的未探索区域, res, path)</span><br><span class="line">            path.pop()</span><br></pre></td></tr></table></figure></p>
+<p>其中:<br><code>backtrack</code>表示: 未搜索区域中满足条件的所有可能路径<br><code>path</code>表示: 一条路径<br><code>res</code>表示: 搜索到满足的路径(将合格的path储存到res里)<br><code>path.pop()</code>表示: 在储存一个合格路径path后,需要将其清空,以免阻碍其他搜索</p>
+<p><strong>本题图解</strong><br> <img src="/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/IMG_0847.jpg" class title="This is an example image"></p>
+<h3 id="三、代码">0.0.3. 三、代码</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def partition(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: List[List[str]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        res = []</span><br><span class="line">        path = []</span><br><span class="line">        self.backtrack(s,res,path)</span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line">        </span><br><span class="line">    def backtrack(self,s,res,path):</span><br><span class="line">        <span class="comment">#指针越界,res保存这个合格的path</span></span><br><span class="line">        <span class="keyword">if</span> not s:</span><br><span class="line">            res.append(path)  </span><br><span class="line">            <span class="built_in">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(1,len(s)+1): <span class="comment">#i=1,2,3</span></span><br><span class="line">            <span class="comment">#如果当下切分满足回文串的条件</span></span><br><span class="line">            <span class="keyword">if</span> self.isSubstring(s[:i]):</span><br><span class="line">                <span class="comment">#递归:考虑剩余部分的切分方法</span></span><br><span class="line">                self.backtrack(s[i:], res, path + [s[:i]])</span><br><span class="line">                </span><br><span class="line">    def isSubstring(self, s):</span><br><span class="line">        <span class="keyword">if</span> s == s[::-1]:</span><br><span class="line">            <span class="built_in">return</span> True</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+  
+  
+  
+
+
+
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/27/%E6%B3%95%E8%AF%AD%E8%8A%B1%E5%8D%89%E8%AF%8D%E6%B1%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -957,7 +1050,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1016,7 +1109,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共26.3k字</span>
+  <span class="post-count">博客全站共26.8k字</span>
 </div>
 
         

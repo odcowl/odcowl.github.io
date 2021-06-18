@@ -53,6 +53,29 @@
       </tags>
   </entry>
   <entry>
+    <title>1239.串联字符串的最大长度</title>
+    <url>/2021/06/18/1239-%E4%B8%B2%E8%81%94%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%9C%80%E5%A4%A7%E9%95%BF%E5%BA%A6/</url>
+    <content><![CDATA[<p>LeetCode每日一题之<a href="https://leetcode-cn.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/">串联字符串的最大长度</a>.<br>难度：中等</p>
+<h3 id="题目">0.0.1. 题目</h3><p>给定一个字符串数组<code>arr</code>，字符串<code>s</code>是将<code>arr</code>某一子序列字符串连接所得的字符串，如果<code>s</code>中的每一个字符都只出现过一次，那么它就是一个可行解。</p>
+<p>请返回所有可行解<code>s</code>中最长长度。</p>
+<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：arr = [<span class="string">&quot;un&quot;</span>,<span class="string">&quot;iq&quot;</span>,<span class="string">&quot;ue&quot;</span>]</span><br><span class="line">输出：4</span><br><span class="line">解释：所有可能的串联组合是 <span class="string">&quot;&quot;</span>,<span class="string">&quot;un&quot;</span>,<span class="string">&quot;iq&quot;</span>,<span class="string">&quot;ue&quot;</span>,<span class="string">&quot;uniq&quot;</span> 和 <span class="string">&quot;ique&quot;</span>，最大长度为 4。</span><br></pre></td></tr></table></figure></p>
+<p>示例 2：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：arr = [<span class="string">&quot;cha&quot;</span>,<span class="string">&quot;r&quot;</span>,<span class="string">&quot;act&quot;</span>,<span class="string">&quot;ers&quot;</span>]</span><br><span class="line">输出：6</span><br><span class="line">解释：可能的解答有 <span class="string">&quot;chaers&quot;</span> 和 <span class="string">&quot;acters&quot;</span>。</span><br></pre></td></tr></table></figure></p>
+<p>示例 3：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：arr &#x3D; [&quot;abcdefghijklmnopqrstuvwxyz&quot;]</span><br><span class="line">输出：26</span><br></pre></td></tr></table></figure></p>
+<p>提示：</p>
+<p>1 &lt;= arr.length &lt;= 16<br>1 &lt;= arr[i].length &lt;= 26<br>arr[i] 中只含有小写英文字母</p>
+<h3 id="我的解法-79-85">0.0.2. 我的解法(79/85)</h3><p>很遗憾。。。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxLength(self, arr):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type arr: List[str]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> not arr:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line">        <span class="keyword">if</span> len(arr) == 1:</span><br><span class="line">            <span class="built_in">return</span> len(arr[0])</span><br><span class="line"></span><br><span class="line">        n = len(arr)</span><br><span class="line">        max_ = 0</span><br><span class="line">        act = <span class="string">&quot;&quot;</span></span><br><span class="line">        def isAppeared(str1,str2):</span><br><span class="line">            <span class="keyword">if</span> len(str1) &gt; len(str2):</span><br><span class="line">                str1, str2 = str2, str1</span><br><span class="line">            <span class="keyword">for</span> ch <span class="keyword">in</span> str1:</span><br><span class="line">                <span class="keyword">if</span> ch <span class="keyword">in</span> str2:</span><br><span class="line">                    <span class="built_in">return</span> True</span><br><span class="line">            <span class="built_in">return</span> False</span><br><span class="line">        def isPure(str1):</span><br><span class="line">            <span class="keyword">if</span> len(str1) == len(<span class="built_in">set</span>(str1)):</span><br><span class="line">                <span class="built_in">return</span> True</span><br><span class="line">            <span class="built_in">return</span> False</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> isPure(arr[i]):</span><br><span class="line">                max_ = max(max_,len(arr[i]))</span><br><span class="line">                act = arr[i]</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+1,n):</span><br><span class="line">                <span class="keyword">if</span> not isAppeared(act,arr[j]) and isPure(arr[j]):</span><br><span class="line">                    act = act + arr[j]</span><br><span class="line">                    max_ = max(max_,len(act))</span><br><span class="line">        <span class="built_in">return</span> max_</span><br></pre></td></tr></table></figure>
+<h3 id="好的解法">0.0.3. 好的解法</h3><p>参考:<a href="https://leetcode-cn.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/solution/python-zhi-bai-po-su-de-01bei-bao-by-qub-8441/">benhao</a></p>
+<h4 id="直白质朴法">0.0.3.1. 直白质朴法</h4><p>我的思路总体和这个是一致的<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def maxLength(self, arr: List[str]) -&gt; int:</span><br><span class="line">        def validStr(string):</span><br><span class="line">            <span class="built_in">return</span> len(<span class="built_in">set</span>(string)) == len(string)</span><br><span class="line">        </span><br><span class="line">        dp = []</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> arr:</span><br><span class="line">            <span class="keyword">if</span> not validStr(s):</span><br><span class="line">                <span class="built_in">continue</span></span><br><span class="line">            <span class="keyword">for</span> s_ <span class="keyword">in</span> dp:</span><br><span class="line">                <span class="keyword">if</span> validStr(s_ + s):</span><br><span class="line">                    dp.append(s_ + s)</span><br><span class="line">            dp.append(s)</span><br><span class="line">        <span class="built_in">return</span> len(max(dp,key=len)) <span class="keyword">if</span> dp <span class="keyword">else</span> 0</span><br></pre></td></tr></table></figure></p>
+<h3 id>0.0.4.  </h3><h3 id="回溯法">0.0.5. 回溯法</h3><p><a href="https://leetcode-cn.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/solution/hui-su-di-gui-shi-xian-wu-you-hua-by-nan-feng-14/">NoBug</a></p>
+<p>回溯算法，采用递归实现</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution():</span><br><span class="line">    def maxLength(self, arr):</span><br><span class="line"></span><br><span class="line">        t &#x3D; []</span><br><span class="line">        for s in arr:</span><br><span class="line">            if len(set(s)) &#x3D;&#x3D; len(s):</span><br><span class="line">                t.append(s)</span><br><span class="line">        arr &#x3D; t[:]</span><br><span class="line"></span><br><span class="line">        def dfs(i, tmp):</span><br><span class="line"></span><br><span class="line">            if i &gt;&#x3D; len(arr):</span><br><span class="line">                return len(tmp)</span><br><span class="line">            else:</span><br><span class="line">                if not (set(tmp) &amp; set(arr[i])):</span><br><span class="line">                    return max(dfs(i+1,tmp+arr[i]),dfs(i+1,tmp))</span><br><span class="line">                else:</span><br><span class="line">                    return dfs(i + 1, tmp)</span><br><span class="line"></span><br><span class="line">        l&#x3D;dfs(0,&#39;&#39;)</span><br><span class="line">        return l</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
     <title>1047.删除字符串中的所有相邻重复项(Easy)</title>
     <url>/2021/03/09/1047-%E5%88%A0%E9%99%A4%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%AD%E7%9A%84%E6%89%80%E6%9C%89%E7%9B%B8%E9%82%BB%E9%87%8D%E5%A4%8D%E9%A1%B9-Easy/</url>
     <content><![CDATA[<p>LeetCode每日一题(2021.03.09)之<a href="https://leetcode-cn.com/problems/remove-all-adjacent-duplicates-in-string/">删除字符串中的所有相邻重复项</a><br>难度：简单</p>
@@ -150,34 +173,34 @@
       </tags>
   </entry>
   <entry>
-    <title>15.三数之和(Medium)</title>
-    <url>/2021/02/26/15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C-Medium/</url>
-    <content><![CDATA[<h3 id="题目描述">0.0.1. 题目描述</h3><p>给你一个包含<code>n</code>个整数的数组<code>nums</code>,判断<code>nums</code>中是否存在三个元素a,b,c，使得<code>a+b+c=0</code> ？请你找出所有和为<code>0</code>且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
-<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = [-1,0,1,2,-1,-4]</span><br><span class="line">输出：[[-1,-1,2],[-1,0,1]]</span><br></pre></td></tr></table></figure><br>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>示例3:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [0]</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">* 0 &lt;= nums.length &lt;= 3000</span><br><span class="line">* -10^5 &lt;= nums[i] &lt;= 10^5</span><br></pre></td></tr></table></figure></p>
-<h3 id="排序➕双指针解法">0.0.2. 排序➕双指针解法</h3><p>三数之和这道题我一直思路不清晰，下面的代码也只是复现别人的思路，接下来总结一下：</p>
-<ol>
-<li>边界条件判断，当<code>nums</code>不存在，或<code>len(nums)&lt;3</code>的时候，返回空集合<code>[]</code></li>
-<li>对数组进行从小到大的排序</li>
-<li>对排序后的数组开始遍历<ol>
-<li>如果<code>nums[i]&gt;0</code>,由于数组已经排序过了，那么<code>nums[i]</code>后面的<code>nums[L]</code>和<code>nums[R]</code>肯定比<code>nums[i]</code>更大，三个大于零的数字和不等于零。</li>
-<li>如果<code>nums[i]</code>和<code>nums[i-1]</code>是重复的，跳过</li>
-<li>令左指针指向<code>L = i + 1</code>, 令右指针指向<code>R = len(nums)-1</code>（其实这就是最后一位)<ul>
-<li>如果<code>nums[i]+nums[L]+nums[R]=0</code>，在答案列表里储存此组数；同时，判断<code>nums[L+1]</code>和<code>nums[L]</code>是否重复，及<code>nums[R]</code>和<code>nums[R-1]</code>是否重复，如果是的话，将<code>L，R</code>移到不再重复的位置，然后再令<code>L=L+1</code>,<code>R=R-1</code>即继续循环</li>
-<li>如果<code>nums[i]+nums[L]+nums[R]&gt;0</code>, 说明右指针太大，<code>R</code>向左移动一位, <code>R=R-1</code></li>
-<li>如果<code>nums[i]+nums[L]+nums[R]&lt;0</code>，说明左指针太小，<code>L</code>向右移动一位，<code>L=L+1</code></li>
+    <title>227.基本计算器2(Medium)</title>
+    <url>/2021/03/10/227-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E6%9C%BA2-Medium/</url>
+    <content><![CDATA[<p>每日一题(2021.03.11)之<a href="https://leetcode-cn.com/problems/basic-calculator-ii/">基本计算器</a><br>难度：中等</p>
+<h3 id="一、题目">0.0.1. 一、题目</h3><p>给你一个字符串表达式 <code>s</code> ，请你实现一个基本计算器来计算并返回它的值。</p>
+<p>整数除法仅保留整数部分。</p>
+<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;3+2*2&quot;</span></span><br><span class="line">输出：7</span><br></pre></td></tr></table></figure></p>
+<p>示例 2：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 3/2 &quot;</span></span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure></p>
+<p>示例 3：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 3+5 / 2 &quot;</span></span><br><span class="line">输出：5</span><br></pre></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>1 &lt;= s.length &lt;= 3 * 10^5</li>
+<li>s 由整数和算符 (‘+’, ‘-‘, ‘*‘, ‘/‘) 组成，中间由一些空格隔开</li>
+<li>s 表示一个 有效表达式</li>
+<li>表达式中的所有整数都是非负整数，且在范围 [0, 2^31 - 1] 内</li>
+<li>题目数据保证答案是一个 32-bit 整数</li>
 </ul>
-</li>
-</ol>
-</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def threeSum(self, nums):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 第一步：如果nums不存在或nums不到三个元素，返回空集</span></span><br><span class="line">        <span class="keyword">if</span> not nums or len(nums) &lt; 3:</span><br><span class="line">            <span class="built_in">return</span> []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第二步：对nums从小到大进行排序</span></span><br><span class="line">        nums.sort() </span><br><span class="line">        </span><br><span class="line">        res = []</span><br><span class="line">        <span class="comment"># 第三步：对排序后的nums进行遍历</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; 0:</span><br><span class="line">                <span class="built_in">return</span>  res <span class="comment">#如果nums[i]已经大于0，因为已排序，后面不可能再有数字和nums[i]相加并等于0，返回当下答案</span></span><br><span class="line">            <span class="keyword">if</span> i &gt; 0 and nums[i] == nums[i-1]:</span><br><span class="line">                <span class="built_in">continue</span> <span class="comment">#如果nums[i]和nums[i-1]</span></span><br><span class="line">            L = i + 1 <span class="comment">#当下nums[i]的右边一位</span></span><br><span class="line">            R = len(nums) - 1 <span class="comment">#最后一位</span></span><br><span class="line">            <span class="keyword">while</span> L &lt; R: </span><br><span class="line">                <span class="keyword">if</span> nums[i]+nums[L]+nums[R] == 0:</span><br><span class="line">                    res.append([nums[i],nums[L],nums[R]])</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[L] == nums[L+1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复最右端</span></span><br><span class="line">                        L = L + 1</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[R] == nums[R-1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复的最左端</span></span><br><span class="line">                        R = R - 1</span><br><span class="line">                    L = L + 1</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和大于0，说明nums[R]太大，nums[R]向左移</span></span><br><span class="line">                <span class="keyword">elif</span> nums[i]+nums[L]+nums[R] &gt; 0:</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和小于0，说明nums[L]太小，nums[L]向右移</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    L = L + 1</span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
+<h3 id="解法">0.0.2. 解法</h3><p>好亲切的连环题(误 而且一看还是个medium,比起昨天hard的残虐，稍微松了一口气。。。<br>凭着脑海里昨日的记忆，欣喜若狂的写下这个愚蠢的答案。。。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        sign = 0 <span class="comment"># 0 =&gt; +, 1 =&gt; - , 2 =&gt; *, 3 =&gt; /</span></span><br><span class="line">        res = 0</span><br><span class="line">        n = len(s)</span><br><span class="line">        i = 0</span><br><span class="line">        <span class="keyword">while</span> i&lt;n:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27; &#x27;</span>:</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                sign = 0</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">                sign = 2</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;/&#x27;</span>:</span><br><span class="line">                sign = 3</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i].isdigit():</span><br><span class="line">                tmp = int(s[i])</span><br><span class="line">                i += 1</span><br><span class="line">                <span class="keyword">while</span> i&lt;n and s[i].isdigit():</span><br><span class="line">                    tmp += tmp*10 + int(s[i])</span><br><span class="line">                    i += 1</span><br><span class="line">                <span class="keyword">if</span> sign == 0:</span><br><span class="line">                    res += tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 1:</span><br><span class="line">                    res -= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 2:</span><br><span class="line">                    res *= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 3:</span><br><span class="line">                    res /= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure><br>这个答案在遇到第一个示例<code>s=&quot;3+3*2</code>时就通过不了了，忘记了乘除法比加减法优先计算了。。。这就叫做乐极生悲吗</p>
+<p>然后我又不识好歹的写下了这个答案逃之夭夭</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="built_in">return</span> <span class="built_in">eval</span>(s)</span><br></pre></td></tr></table></figure>
+<p>说正经的，当有加减乘除四种运算符时，考虑运算符优先级别，所以<strong>思路</strong>就是利用<code>栈</code>，假如遇到的是<code>数字</code>、<code>+</code>、<code>-</code>号时直接入栈（<code>-</code>换成<code>-num</code>入栈，之后就可以用<code>sum(stack)</code>返回结果了。遇到<code>*</code>,<code>/</code>的时候先把栈顶弹出，计算完结果后再保存回栈顶。</p>
+<p>这里要注意一个python的细节，<code>//</code>和<code>/</code>的定义不同。<code>//</code>为向下取整，比如<code>(-3)//2 = -2</code>。我们不需要取整，<code>-(abs(一个负数)/num)</code>通过这个方式，就可以正确求职。</p>
+<p>思路代码参考<a href="https://leetcode-cn.com/problems/basic-calculator-ii/solution/xian-cheng-chu-zai-jia-jian-yong-zhan-ba-hplr/">负雪明烛</a> 这肯定是个小天使姐姐</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        stack = []</span><br><span class="line">        pre_op = <span class="string">&#x27;+&#x27;</span></span><br><span class="line">        num = 0</span><br><span class="line">        <span class="keyword">for</span> i,each <span class="keyword">in</span> enumerate(s):</span><br><span class="line">            <span class="keyword">if</span> each.isdigit():</span><br><span class="line">                num = num*10 + int(each)</span><br><span class="line">            <span class="keyword">if</span> i == len(s)-1 or each <span class="keyword">in</span> <span class="string">&#x27;+-*/&#x27;</span>:</span><br><span class="line">                <span class="keyword">if</span> pre_op == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                    stack.append(num)</span><br><span class="line">                <span class="keyword">elif</span> pre_op == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                    stack.append(-num)</span><br><span class="line">                <span class="keyword">elif</span> pre_op == <span class="string">&#x27;*&#x27;</span>:<span class="comment">#遇到乘法，栈顶跳出计算，结果再储存</span></span><br><span class="line">                    stack.append(stack.pop()*num)</span><br><span class="line">                <span class="keyword">elif</span> pre_op == <span class="string">&#x27;/&#x27;</span>:<span class="comment">#遇到除法，栈顶跳出计算，结果再储存</span></span><br><span class="line">                    top = stack.pop()</span><br><span class="line">                    <span class="keyword">if</span> top &lt; 0:</span><br><span class="line">						<span class="comment">#这句稍有不同</span></span><br><span class="line">                        stack.append(-(abs(top)/num))</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        stack.append(top//num)</span><br><span class="line">                pre_op = each</span><br><span class="line">                num = 0</span><br><span class="line"></span><br><span class="line">        <span class="comment">#由于栈内只有数字了（减法用负数表示），直接求和</span></span><br><span class="line">        <span class="built_in">return</span> sum(stack)</span><br></pre></td></tr></table></figure>
+<p>这道题比起昨天的hard模式不是非常难，但是也是细节满满，学到了</p>
 ]]></content>
       <categories>
         <category>LeetCode</category>
       </categories>
-      <tags>
-        <tag>双指针</tag>
-      </tags>
   </entry>
   <entry>
     <title>224.基本计算器(Hard)</title>
@@ -242,92 +265,58 @@
       </tags>
   </entry>
   <entry>
-    <title>227.基本计算器2(Medium)</title>
-    <url>/2021/03/10/227-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E6%9C%BA2-Medium/</url>
-    <content><![CDATA[<p>每日一题(2021.03.11)之<a href="https://leetcode-cn.com/problems/basic-calculator-ii/">基本计算器</a><br>难度：中等</p>
-<h3 id="一、题目">0.0.1. 一、题目</h3><p>给你一个字符串表达式 <code>s</code> ，请你实现一个基本计算器来计算并返回它的值。</p>
-<p>整数除法仅保留整数部分。</p>
-<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;3+2*2&quot;</span></span><br><span class="line">输出：7</span><br></pre></td></tr></table></figure></p>
-<p>示例 2：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 3/2 &quot;</span></span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure></p>
-<p>示例 3：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 3+5 / 2 &quot;</span></span><br><span class="line">输出：5</span><br></pre></td></tr></table></figure></p>
-<p>提示：</p>
-<ul>
-<li>1 &lt;= s.length &lt;= 3 * 10^5</li>
-<li>s 由整数和算符 (‘+’, ‘-‘, ‘*‘, ‘/‘) 组成，中间由一些空格隔开</li>
-<li>s 表示一个 有效表达式</li>
-<li>表达式中的所有整数都是非负整数，且在范围 [0, 2^31 - 1] 内</li>
-<li>题目数据保证答案是一个 32-bit 整数</li>
+    <title>15.三数之和(Medium)</title>
+    <url>/2021/02/26/15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C-Medium/</url>
+    <content><![CDATA[<h3 id="题目描述">0.0.1. 题目描述</h3><p>给你一个包含<code>n</code>个整数的数组<code>nums</code>,判断<code>nums</code>中是否存在三个元素a,b,c，使得<code>a+b+c=0</code> ？请你找出所有和为<code>0</code>且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
+<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = [-1,0,1,2,-1,-4]</span><br><span class="line">输出：[[-1,-1,2],[-1,0,1]]</span><br></pre></td></tr></table></figure><br>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>示例3:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [0]</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">* 0 &lt;= nums.length &lt;= 3000</span><br><span class="line">* -10^5 &lt;= nums[i] &lt;= 10^5</span><br></pre></td></tr></table></figure></p>
+<h3 id="排序➕双指针解法">0.0.2. 排序➕双指针解法</h3><p>三数之和这道题我一直思路不清晰，下面的代码也只是复现别人的思路，接下来总结一下：</p>
+<ol>
+<li>边界条件判断，当<code>nums</code>不存在，或<code>len(nums)&lt;3</code>的时候，返回空集合<code>[]</code></li>
+<li>对数组进行从小到大的排序</li>
+<li>对排序后的数组开始遍历<ol>
+<li>如果<code>nums[i]&gt;0</code>,由于数组已经排序过了，那么<code>nums[i]</code>后面的<code>nums[L]</code>和<code>nums[R]</code>肯定比<code>nums[i]</code>更大，三个大于零的数字和不等于零。</li>
+<li>如果<code>nums[i]</code>和<code>nums[i-1]</code>是重复的，跳过</li>
+<li>令左指针指向<code>L = i + 1</code>, 令右指针指向<code>R = len(nums)-1</code>（其实这就是最后一位)<ul>
+<li>如果<code>nums[i]+nums[L]+nums[R]=0</code>，在答案列表里储存此组数；同时，判断<code>nums[L+1]</code>和<code>nums[L]</code>是否重复，及<code>nums[R]</code>和<code>nums[R-1]</code>是否重复，如果是的话，将<code>L，R</code>移到不再重复的位置，然后再令<code>L=L+1</code>,<code>R=R-1</code>即继续循环</li>
+<li>如果<code>nums[i]+nums[L]+nums[R]&gt;0</code>, 说明右指针太大，<code>R</code>向左移动一位, <code>R=R-1</code></li>
+<li>如果<code>nums[i]+nums[L]+nums[R]&lt;0</code>，说明左指针太小，<code>L</code>向右移动一位，<code>L=L+1</code></li>
 </ul>
-<h3 id="解法">0.0.2. 解法</h3><p>好亲切的连环题(误 而且一看还是个medium,比起昨天hard的残虐，稍微松了一口气。。。<br>凭着脑海里昨日的记忆，欣喜若狂的写下这个愚蠢的答案。。。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        sign = 0 <span class="comment"># 0 =&gt; +, 1 =&gt; - , 2 =&gt; *, 3 =&gt; /</span></span><br><span class="line">        res = 0</span><br><span class="line">        n = len(s)</span><br><span class="line">        i = 0</span><br><span class="line">        <span class="keyword">while</span> i&lt;n:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27; &#x27;</span>:</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                sign = 0</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">                sign = 2</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;/&#x27;</span>:</span><br><span class="line">                sign = 3</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i].isdigit():</span><br><span class="line">                tmp = int(s[i])</span><br><span class="line">                i += 1</span><br><span class="line">                <span class="keyword">while</span> i&lt;n and s[i].isdigit():</span><br><span class="line">                    tmp += tmp*10 + int(s[i])</span><br><span class="line">                    i += 1</span><br><span class="line">                <span class="keyword">if</span> sign == 0:</span><br><span class="line">                    res += tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 1:</span><br><span class="line">                    res -= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 2:</span><br><span class="line">                    res *= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 3:</span><br><span class="line">                    res /= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure><br>这个答案在遇到第一个示例<code>s=&quot;3+3*2</code>时就通过不了了，忘记了乘除法比加减法优先计算了。。。这就叫做乐极生悲吗</p>
-<p>然后我又不识好歹的写下了这个答案逃之夭夭</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="built_in">return</span> <span class="built_in">eval</span>(s)</span><br></pre></td></tr></table></figure>
-<p>说正经的，当有加减乘除四种运算符时，考虑运算符优先级别，所以<strong>思路</strong>就是利用<code>栈</code>，假如遇到的是<code>数字</code>、<code>+</code>、<code>-</code>号时直接入栈（<code>-</code>换成<code>-num</code>入栈，之后就可以用<code>sum(stack)</code>返回结果了。遇到<code>*</code>,<code>/</code>的时候先把栈顶弹出，计算完结果后再保存回栈顶。</p>
-<p>这里要注意一个python的细节，<code>//</code>和<code>/</code>的定义不同。<code>//</code>为向下取整，比如<code>(-3)//2 = -2</code>。我们不需要取整，<code>-(abs(一个负数)/num)</code>通过这个方式，就可以正确求职。</p>
-<p>思路代码参考<a href="https://leetcode-cn.com/problems/basic-calculator-ii/solution/xian-cheng-chu-zai-jia-jian-yong-zhan-ba-hplr/">负雪明烛</a> 这肯定是个小天使姐姐</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        stack = []</span><br><span class="line">        pre_op = <span class="string">&#x27;+&#x27;</span></span><br><span class="line">        num = 0</span><br><span class="line">        <span class="keyword">for</span> i,each <span class="keyword">in</span> enumerate(s):</span><br><span class="line">            <span class="keyword">if</span> each.isdigit():</span><br><span class="line">                num = num*10 + int(each)</span><br><span class="line">            <span class="keyword">if</span> i == len(s)-1 or each <span class="keyword">in</span> <span class="string">&#x27;+-*/&#x27;</span>:</span><br><span class="line">                <span class="keyword">if</span> pre_op == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                    stack.append(num)</span><br><span class="line">                <span class="keyword">elif</span> pre_op == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                    stack.append(-num)</span><br><span class="line">                <span class="keyword">elif</span> pre_op == <span class="string">&#x27;*&#x27;</span>:<span class="comment">#遇到乘法，栈顶跳出计算，结果再储存</span></span><br><span class="line">                    stack.append(stack.pop()*num)</span><br><span class="line">                <span class="keyword">elif</span> pre_op == <span class="string">&#x27;/&#x27;</span>:<span class="comment">#遇到除法，栈顶跳出计算，结果再储存</span></span><br><span class="line">                    top = stack.pop()</span><br><span class="line">                    <span class="keyword">if</span> top &lt; 0:</span><br><span class="line">						<span class="comment">#这句稍有不同</span></span><br><span class="line">                        stack.append(-(abs(top)/num))</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        stack.append(top//num)</span><br><span class="line">                pre_op = each</span><br><span class="line">                num = 0</span><br><span class="line"></span><br><span class="line">        <span class="comment">#由于栈内只有数字了（减法用负数表示），直接求和</span></span><br><span class="line">        <span class="built_in">return</span> sum(stack)</span><br></pre></td></tr></table></figure>
-<p>这道题比起昨天的hard模式不是非常难，但是也是细节满满，学到了</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>331.验证二叉树的前序序列化(Medium)</title>
-    <url>/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/</url>
-    <content><![CDATA[<p>LeetCode每日一题系列（2021.03.12)之<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree">验证二叉树的前序序列化</a><br>难度：中等</p>
-<h3 id="题目">0.0.1. 题目</h3><p>序列化二叉树的一种方法是使用前序遍历。当我们遇到一个非空节点时，我们可以记录下这个节点的值。如果它是一个空节点，我们可以使用一个标记值记录，例如<code>#</code>。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">     _9_</span><br><span class="line">    /   \</span><br><span class="line">   3     2</span><br><span class="line">  / \   / \</span><br><span class="line"> 4   1  <span class="comment">#  6</span></span><br><span class="line">/ \ / \   / \</span><br><span class="line"><span class="comment"># # # #   # #</span></span><br></pre></td></tr></table></figure>
-<p>例如，上面的二叉树可以被序列化为字符串<code>&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</code>，其中 # 代表一个空节点。</p>
-<p>给定一串以逗号分隔的序列，验证它是否是正确的二叉树的前序序列化。编写一个在不重构树的条件下的可行算法。</p>
-<p>每个以逗号分隔的字符或为一个整数或为一个表示 null 指针的 ‘#’ 。</p>
-<p>你可以认为输入格式总是有效的，例如它永远不会包含两个连续的逗号，比如 “1,,3” 。</p>
-<p>示例 1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: <span class="string">&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</span></span><br><span class="line">输出: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
-<p>示例 2:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: &quot;1,#&quot;</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure></p>
-<p>示例 3:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: <span class="string">&quot;9,#,#,1&quot;</span></span><br><span class="line">输出: <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="解法">0.0.2. 解法</h3><p>还是参考<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/solution/pai-an-jiao-jue-de-liang-chong-jie-fa-zh-66nt/">负雪明烛大神</a>的两种解法。</p>
-<p>我做了好长时间这道题，一直卡在了一种case上：<br>当char已经遍历完，最后三个字符刚好是符合<code>9,#,#</code>转换为<code>#</code>这种情况的，但由于我没有利用好while导致一直没有得到正确的答案，而且代码又臭又长，深感水平太差啊。。。</p>
-<h4 id="利用栈的做法">0.0.2.1. 利用栈的做法</h4><p>首先要明确的是树的<strong>前序遍历</strong>是按照<code>根节点，左子树，右子树</code>的顺序来排列的，那<code>9,#,#</code>代表一个两个孩子都为空的节点，即它是一个<code>叶子节点</code>；当一个节点不是<code>叶子节点</code>时，有两种情况：1）两个孩子都非#（空）2）一个孩子为空，一个孩子不为空。</p>
-<p>这道题的重点思路来了：</p>
-<ul>
-<li>把有效的<code>叶子节点</code>用<code>#</code>代替，比如把<code>4##</code>换成<code>#</code>。</li>
-</ul>
-<p>具体操作流程示例如下：</p>
-<p>如输入： “9,3,4,#,#,1,#,#,2,#,6,#,#” ，当遇到 x,#,# 的时候，就把它变为 #。</p>
-<p>模拟一遍过程：</p>
-<p>[9,3,4,#,#] =&gt; [9,3,#]，继续<br>[9,3,#,1,#,#] =&gt; [9,3,#,#] =&gt; [9,#] ，继续<br>[9,#2,#,6,#,#] =&gt; [9,#,2,#,#] =&gt; [9,#,#] =&gt; [#]，结束<br>下面的动画模拟了”9,3,4,#,#,1,#,#,#”的操作过程：</p>
-<img src="/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/1615551708-uxodPT-331.gif" class>
-<p>代码比较简单，最需要注意的还是这个for循环里精准的while：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isValidSerialization(self, preorder):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type preorder: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> preorder.split(<span class="string">&#x27;,&#x27;</span>):</span><br><span class="line">            stack.append(node)</span><br><span class="line">            <span class="keyword">while</span> len(stack) &gt;= 3 and stack[-1] == <span class="string">&#x27;#&#x27;</span> and stack[-2] == <span class="string">&#x27;#&#x27;</span> and stack[-3].isdigit():</span><br><span class="line">                stack = stack[:-3] <span class="comment">#stack.pop(),stack.pop(),stack.pop()</span></span><br><span class="line">                stack.append(<span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> len(stack) == 1 and stack.pop() == <span class="string">&#x27;#&#x27;</span></span><br></pre></td></tr></table></figure></p>
-<ul>
-<li>时间复杂度:O(N)</li>
-<li>空间复杂度:O(N)</li>
-</ul>
-<h4 id="计算入度出度-（还未掌握）">0.0.2.2. 计算入度出度 （还未掌握）</h4><p>除了负雪明烛用了这个办法，另外一个超棒的博主<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/solution/shou-hua-tu-jie-cong-ling-yi-ge-jiao-du-2rnzg/">笨猪爆破组</a>也是写的这个方法，等待学习！</p>
-<p>背景知识：</p>
-<ul>
-<li><strong>入度</strong>: 有多少个节点指向它</li>
-<li><strong>出度</strong>：它指向多少个节点</li>
-</ul>
-<p>在树中，<code>所有节点的入度之和等于出度之和</code>。故，可以通过这个特点判断输入序列是否为有效的！</p>
-<p>在一棵二叉树中：</p>
-<ul>
-<li>每个空节点（ “#” ）会提供 0 个出度和 1 个入度。</li>
-<li>每个非空节点会提供 2 个出度和 1 个入度（根节点的入度是 0）。</li>
-</ul>
-<p><img src="https://pic.leetcode-cn.com/1615552473-UUReDo-331%E8%BD%AC%E5%9B%BE%E7%89%87.003.jpeg" alt="image"></p>
-<p>我们只要把字符串遍历一次，每个节点都累加 diff = 出度 - 入度 。在遍历到任何一个节点的时候，要求diff &gt;= 0，原因是还没遍历到该节点的子节点，所以此时的出度应该大于等于入度。当所有节点遍历完成之后，整棵树的 diff == 0 。</p>
-<p>这里解释一下为什么下面的代码中 diff 的初始化为 1。因为，我们加入一个非空节点时，都会对 diff 先减去 1（入度），再加上 2（出度）。但是由于根节点没有父节点，所以其入度为 0，出度为 2。因此 diff 初始化为 1，是为了在加入根节点的时候，diff 先减去 1（入度），再加上 2（出度），此时 diff 正好应该是2.</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isValidSerialization(self, preorder):</span><br><span class="line">        nodes = preorder.split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">        diff = 1</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> nodes:</span><br><span class="line">            diff -= 1</span><br><span class="line">            <span class="keyword">if</span> diff &lt; 0:</span><br><span class="line">                <span class="built_in">return</span> False</span><br><span class="line">            <span class="keyword">if</span> node != <span class="string">&#x27;#&#x27;</span>:</span><br><span class="line">                diff += 2</span><br><span class="line">        <span class="built_in">return</span> diff == 0</span><br></pre></td></tr></table></figure>
-<ul>
-<li>时间复杂度：O(N)</li>
-<li>空间复杂度：O(1)</li>
-</ul>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def threeSum(self, nums):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 第一步：如果nums不存在或nums不到三个元素，返回空集</span></span><br><span class="line">        <span class="keyword">if</span> not nums or len(nums) &lt; 3:</span><br><span class="line">            <span class="built_in">return</span> []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第二步：对nums从小到大进行排序</span></span><br><span class="line">        nums.sort() </span><br><span class="line">        </span><br><span class="line">        res = []</span><br><span class="line">        <span class="comment"># 第三步：对排序后的nums进行遍历</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; 0:</span><br><span class="line">                <span class="built_in">return</span>  res <span class="comment">#如果nums[i]已经大于0，因为已排序，后面不可能再有数字和nums[i]相加并等于0，返回当下答案</span></span><br><span class="line">            <span class="keyword">if</span> i &gt; 0 and nums[i] == nums[i-1]:</span><br><span class="line">                <span class="built_in">continue</span> <span class="comment">#如果nums[i]和nums[i-1]</span></span><br><span class="line">            L = i + 1 <span class="comment">#当下nums[i]的右边一位</span></span><br><span class="line">            R = len(nums) - 1 <span class="comment">#最后一位</span></span><br><span class="line">            <span class="keyword">while</span> L &lt; R: </span><br><span class="line">                <span class="keyword">if</span> nums[i]+nums[L]+nums[R] == 0:</span><br><span class="line">                    res.append([nums[i],nums[L],nums[R]])</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[L] == nums[L+1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复最右端</span></span><br><span class="line">                        L = L + 1</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[R] == nums[R-1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复的最左端</span></span><br><span class="line">                        R = R - 1</span><br><span class="line">                    L = L + 1</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和大于0，说明nums[R]太大，nums[R]向左移</span></span><br><span class="line">                <span class="keyword">elif</span> nums[i]+nums[L]+nums[R] &gt; 0:</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和小于0，说明nums[L]太小，nums[L]向右移</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    L = L + 1</span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>LeetCode</category>
       </categories>
       <tags>
-        <tag>栈</tag>
+        <tag>双指针</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>692.前K个高频单词(Medium)</title>
+    <url>/2021/05/21/692-%E5%89%8DK%E4%B8%AA%E9%AB%98%E9%A2%91%E5%8D%95%E8%AF%8D-Medium/</url>
+    <content><![CDATA[<p>LeetCode每日一题(2021.05.20)之<a href="https://leetcode-cn.com/problems/top-k-frequent-words/">前k个高频单词</a><br>难度: 中等</p>
+<p>给一非空的单词列表，返回前 k 个出现次数最多的单词。</p>
+<p>返回的答案应该按单词出现频率由高到低排序。如果不同的单词有相同出现频率，按字母顺序排序。</p>
+<p>示例1：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: [<span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>, <span class="string">&quot;leetcode&quot;</span>, <span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>, <span class="string">&quot;coding&quot;</span>], k = 2</span><br><span class="line">输出: [<span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>]</span><br><span class="line">解析: <span class="string">&quot;i&quot;</span> 和 <span class="string">&quot;love&quot;</span> 为出现次数最多的两个单词，均为2次。</span><br><span class="line">    注意，按字母顺序 <span class="string">&quot;i&quot;</span> 在 <span class="string">&quot;love&quot;</span> 之前。</span><br></pre></td></tr></table></figure></p>
+<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: [<span class="string">&quot;the&quot;</span>, <span class="string">&quot;day&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;sunny&quot;</span>, <span class="string">&quot;the&quot;</span>, <span class="string">&quot;the&quot;</span>, <span class="string">&quot;the&quot;</span>, <span class="string">&quot;sunny&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;is&quot;</span>], k = 4</span><br><span class="line">输出: [<span class="string">&quot;the&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;sunny&quot;</span>, <span class="string">&quot;day&quot;</span>]</span><br><span class="line">解析: <span class="string">&quot;the&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;sunny&quot;</span> 和 <span class="string">&quot;day&quot;</span> 是出现次数最多的四个单词，</span><br><span class="line">    出现次数依次为 4, 3, 2 和 1 次。</span><br></pre></td></tr></table></figure></p>
+<p>注意：</p>
+<ul>
+<li>假定 k 总为有效值， 1 ≤ k ≤ 集合元素数。</li>
+<li>输入的单词均由小写字母组成。</li>
+</ul>
+<h3 id="解析">0.0.1. 解析</h3><p>利用双字典排列：</p>
+<ol>
+<li>第一次排列：自带工具collections.Counter计算给出列表words里每一个单词的出现顺序</li>
+<li>第二次排列：按照词频（从大到小）和单词顺序（从小到大）的方式排序，利用lambda</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def topKFrequent(self, words, k):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type words: List[str]</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: List[str]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment">#双排列</span></span><br><span class="line"></span><br><span class="line">        dic = collections.Counter(words)  <span class="comment">#计算词频</span></span><br><span class="line">        res = sorted(dic,key = lambda word:(-dic[word],word)) <span class="comment">#词频倒序，字母正序</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res[:k]</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
   </entry>
   <entry>
     <title>395.至少有K个重复字符的最长子串(Medium)</title>
@@ -426,28 +415,89 @@
       </tags>
   </entry>
   <entry>
-    <title>692.前K个高频单词(Medium)</title>
-    <url>/2021/05/21/692-%E5%89%8DK%E4%B8%AA%E9%AB%98%E9%A2%91%E5%8D%95%E8%AF%8D-Medium/</url>
-    <content><![CDATA[<p>LeetCode每日一题(2021.05.20)之<a href="https://leetcode-cn.com/problems/top-k-frequent-words/">前k个高频单词</a><br>难度: 中等</p>
-<p>给一非空的单词列表，返回前 k 个出现次数最多的单词。</p>
-<p>返回的答案应该按单词出现频率由高到低排序。如果不同的单词有相同出现频率，按字母顺序排序。</p>
-<p>示例1：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: [<span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>, <span class="string">&quot;leetcode&quot;</span>, <span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>, <span class="string">&quot;coding&quot;</span>], k = 2</span><br><span class="line">输出: [<span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>]</span><br><span class="line">解析: <span class="string">&quot;i&quot;</span> 和 <span class="string">&quot;love&quot;</span> 为出现次数最多的两个单词，均为2次。</span><br><span class="line">    注意，按字母顺序 <span class="string">&quot;i&quot;</span> 在 <span class="string">&quot;love&quot;</span> 之前。</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: [<span class="string">&quot;the&quot;</span>, <span class="string">&quot;day&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;sunny&quot;</span>, <span class="string">&quot;the&quot;</span>, <span class="string">&quot;the&quot;</span>, <span class="string">&quot;the&quot;</span>, <span class="string">&quot;sunny&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;is&quot;</span>], k = 4</span><br><span class="line">输出: [<span class="string">&quot;the&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;sunny&quot;</span>, <span class="string">&quot;day&quot;</span>]</span><br><span class="line">解析: <span class="string">&quot;the&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;sunny&quot;</span> 和 <span class="string">&quot;day&quot;</span> 是出现次数最多的四个单词，</span><br><span class="line">    出现次数依次为 4, 3, 2 和 1 次。</span><br></pre></td></tr></table></figure></p>
-<p>注意：</p>
+    <title>92.反转链表2(Medium)-未掌握</title>
+    <url>/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/</url>
+    <content><![CDATA[<p>LeetCode每日一题(2021.03.18)之<a href="https://leetcode-cn.com/problems/reverse-linked-list-ii/">反转链表2</a></p>
+<p>给你单链表的头指针 head 和两个整数 left 和 right ，其中 left &lt;= right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。</p>
+<p>示例1:</p>
+<img src="/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/rev2ex2.jpeg" class>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5], left = 2, right = 4</span><br><span class="line">输出：[1,4,3,2,5]</span><br></pre></td></tr></table></figure>
+<p>示例2:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：head = [5], left = 1, right = 1</span><br><span class="line">输出：[5]</span><br></pre></td></tr></table></figure>
+<p><strong>提示</strong>：</p>
 <ul>
-<li>假定 k 总为有效值， 1 ≤ k ≤ 集合元素数。</li>
-<li>输入的单词均由小写字母组成。</li>
+<li>链表中节点数目为 n</li>
+<li>1 &lt;= n &lt;= 500</li>
+<li>-500 &lt;= Node.val &lt;= 500</li>
+<li>1 &lt;= left &lt;= right &lt;= n</li>
 </ul>
-<h3 id="解析">0.0.1. 解析</h3><p>利用双字典排列：</p>
-<ol>
-<li>第一次排列：自带工具collections.Counter计算给出列表words里每一个单词的出现顺序</li>
-<li>第二次排列：按照词频（从大到小）和单词顺序（从小到大）的方式排序，利用lambda</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def topKFrequent(self, words, k):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type words: List[str]</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: List[str]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment">#双排列</span></span><br><span class="line"></span><br><span class="line">        dic = collections.Counter(words)  <span class="comment">#计算词频</span></span><br><span class="line">        res = sorted(dic,key = lambda word:(-dic[word],word)) <span class="comment">#词频倒序，字母正序</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res[:k]</span><br></pre></td></tr></table></figure>
+<p><strong>进阶</strong>：<br>你可以使用一趟扫描完成反转吗？</p>
+<h3 id="解法">0.0.1. 解法</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line">class Solution(object):</span><br><span class="line">    def reverseBetween(self, head, left, right):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :type left: int</span></span><br><span class="line"><span class="string">        :type right: int</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        count = 1</span><br><span class="line">        </span><br><span class="line">        dummy = ListNode(0)</span><br><span class="line">        dummy.next = head</span><br><span class="line">        </span><br><span class="line">        pre = dummy</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> pre.next and count &lt; left:</span><br><span class="line">            pre = pre.next</span><br><span class="line">            count += 1</span><br><span class="line"></span><br><span class="line">        cur = pre.next</span><br><span class="line">        tail = cur</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> cur and count &lt;= right:</span><br><span class="line">            nxt = cur.next</span><br><span class="line">            cur.next = pre.next</span><br><span class="line">            pre.next = cur</span><br><span class="line">            tail.next = nxt</span><br><span class="line">            cur = nxt</span><br><span class="line">            count += 1</span><br><span class="line">        <span class="built_in">return</span> dummy.next</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>LeetCode</category>
       </categories>
+      <tags>
+        <tag>链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>331.验证二叉树的前序序列化(Medium)</title>
+    <url>/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/</url>
+    <content><![CDATA[<p>LeetCode每日一题系列（2021.03.12)之<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree">验证二叉树的前序序列化</a><br>难度：中等</p>
+<h3 id="题目">0.0.1. 题目</h3><p>序列化二叉树的一种方法是使用前序遍历。当我们遇到一个非空节点时，我们可以记录下这个节点的值。如果它是一个空节点，我们可以使用一个标记值记录，例如<code>#</code>。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">     _9_</span><br><span class="line">    /   \</span><br><span class="line">   3     2</span><br><span class="line">  / \   / \</span><br><span class="line"> 4   1  <span class="comment">#  6</span></span><br><span class="line">/ \ / \   / \</span><br><span class="line"><span class="comment"># # # #   # #</span></span><br></pre></td></tr></table></figure>
+<p>例如，上面的二叉树可以被序列化为字符串<code>&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</code>，其中 # 代表一个空节点。</p>
+<p>给定一串以逗号分隔的序列，验证它是否是正确的二叉树的前序序列化。编写一个在不重构树的条件下的可行算法。</p>
+<p>每个以逗号分隔的字符或为一个整数或为一个表示 null 指针的 ‘#’ 。</p>
+<p>你可以认为输入格式总是有效的，例如它永远不会包含两个连续的逗号，比如 “1,,3” 。</p>
+<p>示例 1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: <span class="string">&quot;9,3,4,#,#,1,#,#,2,#,6,#,#&quot;</span></span><br><span class="line">输出: <span class="literal">true</span></span><br></pre></td></tr></table></figure></p>
+<p>示例 2:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入: &quot;1,#&quot;</span><br><span class="line">输出: false</span><br></pre></td></tr></table></figure></p>
+<p>示例 3:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: <span class="string">&quot;9,#,#,1&quot;</span></span><br><span class="line">输出: <span class="literal">false</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="解法">0.0.2. 解法</h3><p>还是参考<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/solution/pai-an-jiao-jue-de-liang-chong-jie-fa-zh-66nt/">负雪明烛大神</a>的两种解法。</p>
+<p>我做了好长时间这道题，一直卡在了一种case上：<br>当char已经遍历完，最后三个字符刚好是符合<code>9,#,#</code>转换为<code>#</code>这种情况的，但由于我没有利用好while导致一直没有得到正确的答案，而且代码又臭又长，深感水平太差啊。。。</p>
+<h4 id="利用栈的做法">0.0.2.1. 利用栈的做法</h4><p>首先要明确的是树的<strong>前序遍历</strong>是按照<code>根节点，左子树，右子树</code>的顺序来排列的，那<code>9,#,#</code>代表一个两个孩子都为空的节点，即它是一个<code>叶子节点</code>；当一个节点不是<code>叶子节点</code>时，有两种情况：1）两个孩子都非#（空）2）一个孩子为空，一个孩子不为空。</p>
+<p>这道题的重点思路来了：</p>
+<ul>
+<li>把有效的<code>叶子节点</code>用<code>#</code>代替，比如把<code>4##</code>换成<code>#</code>。</li>
+</ul>
+<p>具体操作流程示例如下：</p>
+<p>如输入： “9,3,4,#,#,1,#,#,2,#,6,#,#” ，当遇到 x,#,# 的时候，就把它变为 #。</p>
+<p>模拟一遍过程：</p>
+<p>[9,3,4,#,#] =&gt; [9,3,#]，继续<br>[9,3,#,1,#,#] =&gt; [9,3,#,#] =&gt; [9,#] ，继续<br>[9,#2,#,6,#,#] =&gt; [9,#,2,#,#] =&gt; [9,#,#] =&gt; [#]，结束<br>下面的动画模拟了”9,3,4,#,#,1,#,#,#”的操作过程：</p>
+<img src="/2021/03/12/331-%E9%AA%8C%E8%AF%81%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E5%89%8D%E5%BA%8F%E5%BA%8F%E5%88%97%E5%8C%96-Medium/1615551708-uxodPT-331.gif" class>
+<p>代码比较简单，最需要注意的还是这个for循环里精准的while：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isValidSerialization(self, preorder):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type preorder: str</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        stack = []</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> preorder.split(<span class="string">&#x27;,&#x27;</span>):</span><br><span class="line">            stack.append(node)</span><br><span class="line">            <span class="keyword">while</span> len(stack) &gt;= 3 and stack[-1] == <span class="string">&#x27;#&#x27;</span> and stack[-2] == <span class="string">&#x27;#&#x27;</span> and stack[-3].isdigit():</span><br><span class="line">                stack = stack[:-3] <span class="comment">#stack.pop(),stack.pop(),stack.pop()</span></span><br><span class="line">                stack.append(<span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> len(stack) == 1 and stack.pop() == <span class="string">&#x27;#&#x27;</span></span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>时间复杂度:O(N)</li>
+<li>空间复杂度:O(N)</li>
+</ul>
+<h4 id="计算入度出度-（还未掌握）">0.0.2.2. 计算入度出度 （还未掌握）</h4><p>除了负雪明烛用了这个办法，另外一个超棒的博主<a href="https://leetcode-cn.com/problems/verify-preorder-serialization-of-a-binary-tree/solution/shou-hua-tu-jie-cong-ling-yi-ge-jiao-du-2rnzg/">笨猪爆破组</a>也是写的这个方法，等待学习！</p>
+<p>背景知识：</p>
+<ul>
+<li><strong>入度</strong>: 有多少个节点指向它</li>
+<li><strong>出度</strong>：它指向多少个节点</li>
+</ul>
+<p>在树中，<code>所有节点的入度之和等于出度之和</code>。故，可以通过这个特点判断输入序列是否为有效的！</p>
+<p>在一棵二叉树中：</p>
+<ul>
+<li>每个空节点（ “#” ）会提供 0 个出度和 1 个入度。</li>
+<li>每个非空节点会提供 2 个出度和 1 个入度（根节点的入度是 0）。</li>
+</ul>
+<p><img src="https://pic.leetcode-cn.com/1615552473-UUReDo-331%E8%BD%AC%E5%9B%BE%E7%89%87.003.jpeg" alt="image"></p>
+<p>我们只要把字符串遍历一次，每个节点都累加 diff = 出度 - 入度 。在遍历到任何一个节点的时候，要求diff &gt;= 0，原因是还没遍历到该节点的子节点，所以此时的出度应该大于等于入度。当所有节点遍历完成之后，整棵树的 diff == 0 。</p>
+<p>这里解释一下为什么下面的代码中 diff 的初始化为 1。因为，我们加入一个非空节点时，都会对 diff 先减去 1（入度），再加上 2（出度）。但是由于根节点没有父节点，所以其入度为 0，出度为 2。因此 diff 初始化为 1，是为了在加入根节点的时候，diff 先减去 1（入度），再加上 2（出度），此时 diff 正好应该是2.</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def isValidSerialization(self, preorder):</span><br><span class="line">        nodes = preorder.split(<span class="string">&#x27;,&#x27;</span>)</span><br><span class="line">        diff = 1</span><br><span class="line">        <span class="keyword">for</span> node <span class="keyword">in</span> nodes:</span><br><span class="line">            diff -= 1</span><br><span class="line">            <span class="keyword">if</span> diff &lt; 0:</span><br><span class="line">                <span class="built_in">return</span> False</span><br><span class="line">            <span class="keyword">if</span> node != <span class="string">&#x27;#&#x27;</span>:</span><br><span class="line">                diff += 2</span><br><span class="line">        <span class="built_in">return</span> diff == 0</span><br></pre></td></tr></table></figure>
+<ul>
+<li>时间复杂度：O(N)</li>
+<li>空间复杂度：O(1)</li>
+</ul>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>栈</tag>
+      </tags>
   </entry>
   <entry>
     <title>7.整数反转(Easy)</title>
@@ -476,50 +526,6 @@
       <categories>
         <category>LeetCode</category>
       </categories>
-  </entry>
-  <entry>
-    <title>856.转置矩阵(Easy)</title>
-    <url>/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.02.25)之<a href="https://leetcode-cn.com/problems/transpose-matrix/">转置矩阵</a><br>难度：简单</p>
-<h2 id="一、题目">0.1. 一、题目</h2><p>给你一个二维整数数组 matrix， 返回 matrix 的 转置矩阵 。<br>矩阵的 转置 是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p>
-<p><img src="https://assets.leetcode.com/uploads/2021/02/10/hint_transpose.png" alt="867.转置矩阵"></p>
-<h3 id="示例">0.1.1. 示例</h3><p>示例1:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ 输入: matrix&#x3D;[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">$ 输出: [[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">m == matrix.length</span><br><span class="line">n == matrix[i].length</span><br><span class="line">1 &lt;= m, n &lt;= 1000</span><br><span class="line">1 &lt;= m * n &lt;= 105</span><br><span class="line">-10^9 &lt;= matrix[i][j] &lt;= 10^9</span><br></pre></td></tr></table></figure></p>
-<h3 id="我的解法">0.1.2. 我的解法</h3><p>转置矩阵即将M行N列的矩阵，转换成N行M列的矩阵，注意有可能N和M并不相等，所以必须要新建一个result矩阵（否则可能会出现out of range的情况）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def transpose(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        m,n = len(matrix),len(matrix[0])</span><br><span class="line">        <span class="comment">#m为行数，n为列数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#不需要numpy的矩阵建造方法</span></span><br><span class="line">        new_matrix = [[0 <span class="keyword">for</span> i <span class="keyword">in</span> range(m)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                new_matrix[i][j] = matrix[j][i]</span><br><span class="line">        <span class="built_in">return</span> new_matrix</span><br></pre></td></tr></table></figure>
-<p>这道题的意思就是原来的每一行转换成了后来的每一列，为了数学关系上更清晰，下面图片为解析。可以看出，对于一个相同的元素，新地址（坐标）和旧地址（坐标）就是横纵轴交换的关系：<br><img src="/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/jiexi.png" class title="This is an example image"></p>
-<p>一个错误的思路：（这个思路就是没有考虑到新矩阵的大小关系）<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">	for j in range(i,m):</span><br><span class="line">		matrix[i][j], matrix[j][i] &#x3D;  matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure></p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>92.反转链表2(Medium)-未掌握</title>
-    <url>/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/</url>
-    <content><![CDATA[<p>LeetCode每日一题(2021.03.18)之<a href="https://leetcode-cn.com/problems/reverse-linked-list-ii/">反转链表2</a></p>
-<p>给你单链表的头指针 head 和两个整数 left 和 right ，其中 left &lt;= right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。</p>
-<p>示例1:</p>
-<img src="/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/rev2ex2.jpeg" class>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5], left = 2, right = 4</span><br><span class="line">输出：[1,4,3,2,5]</span><br></pre></td></tr></table></figure>
-<p>示例2:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：head = [5], left = 1, right = 1</span><br><span class="line">输出：[5]</span><br></pre></td></tr></table></figure>
-<p><strong>提示</strong>：</p>
-<ul>
-<li>链表中节点数目为 n</li>
-<li>1 &lt;= n &lt;= 500</li>
-<li>-500 &lt;= Node.val &lt;= 500</li>
-<li>1 &lt;= left &lt;= right &lt;= n</li>
-</ul>
-<p><strong>进阶</strong>：<br>你可以使用一趟扫描完成反转吗？</p>
-<h3 id="解法">0.0.1. 解法</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line">class Solution(object):</span><br><span class="line">    def reverseBetween(self, head, left, right):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :type left: int</span></span><br><span class="line"><span class="string">        :type right: int</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        count = 1</span><br><span class="line">        </span><br><span class="line">        dummy = ListNode(0)</span><br><span class="line">        dummy.next = head</span><br><span class="line">        </span><br><span class="line">        pre = dummy</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> pre.next and count &lt; left:</span><br><span class="line">            pre = pre.next</span><br><span class="line">            count += 1</span><br><span class="line"></span><br><span class="line">        cur = pre.next</span><br><span class="line">        tail = cur</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> cur and count &lt;= right:</span><br><span class="line">            nxt = cur.next</span><br><span class="line">            cur.next = pre.next</span><br><span class="line">            pre.next = cur</span><br><span class="line">            tail.next = nxt</span><br><span class="line">            cur = nxt</span><br><span class="line">            count += 1</span><br><span class="line">        <span class="built_in">return</span> dummy.next</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>链表</tag>
-      </tags>
   </entry>
   <entry>
     <title>Hexo搭建相关问题</title>
@@ -554,31 +560,21 @@
       </tags>
   </entry>
   <entry>
-    <title>Toeic备考记录</title>
-    <url>/2021/05/02/Toeic%E5%A4%87%E8%80%83%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h3 id="碎碎念">0.0.1. 碎碎念</h3><p>近日本来想赶着回国前把托业考下来，结果机票熔断了，这就是后话了…</p>
-<p>匆忙的报了4.30号的托业，加上super express correction一共170欧，考点在93区的centrex。</p>
-<p><a href="https://www.etsglobal.org/fr/fr/session/search/ile-de-france/paris?testTypeIds[]=100291&amp;date=2021-05-02&amp;showMap=false">报名地址查询</a></p>
-<p>找工作的时候一直没有一个上得了台面的英语成绩，多年前裸考的雅思5.5写了还不如不写QAQ</p>
-<p>当天13点考完，16点多成绩就发到邮件了，速度超快 930/990，也大于国内六级了，终于有一个普通人都有的英语成绩可以写在cv上了QAQ</p>
-
-<h3 id="备考真题的网站">0.0.2. 备考真题的网站</h3><p><a href="https://www.bilibili.com/video/BV1fh411S7VH/">2021最新托业全套练习</a></p>
-<p><a href="https://www.bilibili.com/video/BV1qo4y1d7xW/">2021托业听力练习含答案</a></p>
-<p><a href="https://www.ets.org/s/toeic/pdf/toeic-listening-reading-sample-test-updated.pdf">sample test</a></p>
-<p><a href="https://global-exam.com/blog/zh/toeic-score-conversion-table/#:~:text=%E5%A6%82%E4%BD%95%E8%A8%88%E7%AE%97%E5%88%86%E6%95%B8%EF%BC%9F,%E5%89%87%E5%B0%87%E7%8D%B2%E5%BE%97495%E5%88%86%E3%80%82">Toeic分数换算表</a></p>
-<p><a href="https://github.com/odcowl/Codes_for_blog/blob/master/toeic/109.pdf">托业的语法句型题目pdf</a></p>
-<div class="pdfobject-container" data-target="https://cdn.jsdelivr.net/gh/odcowl/Codes_for_blog/blob/master/toeic/109.pdf" data-height="500px"></div>
-<p>希望下一步还是可以拿下雅思/托福这种被大众更承认的成绩QAQ</p>
+    <title>856.转置矩阵(Easy)</title>
+    <url>/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/</url>
+    <content><![CDATA[<p>力扣每日一题系列(2021.02.25)之<a href="https://leetcode-cn.com/problems/transpose-matrix/">转置矩阵</a><br>难度：简单</p>
+<h2 id="一、题目">0.1. 一、题目</h2><p>给你一个二维整数数组 matrix， 返回 matrix 的 转置矩阵 。<br>矩阵的 转置 是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/10/hint_transpose.png" alt="867.转置矩阵"></p>
+<h3 id="示例">0.1.1. 示例</h3><p>示例1:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ 输入: matrix&#x3D;[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">$ 输出: [[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure></p>
+<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">m == matrix.length</span><br><span class="line">n == matrix[i].length</span><br><span class="line">1 &lt;= m, n &lt;= 1000</span><br><span class="line">1 &lt;= m * n &lt;= 105</span><br><span class="line">-10^9 &lt;= matrix[i][j] &lt;= 10^9</span><br></pre></td></tr></table></figure></p>
+<h3 id="我的解法">0.1.2. 我的解法</h3><p>转置矩阵即将M行N列的矩阵，转换成N行M列的矩阵，注意有可能N和M并不相等，所以必须要新建一个result矩阵（否则可能会出现out of range的情况）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def transpose(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        m,n = len(matrix),len(matrix[0])</span><br><span class="line">        <span class="comment">#m为行数，n为列数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#不需要numpy的矩阵建造方法</span></span><br><span class="line">        new_matrix = [[0 <span class="keyword">for</span> i <span class="keyword">in</span> range(m)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                new_matrix[i][j] = matrix[j][i]</span><br><span class="line">        <span class="built_in">return</span> new_matrix</span><br></pre></td></tr></table></figure>
+<p>这道题的意思就是原来的每一行转换成了后来的每一列，为了数学关系上更清晰，下面图片为解析。可以看出，对于一个相同的元素，新地址（坐标）和旧地址（坐标）就是横纵轴交换的关系：<br><img src="/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/jiexi.png" class title="This is an example image"></p>
+<p>一个错误的思路：（这个思路就是没有考虑到新矩阵的大小关系）<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">	for j in range(i,m):</span><br><span class="line">		matrix[i][j], matrix[j][i] &#x3D;  matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <categories>
-        <category>杂七杂八</category>
+        <category>LeetCode</category>
       </categories>
-  </entry>
-  <entry>
-    <title>cv</title>
-    <url>/2021/04/09/cv/</url>
-    <content><![CDATA[<img src="/2021/04/09/cv/FR_yujiaYANG.jpg" class>
-]]></content>
   </entry>
   <entry>
     <title>向Hexo博客插入Jupyter Notebook的办法</title>
@@ -634,6 +630,33 @@
 ]]></content>
       <categories>
         <category>声学参数</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>cv</title>
+    <url>/2021/04/09/cv/</url>
+    <content><![CDATA[<img src="/2021/04/09/cv/FR_yujiaYANG.jpg" class>
+]]></content>
+  </entry>
+  <entry>
+    <title>Toeic备考记录</title>
+    <url>/2021/05/02/Toeic%E5%A4%87%E8%80%83%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h3 id="碎碎念">0.0.1. 碎碎念</h3><p>近日本来想赶着回国前把托业考下来，结果机票熔断了，这就是后话了…</p>
+<p>匆忙的报了4.30号的托业，加上super express correction一共170欧，考点在93区的centrex。</p>
+<p><a href="https://www.etsglobal.org/fr/fr/session/search/ile-de-france/paris?testTypeIds[]=100291&amp;date=2021-05-02&amp;showMap=false">报名地址查询</a></p>
+<p>找工作的时候一直没有一个上得了台面的英语成绩，多年前裸考的雅思5.5写了还不如不写QAQ</p>
+<p>当天13点考完，16点多成绩就发到邮件了，速度超快 930/990，也大于国内六级了，终于有一个普通人都有的英语成绩可以写在cv上了QAQ</p>
+
+<h3 id="备考真题的网站">0.0.2. 备考真题的网站</h3><p><a href="https://www.bilibili.com/video/BV1fh411S7VH/">2021最新托业全套练习</a></p>
+<p><a href="https://www.bilibili.com/video/BV1qo4y1d7xW/">2021托业听力练习含答案</a></p>
+<p><a href="https://www.ets.org/s/toeic/pdf/toeic-listening-reading-sample-test-updated.pdf">sample test</a></p>
+<p><a href="https://global-exam.com/blog/zh/toeic-score-conversion-table/#:~:text=%E5%A6%82%E4%BD%95%E8%A8%88%E7%AE%97%E5%88%86%E6%95%B8%EF%BC%9F,%E5%89%87%E5%B0%87%E7%8D%B2%E5%BE%97495%E5%88%86%E3%80%82">Toeic分数换算表</a></p>
+<p><a href="https://github.com/odcowl/Codes_for_blog/blob/master/toeic/109.pdf">托业的语法句型题目pdf</a></p>
+<div class="pdfobject-container" data-target="https://cdn.jsdelivr.net/gh/odcowl/Codes_for_blog/blob/master/toeic/109.pdf" data-height="500px"></div>
+<p>希望下一步还是可以拿下雅思/托福这种被大众更承认的成绩QAQ</p>
+]]></content>
+      <categories>
+        <category>杂七杂八</category>
       </categories>
   </entry>
   <entry>
@@ -703,31 +726,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>法语花卉词汇</title>
-    <url>/2021/02/27/%E6%B3%95%E8%AF%AD%E8%8A%B1%E5%8D%89%E8%AF%8D%E6%B1%87/</url>
-    <content><![CDATA[<h2 id="Les-fleurs-en-francais">0.1. Les fleurs en français</h2><p><strong>mimosa n.m 含羞草</strong></p>
-<img src="/2021/02/27/%E6%B3%95%E8%AF%AD%E8%8A%B1%E5%8D%89%E8%AF%8D%E6%B1%87/13292-mimosa-dhiver-le-gaulois-6.jpeg" class title="This is an example image">
-<p>含羞草（Mimosa pudica）是一种不寻常的植物，因为它通过折叠叶子来响应触摸。出于这个原因，它通常也被称为敏感植物。好奇的猫可能喜欢在这种植物的叶子上击球，因为它会响应他们俏皮的姿势。幸运的是，根据康涅狄格大学农业与自然资源学院的说法，如果你的猫决定蚕食一两片叶子，他就不会受到伤害：这种植物没有毒性。</p>
-<p><em>Le langage des fleurs</em></p>
-<blockquote>
-<p>Jaune lumière, le mimosa est riche de significations : on le compare naturellement au soleil. Il symbolise également la magnificence, l’élégance, la tendresse et délivre un message d’amitié.</p>
-<p>含羞草淡淡的黄色，有着丰富的含义：我们它与太阳相比较。它象征着华丽，优雅，温柔并传递着友谊的信息。</p>
-</blockquote>
-<hr>
-<p><strong>tulipe n.f 郁金香</strong></p>
-<img src="/2021/02/27/%E6%B3%95%E8%AF%AD%E8%8A%B1%E5%8D%89%E8%AF%8D%E6%B1%87/tulipe-135728.jpg" class>
-<p>郁金香，百合科郁金香属的多年草本植物，花期是4-5月。</p>
-<p>郁金香对猫咪有毒，临床症状为呕吐，抑郁，腹泻，过度分泌唾液。球茎中毒素浓度最高。</p>
-<p><em>Le dangage des fleurs 花语</em></p>
-<blockquote>
-<p>Dans le langage des fleurs, la tulipe symbolise d’une manière générale l’amour, mais avec des nuances qui varient selon sa couleur. Pourpre, elle incarne la royauté. Blanche, elle demande le pardon.<br>在郁金香的花语中，它一般象征着爱情，但因其颜色不同还有细微差别。比如紫色，代表着皇家气派；而纯白，则是为了表达歉意，请求原谅。</p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>法语学习</category>
-      </categories>
-  </entry>
-  <entry>
     <title>读书笔记 杏仁</title>
     <url>/2021/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%9D%8F%E4%BB%81/</url>
     <content><![CDATA[<img src="/2021/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%9D%8F%E4%BB%81/fengmian.jpeg" class>
@@ -777,6 +775,31 @@
 ]]></content>
       <categories>
         <category>2021读书笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>法语花卉词汇</title>
+    <url>/2021/02/27/%E6%B3%95%E8%AF%AD%E8%8A%B1%E5%8D%89%E8%AF%8D%E6%B1%87/</url>
+    <content><![CDATA[<h2 id="Les-fleurs-en-francais">0.1. Les fleurs en français</h2><p><strong>mimosa n.m 含羞草</strong></p>
+<img src="/2021/02/27/%E6%B3%95%E8%AF%AD%E8%8A%B1%E5%8D%89%E8%AF%8D%E6%B1%87/13292-mimosa-dhiver-le-gaulois-6.jpeg" class title="This is an example image">
+<p>含羞草（Mimosa pudica）是一种不寻常的植物，因为它通过折叠叶子来响应触摸。出于这个原因，它通常也被称为敏感植物。好奇的猫可能喜欢在这种植物的叶子上击球，因为它会响应他们俏皮的姿势。幸运的是，根据康涅狄格大学农业与自然资源学院的说法，如果你的猫决定蚕食一两片叶子，他就不会受到伤害：这种植物没有毒性。</p>
+<p><em>Le langage des fleurs</em></p>
+<blockquote>
+<p>Jaune lumière, le mimosa est riche de significations : on le compare naturellement au soleil. Il symbolise également la magnificence, l’élégance, la tendresse et délivre un message d’amitié.</p>
+<p>含羞草淡淡的黄色，有着丰富的含义：我们它与太阳相比较。它象征着华丽，优雅，温柔并传递着友谊的信息。</p>
+</blockquote>
+<hr>
+<p><strong>tulipe n.f 郁金香</strong></p>
+<img src="/2021/02/27/%E6%B3%95%E8%AF%AD%E8%8A%B1%E5%8D%89%E8%AF%8D%E6%B1%87/tulipe-135728.jpg" class>
+<p>郁金香，百合科郁金香属的多年草本植物，花期是4-5月。</p>
+<p>郁金香对猫咪有毒，临床症状为呕吐，抑郁，腹泻，过度分泌唾液。球茎中毒素浓度最高。</p>
+<p><em>Le dangage des fleurs 花语</em></p>
+<blockquote>
+<p>Dans le langage des fleurs, la tulipe symbolise d’une manière générale l’amour, mais avec des nuances qui varient selon sa couleur. Pourpre, elle incarne la royauté. Blanche, elle demande le pardon.<br>在郁金香的花语中，它一般象征着爱情，但因其颜色不同还有细微差别。比如紫色，代表着皇家气派；而纯白，则是为了表达歉意，请求原谅。</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>法语学习</category>
       </categories>
   </entry>
   <entry>
