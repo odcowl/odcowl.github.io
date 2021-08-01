@@ -634,7 +634,7 @@
       </tags>
   </entry>
   <entry>
-    <title>回国隔离第1、2天</title>
+    <title>回国隔离第1、2天+lc171</title>
     <url>/2021/08/01/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC1%E3%80%812%E5%A4%A9/</url>
     <content><![CDATA[<p>7.29这一天，离开了生活了接近7年的法国。当每次笑吟吟的跟别人说”彻底回国“的时候，心里还是会偷偷的不舍一下。</p>
 <p>飞行一路顺利，能躺平睡觉的座位也是这么多年最舒服的一次，暖心的穿着防护服的小姐姐小哥哥们，很多人都很辛苦，感谢他们的付出，感谢祖国的迎接。</p>
@@ -657,6 +657,7 @@
 <p>我希望隔离期间把一本英文小说看完（Dan Brown的Origin），老史某一年送的；LeetCode每天做一题；然后继续学习C++。</p>
 <img src="/2021/08/01/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC1%E3%80%812%E5%A4%A9/lc-easy.png" class> 
 <p>快乐easy😄</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def titleToNumber(self, columnTitle):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type columnTitle: str</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">        n &#x3D; len(columnTitle)</span><br><span class="line">        </span><br><span class="line">        letters &#x3D; &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ&quot;</span><br><span class="line">        dic1 &#x3D; &#123;&#125;</span><br><span class="line">        for i in range(len(letters)):</span><br><span class="line">            dic1[letters[i]] &#x3D; i+1</span><br><span class="line">        </span><br><span class="line">        ans &#x3D; 0</span><br><span class="line">        for i in range(n):</span><br><span class="line">            ch &#x3D; columnTitle[::-1][i]</span><br><span class="line">            if i &#x3D;&#x3D; 0:</span><br><span class="line">                ans +&#x3D; dic1[ch]</span><br><span class="line">            else:</span><br><span class="line">                ans +&#x3D; 26**i * dic1[ch]</span><br><span class="line">        </span><br><span class="line">        return ans</span><br></pre></td></tr></table></figure>
 <p>午饭又前后又困了，在天猫上定了提子和零食们随着午饭送到了，但完全没力气吃午饭，昏昏睡睡又到了下午测温的时间。然后群里面有人说可能4个确诊了（害怕</p>
 <p>结果没睡多久又被送晚饭的敲醒！（崩溃</p>
 <p>于是吃了这样一顿巨大的晚饭</p>
@@ -669,6 +670,29 @@
 <img src="/2021/08/01/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC1%E3%80%812%E5%A4%A9/D2-bobi.jpeg" class>
 <img src="/2021/08/01/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC1%E3%80%812%E5%A4%A9/D2-tico.jpeg" class>
 <p>第二天又浑浑噩噩的过去了，欲知后事，且看明日😄</p>
+]]></content>
+      <categories>
+        <category>回国隔离</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>回国隔离第3天+lc1337</title>
+    <url>/2021/08/02/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC3%E5%A4%A9/</url>
+    <content><![CDATA[<p>不知不觉第三天大凌晨了又，隔离的时间比想象中过的要快<br>昨天晚上4点睡，早上10点左右醒的（测体温+拿早餐），慢慢开始恢复了（即将打脸</p>
+<p>今日份的早餐，铛铛——<br><img src="/2021/08/02/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC3%E5%A4%A9/D3-p.jpeg" class></p>
+<p>早上吃完早餐之后一直在想办法找可以邮寄手机卡到酒店的方法，最后还是我妈去现场营业厅用她的名义办了一张，顺丰寄来，希望明天能快点寄到。</p>
+<p>中午份的盒饭——<br><img src="/2021/08/02/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC3%E5%A4%A9/D3-m.jpeg" class></p>
+<p>下午，打脸开始了——又睡到18点，被晚饭敲醒= =<br><img src="/2021/08/02/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC3%E5%A4%A9/D3-s.jpeg" class></p>
+<p>但是今天的晚饭真的巨难吃，冷掉的秋刀鱼，刺也不好剔，另外一个菜实在没有吃出是鸡还是鸭，有点恶心。把蔬菜全部吃完之后就打电话给前台说取消一顿饭了，哎。。。</p>
+<p>晚上看了苏苏的100米决赛还有羽毛球女单夺冠，好刺激好激动！</p>
+<img src="/2021/08/02/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC3%E5%A4%A9/D3-m1.jpeg" class>
+<p>顺便吃了一小串提子。。然后没忍住把自热火锅也吃了。。<br><img src="/2021/08/02/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC3%E5%A4%A9/D3-f.jpeg" class><br><img src="/2021/08/02/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC3%E5%A4%A9/D3-fruit.jpeg" class></p>
+<p>突然发现记录到这里全是吃饭- -</p>
+<p>晚上的时间比较清闲，先把力扣打开刷了每日一题的1337. 矩阵中战斗力最弱的 K 行（中国区的每日一题安排的都紧跟实时，比如八一建军节做这个，前段时间情人节做了个hard的牵手题。。。）。</p>
+<p>题目链接：<a href="https://leetcode-cn.com/problems/the-k-weakest-rows-in-a-matrix">1337.矩阵中战斗力最弱的k行</a></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def kWeakestRows(self, mat, k):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type mat: List[List[int]]</span><br><span class="line">        :type k: int</span><br><span class="line">        :rtype: List[int]</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">        m, n &#x3D; len(mat), len(mat[0]) #行数，列数</span><br><span class="line">        numbers &#x3D; [[0,0] for _ in range(m)]</span><br><span class="line"></span><br><span class="line">        for i in range(m):</span><br><span class="line">            h &#x3D; mat[i]</span><br><span class="line">            num &#x3D; 0</span><br><span class="line">            for j in range(n):</span><br><span class="line">                if not h[j] &#x3D;&#x3D; 1:</span><br><span class="line">                    pass</span><br><span class="line">                else:</span><br><span class="line">                    num +&#x3D; 1</span><br><span class="line">            numbers[i][0] &#x3D; i</span><br><span class="line">            numbers[i][1] &#x3D; num</span><br><span class="line">        </span><br><span class="line">        numbers &#x3D; sorted(numbers, key &#x3D;lambda d:(d[1],d[0]), reverse &#x3D; False)</span><br><span class="line">        </span><br><span class="line">        ans &#x3D; [0] * k</span><br><span class="line">        for i in range(k):</span><br><span class="line">            ans[i] &#x3D; numbers[i][0]</span><br><span class="line">        </span><br><span class="line">        return ans</span><br></pre></td></tr></table></figure>
+
+<p>做完题之后看了看Dan Brown 的origin的书，但我决定换一本哈哈哈，因为里面的词对职业需求用处不大，明天找找推荐书籍xD</p>
 ]]></content>
       <categories>
         <category>回国隔离</category>
