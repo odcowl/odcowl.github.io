@@ -148,34 +148,6 @@
       </tags>
   </entry>
   <entry>
-    <title>131.分割回文串(Medium)</title>
-    <url>/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.03.07)之<a href="https://leetcode-cn.com/problems/palindrome-partitioning/">分割回文串</a><br>难度:中等</p>
-<h3 id="一、题目">0.0.1. 一、题目</h3><p>给你一个字符串<code>s</code>,请你将<code>s</code>分割成一些子串,使每个子串都是回文串.返回<code>s</code>所有可能的分割方案.<br><strong>回文串</strong>是正着读和反着读都一样的字符串.</p>
-<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: s=<span class="string">&quot;aab&quot;</span></span><br><span class="line">输出: [[<span class="string">&quot;a&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>],[<span class="string">&quot;aa&quot;</span>,<span class="string">&quot;b&quot;</span>]]</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;a&quot;</span></span><br><span class="line">输出: [[<span class="string">&quot;a&quot;</span>]]</span><br></pre></td></tr></table></figure></p>
-<p>提示:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 16</span><br><span class="line">s 仅由小写英文字母组成</span><br></pre></td></tr></table></figure></p>
-<h3 id="二、题解">0.0.2. 二、题解</h3><p>代码思路学习:<a href="https://leetcode-cn.com/problems/palindrome-partitioning/solution/hui-su-fa-si-lu-yu-mo-ban-by-fuxuemingzh-azhz/">负雪明烛</a></p>
-<p>题目要求返回<code>所有可能的结果</code>, 那么只能<strong>暴力搜索所有可能的解</strong>,在这种情况下可以联想到使用<code>回溯法</code>.回溯法(算法思想)可以用递归(编程方法)来实现.</p>
-<h4 id="回溯法">0.0.2.1. 回溯法</h4><p><code>回溯法</code>实际上是一个类似<code>枚举</code>的搜索尝试过程.<br>对当前搜索路径下的未探索区域进行搜索,则可能有两种情况:</p>
-<ol>
-<li>当前未搜索区域满足条件,则保存当前路径并退出当前搜索</li>
-<li>当前为搜索区域需要继续搜索,则遍历当前所有可能的选择,如果其中有选择符合要求,则把这个选择加入当前搜索路径中(递归),并继续搜索未搜索的路径</li>
-</ol>
-<p>负雪明烛版本的回溯法套用模版:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">res = []</span><br><span class="line">path = []</span><br><span class="line"></span><br><span class="line">def backtrack(未探索区域, res, path):</span><br><span class="line">    <span class="keyword">if</span> 未探索区域满足结束条件:</span><br><span class="line">        res.add(path) <span class="comment"># 深度拷贝</span></span><br><span class="line">        <span class="built_in">return</span></span><br><span class="line">    <span class="keyword">for</span> 选择 <span class="keyword">in</span> 未探索区域当前可能的选择:</span><br><span class="line">        <span class="keyword">if</span> 当前选择符合要求:</span><br><span class="line">            path.add(当前选择)</span><br><span class="line">            backtrack(新的未探索区域, res, path)</span><br><span class="line">            path.pop()</span><br></pre></td></tr></table></figure></p>
-<p>其中:<br><code>backtrack</code>表示: 未搜索区域中满足条件的所有可能路径<br><code>path</code>表示: 一条路径<br><code>res</code>表示: 搜索到满足的路径(将合格的path储存到res里)<br><code>path.pop()</code>表示: 在储存一个合格路径path后,需要将其清空,以免阻碍其他搜索</p>
-<p><strong>本题图解</strong><br> <img src="/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/IMG_0847.jpg" class title="This is an example image"></p>
-<h3 id="三、代码">0.0.3. 三、代码</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def partition(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: List[List[str]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        res = []</span><br><span class="line">        path = []</span><br><span class="line">        self.backtrack(s,res,path)</span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line">        </span><br><span class="line">    def backtrack(self,s,res,path):</span><br><span class="line">        <span class="comment">#指针越界,res保存这个合格的path</span></span><br><span class="line">        <span class="keyword">if</span> not s:</span><br><span class="line">            res.append(path)  </span><br><span class="line">            <span class="built_in">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(1,len(s)+1): <span class="comment">#i=1,2,3</span></span><br><span class="line">            <span class="comment">#如果当下切分满足回文串的条件</span></span><br><span class="line">            <span class="keyword">if</span> self.isSubstring(s[:i]):</span><br><span class="line">                <span class="comment">#递归:考虑剩余部分的切分方法</span></span><br><span class="line">                self.backtrack(s[i:], res, path + [s[:i]])</span><br><span class="line">                </span><br><span class="line">    def isSubstring(self, s):</span><br><span class="line">        <span class="keyword">if</span> s == s[::-1]:</span><br><span class="line">            <span class="built_in">return</span> True</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>回溯</tag>
-        <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>15.三数之和(Medium)</title>
     <url>/2021/02/26/15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C-Medium/</url>
     <content><![CDATA[<h3 id="题目描述">0.0.1. 题目描述</h3><p>给你一个包含<code>n</code>个整数的数组<code>nums</code>,判断<code>nums</code>中是否存在三个元素a,b,c，使得<code>a+b+c=0</code> ？请你找出所有和为<code>0</code>且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
@@ -203,6 +175,34 @@
       </categories>
       <tags>
         <tag>双指针</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>131.分割回文串(Medium)</title>
+    <url>/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/</url>
+    <content><![CDATA[<p>力扣每日一题系列(2021.03.07)之<a href="https://leetcode-cn.com/problems/palindrome-partitioning/">分割回文串</a><br>难度:中等</p>
+<h3 id="一、题目">0.0.1. 一、题目</h3><p>给你一个字符串<code>s</code>,请你将<code>s</code>分割成一些子串,使每个子串都是回文串.返回<code>s</code>所有可能的分割方案.<br><strong>回文串</strong>是正着读和反着读都一样的字符串.</p>
+<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: s=<span class="string">&quot;aab&quot;</span></span><br><span class="line">输出: [[<span class="string">&quot;a&quot;</span>,<span class="string">&quot;a&quot;</span>,<span class="string">&quot;b&quot;</span>],[<span class="string">&quot;aa&quot;</span>,<span class="string">&quot;b&quot;</span>]]</span><br></pre></td></tr></table></figure></p>
+<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: s = <span class="string">&quot;a&quot;</span></span><br><span class="line">输出: [[<span class="string">&quot;a&quot;</span>]]</span><br></pre></td></tr></table></figure></p>
+<p>提示:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 16</span><br><span class="line">s 仅由小写英文字母组成</span><br></pre></td></tr></table></figure></p>
+<h3 id="二、题解">0.0.2. 二、题解</h3><p>代码思路学习:<a href="https://leetcode-cn.com/problems/palindrome-partitioning/solution/hui-su-fa-si-lu-yu-mo-ban-by-fuxuemingzh-azhz/">负雪明烛</a></p>
+<p>题目要求返回<code>所有可能的结果</code>, 那么只能<strong>暴力搜索所有可能的解</strong>,在这种情况下可以联想到使用<code>回溯法</code>.回溯法(算法思想)可以用递归(编程方法)来实现.</p>
+<h4 id="回溯法">0.0.2.1. 回溯法</h4><p><code>回溯法</code>实际上是一个类似<code>枚举</code>的搜索尝试过程.<br>对当前搜索路径下的未探索区域进行搜索,则可能有两种情况:</p>
+<ol>
+<li>当前未搜索区域满足条件,则保存当前路径并退出当前搜索</li>
+<li>当前为搜索区域需要继续搜索,则遍历当前所有可能的选择,如果其中有选择符合要求,则把这个选择加入当前搜索路径中(递归),并继续搜索未搜索的路径</li>
+</ol>
+<p>负雪明烛版本的回溯法套用模版:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">res = []</span><br><span class="line">path = []</span><br><span class="line"></span><br><span class="line">def backtrack(未探索区域, res, path):</span><br><span class="line">    <span class="keyword">if</span> 未探索区域满足结束条件:</span><br><span class="line">        res.add(path) <span class="comment"># 深度拷贝</span></span><br><span class="line">        <span class="built_in">return</span></span><br><span class="line">    <span class="keyword">for</span> 选择 <span class="keyword">in</span> 未探索区域当前可能的选择:</span><br><span class="line">        <span class="keyword">if</span> 当前选择符合要求:</span><br><span class="line">            path.add(当前选择)</span><br><span class="line">            backtrack(新的未探索区域, res, path)</span><br><span class="line">            path.pop()</span><br></pre></td></tr></table></figure></p>
+<p>其中:<br><code>backtrack</code>表示: 未搜索区域中满足条件的所有可能路径<br><code>path</code>表示: 一条路径<br><code>res</code>表示: 搜索到满足的路径(将合格的path储存到res里)<br><code>path.pop()</code>表示: 在储存一个合格路径path后,需要将其清空,以免阻碍其他搜索</p>
+<p><strong>本题图解</strong><br> <img src="/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/IMG_0847.jpg" class title="This is an example image"></p>
+<h3 id="三、代码">0.0.3. 三、代码</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def partition(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: List[List[str]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        res = []</span><br><span class="line">        path = []</span><br><span class="line">        self.backtrack(s,res,path)</span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line">        </span><br><span class="line">    def backtrack(self,s,res,path):</span><br><span class="line">        <span class="comment">#指针越界,res保存这个合格的path</span></span><br><span class="line">        <span class="keyword">if</span> not s:</span><br><span class="line">            res.append(path)  </span><br><span class="line">            <span class="built_in">return</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(1,len(s)+1): <span class="comment">#i=1,2,3</span></span><br><span class="line">            <span class="comment">#如果当下切分满足回文串的条件</span></span><br><span class="line">            <span class="keyword">if</span> self.isSubstring(s[:i]):</span><br><span class="line">                <span class="comment">#递归:考虑剩余部分的切分方法</span></span><br><span class="line">                self.backtrack(s[i:], res, path + [s[:i]])</span><br><span class="line">                </span><br><span class="line">    def isSubstring(self, s):</span><br><span class="line">        <span class="keyword">if</span> s == s[::-1]:</span><br><span class="line">            <span class="built_in">return</span> True</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>回溯</tag>
+        <tag>递归</tag>
       </tags>
   </entry>
   <entry>
@@ -391,24 +391,6 @@
       </tags>
   </entry>
   <entry>
-    <title>451.根据字符出现频率排序</title>
-    <url>/2021/07/03/451-%E6%A0%B9%E6%8D%AE%E5%AD%97%E7%AC%A6%E5%87%BA%E7%8E%B0%E9%A2%91%E7%8E%87%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p>LeetCode每日一题之<a href="https://leetcode-cn.com/problems/sort-characters-by-frequency/">451.根据字符出现频率排序</a>。</p>
-<p>今天这题比较简单，周六愉快</p>
-<p>给定一个字符串，请将字符串里的字符按照出现的频率降序排列。</p>
-<h3 id="题目">0.0.1. 题目</h3><p>示例 1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;tree&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;eert&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line"><span class="string">&#x27;e&#x27;</span>出现两次，<span class="string">&#x27;r&#x27;</span>和<span class="string">&#x27;t&#x27;</span>都只出现一次。</span><br><span class="line">因此<span class="string">&#x27;e&#x27;</span>必须出现在<span class="string">&#x27;r&#x27;</span>和<span class="string">&#x27;t&#x27;</span>之前。此外，<span class="string">&quot;eetr&quot;</span>也是一个有效的答案。</span><br></pre></td></tr></table></figure></p>
-<p>示例 2:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;cccaaa&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;cccaaa&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line"><span class="string">&#x27;c&#x27;</span>和<span class="string">&#x27;a&#x27;</span>都出现三次。此外，<span class="string">&quot;aaaccc&quot;</span>也是有效的答案。</span><br><span class="line">注意<span class="string">&quot;cacaca&quot;</span>是不正确的，因为相同的字母必须放在一起。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>示例 3:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;Aabb&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;bbAa&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line">此外，<span class="string">&quot;bbaA&quot;</span>也是一个有效的答案，但<span class="string">&quot;Aabb&quot;</span>是不正确的。</span><br><span class="line">注意<span class="string">&#x27;A&#x27;</span>和<span class="string">&#x27;a&#x27;</span>被认为是两种不同的字符。</span><br></pre></td></tr></table></figure>
-<h3 id="我的解法">0.0.2. 我的解法</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def frequencySort(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 哈希表</span></span><br><span class="line">        d = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> not ch <span class="keyword">in</span> d:</span><br><span class="line">                d[ch] = 1</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                d[ch] += 1</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 把字典按value的大小从大到小排序</span></span><br><span class="line">        a = sorted(d.items(), key=lambda x: x[1], reverse=True)</span><br><span class="line">        </span><br><span class="line">        res = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> aa <span class="keyword">in</span> a:</span><br><span class="line">            <span class="comment"># 小坑：出现多次的字母需要+=多次</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(aa[1]):</span><br><span class="line">                res += str(aa[0])</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>但是因为相当于最多遍历了两次字典，时间还是比较慢的<br>平平无奇小代码吧。。</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
     <title>54.螺旋矩阵(Medium)</title>
     <url>/2021/03/17/54-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-Medium/</url>
     <content><![CDATA[<p>LeetCode每日一题(2021.03.15)之<a href="https://leetcode-cn.com/problems/spiral-matrix/">螺旋矩阵</a><br>难度：中等</p>
@@ -468,6 +450,24 @@
       <tags>
         <tag>打印矩阵</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>451.根据字符出现频率排序</title>
+    <url>/2021/07/03/451-%E6%A0%B9%E6%8D%AE%E5%AD%97%E7%AC%A6%E5%87%BA%E7%8E%B0%E9%A2%91%E7%8E%87%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p>LeetCode每日一题之<a href="https://leetcode-cn.com/problems/sort-characters-by-frequency/">451.根据字符出现频率排序</a>。</p>
+<p>今天这题比较简单，周六愉快</p>
+<p>给定一个字符串，请将字符串里的字符按照出现的频率降序排列。</p>
+<h3 id="题目">0.0.1. 题目</h3><p>示例 1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;tree&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;eert&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line"><span class="string">&#x27;e&#x27;</span>出现两次，<span class="string">&#x27;r&#x27;</span>和<span class="string">&#x27;t&#x27;</span>都只出现一次。</span><br><span class="line">因此<span class="string">&#x27;e&#x27;</span>必须出现在<span class="string">&#x27;r&#x27;</span>和<span class="string">&#x27;t&#x27;</span>之前。此外，<span class="string">&quot;eetr&quot;</span>也是一个有效的答案。</span><br></pre></td></tr></table></figure></p>
+<p>示例 2:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;cccaaa&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;cccaaa&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line"><span class="string">&#x27;c&#x27;</span>和<span class="string">&#x27;a&#x27;</span>都出现三次。此外，<span class="string">&quot;aaaccc&quot;</span>也是有效的答案。</span><br><span class="line">注意<span class="string">&quot;cacaca&quot;</span>是不正确的，因为相同的字母必须放在一起。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>示例 3:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;Aabb&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;bbAa&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line">此外，<span class="string">&quot;bbaA&quot;</span>也是一个有效的答案，但<span class="string">&quot;Aabb&quot;</span>是不正确的。</span><br><span class="line">注意<span class="string">&#x27;A&#x27;</span>和<span class="string">&#x27;a&#x27;</span>被认为是两种不同的字符。</span><br></pre></td></tr></table></figure>
+<h3 id="我的解法">0.0.2. 我的解法</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def frequencySort(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 哈希表</span></span><br><span class="line">        d = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> not ch <span class="keyword">in</span> d:</span><br><span class="line">                d[ch] = 1</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                d[ch] += 1</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 把字典按value的大小从大到小排序</span></span><br><span class="line">        a = sorted(d.items(), key=lambda x: x[1], reverse=True)</span><br><span class="line">        </span><br><span class="line">        res = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> aa <span class="keyword">in</span> a:</span><br><span class="line">            <span class="comment"># 小坑：出现多次的字母需要+=多次</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(aa[1]):</span><br><span class="line">                res += str(aa[0])</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>但是因为相当于最多遍历了两次字典，时间还是比较慢的<br>平平无奇小代码吧。。</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
   </entry>
   <entry>
     <title>692.前K个高频单词(Medium)</title>
@@ -724,7 +724,7 @@
 <img src="/2021/08/03/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC5%E5%A4%A9/D5-p.jpeg" class>
 <p>其实这个炒粉也没有非常的好吃，但还是吃很香</p>
 <p>早上吃完饭收拾了下房间，消化消化，开始做有氧运动</p>
-<p>虽然带了switch但我这个不中用的电脑也没啥用。。。所以就用电脑播</p>
+<p>虽然带了switch但我这个不中用的电视也没啥用。。。所以就用电脑播</p>
 <img src="/2021/08/03/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC5%E5%A4%A9/D5-dance.jpeg" class>
 <p>做了一小时左右有氧，感觉很棒！May J Lee的教程很不错</p>
 <p>然后今日最衰的事情来了</p>
@@ -739,6 +739,14 @@
 <p>中午的饭本来我是取消了的，但不知道为啥还是送上来了，我的素食餐很不错，喜欢</p>
 <img src="/2021/08/03/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC5%E5%A4%A9/D5-m.jpeg" class>
 <p>收拾东西的时候开始看 我在他乡挺好的 这部剧，真的不错！大家演技都在线的好剧，而且很多事情只有漂泊在外才能感受到。。</p>
+<p>下午做啥忘了哈哈哈哈</p>
+<img src="/2021/08/03/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC5%E5%A4%A9/D5-s.jpeg" class>
+<p>晚餐的丝瓜。。。哦买噶超好吃。。。</p>
+<p>看了奥运，卡的点有点尴尬° °</p>
+<img src="/2021/08/03/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC5%E5%A4%A9/D5-o.jpeg" class>
+<p>前两天做的核算结果也出啦，阴性比耶！！！</p>
+<img src="/2021/08/03/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC5%E5%A4%A9/D5-w.jpeg" class>
+<p>晚上终于敲定了一件重要的事情，赞！</p>
 ]]></content>
       <categories>
         <category>回国隔离</category>
