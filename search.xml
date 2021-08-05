@@ -757,6 +757,46 @@
       </categories>
   </entry>
   <entry>
+    <title>回国隔离第6天+lc611</title>
+    <url>/2021/08/05/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC6%E5%A4%A9-lc611/</url>
+    <content><![CDATA[<p>2021.08.04</p>
+<p>今日份的碎碎念。。</p>
+<p>早上5：40就醒了，做了海洋饼干的晨起拉伸+帕梅拉的有氧操<br>饿。。饿。。拆了老史买的巧克力吃</p>
+<img src="/2021/08/05/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC6%E5%A4%A9-lc611/D6-p.jpeg" class>
+<p>早餐来了之后来不及拍照了！！狠狠咬了一口才记得拍照！！</p>
+<p>不知道是不是醒太早，又做了运动了缘故，吃完饭就头晕晕乎乎的，看知否知否，也不是很看得下去</p>
+<img src="/2021/08/05/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC6%E5%A4%A9-lc611/D6-m.jpeg" class>
+<p>午饭的这个番茄蛋花汤yyds！好喝好喝！</p>
+<img src="/2021/08/05/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC6%E5%A4%A9-lc611/D6-lc.png" class>
+<p>今天做了<a href="https://leetcode-cn.com/problems/valid-triangle-number/">LeetCode第611题</a>（实际上第二天才做出来的）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&quot;&quot;&quot;</span><br><span class="line">:type nums: List[int]</span><br><span class="line">:rtype: int</span><br><span class="line">&quot;&quot;&quot;</span><br><span class="line">n &#x3D; len(nums)</span><br><span class="line">nums &#x3D; sorted(nums)</span><br><span class="line">ans &#x3D; 0</span><br><span class="line"></span><br><span class="line">for i in range(n):</span><br><span class="line">    k &#x3D; i+1</span><br><span class="line">    for j in range(i+1,n):</span><br><span class="line">        while k + 1 &lt; n and nums[k+1] &lt; nums[i] + nums[j]:</span><br><span class="line">            k +&#x3D; 1</span><br><span class="line">        ans +&#x3D; max(k-j,0)</span><br><span class="line">return ans</span><br></pre></td></tr></table></figure>
+<img src="/2021/08/05/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC6%E5%A4%A9-lc611/D6-s.jpeg" class>
+<p>晚餐有豆腐，喜欢豆腐！</p>
+<p>吃完晚饭后收到了快递，两本书都到了，一本C++，一本学习思维。</p>
+<img src="/2021/08/05/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC6%E5%A4%A9-lc611/D6-l.jpeg" class>
+<p>佛山每天晚上都下雨，奇奇怪怪</p>
+<p>明天见啦</p>
+]]></content>
+      <categories>
+        <category>回国隔离</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>回国隔离第7天+lc802</title>
+    <url>/2021/08/05/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC7%E5%A4%A9-lc802/</url>
+    <content><![CDATA[<p>2021.08.05</p>
+<p>今天是晚起的一天，醒来就9:40了，跟我昨晚吃的5-htp是不是有关系？</p>
+<p>早餐依旧棒棒，黄金糕+炒饭+玉米，还有久违的酸奶 哦耶</p>
+<img src="/2021/08/05/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC7%E5%A4%A9-lc802/D7-p.jpeg" class>
+<p>早上收拾了房间，把到处都擦拭了一遍，洗好晒好的衣服收收好，酒店又和刚住进来差不多啦</p>
+<p>喝了好多塑料空瓶子的水，心里感觉非常不是滋味，环保的角度来说，应该给5l的那种大水更好，而且由于会被当作「医疗废品」就算进行垃圾分类，还是会被统一和所有东西一起处理</p>
+<p>冲了一杯挂耳咖啡来醒神</p>
+]]></content>
+      <categories>
+        <category>回国隔离</category>
+      </categories>
+  </entry>
+  <entry>
     <title>短时傅里叶变换STFT及Python/Matlab实现</title>
     <url>/2021/03/10/%E5%A3%B0%E5%AD%A6%E5%8F%82%E6%95%B0-%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2STFT/</url>
     <content><![CDATA[<p>一天一个<strong>声学参数</strong>之短时傅里叶变换STFT及其Python和Matlab的实现，在C++稍微上手一点儿后来补充C++的版本。</p>
