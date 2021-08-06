@@ -804,6 +804,25 @@
       </categories>
   </entry>
   <entry>
+    <title>回国隔离第8天</title>
+    <url>/2021/08/06/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC8%E5%A4%A9/</url>
+    <content><![CDATA[<p>2021.08.06</p>
+<p>隔离的日子越过越快（!=  快活）</p>
+<p>昨晚失眠睡不着，估计是那杯挂耳😂但是嘴里总是馋这口，哎</p>
+<p>早上闹钟7-8点无数个终于8点30起来了，吃了隔离以来最难吃的一顿早餐，然后等待9:30做隔离以来的第二个PCR</p>
+<p>讲真最可怕的一个PCR还是降落机场做的那次了，之后的都是小case</p>
+<img src="/2021/08/06/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC8%E5%A4%A9/D8-p.jpeg" class>
+<p>和可爱的bobi tico近距离对话</p>
+<img src="/2021/08/06/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC8%E5%A4%A9/D8-bobi.jpeg" class>
+<img src="/2021/08/06/%E5%9B%9E%E5%9B%BD%E9%9A%94%E7%A6%BB%E7%AC%AC8%E5%A4%A9/D8-tico.jpeg" class>
+<p>隔离的日子并不「孤独」但很容易丧失方向，所以还是应该尽快结束找到生活本有的节奏才好</p>
+<p>最难的不是学习一件事物本身，而是在迷惘中成为自己的灯塔</p>
+]]></content>
+      <categories>
+        <category>回国隔离</category>
+      </categories>
+  </entry>
+  <entry>
     <title>短时傅里叶变换STFT及Python/Matlab实现</title>
     <url>/2021/03/10/%E5%A3%B0%E5%AD%A6%E5%8F%82%E6%95%B0-%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2STFT/</url>
     <content><![CDATA[<p>一天一个<strong>声学参数</strong>之短时傅里叶变换STFT及其Python和Matlab的实现，在C++稍微上手一点儿后来补充C++的版本。</p>
