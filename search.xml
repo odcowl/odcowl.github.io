@@ -744,6 +744,38 @@
       </categories>
   </entry>
   <entry>
+    <title>Hexo搭建相关问题</title>
+    <url>/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/</url>
+    <content><![CDATA[<h2 id="一、文章创建和发布问题">0.1. 一、文章创建和发布问题</h2><h3 id="常用命令">0.1.1. 常用命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo g 【生成静态文件】</span><br><span class="line">$ hexo d 【部署到网站或服务器，部署之前需要先生成静态文件】</span><br><span class="line">$ hexo clean 【清除缓存文件(db.json)和已经生成的静态文件(public)】</span><br></pre></td></tr></table></figure>
+<h3 id="创建一个新的发布-Create-a-new-Post">0.1.2. 创建一个新的发布 Create a new Post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My new post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>更多信息 More info<a href="https://hexo.io/docs/writing.html">writing</a></p>
+<h3 id="运行服务器-Run-server">0.1.3. 运行服务器 Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>更多信息 More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="生成统计文件-Generate-static-files">0.1.4. 生成统计文件 Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>更多信息 More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="部署到远程站点-Deploy-to-remote-sites">0.1.5. 部署到远程站点 Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>更多信息 More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+<h2 id="二、文章编辑问题">0.2. 二、文章编辑问题</h2><h3 id="显示不出分类、标签问题">0.2.1. 显示不出分类、标签问题</h3><h4 id="1-查看themes-next-config-yml主题配置文件">0.2.1.1. 1.查看themes/next/_config.yml主题配置文件</h4><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/menu.png" class title="This is an example image">
+<p>打开主题配置文件<code>_config.yml</code>，在vim编辑器内用<code>/</code>搜索<code>menu</code>，确定categories和tags是取消注释状态的</p>
+<h4 id="2-添加分类模块">0.2.1.2. 2.添加分类模块</h4><p>在主文件夹<code>Blog</code>页面下<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page categories</span><br><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure><br>在source文件夹现在有了<code>categories/index.md</code>和<code>tags/index.md</code>两个新文件<br><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/categories.png" class title="This is an example image"><br>以<code>categories/index.md</code>为例子,应该自行添加第二行:<br><code>type: categories</code><br>注意:和categories中有一个空格</p>
+<h4 id="3-文章中添加标签或分类的方法及效果">0.2.1.3. 3.文章中添加标签或分类的方法及效果</h4><p>在创建新文章后的顶端添加categories或tags的名字，注意空格<br><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/test.png" class title="This is an example image"></p>
+<p>最后的效果:<br><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/show.png" class title="This is an example image"></p>
+<h4 id="4-参考">0.2.1.4. 4.参考</h4><p><a href="https://blog.csdn.net/Wonz5130/article/details/84666519">Hexo搭建博客显示不出分类、标签问题</a></p>
+<h3 id="Hexo博客搭建之在文章中插入图片">0.2.2. Hexo博客搭建之在文章中插入图片</h3><h4 id="1-本地引用">0.2.2.1. 1.本地引用</h4><p>当中只用到少量图片时，可以将图片统一放在<code>source/images</code>文件夹中，通过markdown语法添加<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ![](&#x2F;images&#x2F;image.png)</span><br></pre></td></tr></table></figure></p>
+<h4 id="2-相对路径">0.2.2.2. 2.相对路径</h4><p>图片可以放在文章自己的目录中，需要先配置<code>_config.yml</code>文件，将<code>post_asset_folder</code>设置为true。设置完之后，在执行<code>hexo new &quot;post_name&quot;</code> 这个操作后，在<code>source/_posts</code>中会自动生成<code>post_name.md</code>和<code>post_name</code>同名文件夹。这时候只需要将图片放在<code>post_name</code>文件夹中，文章中可以直接使用相对路径引用了。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ![](image.png)</span><br></pre></td></tr></table></figure>
+<p>但是!!重点来了，这个经典的markdown语句只能保证文章中可以显示出图片，但首页上不限时，很丑。可以同时显示的语句是:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ &#123;% asset_img exemple.png This is an example image %&#125;</span><br></pre></td></tr></table></figure><br>这时候就大功告成啦！</p>
+<h4 id="3-云引用">0.2.2.3. 3.云引用</h4><p>比如一些免费的CDN服务，如Cloudinary等免费生成的url地址，直接用markdown语法引用即可。</p>
+<h4 id="4-参考-1">0.2.2.4. 4.参考</h4><p><a href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">Hexo博客搭建之在文章中插入图片</a></p>
+]]></content>
+      <categories>
+        <category>网页</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>C++PrimerPlus_4.1数组</title>
     <url>/2021/08/09/C-PrimerPlus-4-1%E6%95%B0%E7%BB%84/</url>
     <content><![CDATA[<h1 id="复合类型">1. 复合类型</h1><h2 id="4-1-数组">1.1. 4.1 数组</h2><p><code>数组(array)是一种数据格式，能够存储多个同类型的值</code>。</p>
@@ -811,38 +843,6 @@
       <categories>
         <category>杂七杂八</category>
       </categories>
-  </entry>
-  <entry>
-    <title>Hexo搭建相关问题</title>
-    <url>/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/</url>
-    <content><![CDATA[<h2 id="一、文章创建和发布问题">0.1. 一、文章创建和发布问题</h2><h3 id="常用命令">0.1.1. 常用命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo g 【生成静态文件】</span><br><span class="line">$ hexo d 【部署到网站或服务器，部署之前需要先生成静态文件】</span><br><span class="line">$ hexo clean 【清除缓存文件(db.json)和已经生成的静态文件(public)】</span><br></pre></td></tr></table></figure>
-<h3 id="创建一个新的发布-Create-a-new-Post">0.1.2. 创建一个新的发布 Create a new Post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My new post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>更多信息 More info<a href="https://hexo.io/docs/writing.html">writing</a></p>
-<h3 id="运行服务器-Run-server">0.1.3. 运行服务器 Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>更多信息 More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="生成统计文件-Generate-static-files">0.1.4. 生成统计文件 Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>更多信息 More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="部署到远程站点-Deploy-to-remote-sites">0.1.5. 部署到远程站点 Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>更多信息 More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-<h2 id="二、文章编辑问题">0.2. 二、文章编辑问题</h2><h3 id="显示不出分类、标签问题">0.2.1. 显示不出分类、标签问题</h3><h4 id="1-查看themes-next-config-yml主题配置文件">0.2.1.1. 1.查看themes/next/_config.yml主题配置文件</h4><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/menu.png" class title="This is an example image">
-<p>打开主题配置文件<code>_config.yml</code>，在vim编辑器内用<code>/</code>搜索<code>menu</code>，确定categories和tags是取消注释状态的</p>
-<h4 id="2-添加分类模块">0.2.1.2. 2.添加分类模块</h4><p>在主文件夹<code>Blog</code>页面下<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new page categories</span><br><span class="line">$ hexo new page tags</span><br></pre></td></tr></table></figure><br>在source文件夹现在有了<code>categories/index.md</code>和<code>tags/index.md</code>两个新文件<br><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/categories.png" class title="This is an example image"><br>以<code>categories/index.md</code>为例子,应该自行添加第二行:<br><code>type: categories</code><br>注意:和categories中有一个空格</p>
-<h4 id="3-文章中添加标签或分类的方法及效果">0.2.1.3. 3.文章中添加标签或分类的方法及效果</h4><p>在创建新文章后的顶端添加categories或tags的名字，注意空格<br><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/test.png" class title="This is an example image"></p>
-<p>最后的效果:<br><img src="/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/show.png" class title="This is an example image"></p>
-<h4 id="4-参考">0.2.1.4. 4.参考</h4><p><a href="https://blog.csdn.net/Wonz5130/article/details/84666519">Hexo搭建博客显示不出分类、标签问题</a></p>
-<h3 id="Hexo博客搭建之在文章中插入图片">0.2.2. Hexo博客搭建之在文章中插入图片</h3><h4 id="1-本地引用">0.2.2.1. 1.本地引用</h4><p>当中只用到少量图片时，可以将图片统一放在<code>source/images</code>文件夹中，通过markdown语法添加<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ ![](&#x2F;images&#x2F;image.png)</span><br></pre></td></tr></table></figure></p>
-<h4 id="2-相对路径">0.2.2.2. 2.相对路径</h4><p>图片可以放在文章自己的目录中，需要先配置<code>_config.yml</code>文件，将<code>post_asset_folder</code>设置为true。设置完之后，在执行<code>hexo new &quot;post_name&quot;</code> 这个操作后，在<code>source/_posts</code>中会自动生成<code>post_name.md</code>和<code>post_name</code>同名文件夹。这时候只需要将图片放在<code>post_name</code>文件夹中，文章中可以直接使用相对路径引用了。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ ![](image.png)</span><br></pre></td></tr></table></figure>
-<p>但是!!重点来了，这个经典的markdown语句只能保证文章中可以显示出图片，但首页上不限时，很丑。可以同时显示的语句是:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ &#123;% asset_img exemple.png This is an example image %&#125;</span><br></pre></td></tr></table></figure><br>这时候就大功告成啦！</p>
-<h4 id="3-云引用">0.2.2.3. 3.云引用</h4><p>比如一些免费的CDN服务，如Cloudinary等免费生成的url地址，直接用markdown语法引用即可。</p>
-<h4 id="4-参考-1">0.2.2.4. 4.参考</h4><p><a href="https://yanyinhong.github.io/2017/05/02/How-to-insert-image-in-hexo-post/">Hexo博客搭建之在文章中插入图片</a></p>
-]]></content>
-      <categories>
-        <category>网页</category>
-      </categories>
-      <tags>
-        <tag>hexo</tag>
-      </tags>
   </entry>
   <entry>
     <title>cv</title>
