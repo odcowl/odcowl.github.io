@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="0.1. 整型C++内置的整型 —— unsigned long, long, unsigned int, int, unsigned short, short, char, unsigned char, signed char, bool 和 unsigned long long, long long (C++ 11新增) 0.1.1. 整型short, int, long 和 long lon">
+  <meta name="description" content="1. C++数据类型：整型，bool，char和浮点型1.1. 整型C++内置的整型 —— unsigned long, long, unsigned int, int, unsigned short, short, char, unsigned char, signed char, bool 和 unsigned long long, long long (C++ 11新增) 1.1.1. 整型">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++里的数据类型">
 <meta property="og:url" content="http://example.com/2021/08/09/C-%E9%87%8C%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/index.html">
 <meta property="og:site_name" content="odcowl的个人博客">
-<meta property="og:description" content="0.1. 整型C++内置的整型 —— unsigned long, long, unsigned int, int, unsigned short, short, char, unsigned char, signed char, bool 和 unsigned long long, long long (C++ 11新增) 0.1.1. 整型short, int, long 和 long lon">
+<meta property="og:description" content="1. C++数据类型：整型，bool，char和浮点型1.1. 整型C++内置的整型 —— unsigned long, long, unsigned int, int, unsigned short, short, char, unsigned char, signed char, bool 和 unsigned long long, long long (C++ 11新增) 1.1.1. 整型">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-09T03:44:27.000Z">
-<meta property="article:modified_time" content="2021-08-09T07:08:24.248Z">
+<meta property="article:modified_time" content="2021-08-09T07:17:35.779Z">
 <meta property="article:author" content="odcowl">
 <meta name="twitter:card" content="summary">
 
@@ -215,7 +215,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-08-09 11:44:27 / 修改时间：15:08:24" itemprop="dateCreated datePublished" datetime="2021-08-09T11:44:27+08:00">2021-08-09</time>
+              <time title="创建时间：2021-08-09 11:44:27 / 修改时间：15:17:35" itemprop="dateCreated datePublished" datetime="2021-08-09T11:44:27+08:00">2021-08-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,8 +238,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="整型">0.1. 整型</h2><p><strong>C++内置的整型</strong> —— unsigned long, long, unsigned int, int, unsigned short, short, char, unsigned char, signed char, bool 和 unsigned long long, long long (C++ 11新增)</p>
-<h3 id="整型short-int-long-和-long-long">0.1.1. 整型short, int, long 和 long long</h3><p>计算机内存由一些叫做位(bit)的单元组成，C++的short, int, long和long long分别用<code>不同数目的位</code>来储存值，最多能够表示4种不同的整数宽度。</p>
+        <h1 id="C-数据类型：整型，bool，char和浮点型">1. C++数据类型：整型，bool，char和浮点型</h1><h2 id="整型">1.1. 整型</h2><p><strong>C++内置的整型</strong> —— unsigned long, long, unsigned int, int, unsigned short, short, char, unsigned char, signed char, bool 和 unsigned long long, long long (C++ 11新增)</p>
+<h3 id="整型short-int-long-和-long-long">1.1.1. 整型short, int, long 和 long long</h3><p>计算机内存由一些叫做位(bit)的单元组成，C++的short, int, long和long long分别用<code>不同数目的位</code>来储存值，最多能够表示4种不同的整数宽度。</p>
 <p>如果在所有的系统中，<code>每种类型的宽度都相同</code>，则使用起来十分方便。例如，short总是16位，int总是32位，<strong>但生活并非那么简单</strong>，C++提供了另一种灵活的标准：</p>
 <ul>
 <li>short 至少16位(2 bytes.)</li>
@@ -247,24 +247,24 @@
 <li>long 至少32位，且至少与int一样长 (8 bytes.)</li>
 <li>long long 至少64位，且至少与long一样长 (8 bytes.)</li>
 </ul>
-<h3 id="无符号类型-unsigned">0.1.2. 无符号类型 unsigned</h3><p><strong>unsigned 是unsigned int的缩写</strong></p>
+<h3 id="无符号类型-unsigned">1.1.2. 无符号类型 unsigned</h3><p><strong>unsigned 是unsigned int的缩写</strong></p>
 <p>如果short表示的范围为-32768到+32767，则无符号版本的表示范围为0-65535，当然，仅当数值不会为负时才应使用无符号类型，如人口等。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">unsigned short change;</span><br><span class="line">unsigned int rovert;</span><br><span class="line">unsigned rovertt; &#x2F;&#x2F; also unsigned int</span><br><span class="line">unsigned long gone;</span><br><span class="line">unsigned long long lang_lang;</span><br></pre></td></tr></table></figure>
-<h3 id="整数字面型（进制问题）">0.1.3. 整数字面型（进制问题）</h3><p>C++ 使用前一（两）位来标识数字常量的基数。</p>
+<h3 id="整数字面型（进制问题）">1.1.3. 整数字面型（进制问题）</h3><p>C++ 使用前一（两）位来标识数字常量的基数。</p>
 <ul>
 <li>如果<strong>第一位为1 —— 9</strong> 则<code>基数为10（十进制）</code></li>
 <li>如果<strong>第一位是0，第二位为1——7</strong>，则<code>基数为8（八进制）</code></li>
 <li>如果<strong>前两位为0x或0X</strong>，则<code>基数为16（十六进制）</code></li>
 </ul>
 <p>pseudo code如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">int chest &#x3D; 42;     &#x2F;&#x2F; decimal integer literal 十进制</span><br><span class="line">int waist &#x3D; 0x42;   &#x2F;&#x2F; hexadecimal integer literal 十六进制</span><br><span class="line">int inseam &#x3D; 042; &#x2F;&#x2F; octal interger literal 八进制</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 在cout输出下：</span><br><span class="line"></span><br><span class="line">chest &#x3D; 42 (42 in decimal)</span><br><span class="line">waist &#x3D; 66 (0x42 in hex)</span><br><span class="line">inseam &#x3D; 34 (042 in octal)</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
-<h3 id="char类型：字符和小整数">0.1.4. char类型：字符和小整数</h3><p><code>char类型</code>是专门为储存字符（如字母和数字）而设计的。char类型也是一种整型，它足够长，能够表示目标计算机系统中的所有基本符号——字母，数字和标点符号等。char最常被用来处理字符，但也可以将它比作比short更小的整型。</p>
+<h3 id="char类型：字符和小整数">1.1.4. char类型：字符和小整数</h3><p><code>char类型</code>是专门为储存字符（如字母和数字）而设计的。char类型也是一种整型，它足够长，能够表示目标计算机系统中的所有基本符号——字母，数字和标点符号等。char最常被用来处理字符，但也可以将它比作比short更小的整型。</p>
 <p>最常用的符号集为ASCII字符集。<br>例如字符A的编码为65，字母M的编码为77等。</p>
 <p>cin输入时，cin将键盘中输入的M转换为77；输出时，cout将77转换为所显示的字符M；cin和cout的行为都是由变量类型（ch）引导的。</p>
 <p>C++对字符用单引号<code>&#39;M&#39;</code>对字符串用双引号。</p>
 <p><code>cout.put()</code>为成员函数，提供了一个显示字符的方法，可以代替<code>cout &lt;&lt;</code></p>
 <p>⚠️ <strong> 注意是字符而非字符串 </strong></p>
 <p>亲测<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cout.put(&#39;M&#39;); &#x2F;&#x2F; valid</span><br><span class="line">cout.put(&#39;My&#39;); &#x2F;&#x2F; non valid</span><br><span class="line">cout.put(&quot;My bag&quot;); &#x2F;&#x2F; non valid</span><br></pre></td></tr></table></figure></p>
-<h3 id="C-转义序列的编码">0.1.5. C++转义序列的编码</h3><div class="table-container">
+<h3 id="C-转义序列的编码">1.1.5. C++转义序列的编码</h3><div class="table-container">
 <table>
 <thead>
 <tr>
@@ -304,17 +304,17 @@
 </tbody>
 </table>
 </div>
-<h3 id="bool-类型">0.1.6. bool 类型</h3><p>bool布尔变量的值可以是true或false<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool is_ready &#x3D; true;</span><br></pre></td></tr></table></figure></p>
-<h2 id="const-限定符">0.2. const 限定符</h2><p>如果程序在多个地方使用相同的一个<strong>常量</strong>时，可用<code>const</code>来修改变量声明和初始化。<br>例如，表示一年中月份的符号常量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const int Months &#x3D; 12;</span><br></pre></td></tr></table></figure><br><code>常量Months</code>被初始化后，其值就被固定了，编译器将不允许再修改该常量的值。</p>
+<h3 id="bool-类型">1.1.6. bool 类型</h3><p>bool布尔变量的值可以是true或false<br>例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool is_ready &#x3D; true;</span><br></pre></td></tr></table></figure></p>
+<h2 id="const-限定符">1.2. const 限定符</h2><p>如果程序在多个地方使用相同的一个<strong>常量</strong>时，可用<code>const</code>来修改变量声明和初始化。<br>例如，表示一年中月份的符号常量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const int Months &#x3D; 12;</span><br></pre></td></tr></table></figure><br><code>常量Months</code>被初始化后，其值就被固定了，编译器将不允许再修改该常量的值。</p>
 <p>一种常见的做法是<code>常量的首字母大写</code>如<strong>Months</strong>，有助于区分<strong>常量</strong>和<strong>变量</strong>。另外一种做法是<code>以字母k打头</code>如<strong>kmonths</strong></p>
-<h2 id="浮点数">0.3. 浮点数</h2><p>C++有3种浮点类型：float，double和long double。</p>
+<h2 id="浮点数">1.3. 浮点数</h2><p>C++有3种浮点类型：float，double和long double。</p>
 <p>浮点数能够表示带小数部分的数字，诸如2.5，3.14159，122442.32这样的数字。</p>
 <p><strong>计算机</strong>将这样的值分成两部分存储。<code>一部分表示值，另一部分用于对值进行放大或缩小。</code></p>
 <p>打个比方，对于数字34.1245和34124.5，他们除了小数点位置不同，其他事相同的。</p>
 <p>可以把第一个数表示为0.341245（基准值）和100（缩放因子）；第二个数0.341245（基准值）和10000（缩放因子）。</p>
 <p><code>缩放因子</code>的作用是移动小数点的位置，术语<code>浮点</code>也因此得名。</p>
 <p><strong>C++</strong>内部表示浮点数的方法与此相同，只不过它基于的是二进制数，因此缩放因子是2的幂，不是10的幂。</p>
-<h3 id="浮点数的表示法">0.3.1. 浮点数的表示法</h3><ul>
+<h3 id="浮点数的表示法">1.3.1. 浮点数的表示法</h3><ul>
 <li><strong>第一种</strong> 是使用常用的标准小数点表示法：</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">12.34</span><br><span class="line">0.00023</span><br><span class="line">8.0 &#x2F;&#x2F; 保证了是float而非int</span><br></pre></td></tr></table></figure>
@@ -322,7 +322,7 @@
 <li><strong>第二种</strong> 是使用E表示法<br>其外观类似3.45E6，意思是3.45与1000000相乘的结果；E6指的是10的6次方。<br>E表示法确定数字以浮点格式存储，即使没有小数点。</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2.52e+8 &#x2F;&#x2F; valid</span><br><span class="line">8.33E5 &#x2F;&#x2F; valid</span><br><span class="line">8.33E-4 &#x2F;&#x2F; valid, exponent can be negative</span><br></pre></td></tr></table></figure>
-<h3 id="浮点的类型float，double和long-double">0.3.2. 浮点的类型float，double和long double</h3><p>浮点数的三种类型是按<code>它们可以表示的有效数位和允许的指数最小范围</code>来描述的。</p>
+<h3 id="浮点的类型float，double和long-double">1.3.2. 浮点的类型float，double和long double</h3><p>浮点数的三种类型是按<code>它们可以表示的有效数位和允许的指数最小范围</code>来描述的。</p>
 <p><strong>有效位(significant figure)</strong>是指数字中有意义的位，</p>
 <p>🍑 例如：</p>
 <p>某山脉额高度位14179英尺，该数字使用了5个有效位。</p>
@@ -344,11 +344,11 @@
 </ul>
 <p>书本p48页提供了一个例子说明了double比float提供的精度更高。</p>
 <figure class="highlight plain"><figcaption><span><iostream></iostream></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    using namespace std; </span><br><span class="line">    cout.setf(ios_base::fixed, ios_base::floatfield); &#x2F;&#x2F; fixed-point</span><br><span class="line">    float tub &#x3D; 10.0 &#x2F; 3.0;     &#x2F;&#x2F; good to about 6 places</span><br><span class="line">    double mint &#x3D; 10.0 &#x2F; 3.0;   &#x2F;&#x2F; good to about 15 places</span><br><span class="line">    const float million &#x3D; 1.0e6;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; &quot;tub &#x3D; &quot; &lt;&lt; tub;</span><br><span class="line">    cout &lt;&lt; &quot;, a million tubs &#x3D; &quot; &lt;&lt; million * tub;</span><br><span class="line">    cout &lt;&lt; &quot;,\nand ten million tubs &#x3D; &quot;;</span><br><span class="line">    cout &lt;&lt; 10 * million * tub &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; &quot;mint &#x3D; &quot; &lt;&lt; mint &lt;&lt; &quot; and a million mints &#x3D; &quot;;</span><br><span class="line">    cout &lt;&lt; million * mint &lt;&lt; endl;</span><br><span class="line">    &#x2F;&#x2F; cin.get();</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="浮点常量">0.3.2.1. 浮点常量</h4><p>在程序中书写副电厂粮食，像8.24或2.4E8这样的浮点都属于double类型。</p>
+<h4 id="浮点常量">1.3.2.1. 浮点常量</h4><p>在程序中书写副电厂粮食，像8.24或2.4E8这样的浮点都属于double类型。</p>
 <p>如果你希望常量为float类型，请使用f或F后缀。</p>
 <p>如果你希望常量为long double类型，可使用l或L后缀（由于l看起来很像数字1，因此L位更好的选择）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.234f &#x2F;&#x2F; a float constsant</span><br><span class="line">2.3423 &#x2F;&#x2F; a double constant</span><br><span class="line">2.2L &#x2F;&#x2F; a long double constant</span><br></pre></td></tr></table></figure>
-<h4 id="浮点和整数的对比">0.3.2.2. 浮点和整数的对比</h4><ul>
+<h4 id="浮点和整数的对比">1.3.2.2. 浮点和整数的对比</h4><ul>
 <li>浮点优点：浮点可以表示整数</li>
 <li>浮点优点：由于有缩放因子，他们可以表示的范围大的多</li>
 <li>浮点缺点：浮点运算速度比整数运算速度慢，其精度降低</li>
@@ -389,8 +389,8 @@
       <i class="fa fa-chevron-left"></i> 451.根据字符出现频率排序
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/08/09/C-%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="next" title="C++运算符">
-      C++运算符 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/08/09/C-%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="next" title="C++运算符及类型转化问题">
+      C++运算符及类型转化问题 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -464,7 +464,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">0.1. 整型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E5%9E%8Bshort-int-long-%E5%92%8C-long-long"><span class="nav-number">1.1.</span> <span class="nav-text">0.1.1. 整型short, int, long 和 long long</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%AC%A6%E5%8F%B7%E7%B1%BB%E5%9E%8B-unsigned"><span class="nav-number">1.2.</span> <span class="nav-text">0.1.2. 无符号类型 unsigned</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E5%AD%97%E9%9D%A2%E5%9E%8B%EF%BC%88%E8%BF%9B%E5%88%B6%E9%97%AE%E9%A2%98%EF%BC%89"><span class="nav-number">1.3.</span> <span class="nav-text">0.1.3. 整数字面型（进制问题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#char%E7%B1%BB%E5%9E%8B%EF%BC%9A%E5%AD%97%E7%AC%A6%E5%92%8C%E5%B0%8F%E6%95%B4%E6%95%B0"><span class="nav-number">1.4.</span> <span class="nav-text">0.1.4. char类型：字符和小整数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97%E7%9A%84%E7%BC%96%E7%A0%81"><span class="nav-number">1.5.</span> <span class="nav-text">0.1.5. C++转义序列的编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bool-%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.6.</span> <span class="nav-text">0.1.6. bool 类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const-%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="nav-number">2.</span> <span class="nav-text">0.2. const 限定符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="nav-number">3.</span> <span class="nav-text">0.3. 浮点数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="nav-number">3.1.</span> <span class="nav-text">0.3.1. 浮点数的表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E7%9A%84%E7%B1%BB%E5%9E%8Bfloat%EF%BC%8Cdouble%E5%92%8Clong-double"><span class="nav-number">3.2.</span> <span class="nav-text">0.3.2. 浮点的类型float，double和long double</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E5%B8%B8%E9%87%8F"><span class="nav-number">3.2.1.</span> <span class="nav-text">0.3.2.1. 浮点常量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E5%92%8C%E6%95%B4%E6%95%B0%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="nav-number">3.2.2.</span> <span class="nav-text">0.3.2.2. 浮点和整数的对比</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%EF%BC%9A%E6%95%B4%E5%9E%8B%EF%BC%8Cbool%EF%BC%8Cchar%E5%92%8C%E6%B5%AE%E7%82%B9%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">1. C++数据类型：整型，bool，char和浮点型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">1.1. 整型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E5%9E%8Bshort-int-long-%E5%92%8C-long-long"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1.1. 整型short, int, long 和 long long</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%AC%A6%E5%8F%B7%E7%B1%BB%E5%9E%8B-unsigned"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.1.2. 无符号类型 unsigned</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B4%E6%95%B0%E5%AD%97%E9%9D%A2%E5%9E%8B%EF%BC%88%E8%BF%9B%E5%88%B6%E9%97%AE%E9%A2%98%EF%BC%89"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.1.3. 整数字面型（进制问题）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#char%E7%B1%BB%E5%9E%8B%EF%BC%9A%E5%AD%97%E7%AC%A6%E5%92%8C%E5%B0%8F%E6%95%B4%E6%95%B0"><span class="nav-number">1.1.4.</span> <span class="nav-text">1.1.4. char类型：字符和小整数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97%E7%9A%84%E7%BC%96%E7%A0%81"><span class="nav-number">1.1.5.</span> <span class="nav-text">1.1.5. C++转义序列的编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bool-%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.1.6.</span> <span class="nav-text">1.1.6. bool 类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#const-%E9%99%90%E5%AE%9A%E7%AC%A6"><span class="nav-number">1.2.</span> <span class="nav-text">1.2. const 限定符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0"><span class="nav-number">1.3.</span> <span class="nav-text">1.3. 浮点数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%B3%95"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.3.1. 浮点数的表示法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E7%9A%84%E7%B1%BB%E5%9E%8Bfloat%EF%BC%8Cdouble%E5%92%8Clong-double"><span class="nav-number">1.3.2.</span> <span class="nav-text">1.3.2. 浮点的类型float，double和long double</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E5%B8%B8%E9%87%8F"><span class="nav-number">1.3.2.1.</span> <span class="nav-text">1.3.2.1. 浮点常量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%AE%E7%82%B9%E5%92%8C%E6%95%B4%E6%95%B0%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="nav-number">1.3.2.2.</span> <span class="nav-text">1.3.2.2. 浮点和整数的对比</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -538,7 +538,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共29k字</span>
+  <span class="post-count">博客全站共29.5k字</span>
 </div>
 
         

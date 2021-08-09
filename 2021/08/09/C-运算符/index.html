@@ -20,15 +20,15 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="wechat odcowl">
+  <meta name="description" content="1. C++ 数学运算符1.1. 5种基本的C++运算符  加法运算    减法运算    乘法运算   &#x2F; 除法运算（如果两个操作数都是整数，则执行整数除法，小数部分将被丢弃，结果为整数；如果有1个（或2个）操作数是浮点数，则小数部分将被保留，结果为浮点数） % 求模。两个操作数必须都为整数  1.2. 类型转换1.2.1. 初始化和赋值进行的转换C++允许将一种类型的值赋给另一种类型的变量，这">
 <meta property="og:type" content="article">
-<meta property="og:title" content="C++运算符">
+<meta property="og:title" content="C++运算符及类型转化问题">
 <meta property="og:url" content="http://example.com/2021/08/09/C-%E8%BF%90%E7%AE%97%E7%AC%A6/index.html">
 <meta property="og:site_name" content="odcowl的个人博客">
-<meta property="og:description" content="wechat odcowl">
+<meta property="og:description" content="1. C++ 数学运算符1.1. 5种基本的C++运算符  加法运算    减法运算    乘法运算   &#x2F; 除法运算（如果两个操作数都是整数，则执行整数除法，小数部分将被丢弃，结果为整数；如果有1个（或2个）操作数是浮点数，则小数部分将被保留，结果为浮点数） % 求模。两个操作数必须都为整数  1.2. 类型转换1.2.1. 初始化和赋值进行的转换C++允许将一种类型的值赋给另一种类型的变量，这">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2021-08-09T04:37:37.000Z">
-<meta property="article:modified_time" content="2021-08-09T07:08:52.057Z">
+<meta property="article:modified_time" content="2021-08-09T13:24:42.063Z">
 <meta property="article:author" content="odcowl">
 <meta name="twitter:card" content="summary">
 
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>C++运算符 | odcowl的个人博客</title>
+  <title>C++运算符及类型转化问题 | odcowl的个人博客</title>
   
 
 
@@ -204,7 +204,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          C++运算符
+          C++运算符及类型转化问题
         </h1>
 
         <div class="post-meta">
@@ -215,7 +215,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2021-08-09 12:37:37 / 修改时间：15:08:52" itemprop="dateCreated datePublished" datetime="2021-08-09T12:37:37+08:00">2021-08-09</time>
+              <time title="创建时间：2021-08-09 12:37:37 / 修改时间：21:24:42" itemprop="dateCreated datePublished" datetime="2021-08-09T12:37:37+08:00">2021-08-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,7 +238,54 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        
+        <h1 id="C-数学运算符">1. C++ 数学运算符</h1><h2 id="5种基本的C-运算符">1.1. 5种基本的C++运算符</h2><ul>
+<li><ul>
+<li>加法运算</li>
+</ul>
+</li>
+<li><ul>
+<li>减法运算</li>
+</ul>
+</li>
+<li><ul>
+<li>乘法运算</li>
+</ul>
+</li>
+<li>/ 除法运算（如果两个操作数都是整数，则执行整数除法，小数部分将被丢弃，结果为整数；如果有1个（或2个）操作数是浮点数，则小数部分将被保留，结果为浮点数）</li>
+<li>% 求模。两个操作数必须都为整数</li>
+</ul>
+<h2 id="类型转换">1.2. 类型转换</h2><h3 id="初始化和赋值进行的转换">1.2.1. 初始化和赋值进行的转换</h3><p>C++允许将一种类型的值赋给另一种类型的变量，这样做时，<strong>值将被转换为接受变量的类型</strong>。</p>
+<p>🍑 例子：</p>
+<p>假设so_long的类型为long，thirty的类型为short，而程序为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">so_long &#x3D; thirty; </span><br></pre></td></tr></table></figure><br>程序将thirty的值（short）扩展为long值，so_long将储存这个值，而thirty不变。</p>
+<hr>
+<p>将一个值赋给取值范围更大的类型通常不会产生问题，反之，则会降低精度；</p>
+<p>下面列出了<strong>潜在的问题</strong>：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">转换</th>
+<th style="text-align:center">潜在的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">将较大浮点类型转换为较小的浮点类型，如将double转换为float</td>
+<td style="text-align:center">精度有效数位丢失</td>
+</tr>
+<tr>
+<td style="text-align:center">将浮点转整数</td>
+<td style="text-align:center">小数部分丢失</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>将0赋给bool变量时，将被转换为false；而非零值将被转换为true；</li>
+</ul>
+<h3 id="以-方式初始化时进行的转换">1.2.2. 以{}方式初始化时进行的转换</h3><h3 id="表达式中的转换">1.2.3. 表达式中的转换</h3><h3 id="传递参数时的转换">1.2.4. 传递参数时的转换</h3><h3 id="强制类型转换">1.2.5. 强制类型转换</h3><h3 id="C-11-中的auto声明">1.2.6. C++ 11 中的auto声明</h3><p>auto声明让编译器能够根据初始值的类型推断变量的类型。如果使用了关键字auto，而不指定变量的类型，编译器将把变量的类型设置与初始值相同。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">auto n &#x3D; 100; &#x2F;&#x2F; n is int</span><br><span class="line">auto x &#x3D; 1.5; &#x2F;&#x2F; x is double（疑问：这里x也可以是float吗）</span><br><span class="line">auto y &#x3D; 1.3e12L &#x2F;&#x2F; y is long double</span><br></pre></td></tr></table></figure>
+
     </div>
 
     
@@ -253,7 +300,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://example.com/2021/08/09/C-%E8%BF%90%E7%AE%97%E7%AC%A6/" title="C++运算符">http://example.com/2021/08/09/C-运算符/</a>
+    <a href="http://example.com/2021/08/09/C-%E8%BF%90%E7%AE%97%E7%AC%A6/" title="C++运算符及类型转化问题">http://example.com/2021/08/09/C-运算符/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -346,6 +393,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C-%E6%95%B0%E5%AD%A6%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.</span> <span class="nav-text">1. C++ 数学运算符</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5%E7%A7%8D%E5%9F%BA%E6%9C%AC%E7%9A%84C-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">1.1.</span> <span class="nav-text">1.1. 5种基本的C++运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.2.</span> <span class="nav-text">1.2. 类型转换</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96%E5%92%8C%E8%B5%8B%E5%80%BC%E8%BF%9B%E8%A1%8C%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1. 初始化和赋值进行的转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A5-%E6%96%B9%E5%BC%8F%E5%88%9D%E5%A7%8B%E5%8C%96%E6%97%B6%E8%BF%9B%E8%A1%8C%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2. 以{}方式初始化时进行的转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F%E4%B8%AD%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.2.3. 表达式中的转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E9%80%92%E5%8F%82%E6%95%B0%E6%97%B6%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.2.4.</span> <span class="nav-text">1.2.4. 传递参数时的转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">1.2.5.</span> <span class="nav-text">1.2.5. 强制类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C-11-%E4%B8%AD%E7%9A%84auto%E5%A3%B0%E6%98%8E"><span class="nav-number">1.2.6.</span> <span class="nav-text">1.2.6. C++ 11 中的auto声明</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -419,7 +467,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共29k字</span>
+  <span class="post-count">博客全站共29.5k字</span>
 </div>
 
         
