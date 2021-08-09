@@ -391,24 +391,6 @@
       </tags>
   </entry>
   <entry>
-    <title>451.根据字符出现频率排序</title>
-    <url>/2021/07/03/451-%E6%A0%B9%E6%8D%AE%E5%AD%97%E7%AC%A6%E5%87%BA%E7%8E%B0%E9%A2%91%E7%8E%87%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p>LeetCode每日一题之<a href="https://leetcode-cn.com/problems/sort-characters-by-frequency/">451.根据字符出现频率排序</a>。</p>
-<p>今天这题比较简单，周六愉快</p>
-<p>给定一个字符串，请将字符串里的字符按照出现的频率降序排列。</p>
-<h3 id="题目">0.0.1. 题目</h3><p>示例 1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;tree&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;eert&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line"><span class="string">&#x27;e&#x27;</span>出现两次，<span class="string">&#x27;r&#x27;</span>和<span class="string">&#x27;t&#x27;</span>都只出现一次。</span><br><span class="line">因此<span class="string">&#x27;e&#x27;</span>必须出现在<span class="string">&#x27;r&#x27;</span>和<span class="string">&#x27;t&#x27;</span>之前。此外，<span class="string">&quot;eetr&quot;</span>也是一个有效的答案。</span><br></pre></td></tr></table></figure></p>
-<p>示例 2:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;cccaaa&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;cccaaa&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line"><span class="string">&#x27;c&#x27;</span>和<span class="string">&#x27;a&#x27;</span>都出现三次。此外，<span class="string">&quot;aaaccc&quot;</span>也是有效的答案。</span><br><span class="line">注意<span class="string">&quot;cacaca&quot;</span>是不正确的，因为相同的字母必须放在一起。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>示例 3:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;Aabb&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;bbAa&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line">此外，<span class="string">&quot;bbaA&quot;</span>也是一个有效的答案，但<span class="string">&quot;Aabb&quot;</span>是不正确的。</span><br><span class="line">注意<span class="string">&#x27;A&#x27;</span>和<span class="string">&#x27;a&#x27;</span>被认为是两种不同的字符。</span><br></pre></td></tr></table></figure>
-<h3 id="我的解法">0.0.2. 我的解法</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def frequencySort(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 哈希表</span></span><br><span class="line">        d = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> not ch <span class="keyword">in</span> d:</span><br><span class="line">                d[ch] = 1</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                d[ch] += 1</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 把字典按value的大小从大到小排序</span></span><br><span class="line">        a = sorted(d.items(), key=lambda x: x[1], reverse=True)</span><br><span class="line">        </span><br><span class="line">        res = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> aa <span class="keyword">in</span> a:</span><br><span class="line">            <span class="comment"># 小坑：出现多次的字母需要+=多次</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(aa[1]):</span><br><span class="line">                res += str(aa[0])</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>但是因为相当于最多遍历了两次字典，时间还是比较慢的<br>平平无奇小代码吧。。</p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
     <title>54.螺旋矩阵(Medium)</title>
     <url>/2021/03/17/54-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-Medium/</url>
     <content><![CDATA[<p>LeetCode每日一题(2021.03.15)之<a href="https://leetcode-cn.com/problems/spiral-matrix/">螺旋矩阵</a><br>难度：中等</p>
@@ -470,6 +452,24 @@
       </tags>
   </entry>
   <entry>
+    <title>451.根据字符出现频率排序</title>
+    <url>/2021/07/03/451-%E6%A0%B9%E6%8D%AE%E5%AD%97%E7%AC%A6%E5%87%BA%E7%8E%B0%E9%A2%91%E7%8E%87%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p>LeetCode每日一题之<a href="https://leetcode-cn.com/problems/sort-characters-by-frequency/">451.根据字符出现频率排序</a>。</p>
+<p>今天这题比较简单，周六愉快</p>
+<p>给定一个字符串，请将字符串里的字符按照出现的频率降序排列。</p>
+<h3 id="题目">0.0.1. 题目</h3><p>示例 1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;tree&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;eert&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line"><span class="string">&#x27;e&#x27;</span>出现两次，<span class="string">&#x27;r&#x27;</span>和<span class="string">&#x27;t&#x27;</span>都只出现一次。</span><br><span class="line">因此<span class="string">&#x27;e&#x27;</span>必须出现在<span class="string">&#x27;r&#x27;</span>和<span class="string">&#x27;t&#x27;</span>之前。此外，<span class="string">&quot;eetr&quot;</span>也是一个有效的答案。</span><br></pre></td></tr></table></figure></p>
+<p>示例 2:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;cccaaa&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;cccaaa&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line"><span class="string">&#x27;c&#x27;</span>和<span class="string">&#x27;a&#x27;</span>都出现三次。此外，<span class="string">&quot;aaaccc&quot;</span>也是有效的答案。</span><br><span class="line">注意<span class="string">&quot;cacaca&quot;</span>是不正确的，因为相同的字母必须放在一起。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>示例 3:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;Aabb&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;bbAa&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line">此外，<span class="string">&quot;bbaA&quot;</span>也是一个有效的答案，但<span class="string">&quot;Aabb&quot;</span>是不正确的。</span><br><span class="line">注意<span class="string">&#x27;A&#x27;</span>和<span class="string">&#x27;a&#x27;</span>被认为是两种不同的字符。</span><br></pre></td></tr></table></figure>
+<h3 id="我的解法">0.0.2. 我的解法</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def frequencySort(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 哈希表</span></span><br><span class="line">        d = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> not ch <span class="keyword">in</span> d:</span><br><span class="line">                d[ch] = 1</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                d[ch] += 1</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 把字典按value的大小从大到小排序</span></span><br><span class="line">        a = sorted(d.items(), key=lambda x: x[1], reverse=True)</span><br><span class="line">        </span><br><span class="line">        res = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> aa <span class="keyword">in</span> a:</span><br><span class="line">            <span class="comment"># 小坑：出现多次的字母需要+=多次</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(aa[1]):</span><br><span class="line">                res += str(aa[0])</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>但是因为相当于最多遍历了两次字典，时间还是比较慢的<br>平平无奇小代码吧。。</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
     <title>692.前K个高频单词(Medium)</title>
     <url>/2021/05/21/692-%E5%89%8DK%E4%B8%AA%E9%AB%98%E9%A2%91%E5%8D%95%E8%AF%8D-Medium/</url>
     <content><![CDATA[<p>LeetCode每日一题(2021.05.20)之<a href="https://leetcode-cn.com/problems/top-k-frequent-words/">前k个高频单词</a><br>难度: 中等</p>
@@ -488,6 +488,23 @@
 <li>第二次排列：按照词频（从大到小）和单词顺序（从小到大）的方式排序，利用lambda</li>
 </ol>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def topKFrequent(self, words, k):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type words: List[str]</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: List[str]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment">#双排列</span></span><br><span class="line"></span><br><span class="line">        dic = collections.Counter(words)  <span class="comment">#计算词频</span></span><br><span class="line">        res = sorted(dic,key = lambda word:(-dic[word],word)) <span class="comment">#词频倒序，字母正序</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res[:k]</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>856.转置矩阵(Easy)</title>
+    <url>/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/</url>
+    <content><![CDATA[<p>力扣每日一题系列(2021.02.25)之<a href="https://leetcode-cn.com/problems/transpose-matrix/">转置矩阵</a><br>难度：简单</p>
+<h2 id="一、题目">0.1. 一、题目</h2><p>给你一个二维整数数组 matrix， 返回 matrix 的 转置矩阵 。<br>矩阵的 转置 是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/10/hint_transpose.png" alt="867.转置矩阵"></p>
+<h3 id="示例">0.1.1. 示例</h3><p>示例1:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ 输入: matrix&#x3D;[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">$ 输出: [[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure></p>
+<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">m == matrix.length</span><br><span class="line">n == matrix[i].length</span><br><span class="line">1 &lt;= m, n &lt;= 1000</span><br><span class="line">1 &lt;= m * n &lt;= 105</span><br><span class="line">-10^9 &lt;= matrix[i][j] &lt;= 10^9</span><br></pre></td></tr></table></figure></p>
+<h3 id="我的解法">0.1.2. 我的解法</h3><p>转置矩阵即将M行N列的矩阵，转换成N行M列的矩阵，注意有可能N和M并不相等，所以必须要新建一个result矩阵（否则可能会出现out of range的情况）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def transpose(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        m,n = len(matrix),len(matrix[0])</span><br><span class="line">        <span class="comment">#m为行数，n为列数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#不需要numpy的矩阵建造方法</span></span><br><span class="line">        new_matrix = [[0 <span class="keyword">for</span> i <span class="keyword">in</span> range(m)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                new_matrix[i][j] = matrix[j][i]</span><br><span class="line">        <span class="built_in">return</span> new_matrix</span><br></pre></td></tr></table></figure>
+<p>这道题的意思就是原来的每一行转换成了后来的每一列，为了数学关系上更清晰，下面图片为解析。可以看出，对于一个相同的元素，新地址（坐标）和旧地址（坐标）就是横纵轴交换的关系：<br><img src="/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/jiexi.png" class title="This is an example image"></p>
+<p>一个错误的思路：（这个思路就是没有考虑到新矩阵的大小关系）<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">	for j in range(i,m):</span><br><span class="line">		matrix[i][j], matrix[j][i] &#x3D;  matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -522,23 +539,6 @@
       </categories>
   </entry>
   <entry>
-    <title>856.转置矩阵(Easy)</title>
-    <url>/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.02.25)之<a href="https://leetcode-cn.com/problems/transpose-matrix/">转置矩阵</a><br>难度：简单</p>
-<h2 id="一、题目">0.1. 一、题目</h2><p>给你一个二维整数数组 matrix， 返回 matrix 的 转置矩阵 。<br>矩阵的 转置 是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p>
-<p><img src="https://assets.leetcode.com/uploads/2021/02/10/hint_transpose.png" alt="867.转置矩阵"></p>
-<h3 id="示例">0.1.1. 示例</h3><p>示例1:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ 输入: matrix&#x3D;[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">$ 输出: [[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">m == matrix.length</span><br><span class="line">n == matrix[i].length</span><br><span class="line">1 &lt;= m, n &lt;= 1000</span><br><span class="line">1 &lt;= m * n &lt;= 105</span><br><span class="line">-10^9 &lt;= matrix[i][j] &lt;= 10^9</span><br></pre></td></tr></table></figure></p>
-<h3 id="我的解法">0.1.2. 我的解法</h3><p>转置矩阵即将M行N列的矩阵，转换成N行M列的矩阵，注意有可能N和M并不相等，所以必须要新建一个result矩阵（否则可能会出现out of range的情况）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def transpose(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        m,n = len(matrix),len(matrix[0])</span><br><span class="line">        <span class="comment">#m为行数，n为列数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#不需要numpy的矩阵建造方法</span></span><br><span class="line">        new_matrix = [[0 <span class="keyword">for</span> i <span class="keyword">in</span> range(m)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                new_matrix[i][j] = matrix[j][i]</span><br><span class="line">        <span class="built_in">return</span> new_matrix</span><br></pre></td></tr></table></figure>
-<p>这道题的意思就是原来的每一行转换成了后来的每一列，为了数学关系上更清晰，下面图片为解析。可以看出，对于一个相同的元素，新地址（坐标）和旧地址（坐标）就是横纵轴交换的关系：<br><img src="/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/jiexi.png" class title="This is an example image"></p>
-<p>一个错误的思路：（这个思路就是没有考虑到新矩阵的大小关系）<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">	for j in range(i,m):</span><br><span class="line">		matrix[i][j], matrix[j][i] &#x3D;  matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure></p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
     <title>92.反转链表2(Medium)-未掌握</title>
     <url>/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/</url>
     <content><![CDATA[<p>LeetCode每日一题(2021.03.18)之<a href="https://leetcode-cn.com/problems/reverse-linked-list-ii/">反转链表2</a></p>
@@ -566,10 +566,15 @@
       </tags>
   </entry>
   <entry>
+    <title>C++运算符</title>
+    <url>/2021/08/09/C-%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>C++里的数据类型</title>
     <url>/2021/08/09/C-%E9%87%8C%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<h4 id="整型">0.0.0.1. 整型</h4><p><strong>C++内置的整型</strong> —— unsigned long, long, unsigned int, int, unsigned short, short, char, unsigned char, signed char, bool 和 unsigned long long, long long (C++ 11新增)</p>
-<h3 id="整型short-int-long-和-long-long">0.0.1. 整型short, int, long 和 long long</h3><p>计算机内存由一些叫做位(bit)的单元组成，C++的short, int, long和long long分别用<code>不同数目的位</code>来储存值，最多能够表示4种不同的整数宽度。</p>
+    <content><![CDATA[<h2 id="整型">0.1. 整型</h2><p><strong>C++内置的整型</strong> —— unsigned long, long, unsigned int, int, unsigned short, short, char, unsigned char, signed char, bool 和 unsigned long long, long long (C++ 11新增)</p>
+<h3 id="整型short-int-long-和-long-long">0.1.1. 整型short, int, long 和 long long</h3><p>计算机内存由一些叫做位(bit)的单元组成，C++的short, int, long和long long分别用<code>不同数目的位</code>来储存值，最多能够表示4种不同的整数宽度。</p>
 <p>如果在所有的系统中，<code>每种类型的宽度都相同</code>，则使用起来十分方便。例如，short总是16位，int总是32位，<strong>但生活并非那么简单</strong>，C++提供了另一种灵活的标准：</p>
 <ul>
 <li>short 至少16位(2 bytes.)</li>
@@ -577,10 +582,24 @@
 <li>long 至少32位，且至少与int一样长 (8 bytes.)</li>
 <li>long long 至少64位，且至少与long一样长 (8 bytes.)</li>
 </ul>
-<h3 id="无符号类型-unsigned">0.0.2. 无符号类型 unsigned</h3><p><strong>unsigned 是unsigned int的缩写</strong></p>
+<h3 id="无符号类型-unsigned">0.1.2. 无符号类型 unsigned</h3><p><strong>unsigned 是unsigned int的缩写</strong></p>
 <p>如果short表示的范围为-32768到+32767，则无符号版本的表示范围为0-65535，当然，仅当数值不会为负时才应使用无符号类型，如人口等。</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">unsigned short change;</span><br><span class="line">unsigned int rovert;</span><br><span class="line">unsigned rovertt; &#x2F;&#x2F; also unsigned int</span><br><span class="line">unsigned long gone;</span><br><span class="line">unsigned long long lang_lang;</span><br></pre></td></tr></table></figure>
-]]></content>
+<h3 id="整数字面型（进制问题）">0.1.3. 整数字面型（进制问题）</h3><p>C++ 使用前一（两）位来标识数字常量的基数。</p>
+<ul>
+<li>如果<strong>第一位为1 —— 9</strong> 则<code>基数为10（十进制）</code></li>
+<li>如果<strong>第一位是0，第二位为1——7</strong>，则<code>基数为8（八进制）</code></li>
+<li>如果<strong>前两位为0x或0X</strong>，则<code>基数为16（十六进制）</code></li>
+</ul>
+<p>pseudo code如下：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int chest &#x3D; 42;     &#x2F;&#x2F; decimal integer literal 十进制</span><br><span class="line">int waist &#x3D; 0x42;   &#x2F;&#x2F; hexadecimal integer literal 十六进制</span><br><span class="line">int inseam &#x3D; 042; &#x2F;&#x2F; octal interger literal 八进制</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 在cout输出下：</span><br><span class="line"></span><br><span class="line">chest &#x3D; 42 (42 in decimal)</span><br><span class="line">waist &#x3D; 66 (0x42 in hex)</span><br><span class="line">inseam &#x3D; 34 (042 in octal)</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<h3 id="char类型：字符和小整数">0.1.4. char类型：字符和小整数</h3><p><code>char类型</code>是专门为储存字符（如字母和数字）而设计的。char类型也是一种整型，它足够长，能够表示目标计算机系统中的所有基本符号——字母，数字和标点符号等。char最常被用来处理字符，但也可以将它比作比short更小的整型。</p>
+<p>最常用的符号集为ASCII字符集。<br>例如字符A的编码为65，字母M的编码为77等。</p>
+<p>cin输入时，cin将键盘中输入的M转换为77；输出时，cout将77转换为所显示的字符M；cin和cout的行为都是由变量类型（ch）引导的。</p>
+<p>C++对字符用单引号<code>&#39;M&#39;</code>对字符串用双引号。</p>
+<p><code>cout.put()</code>为成员函数，提供了一个显示字符的方法，可以代替<code>cout &lt;&lt;</code></p>
+<p>⚠️ <strong> 注意是字符而非字符串 </strong></p>
+<p>亲测<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">cout.put(&#39;M&#39;); &#x2F;&#x2F; valid</span><br><span class="line">cout.put(&#39;My&#39;); &#x2F;&#x2F; non valid</span><br><span class="line">cout.put(&quot;My bag&quot;); &#x2F;&#x2F; non valid</span><br></pre></td></tr></table></figure></p>
+<h2 id="const-限定符">0.2. const 限定符</h2><h2 id="浮点数">0.3. 浮点数</h2>]]></content>
       <categories>
         <category>C++学习</category>
       </categories>
@@ -792,48 +811,6 @@
       </categories>
   </entry>
   <entry>
-    <title>读书笔记 湖泊by东野圭吾</title>
-    <url>/2021/05/23/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%B9%96%E6%B3%8Aby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/</url>
-    <content><![CDATA[<img src="/2021/05/23/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%B9%96%E6%B3%8Aby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/fengmian.jpeg" class>
-<blockquote>
-<p>尸体要在湖底消失需要好几年，不，大概要花好几十年吧。这中间我们肯定都会提心吊胆的。就算尸体不见了，我们的灵魂也无法离开这湖畔吧。</p>
-</blockquote>
-<p>很搞笑的一件事是，我是从凌晨2点开始阅读这本书的，在5点前阅读完，期间伴随着窗对面法国年轻人soirée的欢呼声和音乐声。这一帮聚会的人，平时我肯定辗转难眠骂骂咧咧，这次却让我没有在读书的时候背脊发凉…</p>
-<p>早就听闻东野圭吾的小说很精彩，这次果然感受到了其小说的魅力！</p>
-<p>诸多的犯罪和真相细节在专业的文评里可以找到，博客里我只想简单记录每次阅读后的感悟和心情。</p>
-<blockquote>
-<p>尸体要在湖底消失需要好几年，不，大概要花好几十年吧。这中间我们肯定都会提心吊胆的。就算尸体不见了，我们的灵魂也无法离开这湖畔吧。</p>
-</blockquote>
-<p>小时候不懂得谎言的代价，用谎言换取奖励，用谎言逃避责罚。谎言的层次感也是长大后才明白，何为善意的谎言，何为恶意的谎言。</p>
-<p>但每当不真诚的话说出口，总会担心着需要怎么把谎言说的更真，更让听者信服，不知不觉的又加重了语言上的负担感。久而久之，宁愿不去编造所谓的善意谎言，也不想说出不真诚的话。</p>
-<p>一个谎言需要千千万万个谎言来圆谎。</p>
-<blockquote>
-<p>你是说有的母亲为了招待老师，不惜牺牲自己的肉体吗？</p>
-</blockquote>
-<p>读到这里心中最是沉重。千千万万的亚洲家长们（大部分的情况），为了孩子的学业，没有自己的生活，一掷千金还算好的，需要出卖自己的灵魂去谄媚，甚至出卖自己的肉体。</p>
-<p>但我一直觉得很奇怪的是，真的会有人如此“饥渴”？</p>
-<p>总而言之，坐在某种握着某种权利的位置上，再处于某种社会环境中，人就会变。</p>
-<p>可怜天下父母心。</p>
-<blockquote>
-<p>“嗯，回去的时候，你会跟我和妈妈一起吧？不是各走各路的吧？“ 章太。</p>
-</blockquote>
-<p>孩子的内心需要保护，看起来再冷漠顽固的小孩子，心里的渴望或许就那么简单。</p>
-<p>每个人心里都有那个自己认为的凶手，作者也似乎刻意给每个小孩子安排了合适的动机。悬疑未解，但已经不重要了。</p>
-<p>父母的结合究竟对孩子有那么重要吗？其实我觉得并不是。父母如果能做到互相关心、爱护，那一定是最完美的家庭，但假如不呢？</p>
-<p>我认为最重要的是父母之间的互相尊重，而不是单独在孩子面前指责不在场的另一半。</p>
-<p>对于孩子来说，从小就要面临站哪一边的选择。</p>
-<p>在俊介来到别墅前，美菜子跟所有人吐槽俊介的行为，章太也是看在眼里吧。即便不是血亲，父亲依然是章太的心里另一半天，作为母亲不应该试图把这一片天抹黑。</p>
-<p>与其互相的指责，不如坐下来心平气和的告诉孩子：我们的爱情或许结束了，但我们还可以拥有亲情。</p>
-<p>小孩子根本不懂得爱的差别，只有大人才斤斤计较。</p>
-<p>——————</p>
-<p>接下来还想阅读东野圭吾的其他作品。</p>
-<p>2021.05.23</p>
-]]></content>
-      <categories>
-        <category>2021读书笔记</category>
-      </categories>
-  </entry>
-  <entry>
     <title>读书笔记 杏仁</title>
     <url>/2021/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%9D%8F%E4%BB%81/</url>
     <content><![CDATA[<img src="/2021/04/21/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%9D%8F%E4%BB%81/fengmian.jpeg" class>
@@ -880,6 +857,48 @@
 </blockquote>
 <p>这本书就记录到这里了，耗时2天读完。</p>
 <p>2021.4.21 于巴黎</p>
+]]></content>
+      <categories>
+        <category>2021读书笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>读书笔记 湖泊by东野圭吾</title>
+    <url>/2021/05/23/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%B9%96%E6%B3%8Aby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/</url>
+    <content><![CDATA[<img src="/2021/05/23/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%B9%96%E6%B3%8Aby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/fengmian.jpeg" class>
+<blockquote>
+<p>尸体要在湖底消失需要好几年，不，大概要花好几十年吧。这中间我们肯定都会提心吊胆的。就算尸体不见了，我们的灵魂也无法离开这湖畔吧。</p>
+</blockquote>
+<p>很搞笑的一件事是，我是从凌晨2点开始阅读这本书的，在5点前阅读完，期间伴随着窗对面法国年轻人soirée的欢呼声和音乐声。这一帮聚会的人，平时我肯定辗转难眠骂骂咧咧，这次却让我没有在读书的时候背脊发凉…</p>
+<p>早就听闻东野圭吾的小说很精彩，这次果然感受到了其小说的魅力！</p>
+<p>诸多的犯罪和真相细节在专业的文评里可以找到，博客里我只想简单记录每次阅读后的感悟和心情。</p>
+<blockquote>
+<p>尸体要在湖底消失需要好几年，不，大概要花好几十年吧。这中间我们肯定都会提心吊胆的。就算尸体不见了，我们的灵魂也无法离开这湖畔吧。</p>
+</blockquote>
+<p>小时候不懂得谎言的代价，用谎言换取奖励，用谎言逃避责罚。谎言的层次感也是长大后才明白，何为善意的谎言，何为恶意的谎言。</p>
+<p>但每当不真诚的话说出口，总会担心着需要怎么把谎言说的更真，更让听者信服，不知不觉的又加重了语言上的负担感。久而久之，宁愿不去编造所谓的善意谎言，也不想说出不真诚的话。</p>
+<p>一个谎言需要千千万万个谎言来圆谎。</p>
+<blockquote>
+<p>你是说有的母亲为了招待老师，不惜牺牲自己的肉体吗？</p>
+</blockquote>
+<p>读到这里心中最是沉重。千千万万的亚洲家长们（大部分的情况），为了孩子的学业，没有自己的生活，一掷千金还算好的，需要出卖自己的灵魂去谄媚，甚至出卖自己的肉体。</p>
+<p>但我一直觉得很奇怪的是，真的会有人如此“饥渴”？</p>
+<p>总而言之，坐在某种握着某种权利的位置上，再处于某种社会环境中，人就会变。</p>
+<p>可怜天下父母心。</p>
+<blockquote>
+<p>“嗯，回去的时候，你会跟我和妈妈一起吧？不是各走各路的吧？“ 章太。</p>
+</blockquote>
+<p>孩子的内心需要保护，看起来再冷漠顽固的小孩子，心里的渴望或许就那么简单。</p>
+<p>每个人心里都有那个自己认为的凶手，作者也似乎刻意给每个小孩子安排了合适的动机。悬疑未解，但已经不重要了。</p>
+<p>父母的结合究竟对孩子有那么重要吗？其实我觉得并不是。父母如果能做到互相关心、爱护，那一定是最完美的家庭，但假如不呢？</p>
+<p>我认为最重要的是父母之间的互相尊重，而不是单独在孩子面前指责不在场的另一半。</p>
+<p>对于孩子来说，从小就要面临站哪一边的选择。</p>
+<p>在俊介来到别墅前，美菜子跟所有人吐槽俊介的行为，章太也是看在眼里吧。即便不是血亲，父亲依然是章太的心里另一半天，作为母亲不应该试图把这一片天抹黑。</p>
+<p>与其互相的指责，不如坐下来心平气和的告诉孩子：我们的爱情或许结束了，但我们还可以拥有亲情。</p>
+<p>小孩子根本不懂得爱的差别，只有大人才斤斤计较。</p>
+<p>——————</p>
+<p>接下来还想阅读东野圭吾的其他作品。</p>
+<p>2021.05.23</p>
 ]]></content>
       <categories>
         <category>2021读书笔记</category>
