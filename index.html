@@ -214,6 +214,22 @@
 
               <time title="创建时间：2021-08-09 22:52:13" itemprop="dateCreated datePublished" datetime="2021-08-09T22:52:13+08:00">2021-08-09</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-10 00:35:03" itemprop="dateModified" datetime="2021-08-10T00:35:03+08:00">2021-08-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">C++学习</span></a>
+                </span>
+            </span>
 
           
 
@@ -226,7 +242,47 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          
+          <h1 id="复合类型">1. 复合类型</h1><h2 id="4-1-数组">1.1. 4.1 数组</h2><p><code>数组(array)是一种数据格式，能够存储多个同类型的值</code>。</p>
+<p>要创建数组，可使用声明语句，数组声明应指出以下三点：</p>
+<ul>
+<li>存储在每个元素中的<strong>值的类型</strong></li>
+<li>数组名</li>
+<li>数组中的元素数</li>
+</ul>
+<p>在C++中，可以通过修改简单变量的声明，添加中括号（其中包含元素的数目）来完成数组声明：<br><code>short months[12];</code><br>代表创建了一个名为months的数组，该数组有12个元素，每个元素都可以存储一个short类型的值。<br>可以归纳为：<code>typeName assayName[arraySize];</code></p>
+<p><strong>arraySize</strong>必须是整数常数，或const值。arraySize不可以是变量。</p>
+<p>🧾 程序清单4.1</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    using namespace std;</span><br><span class="line">    </span><br><span class="line">    int yams[3]; // initialize int array with size of 3 elements</span><br><span class="line">    yams[0] = 7; // assign value to the first element of yams</span><br><span class="line">    yams[1] = 8;</span><br><span class="line">    yams[2] = 6;</span><br><span class="line">    </span><br><span class="line">    // another way to initialize and assgin values to an array of integers</span><br><span class="line">    int yamcosts[3] = &#123;20,30,5&#125;; // 注意这里是大括号！！不是中括号！！</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Total yams = &quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">yams[0] + yams</span>[1] + yams[2] &lt;&lt; <span class="string">endl;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;The package with &quot; &lt;&lt; yams[1] &lt;&lt; &quot; yams costs &quot;;</span></span><br><span class="line"><span class="string">    cout &lt;&lt; yamcosts[1] &lt;&lt; &quot; cents per yam.\n&quot;;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    int total = yams[0]*yamcosts[0] + yams[1]*yamcosts[1];</span></span><br><span class="line"><span class="string">    total = total + yams[2]*yamcosts[2];</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;The total yam expense is &quot; &lt;&lt; total &lt;&lt; &quot; cents.\n&quot;;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    // 显示array的长度，显示array中一个element的长度</span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;Size of yams array = &quot; &lt;&lt; sizeof yams &lt;&lt; &quot; bytes. \n&quot;;</span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;Size of one element &quot; &lt;&lt; sizeof yams[0] &lt;&lt; &quot; bytes. \n&quot;;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="数组的初始化规则">1.1.1. 数组的初始化规则</h3><ol>
+<li><p>只有在定义的时候才可以使用初始化，此后就不能使用了，例如:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">int cards[3] &#x3D; &#123;1,2,3&#125;; &#x2F;&#x2F; valid</span><br><span class="line">int hands[4];</span><br><span class="line">hands[4] &#x3D; &#123;1,2,3,4&#125; &#x2F;&#x2F; non-valid</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不可以将一个数组赋给另一个数组：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hands &#x3D; cards; &#x2F;&#x2F; not allowed</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以使用下标分别给数组中的元素赋值</p>
+</li>
+<li><p>初始化数组的时候，提供的值可以少于数组的元素数目。下面的语句只初始化hotelTips的前两个元素：<br><code>float hotelTips[5] = &#123;5.0, 2.5&#125;;</code></p>
+</li>
+</ol>
+<p>如果只对数组的一部分初始化，编译器将自动把其他元素设置为0。</p>
+<p>因此，如果想把数组中所有元素都初始化为0非常简单，只需要把第一个元素初始化为0即可。<br><code>long totals[5000] = &#123;0&#125;;</code></p>
+<ol>
+<li>如果初始化数组时方括号内[]为0，那么C++编译器将计算元素的个数。<br>例如，对于：<br><code>short things[] = &#123;1,5,3,8&#125;;</code>编译器使things数组包含4个元素。</li>
+</ol>
+<h3 id="C-11-数组初始化方法">1.1.2. C++11 数组初始化方法</h3><ol>
+<li><p>初始化数组时，可省略等号(=)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double earning[4]&#123;1.2,1.2,1.2,1.2&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以不在大括号内包含任何内容，这将把所有元素都设置为零。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">unsigned int counts[10] &#x3D; &#123;&#125;; &#x2F;&#x2F; all elements set to 0</span><br><span class="line">float balances[100] &#x3D; &#123;&#125;; &#x2F;&#x2F; all elements set to 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>列表初始化禁止缩窄转换<br><code>long plifs[] = &#123;25,92,1.0&#125;; // not allowed</code><br>这条语句不能通过是因为，浮点数转换为整型(long)是<strong>缩窄操作</strong>，即便浮点数小数点后为零。</p>
+</li>
+</ol>
+<p><code>char slifs[4]&#123;&#39;h&#39;,&#39;i&#39;,1122011,&#39;\0&#39;&#125;; // not allowed</code><br>这条语句不能通过，因为1122011超过了char变量的取值范围</p>
+<p><code>char tlifs[4]&#123;&#39;h&#39;,&#39;i&#39;,112,&#39;\0&#39;&#125;; // allowed</code><br>这条语句可以通过编译，因为虽然112是一个int值，但它在char变量的取值范围内</p>
+
       
     </div>
 
@@ -1449,7 +1505,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共29.5k字</span>
+  <span class="post-count">博客全站共30.4k字</span>
 </div>
 
         
