@@ -188,6 +188,105 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/10/227-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E6%9C%BA2-Medium/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="odcowl">
+      <meta itemprop="description" content="wechat odcowl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="odcowl的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/10/227-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E6%9C%BA2-Medium/" class="post-title-link" itemprop="url">227.基本计算器2(Medium)</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-10 23:18:41" itemprop="dateCreated datePublished" datetime="2021-03-10T23:18:41+08:00">2021-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-11 18:43:57" itemprop="dateModified" datetime="2021-03-11T18:43:57+08:00">2021-03-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>每日一题(2021.03.11)之<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/basic-calculator-ii/">基本计算器</a><br>难度：中等</p>
+<h3 id="一、题目">0.0.1. 一、题目</h3><p>给你一个字符串表达式 <code>s</code> ，请你实现一个基本计算器来计算并返回它的值。</p>
+<p>整数除法仅保留整数部分。</p>
+<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;3+2*2&quot;</span></span><br><span class="line">输出：7</span><br></pre></td></tr></table></figure></p>
+<p>示例 2：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 3/2 &quot;</span></span><br><span class="line">输出：1</span><br></pre></td></tr></table></figure></p>
+<p>示例 3：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：s = <span class="string">&quot; 3+5 / 2 &quot;</span></span><br><span class="line">输出：5</span><br></pre></td></tr></table></figure></p>
+<p>提示：</p>
+<ul>
+<li>1 &lt;= s.length &lt;= 3 * 10^5</li>
+<li>s 由整数和算符 (‘+’, ‘-‘, ‘*‘, ‘/‘) 组成，中间由一些空格隔开</li>
+<li>s 表示一个 有效表达式</li>
+<li>表达式中的所有整数都是非负整数，且在范围 [0, 2^31 - 1] 内</li>
+<li>题目数据保证答案是一个 32-bit 整数</li>
+</ul>
+<h3 id="解法">0.0.2. 解法</h3><p>好亲切的连环题(误 而且一看还是个medium,比起昨天hard的残虐，稍微松了一口气。。。<br>凭着脑海里昨日的记忆，欣喜若狂的写下这个愚蠢的答案。。。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        sign = 0 <span class="comment"># 0 =&gt; +, 1 =&gt; - , 2 =&gt; *, 3 =&gt; /</span></span><br><span class="line">        res = 0</span><br><span class="line">        n = len(s)</span><br><span class="line">        i = 0</span><br><span class="line">        <span class="keyword">while</span> i&lt;n:</span><br><span class="line">            <span class="keyword">if</span> s[i] == <span class="string">&#x27; &#x27;</span>:</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                sign = 0</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                sign = 1</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;*&#x27;</span>:</span><br><span class="line">                sign = 2</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i] == <span class="string">&#x27;/&#x27;</span>:</span><br><span class="line">                sign = 3</span><br><span class="line">                i += 1</span><br><span class="line">            <span class="keyword">elif</span> s[i].isdigit():</span><br><span class="line">                tmp = int(s[i])</span><br><span class="line">                i += 1</span><br><span class="line">                <span class="keyword">while</span> i&lt;n and s[i].isdigit():</span><br><span class="line">                    tmp += tmp*10 + int(s[i])</span><br><span class="line">                    i += 1</span><br><span class="line">                <span class="keyword">if</span> sign == 0:</span><br><span class="line">                    res += tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 1:</span><br><span class="line">                    res -= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 2:</span><br><span class="line">                    res *= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">                <span class="keyword">elif</span> sign == 3:</span><br><span class="line">                    res /= tmp</span><br><span class="line">                    tmp = 0</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure><br>这个答案在遇到第一个示例<code>s=&quot;3+3*2</code>时就通过不了了，忘记了乘除法比加减法优先计算了。。。这就叫做乐极生悲吗</p>
+<p>然后我又不识好歹的写下了这个答案逃之夭夭</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="built_in">return</span> <span class="built_in">eval</span>(s)</span><br></pre></td></tr></table></figure>
+<p>说正经的，当有加减乘除四种运算符时，考虑运算符优先级别，所以<strong>思路</strong>就是利用<code>栈</code>，假如遇到的是<code>数字</code>、<code>+</code>、<code>-</code>号时直接入栈（<code>-</code>换成<code>-num</code>入栈，之后就可以用<code>sum(stack)</code>返回结果了。遇到<code>*</code>,<code>/</code>的时候先把栈顶弹出，计算完结果后再保存回栈顶。</p>
+<p>这里要注意一个python的细节，<code>//</code>和<code>/</code>的定义不同。<code>//</code>为向下取整，比如<code>(-3)//2 = -2</code>。我们不需要取整，<code>-(abs(一个负数)/num)</code>通过这个方式，就可以正确求职。</p>
+<p>思路代码参考<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/basic-calculator-ii/solution/xian-cheng-chu-zai-jia-jian-yong-zhan-ba-hplr/">负雪明烛</a> 这肯定是个小天使姐姐</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def calculate(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        stack = []</span><br><span class="line">        pre_op = <span class="string">&#x27;+&#x27;</span></span><br><span class="line">        num = 0</span><br><span class="line">        <span class="keyword">for</span> i,each <span class="keyword">in</span> enumerate(s):</span><br><span class="line">            <span class="keyword">if</span> each.isdigit():</span><br><span class="line">                num = num*10 + int(each)</span><br><span class="line">            <span class="keyword">if</span> i == len(s)-1 or each <span class="keyword">in</span> <span class="string">&#x27;+-*/&#x27;</span>:</span><br><span class="line">                <span class="keyword">if</span> pre_op == <span class="string">&#x27;+&#x27;</span>:</span><br><span class="line">                    stack.append(num)</span><br><span class="line">                <span class="keyword">elif</span> pre_op == <span class="string">&#x27;-&#x27;</span>:</span><br><span class="line">                    stack.append(-num)</span><br><span class="line">                <span class="keyword">elif</span> pre_op == <span class="string">&#x27;*&#x27;</span>:<span class="comment">#遇到乘法，栈顶跳出计算，结果再储存</span></span><br><span class="line">                    stack.append(stack.pop()*num)</span><br><span class="line">                <span class="keyword">elif</span> pre_op == <span class="string">&#x27;/&#x27;</span>:<span class="comment">#遇到除法，栈顶跳出计算，结果再储存</span></span><br><span class="line">                    top = stack.pop()</span><br><span class="line">                    <span class="keyword">if</span> top &lt; 0:</span><br><span class="line">						<span class="comment">#这句稍有不同</span></span><br><span class="line">                        stack.append(-(abs(top)/num))</span><br><span class="line">                    <span class="keyword">else</span>:</span><br><span class="line">                        stack.append(top//num)</span><br><span class="line">                pre_op = each</span><br><span class="line">                num = 0</span><br><span class="line"></span><br><span class="line">        <span class="comment">#由于栈内只有数字了（减法用负数表示），直接求和</span></span><br><span class="line">        <span class="built_in">return</span> sum(stack)</span><br></pre></td></tr></table></figure>
+<p>这道题比起昨天的hard模式不是非常难，但是也是细节满满，学到了</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+  
+  
+  
+
+
+
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/10/%E5%A3%B0%E5%AD%A6%E5%8F%82%E6%95%B0-%E7%9F%AD%E6%97%B6%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2STFT/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1116,111 +1215,6 @@
 
 
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/02/26/1052-%E7%88%B1%E7%94%9F%E6%B0%94%E7%9A%84%E4%B9%A6%E5%BA%97%E8%80%81%E6%9D%BF-Medium/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="odcowl">
-      <meta itemprop="description" content="wechat odcowl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="odcowl的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/26/1052-%E7%88%B1%E7%94%9F%E6%B0%94%E7%9A%84%E4%B9%A6%E5%BA%97%E8%80%81%E6%9D%BF-Medium/" class="post-title-link" itemprop="url">1052.爱生气的书店老板(Medium)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-02-26 12:05:26" itemprop="dateCreated datePublished" datetime="2021-02-26T12:05:26+08:00">2021-02-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-27 21:30:16" itemprop="dateModified" datetime="2021-02-27T21:30:16+08:00">2021-02-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>力扣每日一题系列(2021.02.23)之<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/">爱生气的书店老板</a><br>难度：中等</p>
-<h3 id="一、题目">0.0.1. 一、题目</h3><p>今天，书店老板有一家店打算试营业<code>customers.length</code>分钟。每分钟都有一些顾客<code>customers[i]</code>会进入书店，所有这些顾客都会在那一分钟结束后离开。</p>
-<p>在某些时候，书店老板会生气。 如果书店老板在第<code>i</code>分钟生气，那么<code>grumpy[i] = 1</code>，否则<code>grumpy[i] = 0</code>。 当书店老板生气时，那一分钟的顾客就会不满意，不生气则他们是满意的。</p>
-<p>书店老板知道一个秘密技巧，能抑制自己的情绪，可以让自己连续<code>X</code>分钟不生气，但却只能使用一次。</p>
-<p>请你返回这一天营业下来，最多有多少客户能够感到满意的数量。</p>
-<h4 id="示例">0.0.1.1. 示例</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">输入：customers = [1,0,1,2,1,1,7,5], grumpy = [0,1,0,1,0,1,0,1], X = 3</span><br><span class="line">输出：16</span><br><span class="line">解释：</span><br><span class="line">书店老板在最后 3 分钟保持冷静。</span><br><span class="line">感到满意的最大客户数量 = 1 + 1 + 1 + 1 + 7 + 5 = 16.</span><br></pre></td></tr></table></figure>
-<h4 id="提示">0.0.1.2. 提示</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1 &lt;&#x3D; X &lt;&#x3D; customers.length &#x3D;&#x3D; grumpy.length &lt;&#x3D; 20000</span><br><span class="line">0 &lt;&#x3D; customers[i] &lt;&#x3D; 1000</span><br><span class="line">0 &lt;&#x3D; grumpy[i] &lt;&#x3D; 1</span><br></pre></td></tr></table></figure>
-<h3 id="二、我的解法">0.0.2. 二、我的解法</h3><p>我的第一个想法是利用暴力解法。（渣</p>
-<p>通过按顺序替换<code>grumpy</code>里不生气的日期，再把每个新的<code>grumpy</code>和<code>customers</code>点乘求和，保存满意客户的最大数量。注意，<code>grumpy</code>和<code>customers</code>点乘前，需要注意把<code>0（不生气）</code>替换成<code>1</code>，把<code>1（生气）</code>替换成<code>0</code>，这样才能使用点乘。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type customers: List[int]</span></span><br><span class="line"><span class="string">        :type grumpy: List[int]</span></span><br><span class="line"><span class="string">        :type X: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment">#滑动窗口</span></span><br><span class="line">        res = 0</span><br><span class="line">        <span class="comment">#先将grumpy里的1和0替换，方便后面点乘</span></span><br><span class="line">        <span class="comment">#1:不生气，服务客户 0:生气，去你娘滴</span></span><br><span class="line">        grumpy = [1-i <span class="keyword">for</span> i <span class="keyword">in</span> grumpy]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(grumpy)-X+1):</span><br><span class="line">            grumpy_now = grumpy[:i] + [1]*X + grumpy[i+X:]</span><br><span class="line">            <span class="comment">#satis：满意度列表</span></span><br><span class="line">            satis = map(lambda x,y:x*y, grumpy_now, customers)</span><br><span class="line">            <span class="comment">#保留最大res</span></span><br><span class="line">            res = max(res,sum(satis))</span><br><span class="line"></span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure><br>但是这个解法只ac了<code>73/38</code>，查看发现是那种非常长的列表无法通过。</p>
-<h3 id="滑动窗口算法">0.0.3. 滑动窗口算法</h3><p>引用思路来自: <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/solution/yong-mi-mi-ji-qiao-wan-liu-zhu-zui-duo-d-py41/">负雪明烛</a></p>
-<p>依然是<code>滑动窗口</code>的思路。</p>
-<h4 id="1-解题思路">0.0.3.1. 1.解题思路</h4><ul>
-<li>将题目分为两部分，第一部分是不做出任何改变会留下的顾客origin，第二部分是每一个<code>不生气窗口X</code>的可以留下的本被赶走的客户数increse。</li>
-<li>得到的客户总数就是 origin + max(increse)</li>
-</ul>
-<p>按照这个思路，我又自己写了一遍代码，<code>ac100%</code>了但是执行用时5.06%…<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type customers: List[int]</span><br><span class="line">        :type grumpy: List[int]</span><br><span class="line">        :type X: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        #滑动窗口</span><br><span class="line">        increase &#x3D; 0</span><br><span class="line">        origin &#x3D; sum(map(lambda x,y:x*y, [1-i for i in grumpy], customers))</span><br><span class="line">        </span><br><span class="line">        for i in range(len(grumpy)-X+1):</span><br><span class="line">            grumpy_now, customers_now &#x3D; grumpy[i:i+X],customers[i:i+X]</span><br><span class="line">            satis &#x3D; 0</span><br><span class="line">            for j in range(len(grumpy_now)):</span><br><span class="line">                if grumpy_now[j] &#x3D;&#x3D; 1:</span><br><span class="line">                    satis +&#x3D; customers_now[j]</span><br><span class="line">            increase &#x3D; max(increase,satis)</span><br><span class="line">        return origin + increase</span><br></pre></td></tr></table></figure><br>所以接下来是我学习上方参考链接的做题方法写的<code>ac100%</code>，248ms(82.24%), 15MB(47.72%)<br>总体分为：</p>
-<ol>
-<li>算毫无作为时满意的客户数量 origin</li>
-<li>算滑动窗口X带来的改变 通过curValue的最大值resValue</li>
-</ol>
-<ul>
-<li>算前X个格子</li>
-<li>算第X到len(grumpy)个格子</li>
-</ul>
-<ol>
-<li>得到结果为origin+resValue<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type customers: List[int]</span><br><span class="line">        :type grumpy: List[int]</span><br><span class="line">        :type X: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        </span><br><span class="line">        #第一步: 计算不做任何改变，满意客户的数量</span><br><span class="line">        origin &#x3D; sum(map(lambda x,y:x*y, [1-i for i in grumpy], customers))</span><br><span class="line">        </span><br><span class="line">        #第二步：计算滑动窗口里可以增加满意客户的数量</span><br><span class="line">        # 2.1 先计算前X个格子的值</span><br><span class="line">        curValue &#x3D; 0</span><br><span class="line">        for i in range(X):</span><br><span class="line">            if grumpy[i] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue +&#x3D; customers[i]</span><br><span class="line">        resValue &#x3D; curValue</span><br><span class="line">        # 2.2 开始向右滑————————————</span><br><span class="line">        for i in range(X,len(grumpy)):</span><br><span class="line">            #先验证左边（左边滑出的那个格子）是否在生气，如果在生气，需要在curValue剪掉</span><br><span class="line">            if grumpy[i-X] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue -&#x3D; customers[i-X]</span><br><span class="line">            #再验证右边（右边新增的那个格子）是否在生气，如果在生气，需要在curValue加上</span><br><span class="line">            if grumpy[i] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue +&#x3D; customers[i]</span><br><span class="line">            #判断当下curValue和史上最大curValue的关系</span><br><span class="line">            resValue &#x3D; max(resValue,curValue)</span><br><span class="line">        </span><br><span class="line">        return origin + resValue</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-  
-  
-  
-
-
-
-
 
   
   <nav class="pagination">
@@ -1291,7 +1285,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1350,7 +1344,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共30.4k字</span>
+  <span class="post-count">博客全站共31.7k字</span>
 </div>
 
         
