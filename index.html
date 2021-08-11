@@ -188,6 +188,101 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/11/C-PrimerPlus-4-3String%E7%B1%BB%E7%AE%80%E4%BB%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="odcowl">
+      <meta itemprop="description" content="wechat odcowl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="odcowl的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/11/C-PrimerPlus-4-3String%E7%B1%BB%E7%AE%80%E4%BB%8B/" class="post-title-link" itemprop="url">C++PrimerPlus_4.3String类简介</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-11 20:56:15 / 修改时间：21:39:36" itemprop="dateCreated datePublished" datetime="2021-08-11T20:56:15+08:00">2021-08-11</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/C-%E8%87%AA%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">C++自学</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="4-3-string-类简介">1. 4.3 string 类简介</h1><p>由文章开头的<code>#include &lt;string&gt;</code>使用string类</p>
+<p>下面的例子比较了string和字符数组的一些相同点：</p>
+<p>🌰 例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;</span><br><span class="line">&#x2F;&#x2F;  main.cpp</span><br><span class="line">&#x2F;&#x2F;  strtype1</span><br><span class="line">&#x2F;&#x2F;</span><br><span class="line">&#x2F;&#x2F;  Created by YujiaYANG on 2021&#x2F;8&#x2F;11.</span><br><span class="line">&#x2F;&#x2F;</span><br><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 旨在说明string对象与字符数组之间的一些相同点和不同点</span><br><span class="line">int main() &#123;</span><br><span class="line">    using namespace std;</span><br><span class="line">    char charr1[20];            &#x2F;&#x2F; create an empty array</span><br><span class="line">    char charr2[20] &#x3D; &quot;jaguar&quot;; &#x2F;&#x2F; create an initialized array</span><br><span class="line">    string str1;                &#x2F;&#x2F; create an empty string object</span><br><span class="line">    string str2 &#x3D; &quot;panther&quot;;    &#x2F;&#x2F; create an initialized string object</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; &quot;Enter a kind of feline: &quot;;</span><br><span class="line">    cin &gt;&gt; charr1; &#x2F;&#x2F; ocelot</span><br><span class="line">    cout &lt;&lt; &quot;Enter another kind of feline: &quot;;</span><br><span class="line">    cin &gt;&gt; str1; &#x2F;&#x2F;tiger</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; &quot;Here are some felines:\n&quot;;</span><br><span class="line">    cout &lt;&lt; charr1 &lt;&lt; &quot; &quot; &lt;&lt; charr2 &lt;&lt; &quot; &quot;</span><br><span class="line">    &lt;&lt; str1 &lt;&lt; &quot; &quot; &lt;&lt; str2 &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; &quot;The third letter in &quot; &lt;&lt; charr2 &lt;&lt; &quot; is &quot;</span><br><span class="line">    &lt;&lt; charr2[2] &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; &quot;The third letter in &quot; &lt;&lt; str2 &lt;&lt; &quot; is &quot;</span><br><span class="line">    &lt;&lt; str2[2] &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在很多方面，使用string对象方式与使用字符数组相同：</p>
+<ul>
+<li>可以使用C-风格字符串来初始化string对象</li>
+<li>可以使用cin输入string</li>
+<li>可以使用cout显示string</li>
+<li>可以使用数组表示法访问存储在string对象中的字符</li>
+</ul>
+<p><strong>类的设计</strong>可以让程序自动处理string的大小</p>
+<p>可以说char数组视为一组用于存储一个字符串中的char存储单元，而string类变量是一个表示字符串的实体。</p>
+<h2 id="C-字符串初始化">1.1. C++字符串初始化</h2><p><code>string str1;</code> 创建一个长度为0的string对象，读取过程中可以自动调整<br><code>string str2 = &quot;panther&quot;;</code> 创建一个初始化了的string类对象<br><code>string str3 &#123;&quot;Hank&#39;s Fine Eats&quot;&#125;;</code> C-风格字符串string对象</p>
+<h2 id="赋值，拼接和附加">1.2. 赋值，拼接和附加</h2><ul>
+<li><p>string 可以赋值（数值不可）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string str1;</span><br><span class="line">string str2 &#x3D; &quot;jaguar&quot;;</span><br><span class="line">str1 &#x3D; str2; &#x2F;&#x2F; valid</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>string类简化了字符串的合并操作（用+或者+=号）</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string str3;</span><br><span class="line">str3 &#x3D; str1 + str2; &#x2F;&#x2F; assign str3 the joined strings</span><br><span class="line">str1 +&#x3D; str2; &#x2F;&#x2F; add str2 to the end of str1</span><br></pre></td></tr></table></figure>
+<h2 id="string类I-O">1.3. string类I/O</h2><p>针对char数组时：<br><code>cin.getline(char,20);</code> 需要标明数组的长度</p>
+<p>针对string对象时：<br><code>getline(cin,str1);</code> 不需要标注string的长度</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+  
+  
+  
+
+
+
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/11/C-PrimerPlus-4-2%E5%AD%97%E7%AC%A6%E4%B8%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1305,124 +1400,6 @@
 
 
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/21/1035-%E4%B8%8D%E7%9B%B8%E4%BA%A4%E7%9A%84%E7%BA%BF-Medium/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="odcowl">
-      <meta itemprop="description" content="wechat odcowl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="odcowl的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/21/1035-%E4%B8%8D%E7%9B%B8%E4%BA%A4%E7%9A%84%E7%BA%BF-Medium/" class="post-title-link" itemprop="url">1035.不相交的线(Medium)</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-21 18:56:40" itemprop="dateCreated datePublished" datetime="2021-05-21T18:56:40+08:00">2021-05-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-22 01:27:05" itemprop="dateModified" datetime="2021-05-22T01:27:05+08:00">2021-05-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>LeetCodee每日一题(2021.05.21)之<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/uncrossed-lines/">不相交的线</a><br>难度：中等</p>
-<h3 id="题目">0.0.1. 题目</h3><p>在两条独立的水平线上按给定的顺序写下<code>nums1</code>和<code>nums2</code>中的整数。</p>
-<p>现在，可以绘制一些连接两个数字<code>nums1[i]</code>和<code>nums2[j]</code>的直线，这些直线需要同时满足满足：</p>
-<p><code>nums1[i] == nums2[j]</code><br>且绘制的直线不与任何其他连线（非水平线）相交。<br>请注意，连线即使在端点也不能相交：每个数字只能属于一条连线。</p>
-<p>以这种方法绘制线条，并返回可以绘制的最大连线数。</p>
-<p><strong>示例1</strong><br><img src="https://assets.leetcode-cn.com/aliyun-lc-upload/uploads/2019/04/28/142.png" alt="img1"></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：nums1 = [1,4,2], nums2 = [1,2,4]</span><br><span class="line">输出：2</span><br><span class="line">解释：可以画出两条不交叉的线，如上图所示。 </span><br><span class="line">但无法画出第三条不相交的直线，因为从 nums1[1]=4 到 nums2[2]=4 的直线将与从 nums1[2]=2 到 nums2[1]=2 的直线相交。</span><br></pre></td></tr></table></figure>
-<p><strong>示例2</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums1 = [2,5,1,2,5], nums2 = [10,5,2,1,5,2]</span><br><span class="line">输出：3</span><br></pre></td></tr></table></figure></p>
-<p><strong>示例3</strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：nums1 = [1,3,7,1,7,5], nums2 = [1,9,2,5,1]</span><br><span class="line">输出：2</span><br></pre></td></tr></table></figure></p>
-<p>提示：</p>
-<p>1 &lt;= nums1.length &lt;= 500<br>1 &lt;= nums2.length &lt;= 500<br>1 &lt;= nums1[i], nums2[i] &lt;= 2000</p>
-<h3 id="暂时错误的思路">0.0.2. 暂时错误的思路</h3><p>一开始看到这道题，我想到的是数学中如何验证平面上两条线段是否相交，也就是讲问题转化成了：给定两个线段的坐标（也就是四个点的直角坐标系坐标），判断这两个线段是否相交。</p>
-<p>假定输入p1,p2,q1,q2四个点的坐标，p1p2为一条线段,q1q2为另外一条线段。</p>
-<p>两条线段相交只有两种情况：</p>
-<ol>
-<li>其中一条线段的某一端点在另一条线段上</li>
-<li>两条线段成X型</li>
-</ol>
-<p>详细的解题过程见：<a target="_blank" rel="noopener" href="https://c.lanmit.com/bianchengkaifa/Python/15518.html">参考</a></p>
-<p>实际上没有用上的代码部分:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">def judge(a,b,c,d):</span><br><span class="line">            <span class="keyword">if</span> min(a[0],b[0])&lt;=max(c[0],d[0]) and min(c[1],d[1])&lt;=max(a[1],b[1]) and min(c[0],d[0])&lt;=max(a[0],b[0]) and min(a[1],b[1])&lt;=max(c[1],d[1]):</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;True&quot;</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;False&quot;</span>)</span><br></pre></td></tr></table></figure></p>
-<h3 id="解题思路">0.0.3. 解题思路</h3><p>这道题LC解题思路里给出的基本为动态规划的解法，也是我算法里最差的一部分。</p>
-<p><strong>定义</strong></p>
-<ul>
-<li><code>dp[i][j]</code>表示数组nums1的前<code>i</code>个数字和数组nums2的前<code>j</code>个数字能形成的不相交的线的最大数。（大问题化小问题）</li>
-<li>其中<code>m</code>为nums1长度，<code>n</code>为nums2长度</li>
-</ul>
-<p><strong>重点：状态转移方程</strong></p>
-<ul>
-<li>对于任意 0 &lt; j &lt; m, 0 &lt; j &lt; n, 当<code>nums1[i]</code>和nums2[j]`数字相同的时候：<ul>
-<li>当前最大连线数又可以增加一条，用<code>dp[i-1][j-1]+1</code>表示</li>
-</ul>
-</li>
-<li>如果数字不相同，可以从nums1或nums2去掉一个数字进行比较<ul>
-<li>比如比较 dp[i-1][j]dp[i−1][j] 和 dp[i][j-1]dp[i][j−1], 取两者中的较大值来更新 dp[i][j]dp[i][j] 即可.</li>
-<li>dp[i-1][j]dp[i−1][j] 代表不考虑 nums[i]nums[i] 字符, nums[j]nums[j] 是考虑的, 但不是必须包含. dp[i][j-1]dp[i][j−1] 同理</li>
-</ul>
-</li>
-<li>最后，遍历完成后，结果在dp[m][n]上</li>
-</ul>
-<p>实现代码：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxUncrossedLines(self, nums1, nums2):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type nums1: List[int]</span></span><br><span class="line"><span class="string">        :type nums2: List[int]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        m, n = len(nums1),len(nums2)</span><br><span class="line"></span><br><span class="line">        dp = [[0 <span class="keyword">for</span> _ <span class="keyword">in</span> range(n+1)] <span class="keyword">for</span> _ <span class="keyword">in</span> range(m+1)]</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(1,m+1):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(1,n+1):</span><br><span class="line">                dp[i][j] = max(dp[i-1][j],dp[i][j-1])</span><br><span class="line">                <span class="keyword">if</span> nums1[i-1] == nums2[j-1]:</span><br><span class="line">                    dp[i][j] = max(dp[i][j], dp[i-1][j-1] + 1)</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> dp[m][n]</span><br></pre></td></tr></table></figure></p>
-<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/uncrossed-lines/solution/chi-xiao-dou-python-tu-wen-jian-ming-si-s7ukn/">赤小豆</a></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-  
-  
-  
-
-
-
-
 
   
   <nav class="pagination">
@@ -1493,14 +1470,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">34</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -1552,7 +1529,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共31.7k字</span>
+  <span class="post-count">博客全站共32.3k字</span>
 </div>
 
         

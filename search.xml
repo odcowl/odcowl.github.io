@@ -494,23 +494,6 @@
       </categories>
   </entry>
   <entry>
-    <title>856.转置矩阵(Easy)</title>
-    <url>/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.02.25)之<a href="https://leetcode-cn.com/problems/transpose-matrix/">转置矩阵</a><br>难度：简单</p>
-<h2 id="一、题目">0.1. 一、题目</h2><p>给你一个二维整数数组 matrix， 返回 matrix 的 转置矩阵 。<br>矩阵的 转置 是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p>
-<p><img src="https://assets.leetcode.com/uploads/2021/02/10/hint_transpose.png" alt="867.转置矩阵"></p>
-<h3 id="示例">0.1.1. 示例</h3><p>示例1:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ 输入: matrix&#x3D;[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">$ 输出: [[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">m == matrix.length</span><br><span class="line">n == matrix[i].length</span><br><span class="line">1 &lt;= m, n &lt;= 1000</span><br><span class="line">1 &lt;= m * n &lt;= 105</span><br><span class="line">-10^9 &lt;= matrix[i][j] &lt;= 10^9</span><br></pre></td></tr></table></figure></p>
-<h3 id="我的解法">0.1.2. 我的解法</h3><p>转置矩阵即将M行N列的矩阵，转换成N行M列的矩阵，注意有可能N和M并不相等，所以必须要新建一个result矩阵（否则可能会出现out of range的情况）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def transpose(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        m,n = len(matrix),len(matrix[0])</span><br><span class="line">        <span class="comment">#m为行数，n为列数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#不需要numpy的矩阵建造方法</span></span><br><span class="line">        new_matrix = [[0 <span class="keyword">for</span> i <span class="keyword">in</span> range(m)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                new_matrix[i][j] = matrix[j][i]</span><br><span class="line">        <span class="built_in">return</span> new_matrix</span><br></pre></td></tr></table></figure>
-<p>这道题的意思就是原来的每一行转换成了后来的每一列，为了数学关系上更清晰，下面图片为解析。可以看出，对于一个相同的元素，新地址（坐标）和旧地址（坐标）就是横纵轴交换的关系：<br><img src="/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/jiexi.png" class title="This is an example image"></p>
-<p>一个错误的思路：（这个思路就是没有考虑到新矩阵的大小关系）<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">	for j in range(i,m):</span><br><span class="line">		matrix[i][j], matrix[j][i] &#x3D;  matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure></p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
     <title>7.整数反转(Easy)</title>
     <url>/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/</url>
     <content><![CDATA[<p>LeetCode之<a href="https://leetcode-cn.com/problems/reverse-integer/">整数反转</a><br>难度：简单</p>
@@ -533,6 +516,23 @@
 <p>但是在这道题中，输入数字x的大小无法确定</p>
 <p>思路为每次截取x的最后一位，按照倍数变化操作，通过while来完成</p>
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">	def reverse(self, x):</span><br><span class="line">		a = 0</span><br><span class="line">		<span class="keyword">while</span> x!=0:</span><br><span class="line">			<span class="keyword">if</span> x&gt;0:</span><br><span class="line">				a=a*10+x%10</span><br><span class="line">				x = x//10</span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				a=a*10+x%-10</span><br><span class="line">				x = -(x//-10)</span><br><span class="line">		<span class="built_in">return</span> a if-2**31&lt;a&lt;2**31-1 <span class="keyword">else</span> 0</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>856.转置矩阵(Easy)</title>
+    <url>/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/</url>
+    <content><![CDATA[<p>力扣每日一题系列(2021.02.25)之<a href="https://leetcode-cn.com/problems/transpose-matrix/">转置矩阵</a><br>难度：简单</p>
+<h2 id="一、题目">0.1. 一、题目</h2><p>给你一个二维整数数组 matrix， 返回 matrix 的 转置矩阵 。<br>矩阵的 转置 是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/10/hint_transpose.png" alt="867.转置矩阵"></p>
+<h3 id="示例">0.1.1. 示例</h3><p>示例1:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ 输入: matrix&#x3D;[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">$ 输出: [[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure></p>
+<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">m == matrix.length</span><br><span class="line">n == matrix[i].length</span><br><span class="line">1 &lt;= m, n &lt;= 1000</span><br><span class="line">1 &lt;= m * n &lt;= 105</span><br><span class="line">-10^9 &lt;= matrix[i][j] &lt;= 10^9</span><br></pre></td></tr></table></figure></p>
+<h3 id="我的解法">0.1.2. 我的解法</h3><p>转置矩阵即将M行N列的矩阵，转换成N行M列的矩阵，注意有可能N和M并不相等，所以必须要新建一个result矩阵（否则可能会出现out of range的情况）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def transpose(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        m,n = len(matrix),len(matrix[0])</span><br><span class="line">        <span class="comment">#m为行数，n为列数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#不需要numpy的矩阵建造方法</span></span><br><span class="line">        new_matrix = [[0 <span class="keyword">for</span> i <span class="keyword">in</span> range(m)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                new_matrix[i][j] = matrix[j][i]</span><br><span class="line">        <span class="built_in">return</span> new_matrix</span><br></pre></td></tr></table></figure>
+<p>这道题的意思就是原来的每一行转换成了后来的每一列，为了数学关系上更清晰，下面图片为解析。可以看出，对于一个相同的元素，新地址（坐标）和旧地址（坐标）就是横纵轴交换的关系：<br><img src="/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/jiexi.png" class title="This is an example image"></p>
+<p>一个错误的思路：（这个思路就是没有考虑到新矩阵的大小关系）<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">	for j in range(i,m):</span><br><span class="line">		matrix[i][j], matrix[j][i] &#x3D;  matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure></p>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -866,6 +866,38 @@
 ]]></content>
       <categories>
         <category>C++学习</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>C++PrimerPlus_4.3String类简介</title>
+    <url>/2021/08/11/C-PrimerPlus-4-3String%E7%B1%BB%E7%AE%80%E4%BB%8B/</url>
+    <content><![CDATA[<h1 id="4-3-string-类简介">1. 4.3 string 类简介</h1><p>由文章开头的<code>#include &lt;string&gt;</code>使用string类</p>
+<p>下面的例子比较了string和字符数组的一些相同点：</p>
+<p>🌰 例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F;</span><br><span class="line">&#x2F;&#x2F;  main.cpp</span><br><span class="line">&#x2F;&#x2F;  strtype1</span><br><span class="line">&#x2F;&#x2F;</span><br><span class="line">&#x2F;&#x2F;  Created by YujiaYANG on 2021&#x2F;8&#x2F;11.</span><br><span class="line">&#x2F;&#x2F;</span><br><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 旨在说明string对象与字符数组之间的一些相同点和不同点</span><br><span class="line">int main() &#123;</span><br><span class="line">    using namespace std;</span><br><span class="line">    char charr1[20];            &#x2F;&#x2F; create an empty array</span><br><span class="line">    char charr2[20] &#x3D; &quot;jaguar&quot;; &#x2F;&#x2F; create an initialized array</span><br><span class="line">    string str1;                &#x2F;&#x2F; create an empty string object</span><br><span class="line">    string str2 &#x3D; &quot;panther&quot;;    &#x2F;&#x2F; create an initialized string object</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; &quot;Enter a kind of feline: &quot;;</span><br><span class="line">    cin &gt;&gt; charr1; &#x2F;&#x2F; ocelot</span><br><span class="line">    cout &lt;&lt; &quot;Enter another kind of feline: &quot;;</span><br><span class="line">    cin &gt;&gt; str1; &#x2F;&#x2F;tiger</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; &quot;Here are some felines:\n&quot;;</span><br><span class="line">    cout &lt;&lt; charr1 &lt;&lt; &quot; &quot; &lt;&lt; charr2 &lt;&lt; &quot; &quot;</span><br><span class="line">    &lt;&lt; str1 &lt;&lt; &quot; &quot; &lt;&lt; str2 &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; &quot;The third letter in &quot; &lt;&lt; charr2 &lt;&lt; &quot; is &quot;</span><br><span class="line">    &lt;&lt; charr2[2] &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; &quot;The third letter in &quot; &lt;&lt; str2 &lt;&lt; &quot; is &quot;</span><br><span class="line">    &lt;&lt; str2[2] &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在很多方面，使用string对象方式与使用字符数组相同：</p>
+<ul>
+<li>可以使用C-风格字符串来初始化string对象</li>
+<li>可以使用cin输入string</li>
+<li>可以使用cout显示string</li>
+<li>可以使用数组表示法访问存储在string对象中的字符</li>
+</ul>
+<p><strong>类的设计</strong>可以让程序自动处理string的大小</p>
+<p>可以说char数组视为一组用于存储一个字符串中的char存储单元，而string类变量是一个表示字符串的实体。</p>
+<h2 id="C-字符串初始化">1.1. C++字符串初始化</h2><p><code>string str1;</code> 创建一个长度为0的string对象，读取过程中可以自动调整<br><code>string str2 = &quot;panther&quot;;</code> 创建一个初始化了的string类对象<br><code>string str3 &#123;&quot;Hank&#39;s Fine Eats&quot;&#125;;</code> C-风格字符串string对象</p>
+<h2 id="赋值，拼接和附加">1.2. 赋值，拼接和附加</h2><ul>
+<li><p>string 可以赋值（数值不可）</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">string str1;</span><br><span class="line">string str2 &#x3D; &quot;jaguar&quot;;</span><br><span class="line">str1 &#x3D; str2; &#x2F;&#x2F; valid</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>string类简化了字符串的合并操作（用+或者+=号）</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">string str3;</span><br><span class="line">str3 &#x3D; str1 + str2; &#x2F;&#x2F; assign str3 the joined strings</span><br><span class="line">str1 +&#x3D; str2; &#x2F;&#x2F; add str2 to the end of str1</span><br></pre></td></tr></table></figure>
+<h2 id="string类I-O">1.3. string类I/O</h2><p>针对char数组时：<br><code>cin.getline(char,20);</code> 需要标明数组的长度</p>
+<p>针对string对象时：<br><code>getline(cin,str1);</code> 不需要标注string的长度</p>
+]]></content>
+      <categories>
+        <category>C++自学</category>
       </categories>
   </entry>
   <entry>

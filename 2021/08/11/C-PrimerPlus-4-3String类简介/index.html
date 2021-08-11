@@ -20,22 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="LeetCode每日一题(2021.03.18)之反转链表2 给你单链表的头指针 head 和两个整数 left 和 right ，其中 left &lt;&#x3D; right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。 示例1:  12输入：head &#x3D; [1,2,3,4,5], left &#x3D; 2, right &#x3D; 4输出：[1,4,3,2,5] 示例2: 12">
+  <meta name="description" content="1. 4.3 string 类简介由文章开头的#include &lt;string&gt;使用string类 下面的例子比较了string和字符数组的一些相同点： 🌰 例子： 12345678910111213141516171819202122232425262728293031323334353637&#x2F;&#x2F;&#x2F;&#x2F;  main.cpp&#x2F;&amp;#x2F">
 <meta property="og:type" content="article">
-<meta property="og:title" content="92.反转链表2(Medium)-未掌握">
-<meta property="og:url" content="http://example.com/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/index.html">
+<meta property="og:title" content="C++PrimerPlus_4.3String类简介">
+<meta property="og:url" content="http://example.com/2021/08/11/C-PrimerPlus-4-3String%E7%B1%BB%E7%AE%80%E4%BB%8B/index.html">
 <meta property="og:site_name" content="odcowl的个人博客">
-<meta property="og:description" content="LeetCode每日一题(2021.03.18)之反转链表2 给你单链表的头指针 head 和两个整数 left 和 right ，其中 left &lt;&#x3D; right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。 示例1:  12输入：head &#x3D; [1,2,3,4,5], left &#x3D; 2, right &#x3D; 4输出：[1,4,3,2,5] 示例2: 12">
+<meta property="og:description" content="1. 4.3 string 类简介由文章开头的#include &lt;string&gt;使用string类 下面的例子比较了string和字符数组的一些相同点： 🌰 例子： 12345678910111213141516171819202122232425262728293031323334353637&#x2F;&#x2F;&#x2F;&#x2F;  main.cpp&#x2F;&amp;#x2F">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/rev2ex2.jpeg">
-<meta property="article:published_time" content="2021-03-18T03:55:07.000Z">
-<meta property="article:modified_time" content="2021-05-21T17:23:27.751Z">
+<meta property="article:published_time" content="2021-08-11T12:56:15.000Z">
+<meta property="article:modified_time" content="2021-08-11T13:39:36.352Z">
 <meta property="article:author" content="odcowl">
-<meta property="article:tag" content="链表">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/rev2ex2.jpeg">
 
-<link rel="canonical" href="http://example.com/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/">
+<link rel="canonical" href="http://example.com/2021/08/11/C-PrimerPlus-4-3String%E7%B1%BB%E7%AE%80%E4%BB%8B/">
 
 
 <script id="page-configurations">
@@ -48,7 +45,7 @@
   };
 </script>
 
-  <title>92.反转链表2(Medium)-未掌握 | odcowl的个人博客</title>
+  <title>C++PrimerPlus_4.3String类简介 | odcowl的个人博客</title>
   
 
 
@@ -194,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/11/C-PrimerPlus-4-3String%E7%B1%BB%E7%AE%80%E4%BB%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -207,7 +204,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          92.反转链表2(Medium)-未掌握
+          C++PrimerPlus_4.3String类简介
         </h1>
 
         <div class="post-meta">
@@ -216,23 +213,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-03-18 11:55:07" itemprop="dateCreated datePublished" datetime="2021-03-18T11:55:07+08:00">2021-03-18</time>
+              <time title="创建时间：2021-08-11 20:56:15 / 修改时间：21:39:36" itemprop="dateCreated datePublished" datetime="2021-08-11T20:56:15+08:00">2021-08-11</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-22 01:23:27" itemprop="dateModified" datetime="2021-05-22T01:23:27+08:00">2021-05-22</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
+                  <a href="/categories/C-%E8%87%AA%E5%AD%A6/" itemprop="url" rel="index"><span itemprop="name">C++自学</span></a>
                 </span>
             </span>
 
@@ -247,22 +238,30 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>LeetCode每日一题(2021.03.18)之<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-linked-list-ii/">反转链表2</a></p>
-<p>给你单链表的头指针 head 和两个整数 left 和 right ，其中 left &lt;= right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。</p>
-<p>示例1:</p>
-<img src="/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/rev2ex2.jpeg" class>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5], left = 2, right = 4</span><br><span class="line">输出：[1,4,3,2,5]</span><br></pre></td></tr></table></figure>
-<p>示例2:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [5], left = 1, right = 1</span><br><span class="line">输出：[5]</span><br></pre></td></tr></table></figure>
-<p><strong>提示</strong>：</p>
+        <h1 id="4-3-string-类简介">1. 4.3 string 类简介</h1><p>由文章开头的<code>#include &lt;string&gt;</code>使用string类</p>
+<p>下面的例子比较了string和字符数组的一些相同点：</p>
+<p>🌰 例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F;</span><br><span class="line">&#x2F;&#x2F;  main.cpp</span><br><span class="line">&#x2F;&#x2F;  strtype1</span><br><span class="line">&#x2F;&#x2F;</span><br><span class="line">&#x2F;&#x2F;  Created by YujiaYANG on 2021&#x2F;8&#x2F;11.</span><br><span class="line">&#x2F;&#x2F;</span><br><span class="line"></span><br><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 旨在说明string对象与字符数组之间的一些相同点和不同点</span><br><span class="line">int main() &#123;</span><br><span class="line">    using namespace std;</span><br><span class="line">    char charr1[20];            &#x2F;&#x2F; create an empty array</span><br><span class="line">    char charr2[20] &#x3D; &quot;jaguar&quot;; &#x2F;&#x2F; create an initialized array</span><br><span class="line">    string str1;                &#x2F;&#x2F; create an empty string object</span><br><span class="line">    string str2 &#x3D; &quot;panther&quot;;    &#x2F;&#x2F; create an initialized string object</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; &quot;Enter a kind of feline: &quot;;</span><br><span class="line">    cin &gt;&gt; charr1; &#x2F;&#x2F; ocelot</span><br><span class="line">    cout &lt;&lt; &quot;Enter another kind of feline: &quot;;</span><br><span class="line">    cin &gt;&gt; str1; &#x2F;&#x2F;tiger</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; &quot;Here are some felines:\n&quot;;</span><br><span class="line">    cout &lt;&lt; charr1 &lt;&lt; &quot; &quot; &lt;&lt; charr2 &lt;&lt; &quot; &quot;</span><br><span class="line">    &lt;&lt; str1 &lt;&lt; &quot; &quot; &lt;&lt; str2 &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; &quot;The third letter in &quot; &lt;&lt; charr2 &lt;&lt; &quot; is &quot;</span><br><span class="line">    &lt;&lt; charr2[2] &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; &quot;The third letter in &quot; &lt;&lt; str2 &lt;&lt; &quot; is &quot;</span><br><span class="line">    &lt;&lt; str2[2] &lt;&lt; endl;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">        </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>在很多方面，使用string对象方式与使用字符数组相同：</p>
 <ul>
-<li>链表中节点数目为 n</li>
-<li>1 &lt;= n &lt;= 500</li>
-<li>-500 &lt;= Node.val &lt;= 500</li>
-<li>1 &lt;= left &lt;= right &lt;= n</li>
+<li>可以使用C-风格字符串来初始化string对象</li>
+<li>可以使用cin输入string</li>
+<li>可以使用cout显示string</li>
+<li>可以使用数组表示法访问存储在string对象中的字符</li>
 </ul>
-<p><strong>进阶</strong>：<br>你可以使用一趟扫描完成反转吗？</p>
-<h3 id="解法">0.0.1. 解法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line">class Solution(object):</span><br><span class="line">    def reverseBetween(self, head, left, right):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :type left: int</span></span><br><span class="line"><span class="string">        :type right: int</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        count = 1</span><br><span class="line">        </span><br><span class="line">        dummy = ListNode(0)</span><br><span class="line">        dummy.next = head</span><br><span class="line">        </span><br><span class="line">        pre = dummy</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> pre.next and count &lt; left:</span><br><span class="line">            pre = pre.next</span><br><span class="line">            count += 1</span><br><span class="line"></span><br><span class="line">        cur = pre.next</span><br><span class="line">        tail = cur</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> cur and count &lt;= right:</span><br><span class="line">            nxt = cur.next</span><br><span class="line">            cur.next = pre.next</span><br><span class="line">            pre.next = cur</span><br><span class="line">            tail.next = nxt</span><br><span class="line">            cur = nxt</span><br><span class="line">            count += 1</span><br><span class="line">        <span class="built_in">return</span> dummy.next</span><br></pre></td></tr></table></figure>
+<p><strong>类的设计</strong>可以让程序自动处理string的大小</p>
+<p>可以说char数组视为一组用于存储一个字符串中的char存储单元，而string类变量是一个表示字符串的实体。</p>
+<h2 id="C-字符串初始化">1.1. C++字符串初始化</h2><p><code>string str1;</code> 创建一个长度为0的string对象，读取过程中可以自动调整<br><code>string str2 = &quot;panther&quot;;</code> 创建一个初始化了的string类对象<br><code>string str3 &#123;&quot;Hank&#39;s Fine Eats&quot;&#125;;</code> C-风格字符串string对象</p>
+<h2 id="赋值，拼接和附加">1.2. 赋值，拼接和附加</h2><ul>
+<li><p>string 可以赋值（数值不可）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string str1;</span><br><span class="line">string str2 &#x3D; &quot;jaguar&quot;;</span><br><span class="line">str1 &#x3D; str2; &#x2F;&#x2F; valid</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>string类简化了字符串的合并操作（用+或者+=号）</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">string str3;</span><br><span class="line">str3 &#x3D; str1 + str2; &#x2F;&#x2F; assign str3 the joined strings</span><br><span class="line">str1 +&#x3D; str2; &#x2F;&#x2F; add str2 to the end of str1</span><br></pre></td></tr></table></figure>
+<h2 id="string类I-O">1.3. string类I/O</h2><p>针对char数组时：<br><code>cin.getline(char,20);</code> 需要标明数组的长度</p>
+<p>针对string对象时：<br><code>getline(cin,str1);</code> 不需要标注string的长度</p>
 
     </div>
 
@@ -278,7 +277,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://example.com/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/" title="92.反转链表2(Medium)-未掌握">http://example.com/2021/03/18/92-反转链表-Medium/</a>
+    <a href="http://example.com/2021/08/11/C-PrimerPlus-4-3String%E7%B1%BB%E7%AE%80%E4%BB%8B/" title="C++PrimerPlus_4.3String类简介">http://example.com/2021/08/11/C-PrimerPlus-4-3String类简介/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -288,9 +287,6 @@
 
 
       <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/%E9%93%BE%E8%A1%A8/" rel="tag"># 链表</a>
-          </div>
 
         
 
@@ -298,13 +294,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/03/17/54-%E8%9E%BA%E6%97%8B%E7%9F%A9%E9%98%B5-Medium/" rel="prev" title="54.螺旋矩阵(Medium)">
-      <i class="fa fa-chevron-left"></i> 54.螺旋矩阵(Medium)
+    <a href="/2021/08/11/C-PrimerPlus-4-2%E5%AD%97%E7%AC%A6%E4%B8%B2/" rel="prev" title="C++PrimerPlus_4.2字符串">
+      <i class="fa fa-chevron-left"></i> C++PrimerPlus_4.2字符串
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/" rel="next" title="数据结构-链表">
-      数据结构-链表 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -377,7 +370,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A7%A3%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">0.0.1. 解法</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#4-3-string-%E7%B1%BB%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">1. 4.3 string 类简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#C-%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.1.</span> <span class="nav-text">1.1. C++字符串初始化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B5%8B%E5%80%BC%EF%BC%8C%E6%8B%BC%E6%8E%A5%E5%92%8C%E9%99%84%E5%8A%A0"><span class="nav-number">1.2.</span> <span class="nav-text">1.2. 赋值，拼接和附加</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#string%E7%B1%BBI-O"><span class="nav-number">1.3.</span> <span class="nav-text">1.3. string类I&#x2F;O</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
