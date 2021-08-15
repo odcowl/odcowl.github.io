@@ -176,36 +176,6 @@
       </tags>
   </entry>
   <entry>
-    <title>15.三数之和(Medium)</title>
-    <url>/2021/02/26/15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C-Medium/</url>
-    <content><![CDATA[<h3 id="题目描述">0.0.1. 题目描述</h3><p>给你一个包含<code>n</code>个整数的数组<code>nums</code>,判断<code>nums</code>中是否存在三个元素a,b,c，使得<code>a+b+c=0</code> ？请你找出所有和为<code>0</code>且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
-<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = [-1,0,1,2,-1,-4]</span><br><span class="line">输出：[[-1,-1,2],[-1,0,1]]</span><br></pre></td></tr></table></figure><br>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>示例3:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [0]</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">* 0 &lt;= nums.length &lt;= 3000</span><br><span class="line">* -10^5 &lt;= nums[i] &lt;= 10^5</span><br></pre></td></tr></table></figure></p>
-<h3 id="排序➕双指针解法">0.0.2. 排序➕双指针解法</h3><p>三数之和这道题我一直思路不清晰，下面的代码也只是复现别人的思路，接下来总结一下：</p>
-<ol>
-<li>边界条件判断，当<code>nums</code>不存在，或<code>len(nums)&lt;3</code>的时候，返回空集合<code>[]</code></li>
-<li>对数组进行从小到大的排序</li>
-<li>对排序后的数组开始遍历<ol>
-<li>如果<code>nums[i]&gt;0</code>,由于数组已经排序过了，那么<code>nums[i]</code>后面的<code>nums[L]</code>和<code>nums[R]</code>肯定比<code>nums[i]</code>更大，三个大于零的数字和不等于零。</li>
-<li>如果<code>nums[i]</code>和<code>nums[i-1]</code>是重复的，跳过</li>
-<li>令左指针指向<code>L = i + 1</code>, 令右指针指向<code>R = len(nums)-1</code>（其实这就是最后一位)<ul>
-<li>如果<code>nums[i]+nums[L]+nums[R]=0</code>，在答案列表里储存此组数；同时，判断<code>nums[L+1]</code>和<code>nums[L]</code>是否重复，及<code>nums[R]</code>和<code>nums[R-1]</code>是否重复，如果是的话，将<code>L，R</code>移到不再重复的位置，然后再令<code>L=L+1</code>,<code>R=R-1</code>即继续循环</li>
-<li>如果<code>nums[i]+nums[L]+nums[R]&gt;0</code>, 说明右指针太大，<code>R</code>向左移动一位, <code>R=R-1</code></li>
-<li>如果<code>nums[i]+nums[L]+nums[R]&lt;0</code>，说明左指针太小，<code>L</code>向右移动一位，<code>L=L+1</code></li>
-</ul>
-</li>
-</ol>
-</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def threeSum(self, nums):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 第一步：如果nums不存在或nums不到三个元素，返回空集</span></span><br><span class="line">        <span class="keyword">if</span> not nums or len(nums) &lt; 3:</span><br><span class="line">            <span class="built_in">return</span> []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第二步：对nums从小到大进行排序</span></span><br><span class="line">        nums.sort() </span><br><span class="line">        </span><br><span class="line">        res = []</span><br><span class="line">        <span class="comment"># 第三步：对排序后的nums进行遍历</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; 0:</span><br><span class="line">                <span class="built_in">return</span>  res <span class="comment">#如果nums[i]已经大于0，因为已排序，后面不可能再有数字和nums[i]相加并等于0，返回当下答案</span></span><br><span class="line">            <span class="keyword">if</span> i &gt; 0 and nums[i] == nums[i-1]:</span><br><span class="line">                <span class="built_in">continue</span> <span class="comment">#如果nums[i]和nums[i-1]</span></span><br><span class="line">            L = i + 1 <span class="comment">#当下nums[i]的右边一位</span></span><br><span class="line">            R = len(nums) - 1 <span class="comment">#最后一位</span></span><br><span class="line">            <span class="keyword">while</span> L &lt; R: </span><br><span class="line">                <span class="keyword">if</span> nums[i]+nums[L]+nums[R] == 0:</span><br><span class="line">                    res.append([nums[i],nums[L],nums[R]])</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[L] == nums[L+1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复最右端</span></span><br><span class="line">                        L = L + 1</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[R] == nums[R-1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复的最左端</span></span><br><span class="line">                        R = R - 1</span><br><span class="line">                    L = L + 1</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和大于0，说明nums[R]太大，nums[R]向左移</span></span><br><span class="line">                <span class="keyword">elif</span> nums[i]+nums[L]+nums[R] &gt; 0:</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和小于0，说明nums[L]太小，nums[L]向右移</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    L = L + 1</span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>双指针</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>224.基本计算器(Hard)</title>
     <url>/2021/03/09/224-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8-Hard/</url>
     <content><![CDATA[<p>每日一题系列(2021.03.10)之<a href="https://leetcode-cn.com/problems/basic-calculator/">基本计算器</a><br>难度：困难</p>
@@ -265,6 +235,36 @@
       </categories>
       <tags>
         <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>15.三数之和(Medium)</title>
+    <url>/2021/02/26/15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C-Medium/</url>
+    <content><![CDATA[<h3 id="题目描述">0.0.1. 题目描述</h3><p>给你一个包含<code>n</code>个整数的数组<code>nums</code>,判断<code>nums</code>中是否存在三个元素a,b,c，使得<code>a+b+c=0</code> ？请你找出所有和为<code>0</code>且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
+<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = [-1,0,1,2,-1,-4]</span><br><span class="line">输出：[[-1,-1,2],[-1,0,1]]</span><br></pre></td></tr></table></figure><br>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>示例3:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [0]</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">* 0 &lt;= nums.length &lt;= 3000</span><br><span class="line">* -10^5 &lt;= nums[i] &lt;= 10^5</span><br></pre></td></tr></table></figure></p>
+<h3 id="排序➕双指针解法">0.0.2. 排序➕双指针解法</h3><p>三数之和这道题我一直思路不清晰，下面的代码也只是复现别人的思路，接下来总结一下：</p>
+<ol>
+<li>边界条件判断，当<code>nums</code>不存在，或<code>len(nums)&lt;3</code>的时候，返回空集合<code>[]</code></li>
+<li>对数组进行从小到大的排序</li>
+<li>对排序后的数组开始遍历<ol>
+<li>如果<code>nums[i]&gt;0</code>,由于数组已经排序过了，那么<code>nums[i]</code>后面的<code>nums[L]</code>和<code>nums[R]</code>肯定比<code>nums[i]</code>更大，三个大于零的数字和不等于零。</li>
+<li>如果<code>nums[i]</code>和<code>nums[i-1]</code>是重复的，跳过</li>
+<li>令左指针指向<code>L = i + 1</code>, 令右指针指向<code>R = len(nums)-1</code>（其实这就是最后一位)<ul>
+<li>如果<code>nums[i]+nums[L]+nums[R]=0</code>，在答案列表里储存此组数；同时，判断<code>nums[L+1]</code>和<code>nums[L]</code>是否重复，及<code>nums[R]</code>和<code>nums[R-1]</code>是否重复，如果是的话，将<code>L，R</code>移到不再重复的位置，然后再令<code>L=L+1</code>,<code>R=R-1</code>即继续循环</li>
+<li>如果<code>nums[i]+nums[L]+nums[R]&gt;0</code>, 说明右指针太大，<code>R</code>向左移动一位, <code>R=R-1</code></li>
+<li>如果<code>nums[i]+nums[L]+nums[R]&lt;0</code>，说明左指针太小，<code>L</code>向右移动一位，<code>L=L+1</code></li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def threeSum(self, nums):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 第一步：如果nums不存在或nums不到三个元素，返回空集</span></span><br><span class="line">        <span class="keyword">if</span> not nums or len(nums) &lt; 3:</span><br><span class="line">            <span class="built_in">return</span> []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第二步：对nums从小到大进行排序</span></span><br><span class="line">        nums.sort() </span><br><span class="line">        </span><br><span class="line">        res = []</span><br><span class="line">        <span class="comment"># 第三步：对排序后的nums进行遍历</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; 0:</span><br><span class="line">                <span class="built_in">return</span>  res <span class="comment">#如果nums[i]已经大于0，因为已排序，后面不可能再有数字和nums[i]相加并等于0，返回当下答案</span></span><br><span class="line">            <span class="keyword">if</span> i &gt; 0 and nums[i] == nums[i-1]:</span><br><span class="line">                <span class="built_in">continue</span> <span class="comment">#如果nums[i]和nums[i-1]</span></span><br><span class="line">            L = i + 1 <span class="comment">#当下nums[i]的右边一位</span></span><br><span class="line">            R = len(nums) - 1 <span class="comment">#最后一位</span></span><br><span class="line">            <span class="keyword">while</span> L &lt; R: </span><br><span class="line">                <span class="keyword">if</span> nums[i]+nums[L]+nums[R] == 0:</span><br><span class="line">                    res.append([nums[i],nums[L],nums[R]])</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[L] == nums[L+1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复最右端</span></span><br><span class="line">                        L = L + 1</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[R] == nums[R-1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复的最左端</span></span><br><span class="line">                        R = R - 1</span><br><span class="line">                    L = L + 1</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和大于0，说明nums[R]太大，nums[R]向左移</span></span><br><span class="line">                <span class="keyword">elif</span> nums[i]+nums[L]+nums[R] &gt; 0:</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和小于0，说明nums[L]太小，nums[L]向右移</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    L = L + 1</span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>双指针</tag>
       </tags>
   </entry>
   <entry>
@@ -744,54 +744,6 @@
       </categories>
   </entry>
   <entry>
-    <title>C++PrimerPlus_4.1数组</title>
-    <url>/2021/08/09/C-PrimerPlus-4-1%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<h1 id="复合类型">1. 复合类型</h1><h2 id="4-1-数组">1.1. 4.1 数组</h2><p><code>数组(array)是一种数据格式，能够存储多个同类型的值</code>。</p>
-<p>要创建数组，可使用声明语句，数组声明应指出以下三点：</p>
-<ul>
-<li>存储在每个元素中的<strong>值的类型</strong></li>
-<li>数组名</li>
-<li>数组中的元素数</li>
-</ul>
-<p>在C++中，可以通过修改简单变量的声明，添加中括号（其中包含元素的数目）来完成数组声明：<br><code>short months[12];</code><br>代表创建了一个名为months的数组，该数组有12个元素，每个元素都可以存储一个short类型的值。<br>可以归纳为：<code>typeName assayName[arraySize];</code></p>
-<p><strong>arraySize</strong>必须是整数常数，或const值。arraySize不可以是变量。</p>
-<p>🧾 程序清单4.1</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    using namespace std;</span><br><span class="line">    </span><br><span class="line">    int yams[3]; // initialize int array with size of 3 elements</span><br><span class="line">    yams[0] = 7; // assign value to the first element of yams</span><br><span class="line">    yams[1] = 8;</span><br><span class="line">    yams[2] = 6;</span><br><span class="line">    </span><br><span class="line">    // another way to initialize and assgin values to an array of integers</span><br><span class="line">    int yamcosts[3] = &#123;20,30,5&#125;; // 注意这里是大括号！！不是中括号！！</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Total yams = &quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">yams[0] + yams</span>[1] + yams[2] &lt;&lt; <span class="string">endl;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;The package with &quot; &lt;&lt; yams[1] &lt;&lt; &quot; yams costs &quot;;</span></span><br><span class="line"><span class="string">    cout &lt;&lt; yamcosts[1] &lt;&lt; &quot; cents per yam.\n&quot;;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    int total = yams[0]*yamcosts[0] + yams[1]*yamcosts[1];</span></span><br><span class="line"><span class="string">    total = total + yams[2]*yamcosts[2];</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;The total yam expense is &quot; &lt;&lt; total &lt;&lt; &quot; cents.\n&quot;;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    // 显示array的长度，显示array中一个element的长度</span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;Size of yams array = &quot; &lt;&lt; sizeof yams &lt;&lt; &quot; bytes. \n&quot;;</span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;Size of one element &quot; &lt;&lt; sizeof yams[0] &lt;&lt; &quot; bytes. \n&quot;;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
-<h3 id="数组的初始化规则">1.1.1. 数组的初始化规则</h3><ol>
-<li><p>只有在定义的时候才可以使用初始化，此后就不能使用了，例如:</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int cards[3] &#x3D; &#123;1,2,3&#125;; &#x2F;&#x2F; valid</span><br><span class="line">int hands[4];</span><br><span class="line">hands[4] &#x3D; &#123;1,2,3,4&#125; &#x2F;&#x2F; non-valid</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>不可以将一个数组赋给另一个数组：</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hands &#x3D; cards; &#x2F;&#x2F; not allowed</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可以使用下标分别给数组中的元素赋值</p>
-</li>
-<li><p>初始化数组的时候，提供的值可以少于数组的元素数目。下面的语句只初始化hotelTips的前两个元素：<br><code>float hotelTips[5] = &#123;5.0, 2.5&#125;;</code></p>
-</li>
-</ol>
-<p>如果只对数组的一部分初始化，编译器将自动把其他元素设置为0。</p>
-<p>因此，如果想把数组中所有元素都初始化为0非常简单，只需要把第一个元素初始化为0即可。<br><code>long totals[5000] = &#123;0&#125;;</code></p>
-<ol>
-<li>如果初始化数组时方括号内[]为0，那么C++编译器将计算元素的个数。<br>例如，对于：<br><code>short things[] = &#123;1,5,3,8&#125;;</code>编译器使things数组包含4个元素。</li>
-</ol>
-<h3 id="C-11-数组初始化方法">1.1.2. C++11 数组初始化方法</h3><ol>
-<li><p>初始化数组时，可省略等号(=)</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">double earning[4]&#123;1.2,1.2,1.2,1.2&#125;;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>可以不在大括号内包含任何内容，这将把所有元素都设置为零。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">unsigned int counts[10] &#x3D; &#123;&#125;; &#x2F;&#x2F; all elements set to 0</span><br><span class="line">float balances[100] &#x3D; &#123;&#125;; &#x2F;&#x2F; all elements set to 0</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>列表初始化禁止缩窄转换<br><code>long plifs[] = &#123;25,92,1.0&#125;; // not allowed</code><br>这条语句不能通过是因为，浮点数转换为整型(long)是<strong>缩窄操作</strong>，即便浮点数小数点后为零。</p>
-</li>
-</ol>
-<p><code>char slifs[4]&#123;&#39;h&#39;,&#39;i&#39;,1122011,&#39;\0&#39;&#125;; // not allowed</code><br>这条语句不能通过，因为1122011超过了char变量的取值范围</p>
-<p><code>char tlifs[4]&#123;&#39;h&#39;,&#39;i&#39;,112,&#39;\0&#39;&#125;; // allowed</code><br>这条语句可以通过编译，因为虽然112是一个int值，但它在char变量的取值范围内</p>
-]]></content>
-      <categories>
-        <category>C++学习</category>
-      </categories>
-  </entry>
-  <entry>
     <title>C++PrimerPlus_4.2字符串</title>
     <url>/2021/08/11/C-PrimerPlus-4-2%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
     <content><![CDATA[<h1 id="4-2-字符串">1. 4.2 字符串</h1><p><strong>字符串</strong>是存储在内存的连续字节中的一系列字符。</p>
@@ -863,6 +815,54 @@
 <li>第二种方法</li>
 </ol>
 <p>cin &gt;&gt; year;<br>cin.get();</p>
+]]></content>
+      <categories>
+        <category>C++学习</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>C++PrimerPlus_4.1数组</title>
+    <url>/2021/08/09/C-PrimerPlus-4-1%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h1 id="复合类型">1. 复合类型</h1><h2 id="4-1-数组">1.1. 4.1 数组</h2><p><code>数组(array)是一种数据格式，能够存储多个同类型的值</code>。</p>
+<p>要创建数组，可使用声明语句，数组声明应指出以下三点：</p>
+<ul>
+<li>存储在每个元素中的<strong>值的类型</strong></li>
+<li>数组名</li>
+<li>数组中的元素数</li>
+</ul>
+<p>在C++中，可以通过修改简单变量的声明，添加中括号（其中包含元素的数目）来完成数组声明：<br><code>short months[12];</code><br>代表创建了一个名为months的数组，该数组有12个元素，每个元素都可以存储一个short类型的值。<br>可以归纳为：<code>typeName assayName[arraySize];</code></p>
+<p><strong>arraySize</strong>必须是整数常数，或const值。arraySize不可以是变量。</p>
+<p>🧾 程序清单4.1</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    using namespace std;</span><br><span class="line">    </span><br><span class="line">    int yams[3]; // initialize int array with size of 3 elements</span><br><span class="line">    yams[0] = 7; // assign value to the first element of yams</span><br><span class="line">    yams[1] = 8;</span><br><span class="line">    yams[2] = 6;</span><br><span class="line">    </span><br><span class="line">    // another way to initialize and assgin values to an array of integers</span><br><span class="line">    int yamcosts[3] = &#123;20,30,5&#125;; // 注意这里是大括号！！不是中括号！！</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    cout &lt;&lt; <span class="string">&quot;Total yams = &quot;</span>;</span><br><span class="line">    cout &lt;&lt; <span class="string">yams[0] + yams</span>[1] + yams[2] &lt;&lt; <span class="string">endl;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;The package with &quot; &lt;&lt; yams[1] &lt;&lt; &quot; yams costs &quot;;</span></span><br><span class="line"><span class="string">    cout &lt;&lt; yamcosts[1] &lt;&lt; &quot; cents per yam.\n&quot;;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    int total = yams[0]*yamcosts[0] + yams[1]*yamcosts[1];</span></span><br><span class="line"><span class="string">    total = total + yams[2]*yamcosts[2];</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;The total yam expense is &quot; &lt;&lt; total &lt;&lt; &quot; cents.\n&quot;;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    // 显示array的长度，显示array中一个element的长度</span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;Size of yams array = &quot; &lt;&lt; sizeof yams &lt;&lt; &quot; bytes. \n&quot;;</span></span><br><span class="line"><span class="string">    cout &lt;&lt; &quot;Size of one element &quot; &lt;&lt; sizeof yams[0] &lt;&lt; &quot; bytes. \n&quot;;</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    return 0;</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="数组的初始化规则">1.1.1. 数组的初始化规则</h3><ol>
+<li><p>只有在定义的时候才可以使用初始化，此后就不能使用了，例如:</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">int cards[3] &#x3D; &#123;1,2,3&#125;; &#x2F;&#x2F; valid</span><br><span class="line">int hands[4];</span><br><span class="line">hands[4] &#x3D; &#123;1,2,3,4&#125; &#x2F;&#x2F; non-valid</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>不可以将一个数组赋给另一个数组：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">hands &#x3D; cards; &#x2F;&#x2F; not allowed</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以使用下标分别给数组中的元素赋值</p>
+</li>
+<li><p>初始化数组的时候，提供的值可以少于数组的元素数目。下面的语句只初始化hotelTips的前两个元素：<br><code>float hotelTips[5] = &#123;5.0, 2.5&#125;;</code></p>
+</li>
+</ol>
+<p>如果只对数组的一部分初始化，编译器将自动把其他元素设置为0。</p>
+<p>因此，如果想把数组中所有元素都初始化为0非常简单，只需要把第一个元素初始化为0即可。<br><code>long totals[5000] = &#123;0&#125;;</code></p>
+<ol>
+<li>如果初始化数组时方括号内[]为0，那么C++编译器将计算元素的个数。<br>例如，对于：<br><code>short things[] = &#123;1,5,3,8&#125;;</code>编译器使things数组包含4个元素。</li>
+</ol>
+<h3 id="C-11-数组初始化方法">1.1.2. C++11 数组初始化方法</h3><ol>
+<li><p>初始化数组时，可省略等号(=)</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">double earning[4]&#123;1.2,1.2,1.2,1.2&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>可以不在大括号内包含任何内容，这将把所有元素都设置为零。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">unsigned int counts[10] &#x3D; &#123;&#125;; &#x2F;&#x2F; all elements set to 0</span><br><span class="line">float balances[100] &#x3D; &#123;&#125;; &#x2F;&#x2F; all elements set to 0</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>列表初始化禁止缩窄转换<br><code>long plifs[] = &#123;25,92,1.0&#125;; // not allowed</code><br>这条语句不能通过是因为，浮点数转换为整型(long)是<strong>缩窄操作</strong>，即便浮点数小数点后为零。</p>
+</li>
+</ol>
+<p><code>char slifs[4]&#123;&#39;h&#39;,&#39;i&#39;,1122011,&#39;\0&#39;&#125;; // not allowed</code><br>这条语句不能通过，因为1122011超过了char变量的取值范围</p>
+<p><code>char tlifs[4]&#123;&#39;h&#39;,&#39;i&#39;,112,&#39;\0&#39;&#125;; // allowed</code><br>这条语句可以通过编译，因为虽然112是一个int值，但它在char变量的取值范围内</p>
 ]]></content>
       <categories>
         <category>C++学习</category>
