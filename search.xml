@@ -176,6 +176,36 @@
       </tags>
   </entry>
   <entry>
+    <title>15.三数之和(Medium)</title>
+    <url>/2021/02/26/15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C-Medium/</url>
+    <content><![CDATA[<h3 id="题目描述">0.0.1. 题目描述</h3><p>给你一个包含<code>n</code>个整数的数组<code>nums</code>,判断<code>nums</code>中是否存在三个元素a,b,c，使得<code>a+b+c=0</code> ？请你找出所有和为<code>0</code>且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
+<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = [-1,0,1,2,-1,-4]</span><br><span class="line">输出：[[-1,-1,2],[-1,0,1]]</span><br></pre></td></tr></table></figure><br>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>示例3:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [0]</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">* 0 &lt;= nums.length &lt;= 3000</span><br><span class="line">* -10^5 &lt;= nums[i] &lt;= 10^5</span><br></pre></td></tr></table></figure></p>
+<h3 id="排序➕双指针解法">0.0.2. 排序➕双指针解法</h3><p>三数之和这道题我一直思路不清晰，下面的代码也只是复现别人的思路，接下来总结一下：</p>
+<ol>
+<li>边界条件判断，当<code>nums</code>不存在，或<code>len(nums)&lt;3</code>的时候，返回空集合<code>[]</code></li>
+<li>对数组进行从小到大的排序</li>
+<li>对排序后的数组开始遍历<ol>
+<li>如果<code>nums[i]&gt;0</code>,由于数组已经排序过了，那么<code>nums[i]</code>后面的<code>nums[L]</code>和<code>nums[R]</code>肯定比<code>nums[i]</code>更大，三个大于零的数字和不等于零。</li>
+<li>如果<code>nums[i]</code>和<code>nums[i-1]</code>是重复的，跳过</li>
+<li>令左指针指向<code>L = i + 1</code>, 令右指针指向<code>R = len(nums)-1</code>（其实这就是最后一位)<ul>
+<li>如果<code>nums[i]+nums[L]+nums[R]=0</code>，在答案列表里储存此组数；同时，判断<code>nums[L+1]</code>和<code>nums[L]</code>是否重复，及<code>nums[R]</code>和<code>nums[R-1]</code>是否重复，如果是的话，将<code>L，R</code>移到不再重复的位置，然后再令<code>L=L+1</code>,<code>R=R-1</code>即继续循环</li>
+<li>如果<code>nums[i]+nums[L]+nums[R]&gt;0</code>, 说明右指针太大，<code>R</code>向左移动一位, <code>R=R-1</code></li>
+<li>如果<code>nums[i]+nums[L]+nums[R]&lt;0</code>，说明左指针太小，<code>L</code>向右移动一位，<code>L=L+1</code></li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def threeSum(self, nums):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 第一步：如果nums不存在或nums不到三个元素，返回空集</span></span><br><span class="line">        <span class="keyword">if</span> not nums or len(nums) &lt; 3:</span><br><span class="line">            <span class="built_in">return</span> []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第二步：对nums从小到大进行排序</span></span><br><span class="line">        nums.sort() </span><br><span class="line">        </span><br><span class="line">        res = []</span><br><span class="line">        <span class="comment"># 第三步：对排序后的nums进行遍历</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; 0:</span><br><span class="line">                <span class="built_in">return</span>  res <span class="comment">#如果nums[i]已经大于0，因为已排序，后面不可能再有数字和nums[i]相加并等于0，返回当下答案</span></span><br><span class="line">            <span class="keyword">if</span> i &gt; 0 and nums[i] == nums[i-1]:</span><br><span class="line">                <span class="built_in">continue</span> <span class="comment">#如果nums[i]和nums[i-1]</span></span><br><span class="line">            L = i + 1 <span class="comment">#当下nums[i]的右边一位</span></span><br><span class="line">            R = len(nums) - 1 <span class="comment">#最后一位</span></span><br><span class="line">            <span class="keyword">while</span> L &lt; R: </span><br><span class="line">                <span class="keyword">if</span> nums[i]+nums[L]+nums[R] == 0:</span><br><span class="line">                    res.append([nums[i],nums[L],nums[R]])</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[L] == nums[L+1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复最右端</span></span><br><span class="line">                        L = L + 1</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[R] == nums[R-1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复的最左端</span></span><br><span class="line">                        R = R - 1</span><br><span class="line">                    L = L + 1</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和大于0，说明nums[R]太大，nums[R]向左移</span></span><br><span class="line">                <span class="keyword">elif</span> nums[i]+nums[L]+nums[R] &gt; 0:</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和小于0，说明nums[L]太小，nums[L]向右移</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    L = L + 1</span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>双指针</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>224.基本计算器(Hard)</title>
     <url>/2021/03/09/224-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8-Hard/</url>
     <content><![CDATA[<p>每日一题系列(2021.03.10)之<a href="https://leetcode-cn.com/problems/basic-calculator/">基本计算器</a><br>难度：困难</p>
@@ -235,36 +265,6 @@
       </categories>
       <tags>
         <tag>栈</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>15.三数之和(Medium)</title>
-    <url>/2021/02/26/15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C-Medium/</url>
-    <content><![CDATA[<h3 id="题目描述">0.0.1. 题目描述</h3><p>给你一个包含<code>n</code>个整数的数组<code>nums</code>,判断<code>nums</code>中是否存在三个元素a,b,c，使得<code>a+b+c=0</code> ？请你找出所有和为<code>0</code>且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
-<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = [-1,0,1,2,-1,-4]</span><br><span class="line">输出：[[-1,-1,2],[-1,0,1]]</span><br></pre></td></tr></table></figure><br>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>示例3:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [0]</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">* 0 &lt;= nums.length &lt;= 3000</span><br><span class="line">* -10^5 &lt;= nums[i] &lt;= 10^5</span><br></pre></td></tr></table></figure></p>
-<h3 id="排序➕双指针解法">0.0.2. 排序➕双指针解法</h3><p>三数之和这道题我一直思路不清晰，下面的代码也只是复现别人的思路，接下来总结一下：</p>
-<ol>
-<li>边界条件判断，当<code>nums</code>不存在，或<code>len(nums)&lt;3</code>的时候，返回空集合<code>[]</code></li>
-<li>对数组进行从小到大的排序</li>
-<li>对排序后的数组开始遍历<ol>
-<li>如果<code>nums[i]&gt;0</code>,由于数组已经排序过了，那么<code>nums[i]</code>后面的<code>nums[L]</code>和<code>nums[R]</code>肯定比<code>nums[i]</code>更大，三个大于零的数字和不等于零。</li>
-<li>如果<code>nums[i]</code>和<code>nums[i-1]</code>是重复的，跳过</li>
-<li>令左指针指向<code>L = i + 1</code>, 令右指针指向<code>R = len(nums)-1</code>（其实这就是最后一位)<ul>
-<li>如果<code>nums[i]+nums[L]+nums[R]=0</code>，在答案列表里储存此组数；同时，判断<code>nums[L+1]</code>和<code>nums[L]</code>是否重复，及<code>nums[R]</code>和<code>nums[R-1]</code>是否重复，如果是的话，将<code>L，R</code>移到不再重复的位置，然后再令<code>L=L+1</code>,<code>R=R-1</code>即继续循环</li>
-<li>如果<code>nums[i]+nums[L]+nums[R]&gt;0</code>, 说明右指针太大，<code>R</code>向左移动一位, <code>R=R-1</code></li>
-<li>如果<code>nums[i]+nums[L]+nums[R]&lt;0</code>，说明左指针太小，<code>L</code>向右移动一位，<code>L=L+1</code></li>
-</ul>
-</li>
-</ol>
-</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def threeSum(self, nums):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 第一步：如果nums不存在或nums不到三个元素，返回空集</span></span><br><span class="line">        <span class="keyword">if</span> not nums or len(nums) &lt; 3:</span><br><span class="line">            <span class="built_in">return</span> []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第二步：对nums从小到大进行排序</span></span><br><span class="line">        nums.sort() </span><br><span class="line">        </span><br><span class="line">        res = []</span><br><span class="line">        <span class="comment"># 第三步：对排序后的nums进行遍历</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; 0:</span><br><span class="line">                <span class="built_in">return</span>  res <span class="comment">#如果nums[i]已经大于0，因为已排序，后面不可能再有数字和nums[i]相加并等于0，返回当下答案</span></span><br><span class="line">            <span class="keyword">if</span> i &gt; 0 and nums[i] == nums[i-1]:</span><br><span class="line">                <span class="built_in">continue</span> <span class="comment">#如果nums[i]和nums[i-1]</span></span><br><span class="line">            L = i + 1 <span class="comment">#当下nums[i]的右边一位</span></span><br><span class="line">            R = len(nums) - 1 <span class="comment">#最后一位</span></span><br><span class="line">            <span class="keyword">while</span> L &lt; R: </span><br><span class="line">                <span class="keyword">if</span> nums[i]+nums[L]+nums[R] == 0:</span><br><span class="line">                    res.append([nums[i],nums[L],nums[R]])</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[L] == nums[L+1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复最右端</span></span><br><span class="line">                        L = L + 1</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[R] == nums[R-1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复的最左端</span></span><br><span class="line">                        R = R - 1</span><br><span class="line">                    L = L + 1</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和大于0，说明nums[R]太大，nums[R]向左移</span></span><br><span class="line">                <span class="keyword">elif</span> nums[i]+nums[L]+nums[R] &gt; 0:</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和小于0，说明nums[L]太小，nums[L]向右移</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    L = L + 1</span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>双指针</tag>
       </tags>
   </entry>
   <entry>
@@ -566,6 +566,61 @@
       </tags>
   </entry>
   <entry>
+    <title>C++PrimerPlus_3.2运算符和类型转换</title>
+    <url>/2021/08/09/C-PrimerPlus-3-2%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
+    <content><![CDATA[<h1 id="C-数学运算符">1. C++ 数学运算符</h1><h2 id="5种基本的C-运算符">1.1. 5种基本的C++运算符</h2><ul>
+<li><ul>
+<li>加法运算</li>
+</ul>
+</li>
+<li><ul>
+<li>减法运算</li>
+</ul>
+</li>
+<li><ul>
+<li>乘法运算</li>
+</ul>
+</li>
+<li>/ 除法运算（如果两个操作数都是整数，则执行整数除法，小数部分将被丢弃，结果为整数；如果有1个（或2个）操作数是浮点数，则小数部分将被保留，结果为浮点数）</li>
+<li>% 求模。两个操作数必须都为整数</li>
+</ul>
+<h2 id="类型转换">1.2. 类型转换</h2><h3 id="初始化和赋值进行的转换">1.2.1. 初始化和赋值进行的转换</h3><p>C++允许将一种类型的值赋给另一种类型的变量，这样做时，<strong>值将被转换为接受变量的类型</strong>。</p>
+<p>🍑 例子：</p>
+<p>假设so_long的类型为long，thirty的类型为short，而程序为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">so_long &#x3D; thirty; </span><br></pre></td></tr></table></figure><br>程序将thirty的值（short）扩展为long值，so_long将储存这个值，而thirty不变。</p>
+<hr>
+<p>将一个值赋给取值范围更大的类型通常不会产生问题，反之，则会降低精度；</p>
+<p>下面列出了<strong>潜在的问题</strong>：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">转换</th>
+<th style="text-align:center">潜在的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">将较大浮点类型转换为较小的浮点类型，如将double转换为float</td>
+<td style="text-align:center">精度有效数位丢失</td>
+</tr>
+<tr>
+<td style="text-align:center">将浮点转整数</td>
+<td style="text-align:center">小数部分丢失</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>将0赋给bool变量时，将被转换为false；而非零值将被转换为true；</li>
+</ul>
+<h3 id="以-方式初始化时进行的转换">1.2.2. 以{}方式初始化时进行的转换</h3><h3 id="表达式中的转换">1.2.3. 表达式中的转换</h3><h3 id="传递参数时的转换">1.2.4. 传递参数时的转换</h3><h3 id="强制类型转换">1.2.5. 强制类型转换</h3><h3 id="C-11-中的auto声明">1.2.6. C++ 11 中的auto声明</h3><p>auto声明让编译器能够根据初始值的类型推断变量的类型。如果使用了关键字auto，而不指定变量的类型，编译器将把变量的类型设置与初始值相同。</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">auto n &#x3D; 100; &#x2F;&#x2F; n is int</span><br><span class="line">auto x &#x3D; 1.5; &#x2F;&#x2F; x is double（疑问：这里x也可以是float吗）</span><br><span class="line">auto y &#x3D; 1.3e12L &#x2F;&#x2F; y is long double</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>C++学习</category>
+      </categories>
+  </entry>
+  <entry>
     <title>C++PrimerPlus_3.1数据类型</title>
     <url>/2021/08/09/C-PrimerPlus-3-1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
     <content><![CDATA[<h1 id="C-数据类型：整型，bool，char和浮点型">1. C++数据类型：整型，bool，char和浮点型</h1><h2 id="整型">1.1. 整型</h2><p><strong>C++内置的整型</strong> —— unsigned long, long, unsigned int, int, unsigned short, short, char, unsigned char, signed char, bool 和 unsigned long long, long long (C++ 11新增)</p>
@@ -683,61 +738,6 @@
 <li>浮点优点：由于有缩放因子，他们可以表示的范围大的多</li>
 <li>浮点缺点：浮点运算速度比整数运算速度慢，其精度降低</li>
 </ul>
-]]></content>
-      <categories>
-        <category>C++学习</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>C++PrimerPlus_3.2运算符和类型转换</title>
-    <url>/2021/08/09/C-PrimerPlus-3-2%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
-    <content><![CDATA[<h1 id="C-数学运算符">1. C++ 数学运算符</h1><h2 id="5种基本的C-运算符">1.1. 5种基本的C++运算符</h2><ul>
-<li><ul>
-<li>加法运算</li>
-</ul>
-</li>
-<li><ul>
-<li>减法运算</li>
-</ul>
-</li>
-<li><ul>
-<li>乘法运算</li>
-</ul>
-</li>
-<li>/ 除法运算（如果两个操作数都是整数，则执行整数除法，小数部分将被丢弃，结果为整数；如果有1个（或2个）操作数是浮点数，则小数部分将被保留，结果为浮点数）</li>
-<li>% 求模。两个操作数必须都为整数</li>
-</ul>
-<h2 id="类型转换">1.2. 类型转换</h2><h3 id="初始化和赋值进行的转换">1.2.1. 初始化和赋值进行的转换</h3><p>C++允许将一种类型的值赋给另一种类型的变量，这样做时，<strong>值将被转换为接受变量的类型</strong>。</p>
-<p>🍑 例子：</p>
-<p>假设so_long的类型为long，thirty的类型为short，而程序为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">so_long &#x3D; thirty; </span><br></pre></td></tr></table></figure><br>程序将thirty的值（short）扩展为long值，so_long将储存这个值，而thirty不变。</p>
-<hr>
-<p>将一个值赋给取值范围更大的类型通常不会产生问题，反之，则会降低精度；</p>
-<p>下面列出了<strong>潜在的问题</strong>：</p>
-<div class="table-container">
-<table>
-<thead>
-<tr>
-<th style="text-align:center">转换</th>
-<th style="text-align:center">潜在的问题</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">将较大浮点类型转换为较小的浮点类型，如将double转换为float</td>
-<td style="text-align:center">精度有效数位丢失</td>
-</tr>
-<tr>
-<td style="text-align:center">将浮点转整数</td>
-<td style="text-align:center">小数部分丢失</td>
-</tr>
-</tbody>
-</table>
-</div>
-<ul>
-<li>将0赋给bool变量时，将被转换为false；而非零值将被转换为true；</li>
-</ul>
-<h3 id="以-方式初始化时进行的转换">1.2.2. 以{}方式初始化时进行的转换</h3><h3 id="表达式中的转换">1.2.3. 表达式中的转换</h3><h3 id="传递参数时的转换">1.2.4. 传递参数时的转换</h3><h3 id="强制类型转换">1.2.5. 强制类型转换</h3><h3 id="C-11-中的auto声明">1.2.6. C++ 11 中的auto声明</h3><p>auto声明让编译器能够根据初始值的类型推断变量的类型。如果使用了关键字auto，而不指定变量的类型，编译器将把变量的类型设置与初始值相同。</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">auto n &#x3D; 100; &#x2F;&#x2F; n is int</span><br><span class="line">auto x &#x3D; 1.5; &#x2F;&#x2F; x is double（疑问：这里x也可以是float吗）</span><br><span class="line">auto y &#x3D; 1.3e12L &#x2F;&#x2F; y is long double</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>C++学习</category>
@@ -1268,48 +1268,6 @@
       </categories>
   </entry>
   <entry>
-    <title>读书笔记 湖泊by东野圭吾</title>
-    <url>/2021/05/23/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%B9%96%E6%B3%8Aby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/</url>
-    <content><![CDATA[<img src="/2021/05/23/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%B9%96%E6%B3%8Aby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/fengmian.jpeg" class>
-<blockquote>
-<p>尸体要在湖底消失需要好几年，不，大概要花好几十年吧。这中间我们肯定都会提心吊胆的。就算尸体不见了，我们的灵魂也无法离开这湖畔吧。</p>
-</blockquote>
-<p>很搞笑的一件事是，我是从凌晨2点开始阅读这本书的，在5点前阅读完，期间伴随着窗对面法国年轻人soirée的欢呼声和音乐声。这一帮聚会的人，平时我肯定辗转难眠骂骂咧咧，这次却让我没有在读书的时候背脊发凉…</p>
-<p>早就听闻东野圭吾的小说很精彩，这次果然感受到了其小说的魅力！</p>
-<p>诸多的犯罪和真相细节在专业的文评里可以找到，博客里我只想简单记录每次阅读后的感悟和心情。</p>
-<blockquote>
-<p>尸体要在湖底消失需要好几年，不，大概要花好几十年吧。这中间我们肯定都会提心吊胆的。就算尸体不见了，我们的灵魂也无法离开这湖畔吧。</p>
-</blockquote>
-<p>小时候不懂得谎言的代价，用谎言换取奖励，用谎言逃避责罚。谎言的层次感也是长大后才明白，何为善意的谎言，何为恶意的谎言。</p>
-<p>但每当不真诚的话说出口，总会担心着需要怎么把谎言说的更真，更让听者信服，不知不觉的又加重了语言上的负担感。久而久之，宁愿不去编造所谓的善意谎言，也不想说出不真诚的话。</p>
-<p>一个谎言需要千千万万个谎言来圆谎。</p>
-<blockquote>
-<p>你是说有的母亲为了招待老师，不惜牺牲自己的肉体吗？</p>
-</blockquote>
-<p>读到这里心中最是沉重。千千万万的亚洲家长们（大部分的情况），为了孩子的学业，没有自己的生活，一掷千金还算好的，需要出卖自己的灵魂去谄媚，甚至出卖自己的肉体。</p>
-<p>但我一直觉得很奇怪的是，真的会有人如此“饥渴”？</p>
-<p>总而言之，坐在某种握着某种权利的位置上，再处于某种社会环境中，人就会变。</p>
-<p>可怜天下父母心。</p>
-<blockquote>
-<p>“嗯，回去的时候，你会跟我和妈妈一起吧？不是各走各路的吧？“ 章太。</p>
-</blockquote>
-<p>孩子的内心需要保护，看起来再冷漠顽固的小孩子，心里的渴望或许就那么简单。</p>
-<p>每个人心里都有那个自己认为的凶手，作者也似乎刻意给每个小孩子安排了合适的动机。悬疑未解，但已经不重要了。</p>
-<p>父母的结合究竟对孩子有那么重要吗？其实我觉得并不是。父母如果能做到互相关心、爱护，那一定是最完美的家庭，但假如不呢？</p>
-<p>我认为最重要的是父母之间的互相尊重，而不是单独在孩子面前指责不在场的另一半。</p>
-<p>对于孩子来说，从小就要面临站哪一边的选择。</p>
-<p>在俊介来到别墅前，美菜子跟所有人吐槽俊介的行为，章太也是看在眼里吧。即便不是血亲，父亲依然是章太的心里另一半天，作为母亲不应该试图把这一片天抹黑。</p>
-<p>与其互相的指责，不如坐下来心平气和的告诉孩子：我们的爱情或许结束了，但我们还可以拥有亲情。</p>
-<p>小孩子根本不懂得爱的差别，只有大人才斤斤计较。</p>
-<p>——————</p>
-<p>接下来还想阅读东野圭吾的其他作品。</p>
-<p>2021.05.23</p>
-]]></content>
-      <categories>
-        <category>2021读书笔记</category>
-      </categories>
-  </entry>
-  <entry>
     <title>读书笔记 白夜行by东野圭吾</title>
     <url>/2021/05/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%99%BD%E5%A4%9C%E8%A1%8Cby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/</url>
     <content><![CDATA[<img src="/2021/05/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%99%BD%E5%A4%9C%E8%A1%8Cby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/fengmian.jpeg" class>
@@ -1411,6 +1369,48 @@
 <blockquote>
 <p>一旦人们认为不答应我们就会收到责罚，他们就会把我们的请求看作是命令。听到命令时，一个人只能看到两种选择：服从或反抗。不论如何，只要人们认为我们是在强迫他们，他们就不会乐于满足我们的需要。</p>
 </blockquote>
+]]></content>
+      <categories>
+        <category>2021读书笔记</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>读书笔记 湖泊by东野圭吾</title>
+    <url>/2021/05/23/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%B9%96%E6%B3%8Aby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/</url>
+    <content><![CDATA[<img src="/2021/05/23/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%B9%96%E6%B3%8Aby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/fengmian.jpeg" class>
+<blockquote>
+<p>尸体要在湖底消失需要好几年，不，大概要花好几十年吧。这中间我们肯定都会提心吊胆的。就算尸体不见了，我们的灵魂也无法离开这湖畔吧。</p>
+</blockquote>
+<p>很搞笑的一件事是，我是从凌晨2点开始阅读这本书的，在5点前阅读完，期间伴随着窗对面法国年轻人soirée的欢呼声和音乐声。这一帮聚会的人，平时我肯定辗转难眠骂骂咧咧，这次却让我没有在读书的时候背脊发凉…</p>
+<p>早就听闻东野圭吾的小说很精彩，这次果然感受到了其小说的魅力！</p>
+<p>诸多的犯罪和真相细节在专业的文评里可以找到，博客里我只想简单记录每次阅读后的感悟和心情。</p>
+<blockquote>
+<p>尸体要在湖底消失需要好几年，不，大概要花好几十年吧。这中间我们肯定都会提心吊胆的。就算尸体不见了，我们的灵魂也无法离开这湖畔吧。</p>
+</blockquote>
+<p>小时候不懂得谎言的代价，用谎言换取奖励，用谎言逃避责罚。谎言的层次感也是长大后才明白，何为善意的谎言，何为恶意的谎言。</p>
+<p>但每当不真诚的话说出口，总会担心着需要怎么把谎言说的更真，更让听者信服，不知不觉的又加重了语言上的负担感。久而久之，宁愿不去编造所谓的善意谎言，也不想说出不真诚的话。</p>
+<p>一个谎言需要千千万万个谎言来圆谎。</p>
+<blockquote>
+<p>你是说有的母亲为了招待老师，不惜牺牲自己的肉体吗？</p>
+</blockquote>
+<p>读到这里心中最是沉重。千千万万的亚洲家长们（大部分的情况），为了孩子的学业，没有自己的生活，一掷千金还算好的，需要出卖自己的灵魂去谄媚，甚至出卖自己的肉体。</p>
+<p>但我一直觉得很奇怪的是，真的会有人如此“饥渴”？</p>
+<p>总而言之，坐在某种握着某种权利的位置上，再处于某种社会环境中，人就会变。</p>
+<p>可怜天下父母心。</p>
+<blockquote>
+<p>“嗯，回去的时候，你会跟我和妈妈一起吧？不是各走各路的吧？“ 章太。</p>
+</blockquote>
+<p>孩子的内心需要保护，看起来再冷漠顽固的小孩子，心里的渴望或许就那么简单。</p>
+<p>每个人心里都有那个自己认为的凶手，作者也似乎刻意给每个小孩子安排了合适的动机。悬疑未解，但已经不重要了。</p>
+<p>父母的结合究竟对孩子有那么重要吗？其实我觉得并不是。父母如果能做到互相关心、爱护，那一定是最完美的家庭，但假如不呢？</p>
+<p>我认为最重要的是父母之间的互相尊重，而不是单独在孩子面前指责不在场的另一半。</p>
+<p>对于孩子来说，从小就要面临站哪一边的选择。</p>
+<p>在俊介来到别墅前，美菜子跟所有人吐槽俊介的行为，章太也是看在眼里吧。即便不是血亲，父亲依然是章太的心里另一半天，作为母亲不应该试图把这一片天抹黑。</p>
+<p>与其互相的指责，不如坐下来心平气和的告诉孩子：我们的爱情或许结束了，但我们还可以拥有亲情。</p>
+<p>小孩子根本不懂得爱的差别，只有大人才斤斤计较。</p>
+<p>——————</p>
+<p>接下来还想阅读东野圭吾的其他作品。</p>
+<p>2021.05.23</p>
 ]]></content>
       <categories>
         <category>2021读书笔记</category>
