@@ -83,6 +83,32 @@
       </tags>
   </entry>
   <entry>
+    <title>1239.串联字符串的最大长度</title>
+    <url>/2021/06/18/1239-%E4%B8%B2%E8%81%94%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%9C%80%E5%A4%A7%E9%95%BF%E5%BA%A6/</url>
+    <content><![CDATA[<p>LeetCode每日一题之<a href="https://leetcode-cn.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/">串联字符串的最大长度</a>.<br>难度：中等</p>
+<h3 id="题目">0.0.1. 题目</h3><p>给定一个字符串数组<code>arr</code>，字符串<code>s</code>是将<code>arr</code>某一子序列字符串连接所得的字符串，如果<code>s</code>中的每一个字符都只出现过一次，那么它就是一个可行解。</p>
+<p>请返回所有可行解<code>s</code>中最长长度。</p>
+<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：arr = [<span class="string">&quot;un&quot;</span>,<span class="string">&quot;iq&quot;</span>,<span class="string">&quot;ue&quot;</span>]</span><br><span class="line">输出：4</span><br><span class="line">解释：所有可能的串联组合是 <span class="string">&quot;&quot;</span>,<span class="string">&quot;un&quot;</span>,<span class="string">&quot;iq&quot;</span>,<span class="string">&quot;ue&quot;</span>,<span class="string">&quot;uniq&quot;</span> 和 <span class="string">&quot;ique&quot;</span>，最大长度为 4。</span><br></pre></td></tr></table></figure></p>
+<p>示例 2：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：arr = [<span class="string">&quot;cha&quot;</span>,<span class="string">&quot;r&quot;</span>,<span class="string">&quot;act&quot;</span>,<span class="string">&quot;ers&quot;</span>]</span><br><span class="line">输出：6</span><br><span class="line">解释：可能的解答有 <span class="string">&quot;chaers&quot;</span> 和 <span class="string">&quot;acters&quot;</span>。</span><br></pre></td></tr></table></figure></p>
+<p>示例 3：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：arr &#x3D; [&quot;abcdefghijklmnopqrstuvwxyz&quot;]</span><br><span class="line">输出：26</span><br></pre></td></tr></table></figure></p>
+<p>提示：</p>
+<p>1 &lt;= arr.length &lt;= 16<br>1 &lt;= arr[i].length &lt;= 26<br>arr[i] 中只含有小写英文字母</p>
+<h3 id="我的解法-79-85">0.0.2. 我的解法(79/85)</h3><p>很遗憾。。。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxLength(self, arr):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type arr: List[str]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> not arr:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line">        <span class="keyword">if</span> len(arr) == 1:</span><br><span class="line">            <span class="built_in">return</span> len(arr[0])</span><br><span class="line"></span><br><span class="line">        n = len(arr)</span><br><span class="line">        max_ = 0</span><br><span class="line">        act = <span class="string">&quot;&quot;</span></span><br><span class="line">        def isAppeared(str1,str2):</span><br><span class="line">            <span class="keyword">if</span> len(str1) &gt; len(str2):</span><br><span class="line">                str1, str2 = str2, str1</span><br><span class="line">            <span class="keyword">for</span> ch <span class="keyword">in</span> str1:</span><br><span class="line">                <span class="keyword">if</span> ch <span class="keyword">in</span> str2:</span><br><span class="line">                    <span class="built_in">return</span> True</span><br><span class="line">            <span class="built_in">return</span> False</span><br><span class="line">        def isPure(str1):</span><br><span class="line">            <span class="keyword">if</span> len(str1) == len(<span class="built_in">set</span>(str1)):</span><br><span class="line">                <span class="built_in">return</span> True</span><br><span class="line">            <span class="built_in">return</span> False</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> isPure(arr[i]):</span><br><span class="line">                max_ = max(max_,len(arr[i]))</span><br><span class="line">                act = arr[i]</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+1,n):</span><br><span class="line">                <span class="keyword">if</span> not isAppeared(act,arr[j]) and isPure(arr[j]):</span><br><span class="line">                    act = act + arr[j]</span><br><span class="line">                    max_ = max(max_,len(act))</span><br><span class="line">        <span class="built_in">return</span> max_</span><br></pre></td></tr></table></figure>
+<h3 id="好的解法">0.0.3. 好的解法</h3><p>参考:<a href="https://leetcode-cn.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/solution/python-zhi-bai-po-su-de-01bei-bao-by-qub-8441/">benhao</a></p>
+<h4 id="直白质朴法">0.0.3.1. 直白质朴法</h4><p>我的思路总体和这个是一致的<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def maxLength(self, arr: List[str]) -&gt; int:</span><br><span class="line">        def validStr(string):</span><br><span class="line">            <span class="built_in">return</span> len(<span class="built_in">set</span>(string)) == len(string)</span><br><span class="line">        </span><br><span class="line">        dp = []</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> arr:</span><br><span class="line">            <span class="keyword">if</span> not validStr(s):</span><br><span class="line">                <span class="built_in">continue</span></span><br><span class="line">            <span class="keyword">for</span> s_ <span class="keyword">in</span> dp:</span><br><span class="line">                <span class="keyword">if</span> validStr(s_ + s):</span><br><span class="line">                    dp.append(s_ + s)</span><br><span class="line">            dp.append(s)</span><br><span class="line">        <span class="built_in">return</span> len(max(dp,key=len)) <span class="keyword">if</span> dp <span class="keyword">else</span> 0</span><br></pre></td></tr></table></figure></p>
+<h3 id>0.0.4.  </h3><h3 id="回溯法">0.0.5. 回溯法</h3><p><a href="https://leetcode-cn.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/solution/hui-su-di-gui-shi-xian-wu-you-hua-by-nan-feng-14/">NoBug</a></p>
+<p>回溯算法，采用递归实现</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution():</span><br><span class="line">    def maxLength(self, arr):</span><br><span class="line"></span><br><span class="line">        t &#x3D; []</span><br><span class="line">        for s in arr:</span><br><span class="line">            if len(set(s)) &#x3D;&#x3D; len(s):</span><br><span class="line">                t.append(s)</span><br><span class="line">        arr &#x3D; t[:]</span><br><span class="line"></span><br><span class="line">        def dfs(i, tmp):</span><br><span class="line"></span><br><span class="line">            if i &gt;&#x3D; len(arr):</span><br><span class="line">                return len(tmp)</span><br><span class="line">            else:</span><br><span class="line">                if not (set(tmp) &amp; set(arr[i])):</span><br><span class="line">                    return max(dfs(i+1,tmp+arr[i]),dfs(i+1,tmp))</span><br><span class="line">                else:</span><br><span class="line">                    return dfs(i + 1, tmp)</span><br><span class="line"></span><br><span class="line">        l&#x3D;dfs(0,&#39;&#39;)</span><br><span class="line">        return l</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>回溯</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>1052.爱生气的书店老板(Medium)</title>
     <url>/2021/02/26/1052-%E7%88%B1%E7%94%9F%E6%B0%94%E7%9A%84%E4%B9%A6%E5%BA%97%E8%80%81%E6%9D%BF-Medium/</url>
     <content><![CDATA[<p>力扣每日一题系列(2021.02.23)之<a href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/">爱生气的书店老板</a><br>难度：中等</p>
@@ -122,32 +148,6 @@
       </tags>
   </entry>
   <entry>
-    <title>1239.串联字符串的最大长度</title>
-    <url>/2021/06/18/1239-%E4%B8%B2%E8%81%94%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%9C%80%E5%A4%A7%E9%95%BF%E5%BA%A6/</url>
-    <content><![CDATA[<p>LeetCode每日一题之<a href="https://leetcode-cn.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/">串联字符串的最大长度</a>.<br>难度：中等</p>
-<h3 id="题目">0.0.1. 题目</h3><p>给定一个字符串数组<code>arr</code>，字符串<code>s</code>是将<code>arr</code>某一子序列字符串连接所得的字符串，如果<code>s</code>中的每一个字符都只出现过一次，那么它就是一个可行解。</p>
-<p>请返回所有可行解<code>s</code>中最长长度。</p>
-<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：arr = [<span class="string">&quot;un&quot;</span>,<span class="string">&quot;iq&quot;</span>,<span class="string">&quot;ue&quot;</span>]</span><br><span class="line">输出：4</span><br><span class="line">解释：所有可能的串联组合是 <span class="string">&quot;&quot;</span>,<span class="string">&quot;un&quot;</span>,<span class="string">&quot;iq&quot;</span>,<span class="string">&quot;ue&quot;</span>,<span class="string">&quot;uniq&quot;</span> 和 <span class="string">&quot;ique&quot;</span>，最大长度为 4。</span><br></pre></td></tr></table></figure></p>
-<p>示例 2：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：arr = [<span class="string">&quot;cha&quot;</span>,<span class="string">&quot;r&quot;</span>,<span class="string">&quot;act&quot;</span>,<span class="string">&quot;ers&quot;</span>]</span><br><span class="line">输出：6</span><br><span class="line">解释：可能的解答有 <span class="string">&quot;chaers&quot;</span> 和 <span class="string">&quot;acters&quot;</span>。</span><br></pre></td></tr></table></figure></p>
-<p>示例 3：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：arr &#x3D; [&quot;abcdefghijklmnopqrstuvwxyz&quot;]</span><br><span class="line">输出：26</span><br></pre></td></tr></table></figure></p>
-<p>提示：</p>
-<p>1 &lt;= arr.length &lt;= 16<br>1 &lt;= arr[i].length &lt;= 26<br>arr[i] 中只含有小写英文字母</p>
-<h3 id="我的解法-79-85">0.0.2. 我的解法(79/85)</h3><p>很遗憾。。。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxLength(self, arr):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type arr: List[str]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> not arr:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line">        <span class="keyword">if</span> len(arr) == 1:</span><br><span class="line">            <span class="built_in">return</span> len(arr[0])</span><br><span class="line"></span><br><span class="line">        n = len(arr)</span><br><span class="line">        max_ = 0</span><br><span class="line">        act = <span class="string">&quot;&quot;</span></span><br><span class="line">        def isAppeared(str1,str2):</span><br><span class="line">            <span class="keyword">if</span> len(str1) &gt; len(str2):</span><br><span class="line">                str1, str2 = str2, str1</span><br><span class="line">            <span class="keyword">for</span> ch <span class="keyword">in</span> str1:</span><br><span class="line">                <span class="keyword">if</span> ch <span class="keyword">in</span> str2:</span><br><span class="line">                    <span class="built_in">return</span> True</span><br><span class="line">            <span class="built_in">return</span> False</span><br><span class="line">        def isPure(str1):</span><br><span class="line">            <span class="keyword">if</span> len(str1) == len(<span class="built_in">set</span>(str1)):</span><br><span class="line">                <span class="built_in">return</span> True</span><br><span class="line">            <span class="built_in">return</span> False</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> isPure(arr[i]):</span><br><span class="line">                max_ = max(max_,len(arr[i]))</span><br><span class="line">                act = arr[i]</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+1,n):</span><br><span class="line">                <span class="keyword">if</span> not isAppeared(act,arr[j]) and isPure(arr[j]):</span><br><span class="line">                    act = act + arr[j]</span><br><span class="line">                    max_ = max(max_,len(act))</span><br><span class="line">        <span class="built_in">return</span> max_</span><br></pre></td></tr></table></figure>
-<h3 id="好的解法">0.0.3. 好的解法</h3><p>参考:<a href="https://leetcode-cn.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/solution/python-zhi-bai-po-su-de-01bei-bao-by-qub-8441/">benhao</a></p>
-<h4 id="直白质朴法">0.0.3.1. 直白质朴法</h4><p>我的思路总体和这个是一致的<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def maxLength(self, arr: List[str]) -&gt; int:</span><br><span class="line">        def validStr(string):</span><br><span class="line">            <span class="built_in">return</span> len(<span class="built_in">set</span>(string)) == len(string)</span><br><span class="line">        </span><br><span class="line">        dp = []</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> arr:</span><br><span class="line">            <span class="keyword">if</span> not validStr(s):</span><br><span class="line">                <span class="built_in">continue</span></span><br><span class="line">            <span class="keyword">for</span> s_ <span class="keyword">in</span> dp:</span><br><span class="line">                <span class="keyword">if</span> validStr(s_ + s):</span><br><span class="line">                    dp.append(s_ + s)</span><br><span class="line">            dp.append(s)</span><br><span class="line">        <span class="built_in">return</span> len(max(dp,key=len)) <span class="keyword">if</span> dp <span class="keyword">else</span> 0</span><br></pre></td></tr></table></figure></p>
-<h3 id>0.0.4.  </h3><h3 id="回溯法">0.0.5. 回溯法</h3><p><a href="https://leetcode-cn.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/solution/hui-su-di-gui-shi-xian-wu-you-hua-by-nan-feng-14/">NoBug</a></p>
-<p>回溯算法，采用递归实现</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution():</span><br><span class="line">    def maxLength(self, arr):</span><br><span class="line"></span><br><span class="line">        t &#x3D; []</span><br><span class="line">        for s in arr:</span><br><span class="line">            if len(set(s)) &#x3D;&#x3D; len(s):</span><br><span class="line">                t.append(s)</span><br><span class="line">        arr &#x3D; t[:]</span><br><span class="line"></span><br><span class="line">        def dfs(i, tmp):</span><br><span class="line"></span><br><span class="line">            if i &gt;&#x3D; len(arr):</span><br><span class="line">                return len(tmp)</span><br><span class="line">            else:</span><br><span class="line">                if not (set(tmp) &amp; set(arr[i])):</span><br><span class="line">                    return max(dfs(i+1,tmp+arr[i]),dfs(i+1,tmp))</span><br><span class="line">                else:</span><br><span class="line">                    return dfs(i + 1, tmp)</span><br><span class="line"></span><br><span class="line">        l&#x3D;dfs(0,&#39;&#39;)</span><br><span class="line">        return l</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>回溯</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>131.分割回文串(Medium)</title>
     <url>/2021/03/08/131-%E5%88%86%E5%89%B2%E5%9B%9E%E6%96%87%E4%B8%B2-Medium/</url>
     <content><![CDATA[<p>力扣每日一题系列(2021.03.07)之<a href="https://leetcode-cn.com/problems/palindrome-partitioning/">分割回文串</a><br>难度:中等</p>
@@ -173,36 +173,6 @@
       <tags>
         <tag>回溯</tag>
         <tag>递归</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>15.三数之和(Medium)</title>
-    <url>/2021/02/26/15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C-Medium/</url>
-    <content><![CDATA[<h3 id="题目描述">0.0.1. 题目描述</h3><p>给你一个包含<code>n</code>个整数的数组<code>nums</code>,判断<code>nums</code>中是否存在三个元素a,b,c，使得<code>a+b+c=0</code> ？请你找出所有和为<code>0</code>且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
-<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = [-1,0,1,2,-1,-4]</span><br><span class="line">输出：[[-1,-1,2],[-1,0,1]]</span><br></pre></td></tr></table></figure><br>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>示例3:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [0]</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">* 0 &lt;= nums.length &lt;= 3000</span><br><span class="line">* -10^5 &lt;= nums[i] &lt;= 10^5</span><br></pre></td></tr></table></figure></p>
-<h3 id="排序➕双指针解法">0.0.2. 排序➕双指针解法</h3><p>三数之和这道题我一直思路不清晰，下面的代码也只是复现别人的思路，接下来总结一下：</p>
-<ol>
-<li>边界条件判断，当<code>nums</code>不存在，或<code>len(nums)&lt;3</code>的时候，返回空集合<code>[]</code></li>
-<li>对数组进行从小到大的排序</li>
-<li>对排序后的数组开始遍历<ol>
-<li>如果<code>nums[i]&gt;0</code>,由于数组已经排序过了，那么<code>nums[i]</code>后面的<code>nums[L]</code>和<code>nums[R]</code>肯定比<code>nums[i]</code>更大，三个大于零的数字和不等于零。</li>
-<li>如果<code>nums[i]</code>和<code>nums[i-1]</code>是重复的，跳过</li>
-<li>令左指针指向<code>L = i + 1</code>, 令右指针指向<code>R = len(nums)-1</code>（其实这就是最后一位)<ul>
-<li>如果<code>nums[i]+nums[L]+nums[R]=0</code>，在答案列表里储存此组数；同时，判断<code>nums[L+1]</code>和<code>nums[L]</code>是否重复，及<code>nums[R]</code>和<code>nums[R-1]</code>是否重复，如果是的话，将<code>L，R</code>移到不再重复的位置，然后再令<code>L=L+1</code>,<code>R=R-1</code>即继续循环</li>
-<li>如果<code>nums[i]+nums[L]+nums[R]&gt;0</code>, 说明右指针太大，<code>R</code>向左移动一位, <code>R=R-1</code></li>
-<li>如果<code>nums[i]+nums[L]+nums[R]&lt;0</code>，说明左指针太小，<code>L</code>向右移动一位，<code>L=L+1</code></li>
-</ul>
-</li>
-</ol>
-</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def threeSum(self, nums):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 第一步：如果nums不存在或nums不到三个元素，返回空集</span></span><br><span class="line">        <span class="keyword">if</span> not nums or len(nums) &lt; 3:</span><br><span class="line">            <span class="built_in">return</span> []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第二步：对nums从小到大进行排序</span></span><br><span class="line">        nums.sort() </span><br><span class="line">        </span><br><span class="line">        res = []</span><br><span class="line">        <span class="comment"># 第三步：对排序后的nums进行遍历</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; 0:</span><br><span class="line">                <span class="built_in">return</span>  res <span class="comment">#如果nums[i]已经大于0，因为已排序，后面不可能再有数字和nums[i]相加并等于0，返回当下答案</span></span><br><span class="line">            <span class="keyword">if</span> i &gt; 0 and nums[i] == nums[i-1]:</span><br><span class="line">                <span class="built_in">continue</span> <span class="comment">#如果nums[i]和nums[i-1]</span></span><br><span class="line">            L = i + 1 <span class="comment">#当下nums[i]的右边一位</span></span><br><span class="line">            R = len(nums) - 1 <span class="comment">#最后一位</span></span><br><span class="line">            <span class="keyword">while</span> L &lt; R: </span><br><span class="line">                <span class="keyword">if</span> nums[i]+nums[L]+nums[R] == 0:</span><br><span class="line">                    res.append([nums[i],nums[L],nums[R]])</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[L] == nums[L+1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复最右端</span></span><br><span class="line">                        L = L + 1</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[R] == nums[R-1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复的最左端</span></span><br><span class="line">                        R = R - 1</span><br><span class="line">                    L = L + 1</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和大于0，说明nums[R]太大，nums[R]向左移</span></span><br><span class="line">                <span class="keyword">elif</span> nums[i]+nums[L]+nums[R] &gt; 0:</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和小于0，说明nums[L]太小，nums[L]向右移</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    L = L + 1</span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>双指针</tag>
       </tags>
   </entry>
   <entry>
@@ -265,6 +235,36 @@
       </categories>
       <tags>
         <tag>栈</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>15.三数之和(Medium)</title>
+    <url>/2021/02/26/15-%E4%B8%89%E6%95%B0%E4%B9%8B%E5%92%8C-Medium/</url>
+    <content><![CDATA[<h3 id="题目描述">0.0.1. 题目描述</h3><p>给你一个包含<code>n</code>个整数的数组<code>nums</code>,判断<code>nums</code>中是否存在三个元素a,b,c，使得<code>a+b+c=0</code> ？请你找出所有和为<code>0</code>且不重复的三元组。<br>注意：答案中不可以包含重复的三元组。</p>
+<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = [-1,0,1,2,-1,-4]</span><br><span class="line">输出：[[-1,-1,2],[-1,0,1]]</span><br></pre></td></tr></table></figure><br>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：nums = []</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>示例3:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：nums &#x3D; [0]</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">* 0 &lt;= nums.length &lt;= 3000</span><br><span class="line">* -10^5 &lt;= nums[i] &lt;= 10^5</span><br></pre></td></tr></table></figure></p>
+<h3 id="排序➕双指针解法">0.0.2. 排序➕双指针解法</h3><p>三数之和这道题我一直思路不清晰，下面的代码也只是复现别人的思路，接下来总结一下：</p>
+<ol>
+<li>边界条件判断，当<code>nums</code>不存在，或<code>len(nums)&lt;3</code>的时候，返回空集合<code>[]</code></li>
+<li>对数组进行从小到大的排序</li>
+<li>对排序后的数组开始遍历<ol>
+<li>如果<code>nums[i]&gt;0</code>,由于数组已经排序过了，那么<code>nums[i]</code>后面的<code>nums[L]</code>和<code>nums[R]</code>肯定比<code>nums[i]</code>更大，三个大于零的数字和不等于零。</li>
+<li>如果<code>nums[i]</code>和<code>nums[i-1]</code>是重复的，跳过</li>
+<li>令左指针指向<code>L = i + 1</code>, 令右指针指向<code>R = len(nums)-1</code>（其实这就是最后一位)<ul>
+<li>如果<code>nums[i]+nums[L]+nums[R]=0</code>，在答案列表里储存此组数；同时，判断<code>nums[L+1]</code>和<code>nums[L]</code>是否重复，及<code>nums[R]</code>和<code>nums[R-1]</code>是否重复，如果是的话，将<code>L，R</code>移到不再重复的位置，然后再令<code>L=L+1</code>,<code>R=R-1</code>即继续循环</li>
+<li>如果<code>nums[i]+nums[L]+nums[R]&gt;0</code>, 说明右指针太大，<code>R</code>向左移动一位, <code>R=R-1</code></li>
+<li>如果<code>nums[i]+nums[L]+nums[R]&lt;0</code>，说明左指针太小，<code>L</code>向右移动一位，<code>L=L+1</code></li>
+</ul>
+</li>
+</ol>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def threeSum(self, nums):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type nums: List[int]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 第一步：如果nums不存在或nums不到三个元素，返回空集</span></span><br><span class="line">        <span class="keyword">if</span> not nums or len(nums) &lt; 3:</span><br><span class="line">            <span class="built_in">return</span> []</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 第二步：对nums从小到大进行排序</span></span><br><span class="line">        nums.sort() </span><br><span class="line">        </span><br><span class="line">        res = []</span><br><span class="line">        <span class="comment"># 第三步：对排序后的nums进行遍历</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(nums)):</span><br><span class="line">            <span class="keyword">if</span> nums[i] &gt; 0:</span><br><span class="line">                <span class="built_in">return</span>  res <span class="comment">#如果nums[i]已经大于0，因为已排序，后面不可能再有数字和nums[i]相加并等于0，返回当下答案</span></span><br><span class="line">            <span class="keyword">if</span> i &gt; 0 and nums[i] == nums[i-1]:</span><br><span class="line">                <span class="built_in">continue</span> <span class="comment">#如果nums[i]和nums[i-1]</span></span><br><span class="line">            L = i + 1 <span class="comment">#当下nums[i]的右边一位</span></span><br><span class="line">            R = len(nums) - 1 <span class="comment">#最后一位</span></span><br><span class="line">            <span class="keyword">while</span> L &lt; R: </span><br><span class="line">                <span class="keyword">if</span> nums[i]+nums[L]+nums[R] == 0:</span><br><span class="line">                    res.append([nums[i],nums[L],nums[R]])</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[L] == nums[L+1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复最右端</span></span><br><span class="line">                        L = L + 1</span><br><span class="line">                    <span class="keyword">while</span> L &lt; R and nums[R] == nums[R-1]:</span><br><span class="line">                        <span class="comment">#如果有重复的情况，自动移到重复的最左端</span></span><br><span class="line">                        R = R - 1</span><br><span class="line">                    L = L + 1</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和大于0，说明nums[R]太大，nums[R]向左移</span></span><br><span class="line">                <span class="keyword">elif</span> nums[i]+nums[L]+nums[R] &gt; 0:</span><br><span class="line">                    R = R - 1</span><br><span class="line">                <span class="comment">#如果和小于0，说明nums[L]太小，nums[L]向右移</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    L = L + 1</span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>双指针</tag>
       </tags>
   </entry>
   <entry>
@@ -942,6 +942,63 @@
 ]]></content>
       <categories>
         <category>C++学习</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>Hexo/MacOs github不再支持密码验证解决方案2021.8.13更新</title>
+    <url>/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/</url>
+    <content><![CDATA[<p>8月13日（本来应该是集中隔离最后一天，可恶）github更新了一个东东：</p>
+<p>remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.</p>
+<p>remote: Please see <a href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/">https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/</a> for more information.</p>
+<p>fatal: unable to access ‘<a href="https://github.com/zhoulujun/algorithm.git/">https://github.com/zhoulujun/algorithm.git/</a>‘: The requested URL returned error: 403</p>
+<p>然后导致我的hexo博客上传有问题了，我是基于ssh的免密</p>
+<p>在网上找到这两篇帖子找到了解决方法，更新后需要使用token了</p>
+<p><a href="https://cloud.tencent.com/developer/article/1861466">1.GitHub不再支持密码验证解决方案：SSH免密与Token登录配置</a></p>
+<p><a href="https://stackoverflow.com/questions/68775869/support-for-password-authentication-was-removed-please-use-a-personal-access-to">2.stackoverflow:support for password …</a></p>
+<p>操作很简单，记录下来以便以后别忘球了。。</p>
+<ol>
+<li>打开github点击setting</li>
+</ol>
+<img src="/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/1.png" class>
+<ol>
+<li>左边栏目里找到developer settings</li>
+</ol>
+<img src="/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/2.png" class>
+<ol>
+<li>继续点击personal access tokens </li>
+</ol>
+<p>这一步是为了创造一个token出来，可以选择有效期，30天，90天啥的， 按需选择</p>
+<img src="/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/3.png" class>
+<ol>
+<li>generate new token 自己选择需要的时常和权限范围，我全选了</li>
+</ol>
+<img src="/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/4.png" class>
+<ol>
+<li>生成token后，大概长这样的一串东西：</li>
+</ol>
+<p><code>ghp_sFhFsSHhTzMDreGRLjmks4Tzuzgthdvfsrta</code></p>
+<p>复制一下</p>
+<ol>
+<li>在mac系统里打开Spotlight icon （中文：聚焦搜索）然后搜索Keychain access（中文：钥匙串访问）</li>
+</ol>
+<img src="/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/5.png" class>
+<img src="/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/6.png" class>
+<ol>
+<li>在钥匙串访问里搜索<code>github</code></li>
+</ol>
+<img src="/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/7.png" class>
+<p>就会出现一个或者两个（不知道是不是我以前用法语系统导致有两个）的属性控制，点开显示密码的地方，把原先的密码替换成token，这里可能会要求输入电脑密码等等</p>
+<ol>
+<li><p>再运行hexo clean/d/g的操作就ok了</p>
+</li>
+<li><p>非mac系统的解决方法在stack的那个参考链接里有写</p>
+</li>
+<li><p>terminal的方法没有成功，这里就不记录了</p>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>网页</category>
       </categories>
   </entry>
   <entry>

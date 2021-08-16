@@ -188,6 +188,126 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="odcowl">
+      <meta itemprop="description" content="wechat odcowl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="odcowl的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/" class="post-title-link" itemprop="url">Hexo/MacOs github不再支持密码验证解决方案2021.8.13更新</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-08-16 12:43:10 / 修改时间：13:07:40" itemprop="dateCreated datePublished" datetime="2021-08-16T12:43:10+08:00">2021-08-16</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BD%91%E9%A1%B5/" itemprop="url" rel="index"><span itemprop="name">网页</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>8月13日（本来应该是集中隔离最后一天，可恶）github更新了一个东东：</p>
+<p>remote: Support for password authentication was removed on August 13, 2021. Please use a personal access token instead.</p>
+<p>remote: Please see <a target="_blank" rel="noopener" href="https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/">https://github.blog/2020-12-15-token-authentication-requirements-for-git-operations/</a> for more information.</p>
+<p>fatal: unable to access ‘<a target="_blank" rel="noopener" href="https://github.com/zhoulujun/algorithm.git/">https://github.com/zhoulujun/algorithm.git/</a>‘: The requested URL returned error: 403</p>
+<p>然后导致我的hexo博客上传有问题了，我是基于ssh的免密</p>
+<p>在网上找到这两篇帖子找到了解决方法，更新后需要使用token了</p>
+<p><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1861466">1.GitHub不再支持密码验证解决方案：SSH免密与Token登录配置</a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/68775869/support-for-password-authentication-was-removed-please-use-a-personal-access-to">2.stackoverflow:support for password …</a></p>
+<p>操作很简单，记录下来以便以后别忘球了。。</p>
+<ol>
+<li>打开github点击setting</li>
+</ol>
+<img src="/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/1.png" class>
+<ol>
+<li>左边栏目里找到developer settings</li>
+</ol>
+<img src="/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/2.png" class>
+<ol>
+<li>继续点击personal access tokens </li>
+</ol>
+<p>这一步是为了创造一个token出来，可以选择有效期，30天，90天啥的， 按需选择</p>
+<img src="/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/3.png" class>
+<ol>
+<li>generate new token 自己选择需要的时常和权限范围，我全选了</li>
+</ol>
+<img src="/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/4.png" class>
+<ol>
+<li>生成token后，大概长这样的一串东西：</li>
+</ol>
+<p><code>ghp_sFhFsSHhTzMDreGRLjmks4Tzuzgthdvfsrta</code></p>
+<p>复制一下</p>
+<ol>
+<li>在mac系统里打开Spotlight icon （中文：聚焦搜索）然后搜索Keychain access（中文：钥匙串访问）</li>
+</ol>
+<img src="/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/5.png" class>
+<img src="/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/6.png" class>
+<ol>
+<li>在钥匙串访问里搜索<code>github</code></li>
+</ol>
+<img src="/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/7.png" class>
+<p>就会出现一个或者两个（不知道是不是我以前用法语系统导致有两个）的属性控制，点开显示密码的地方，把原先的密码替换成token，这里可能会要求输入电脑密码等等</p>
+<ol>
+<li><p>再运行hexo clean/d/g的操作就ok了</p>
+</li>
+<li><p>非mac系统的解决方法在stack的那个参考链接里有写</p>
+</li>
+<li><p>terminal的方法没有成功，这里就不记录了</p>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+  
+  
+  
+
+
+
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/11/C-PrimerPlus-4-4%E7%BB%93%E6%9E%84%E7%AE%80%E4%BB%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1295,119 +1415,6 @@
 
 
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%99%BD%E5%A4%9C%E8%A1%8Cby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="odcowl">
-      <meta itemprop="description" content="wechat odcowl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="odcowl的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%99%BD%E5%A4%9C%E8%A1%8Cby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/" class="post-title-link" itemprop="url">读书笔记 白夜行by东野圭吾</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-05-27 15:50:07 / 修改时间：22:15:22" itemprop="dateCreated datePublished" datetime="2021-05-27T15:50:07+08:00">2021-05-27</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/2021%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">2021读书笔记</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <img src="/2021/05/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%99%BD%E5%A4%9C%E8%A1%8Cby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/fengmian.jpeg" class>
-<p>继续读闲书…</p>
-<p>上次读完湖泊后，对日本悬疑类小说名家东野圭吾的作品继续产生兴趣，于是就读了这本《白夜行》。</p>
-<p>先说结尾，我还是不太习惯于戛然而止式的结尾😅总觉得坏人应该得到无论是法律上还是心灵上的惩罚，好人应该有好的结局。</p>
-<p>亮跳下去后背过身的雪穗是真的有失控吗？</p>
-<p>R&amp;Y的未来如何？</p>
-<p>警官是否心满意足的找到了真正的罪犯？</p>
-<p>也有可能这大片的留白是作者留下的想象空间，只可惜我这种凡人想象不到罢了。</p>
-<hr>
-<p>故事开始于大人的罪恶，小孩子无法选择的命运。</p>
-<p>恶之花在废弃的大楼里流着泪生长，压抑又复杂的小孩子间惺惺相惜、共生的情感，最终造就了所有阳光下的罪恶。</p>
-<blockquote>
-<p> 我的天空里没有太阳，总是黑夜，但并不暗，因为有东西代替了太阳。虽然没有太阳那么明亮，但对我来说已经足够。凭借着这份光，我便能把黑夜当成白天。我从来就没有太阳，所以不怕失去。</p>
-</blockquote>
-<p>我觉得亮心里有一丝愧疚，他认为是自己的责任要去守护雪穗。</p>
-<p>这是一种复杂的情感。自己的父亲是变态，自己喜爱的女生惨遭毒手。所以他要成为代替太阳的守护者，他要保护心里的花朵，即便这朵花早已变质。</p>
-<blockquote>
-<p>只希望能手牵手在太阳下散步</p>
-</blockquote>
-<p>对于我来说，这早就不是雪穗的想法。</p>
-<p>一个人越来越靠近阳光，一个人只能向蝼蚁般藏匿地下。</p>
-<blockquote>
-<p>美佳差点惊呼失声，雪穗伸出食指抵住她的唇。</p>
-<p>“那时，我比现在的你更小，真的还是孩子。但是，恶魔不会因为你是孩子就放过你。而且，恶魔还不止一个。”</p>
-<p>“不……”美佳喃喃地说，却发不出声音。</p>
-<p>“现在的你，就是那时的我。”雪穗压在美佳身上，双手抱住美佳的头，“真可怜。 »</p>
-</blockquote>
-<p>应该是全文里我看的最有生理性反感的部分吧。</p>
-<p>因为曾经见过黑暗，所以要把所有美好的人脱向黑暗。</p>
-<p>所有和雪穗有关系的人最后都没有落得好的结局，而这些人都很善良。</p>
-<blockquote>
-<p>雪穗像人偶般面无表情。她冰冷地回答：“我不知道。雇用临时工都由店长全权负责。 </p>
-</blockquote>
-<p>最终亮带着那把杀死父亲的小剪刀，一跃而下。</p>
-<p>在大阪店的开业典礼上，所有的纸醉金迷，截然而止。</p>
-<p>我不由地问，笹垣真的可以捉拿雪穗吗？</p>
-<p>为什么要给这样子的人留下一条生路了？这大概是我还没有读懂作者的一点。</p>
-<hr>
-<p>打算停下来阅读悬疑类别的小说，准备准备刷题啦❤️</p>
-<ul>
-<li>想要自救</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-  
-  
-  
-
-
-
-
 
   
   <nav class="pagination">
@@ -1478,7 +1485,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">36</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1537,7 +1544,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共33.5k字</span>
+  <span class="post-count">博客全站共33.9k字</span>
 </div>
 
         
