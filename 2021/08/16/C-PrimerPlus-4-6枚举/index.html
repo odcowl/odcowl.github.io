@@ -20,21 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"always","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="继续读闲书… 上次读完湖泊后，对日本悬疑类小说名家东野圭吾的作品继续产生兴趣，于是就读了这本《白夜行》。 先说结尾，我还是不太习惯于戛然而止式的结尾😅总觉得坏人应该得到无论是法律上还是心灵上的惩罚，好人应该有好的结局。 亮跳下去后背过身的雪穗是真的有失控吗？ R&amp;Y的未来如何？ 警官是否心满意足的找到了真正的罪犯？ 也有可能这大片的留白是作者留下的想象空间，只可惜我这种凡人想象不到罢了">
+  <meta name="description" content="1. 4.6 枚举C++的枚举enum工具可以创建符号常量，和const的作用相同。 例如 123456789101112131415&#x2F;&#x2F; spectrum 成为新类型的名称，被称为枚举(enumeration)&#x2F;&#x2F; red,orange,yellow被称为符号常量，被称为枚举量(enumerator)enum spectrum &amp;#123;red,oran">
 <meta property="og:type" content="article">
-<meta property="og:title" content="读书笔记 白夜行by东野圭吾">
-<meta property="og:url" content="http://example.com/2021/05/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%99%BD%E5%A4%9C%E8%A1%8Cby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/index.html">
+<meta property="og:title" content="C++PrimerPlus_4.6枚举enum">
+<meta property="og:url" content="http://example.com/2021/08/16/C-PrimerPlus-4-6%E6%9E%9A%E4%B8%BE/index.html">
 <meta property="og:site_name" content="odcowl的个人博客">
-<meta property="og:description" content="继续读闲书… 上次读完湖泊后，对日本悬疑类小说名家东野圭吾的作品继续产生兴趣，于是就读了这本《白夜行》。 先说结尾，我还是不太习惯于戛然而止式的结尾😅总觉得坏人应该得到无论是法律上还是心灵上的惩罚，好人应该有好的结局。 亮跳下去后背过身的雪穗是真的有失控吗？ R&amp;Y的未来如何？ 警官是否心满意足的找到了真正的罪犯？ 也有可能这大片的留白是作者留下的想象空间，只可惜我这种凡人想象不到罢了">
+<meta property="og:description" content="1. 4.6 枚举C++的枚举enum工具可以创建符号常量，和const的作用相同。 例如 123456789101112131415&#x2F;&#x2F; spectrum 成为新类型的名称，被称为枚举(enumeration)&#x2F;&#x2F; red,orange,yellow被称为符号常量，被称为枚举量(enumerator)enum spectrum &amp;#123;red,oran">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/2021/05/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%99%BD%E5%A4%9C%E8%A1%8Cby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/fengmian.jpeg">
-<meta property="article:published_time" content="2021-05-27T07:50:07.000Z">
-<meta property="article:modified_time" content="2021-05-27T14:15:22.079Z">
+<meta property="article:published_time" content="2021-08-16T15:30:02.000Z">
+<meta property="article:modified_time" content="2021-08-17T08:48:12.352Z">
 <meta property="article:author" content="odcowl">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/2021/05/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%99%BD%E5%A4%9C%E8%A1%8Cby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/fengmian.jpeg">
 
-<link rel="canonical" href="http://example.com/2021/05/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%99%BD%E5%A4%9C%E8%A1%8Cby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/">
+<link rel="canonical" href="http://example.com/2021/08/16/C-PrimerPlus-4-6%E6%9E%9A%E4%B8%BE/">
 
 
 <script id="page-configurations">
@@ -47,7 +45,7 @@
   };
 </script>
 
-  <title>读书笔记 白夜行by东野圭吾 | odcowl的个人博客</title>
+  <title>C++PrimerPlus_4.6枚举enum | odcowl的个人博客</title>
   
 
 
@@ -193,7 +191,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%99%BD%E5%A4%9C%E8%A1%8Cby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/08/16/C-PrimerPlus-4-6%E6%9E%9A%E4%B8%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -206,7 +204,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          读书笔记 白夜行by东野圭吾
+          C++PrimerPlus_4.6枚举enum
         </h1>
 
         <div class="post-meta">
@@ -215,17 +213,23 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-05-27 15:50:07 / 修改时间：22:15:22" itemprop="dateCreated datePublished" datetime="2021-05-27T15:50:07+08:00">2021-05-27</time>
+              <time title="创建时间：2021-08-16 23:30:02" itemprop="dateCreated datePublished" datetime="2021-08-16T23:30:02+08:00">2021-08-16</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-08-17 16:48:12" itemprop="dateModified" datetime="2021-08-17T16:48:12+08:00">2021-08-17</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/2021%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/" itemprop="url" rel="index"><span itemprop="name">2021读书笔记</span></a>
+                  <a href="/categories/C-%E5%AD%A6%E4%B9%A0/" itemprop="url" rel="index"><span itemprop="name">C++学习</span></a>
                 </span>
             </span>
 
@@ -240,47 +244,18 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <img src="/2021/05/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%99%BD%E5%A4%9C%E8%A1%8Cby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/fengmian.jpeg" class>
-<p>继续读闲书…</p>
-<p>上次读完湖泊后，对日本悬疑类小说名家东野圭吾的作品继续产生兴趣，于是就读了这本《白夜行》。</p>
-<p>先说结尾，我还是不太习惯于戛然而止式的结尾😅总觉得坏人应该得到无论是法律上还是心灵上的惩罚，好人应该有好的结局。</p>
-<p>亮跳下去后背过身的雪穗是真的有失控吗？</p>
-<p>R&amp;Y的未来如何？</p>
-<p>警官是否心满意足的找到了真正的罪犯？</p>
-<p>也有可能这大片的留白是作者留下的想象空间，只可惜我这种凡人想象不到罢了。</p>
-<hr>
-<p>故事开始于大人的罪恶，小孩子无法选择的命运。</p>
-<p>恶之花在废弃的大楼里流着泪生长，压抑又复杂的小孩子间惺惺相惜、共生的情感，最终造就了所有阳光下的罪恶。</p>
-<blockquote>
-<p> 我的天空里没有太阳，总是黑夜，但并不暗，因为有东西代替了太阳。虽然没有太阳那么明亮，但对我来说已经足够。凭借着这份光，我便能把黑夜当成白天。我从来就没有太阳，所以不怕失去。</p>
-</blockquote>
-<p>我觉得亮心里有一丝愧疚，他认为是自己的责任要去守护雪穗。</p>
-<p>这是一种复杂的情感。自己的父亲是变态，自己喜爱的女生惨遭毒手。所以他要成为代替太阳的守护者，他要保护心里的花朵，即便这朵花早已变质。</p>
-<blockquote>
-<p>只希望能手牵手在太阳下散步</p>
-</blockquote>
-<p>对于我来说，这早就不是雪穗的想法。</p>
-<p>一个人越来越靠近阳光，一个人只能向蝼蚁般藏匿地下。</p>
-<blockquote>
-<p>美佳差点惊呼失声，雪穗伸出食指抵住她的唇。</p>
-<p>“那时，我比现在的你更小，真的还是孩子。但是，恶魔不会因为你是孩子就放过你。而且，恶魔还不止一个。”</p>
-<p>“不……”美佳喃喃地说，却发不出声音。</p>
-<p>“现在的你，就是那时的我。”雪穗压在美佳身上，双手抱住美佳的头，“真可怜。 »</p>
-</blockquote>
-<p>应该是全文里我看的最有生理性反感的部分吧。</p>
-<p>因为曾经见过黑暗，所以要把所有美好的人脱向黑暗。</p>
-<p>所有和雪穗有关系的人最后都没有落得好的结局，而这些人都很善良。</p>
-<blockquote>
-<p>雪穗像人偶般面无表情。她冰冷地回答：“我不知道。雇用临时工都由店长全权负责。 </p>
-</blockquote>
-<p>最终亮带着那把杀死父亲的小剪刀，一跃而下。</p>
-<p>在大阪店的开业典礼上，所有的纸醉金迷，截然而止。</p>
-<p>我不由地问，笹垣真的可以捉拿雪穗吗？</p>
-<p>为什么要给这样子的人留下一条生路了？这大概是我还没有读懂作者的一点。</p>
-<hr>
-<p>打算停下来阅读悬疑类别的小说，准备准备刷题啦❤️</p>
+        <h1 id="4-6-枚举">1. 4.6 枚举</h1><p>C++的枚举<code>enum</code>工具可以创建符号常量，和<code>const</code>的作用相同。</p>
+<p>例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; spectrum 成为新类型的名称，被称为枚举(enumeration)</span><br><span class="line">&#x2F;&#x2F; red,orange,yellow被称为符号常量，被称为枚举量(enumerator)</span><br><span class="line"></span><br><span class="line">enum spectrum &#123;red,orange,yellow&#125;;</span><br><span class="line">&#x2F;&#x2F; 同等于</span><br><span class="line">const int red &#x3D; 0;</span><br><span class="line">const int orange &#x3D; 1;</span><br><span class="line">const int yellow &#x3D; 2;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 可以用枚举名来生命这种类型的变量</span><br><span class="line">spectrum band;</span><br><span class="line">band &#x3D; blue; </span><br><span class="line"></span><br><span class="line">int color &#x3D; orange; &#x2F;&#x2F; valid</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="设置枚举量的值">1.1. 设置枚举量的值</h2><h3 id="可以显式的设置">1.1.1. 可以显式的设置</h3><p><strong>指定的值必须是整数</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enum bits &#123;one &#x3D; 1, two &#x3D; 2, four &#x3D; 4&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="只显式的定义其中一些">1.1.2. 只显式的定义其中一些</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enum bigstep &#123;first, second &#x3D; 100, third&#125;;</span><br></pre></td></tr></table></figure>
+<p>first在默认情况下为0，后面没有被初始化的值将比其前面的枚举值大1，因此third=#01。</p>
+<h3 id="可以创建多个值相同的枚举值">1.1.3. 可以创建多个值相同的枚举值</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">enum &#123;zero, null &#x3D; 0, one, numero_one &#x3D; 1&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="枚举的取值范围">1.2. 枚举的取值范围</h2><p><code>enum bigstep &#123;first, second = 100, thrid&#125;;</code>为例子：</p>
 <ul>
-<li>想要自救</li>
+<li>上限：找到bigstep最大值，他的最小2次幂减去一。这里最大值third=101，最小二次幂为128，因此取值上限是127。</li>
+<li>下限：如果最小值大于0，那么取值下限为0；否则采用和上面一样的方法，但是加上负号。假如最小的枚举量为-6，那么比他小、最大的2次幂为-8，因此下限为-7。</li>
 </ul>
 
     </div>
@@ -297,7 +272,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://example.com/2021/05/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%99%BD%E5%A4%9C%E8%A1%8Cby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/" title="读书笔记 白夜行by东野圭吾">http://example.com/2021/05/27/读书笔记-白夜行by东野圭吾/</a>
+    <a href="http://example.com/2021/08/16/C-PrimerPlus-4-6%E6%9E%9A%E4%B8%BE/" title="C++PrimerPlus_4.6枚举enum">http://example.com/2021/08/16/C-PrimerPlus-4-6枚举/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -314,13 +289,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/05/23/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E6%B9%96%E6%B3%8Aby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/" rel="prev" title="读书笔记 湖泊by东野圭吾">
-      <i class="fa fa-chevron-left"></i> 读书笔记 湖泊by东野圭吾
+    <a href="/2021/08/16/C-PrimerPlus-4-5%E5%85%B1%E7%94%A8%E4%BD%93/" rel="prev" title="C++PrimerPlus_4.5共用体union">
+      <i class="fa fa-chevron-left"></i> C++PrimerPlus_4.5共用体union
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/06/08/%E9%9F%B3%E9%A2%91%E5%89%8D%E5%A4%84%E7%90%86%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" rel="next" title="转载:音频处理基本概念">
-      转载:音频处理基本概念 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -393,6 +365,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#4-6-%E6%9E%9A%E4%B8%BE"><span class="nav-number">1.</span> <span class="nav-text">1. 4.6 枚举</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%9E%9A%E4%B8%BE%E9%87%8F%E7%9A%84%E5%80%BC"><span class="nav-number">1.1.</span> <span class="nav-text">1.1. 设置枚举量的值</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E6%98%BE%E5%BC%8F%E7%9A%84%E8%AE%BE%E7%BD%AE"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1.1. 可以显式的设置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AA%E6%98%BE%E5%BC%8F%E7%9A%84%E5%AE%9A%E4%B9%89%E5%85%B6%E4%B8%AD%E4%B8%80%E4%BA%9B"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.1.2. 只显式的定义其中一些</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E5%88%9B%E5%BB%BA%E5%A4%9A%E4%B8%AA%E5%80%BC%E7%9B%B8%E5%90%8C%E7%9A%84%E6%9E%9A%E4%B8%BE%E5%80%BC"><span class="nav-number">1.1.3.</span> <span class="nav-text">1.1.3. 可以创建多个值相同的枚举值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%9A%E4%B8%BE%E7%9A%84%E5%8F%96%E5%80%BC%E8%8C%83%E5%9B%B4"><span class="nav-number">1.2.</span> <span class="nav-text">1.2. 枚举的取值范围</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

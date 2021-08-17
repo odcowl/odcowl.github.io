@@ -188,6 +188,261 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/18/1239-%E4%B8%B2%E8%81%94%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%9C%80%E5%A4%A7%E9%95%BF%E5%BA%A6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="odcowl">
+      <meta itemprop="description" content="wechat odcowl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="odcowl的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/18/1239-%E4%B8%B2%E8%81%94%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%9C%80%E5%A4%A7%E9%95%BF%E5%BA%A6/" class="post-title-link" itemprop="url">1239.串联字符串的最大长度</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-18 19:31:53" itemprop="dateCreated datePublished" datetime="2021-06-18T19:31:53+08:00">2021-06-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-19 02:33:25" itemprop="dateModified" datetime="2021-06-19T02:33:25+08:00">2021-06-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>LeetCode每日一题之<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/">串联字符串的最大长度</a>.<br>难度：中等</p>
+<h3 id="题目">0.0.1. 题目</h3><p>给定一个字符串数组<code>arr</code>，字符串<code>s</code>是将<code>arr</code>某一子序列字符串连接所得的字符串，如果<code>s</code>中的每一个字符都只出现过一次，那么它就是一个可行解。</p>
+<p>请返回所有可行解<code>s</code>中最长长度。</p>
+<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：arr = [<span class="string">&quot;un&quot;</span>,<span class="string">&quot;iq&quot;</span>,<span class="string">&quot;ue&quot;</span>]</span><br><span class="line">输出：4</span><br><span class="line">解释：所有可能的串联组合是 <span class="string">&quot;&quot;</span>,<span class="string">&quot;un&quot;</span>,<span class="string">&quot;iq&quot;</span>,<span class="string">&quot;ue&quot;</span>,<span class="string">&quot;uniq&quot;</span> 和 <span class="string">&quot;ique&quot;</span>，最大长度为 4。</span><br></pre></td></tr></table></figure></p>
+<p>示例 2：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：arr = [<span class="string">&quot;cha&quot;</span>,<span class="string">&quot;r&quot;</span>,<span class="string">&quot;act&quot;</span>,<span class="string">&quot;ers&quot;</span>]</span><br><span class="line">输出：6</span><br><span class="line">解释：可能的解答有 <span class="string">&quot;chaers&quot;</span> 和 <span class="string">&quot;acters&quot;</span>。</span><br></pre></td></tr></table></figure></p>
+<p>示例 3：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：arr &#x3D; [&quot;abcdefghijklmnopqrstuvwxyz&quot;]</span><br><span class="line">输出：26</span><br></pre></td></tr></table></figure></p>
+<p>提示：</p>
+<p>1 &lt;= arr.length &lt;= 16<br>1 &lt;= arr[i].length &lt;= 26<br>arr[i] 中只含有小写英文字母</p>
+<h3 id="我的解法-79-85">0.0.2. 我的解法(79/85)</h3><p>很遗憾。。。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxLength(self, arr):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type arr: List[str]</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> not arr:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line">        <span class="keyword">if</span> len(arr) == 1:</span><br><span class="line">            <span class="built_in">return</span> len(arr[0])</span><br><span class="line"></span><br><span class="line">        n = len(arr)</span><br><span class="line">        max_ = 0</span><br><span class="line">        act = <span class="string">&quot;&quot;</span></span><br><span class="line">        def isAppeared(str1,str2):</span><br><span class="line">            <span class="keyword">if</span> len(str1) &gt; len(str2):</span><br><span class="line">                str1, str2 = str2, str1</span><br><span class="line">            <span class="keyword">for</span> ch <span class="keyword">in</span> str1:</span><br><span class="line">                <span class="keyword">if</span> ch <span class="keyword">in</span> str2:</span><br><span class="line">                    <span class="built_in">return</span> True</span><br><span class="line">            <span class="built_in">return</span> False</span><br><span class="line">        def isPure(str1):</span><br><span class="line">            <span class="keyword">if</span> len(str1) == len(<span class="built_in">set</span>(str1)):</span><br><span class="line">                <span class="built_in">return</span> True</span><br><span class="line">            <span class="built_in">return</span> False</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">if</span> isPure(arr[i]):</span><br><span class="line">                max_ = max(max_,len(arr[i]))</span><br><span class="line">                act = arr[i]</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+1,n):</span><br><span class="line">                <span class="keyword">if</span> not isAppeared(act,arr[j]) and isPure(arr[j]):</span><br><span class="line">                    act = act + arr[j]</span><br><span class="line">                    max_ = max(max_,len(act))</span><br><span class="line">        <span class="built_in">return</span> max_</span><br></pre></td></tr></table></figure>
+<h3 id="好的解法">0.0.3. 好的解法</h3><p>参考:<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/solution/python-zhi-bai-po-su-de-01bei-bao-by-qub-8441/">benhao</a></p>
+<h4 id="直白质朴法">0.0.3.1. 直白质朴法</h4><p>我的思路总体和这个是一致的<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def maxLength(self, arr: List[str]) -&gt; int:</span><br><span class="line">        def validStr(string):</span><br><span class="line">            <span class="built_in">return</span> len(<span class="built_in">set</span>(string)) == len(string)</span><br><span class="line">        </span><br><span class="line">        dp = []</span><br><span class="line">        <span class="keyword">for</span> s <span class="keyword">in</span> arr:</span><br><span class="line">            <span class="keyword">if</span> not validStr(s):</span><br><span class="line">                <span class="built_in">continue</span></span><br><span class="line">            <span class="keyword">for</span> s_ <span class="keyword">in</span> dp:</span><br><span class="line">                <span class="keyword">if</span> validStr(s_ + s):</span><br><span class="line">                    dp.append(s_ + s)</span><br><span class="line">            dp.append(s)</span><br><span class="line">        <span class="built_in">return</span> len(max(dp,key=len)) <span class="keyword">if</span> dp <span class="keyword">else</span> 0</span><br></pre></td></tr></table></figure></p>
+<h3 id>0.0.4.  </h3><h3 id="回溯法">0.0.5. 回溯法</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/solution/hui-su-di-gui-shi-xian-wu-you-hua-by-nan-feng-14/">NoBug</a></p>
+<p>回溯算法，采用递归实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Solution():</span><br><span class="line">    def maxLength(self, arr):</span><br><span class="line"></span><br><span class="line">        t &#x3D; []</span><br><span class="line">        for s in arr:</span><br><span class="line">            if len(set(s)) &#x3D;&#x3D; len(s):</span><br><span class="line">                t.append(s)</span><br><span class="line">        arr &#x3D; t[:]</span><br><span class="line"></span><br><span class="line">        def dfs(i, tmp):</span><br><span class="line"></span><br><span class="line">            if i &gt;&#x3D; len(arr):</span><br><span class="line">                return len(tmp)</span><br><span class="line">            else:</span><br><span class="line">                if not (set(tmp) &amp; set(arr[i])):</span><br><span class="line">                    return max(dfs(i+1,tmp+arr[i]),dfs(i+1,tmp))</span><br><span class="line">                else:</span><br><span class="line">                    return dfs(i + 1, tmp)</span><br><span class="line"></span><br><span class="line">        l&#x3D;dfs(0,&#39;&#39;)</span><br><span class="line">        return l</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+  
+  
+  
+
+
+
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2021/06/08/%E9%9F%B3%E9%A2%91%E5%89%8D%E5%A4%84%E7%90%86%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="odcowl">
+      <meta itemprop="description" content="wechat odcowl">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="odcowl的个人博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/06/08/%E9%9F%B3%E9%A2%91%E5%89%8D%E5%A4%84%E7%90%86%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" class="post-title-link" itemprop="url">转载:音频处理基本概念</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-06-08 16:17:28 / 修改时间：22:30:56" itemprop="dateCreated datePublished" datetime="2021-06-08T16:17:28+08:00">2021-06-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/" itemprop="url" rel="index"><span itemprop="name">信号处理</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>转载自：<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/28dd7f1e58d0">音频基础知识</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhongshijunacm/article/details/104799137?utm_medium=distribute.pc_relevant.none-task-blog-baidujs_title-0&amp;spm=1001.2101.3001.4242">音频前处理基本概念</a></p>
+<p><a target="_blank" rel="noopener" href="https://my.oschina.net/u/4324171/blog/3556108">音频相关基本概念，音频处理及编解码基本框架和原理以及音、重采样、3A等音频处理(了解概念为主)</a></p>
+<h3 id="音频基础知识">0.0.1. 音频基础知识</h3><p>声音信号通常是一种连续的波形来表示。波形的最大位移称为振幅A，反应音量。波形中两个连续波峰（或波谷）之间的距离称为周期T。周期的倒数即为频率f，以赫兹（Hz）为单位。频率反应了声音的音调。</p>
+<p>声音可按频率分为三类：</p>
+<p>次声波：频率低于20Hz。<br>音频；频率在20-20kHz。<br>超声：频率高于20kHz。</p>
+<p>音频（Audio）指频率在20Hz-20kHz范围内的可听声音，是多媒体信息中的一种媒体类型 - 可听类媒体。</p>
+<p>目前多媒体计算机中的音频主要由波形音频、CD音频和MIDE音乐3种形式。重点应该是波形音频。</p>
+<ol>
+<li>波形音频</li>
+</ol>
+<p>波形音频是由外部声音源通过数字化过程采集到多媒体计算机的所有声音形式。语音是波形声音中人说话的声音，具有内在的语言学、语音学的内涵。多媒体计算机可以利用特殊的方法分析、研究、抽取语音的相关特征，实现对不同语音的分辨、识别以及通过文字合成语音波形等。</p>
+<ol>
+<li>CD音频</li>
+</ol>
+<p>CD音频（CD-Audio）是存储在音乐CD光盘中的数字音频，可以通过CD-ROM驱动器读取并采集到多媒体计算机系统中，并以波形音频的相应形式存储和处理。</p>
+<ol>
+<li>MIDI音频</li>
+</ol>
+<p>MIDI音频（musical instrument digital interface），它将音乐符号化并保存在MIDI文件中，通过因为合成器产生相应的声音波形来还原播放。</p>
+<p>音频是时间的函数，具有很强的前后相关性，所以实时性是音频处理的基本要求。</p>
+<h3 id="音频的数字化">0.0.2. 音频的数字化</h3><p>计算机处理音频信号前，必须将模拟的声音信号数字化，产生数字音频。具体过程包括采样、量化与编码。</p>
+<ol>
+<li>采样与采样频率</li>
+</ol>
+<p>采样就是每间隔一段时间读取一次声音信号幅度，使声音信号在时间上被离散化。</p>
+<p>采样频率就是将模拟声音波形数字化时，每秒钟抽取声波幅度样本的次数，其计算单位是kHz（千赫兹）。一般来说，采样频率越高，声音失真越小，用于存储的数字音频的数据量也越大。</p>
+<p>乃奎斯特(Nyquist)采样理论：采样频率不应低于声音信号最高频率的两倍。这样就能把以数字表达的声音还原成原来的声音。例如：电话话音的信号频率约为 3.4 kHz，采样频率一般选用 8 kHz。</p>
+<p>音频抽样率有：8kHz、11.025kHz、22.05kHz、16kHz、37.8kHz、44.1kHz、48kHz。</p>
+<ol>
+<li>量化与量化位数</li>
+</ol>
+<p>量化就是把采样得到的信号幅度转化为数字值，是声音信号在幅度上被离散化。量化位数（位深）是每个采样点能够表示的数据范围，常用的有8位、12位和16位。图示一个：</p>
+<ol>
+<li>声道</li>
+</ol>
+<p>反映音频数字化质量的另一个因素是声道个数。记录音频时，如果每次生成一个声波的数据，称为单声道；每次记录两个声波数据，称为双声道（立体声）；每次生成二个以上的声波数据，称为多声道（环绕立体声）。</p>
+<ol>
+<li>音频采样的数据量</li>
+</ol>
+<p>数字音频的采样数据量主要取决两方面的因素：</p>
+<p>音质因素：采样频率、量化位数和声道数三个参数决定。<br>时间：采样时间长短。</p>
+<h3 id="音频的编码">0.0.3. 音频的编码</h3><p>音频数据压缩编码的方法有多种，可分为无损压缩和有损压缩两大类。无损压缩主要包含各种熵编码；有损压缩则分为波形编码、参数编码、感知编码和混合编码。</p>
+<p>波形编码：模拟音频数字化（抽样和量化）的过程中，根据人耳的听觉特性进行编码，并使编码后的音频信号与原始信号的波形尽可能匹配，实现数据压缩。</p>
+<p>PCM (Pulse Code Modulation)、脉冲编码调制。<br>DPCM (Differential Pulse Code Modulation)。<br>APCM (Adaptive Pulse Code Modulation)。<br>ADPCM (Adaptive Differential Pulse Code Modulation)。<br>参数编码：把音频信号表示成模型的输出，利用特征的方法抽取必要的模型参数和激励信号的信息，且对这些信息编码，最后在输出端合成原始信号。</p>
+<h3 id="音频采集">0.0.4. 音频采集</h3><p>音频采集播放流程：采集-前处理（回声消除、噪声抑制、音量调节、混响处理等）-编码-传输-解码-后处理-播放</p>
+<p>采样率：原始PCM数据每秒采样次数</p>
+<p>比特率：编码压缩后的码率，每秒音频的大小。（所以在编码效果好的情况下也会有高采样率对应相对低的比特率）</p>
+<p>PCM(Pulse Code Modulation)，脉冲编码调制。人耳听到的是模拟信号，PCM是把声音从模拟信号转化为数字信号的技术。原理是用一个固定的频率对模拟信号进行采样，采样后的信号在波形上看就像一串连续的幅值不一的脉冲(脉搏似的短暂起伏的电冲                         击)，把这些脉冲的幅值按一定精度进行量化，这些量化后的数值被连续的输出、传输、处理或记录到存储介质中，所有这些组成了数字音频的产生过程(抽样、量化、编码三个过程)。</p>
+<h3 id="音频前、后处理">0.0.5. 音频前、后处理</h3><p>ES: Echo Suppresion</p>
+<p>EES: Enhanced Echo Suppresion</p>
+<p>AEC: Acoustic Echo Cancellation 声学回声消除。在一般的VOIP软件或视频会议系统中，假设我们只有A和B两个人在通话，首先，A的声音传给B，B然后用喇叭放出来，而这时B的MIC呢则会采集到喇叭放出来的声音，然后传回给A，如果这个传输的过程中时延足够大，A就会听到一个和自己刚才说过的话一样的声音，这就是回声，声学回声消除器的作用就是在B端对B采集到的声音进行处理，把采集到声音包含的A的声音去掉再传给A，这样，A就不会听到自己说过的话了。就是说，在B端，接收到A说的话以后，要把这些话音数据传给回声消除器做参考，然后再传给声卡，声卡再放出来，这有一段延时，这时，B再采集，然后传给回声消除器，与那个参考数据比较，从采集到的数据中把频域和参考数据相同的部分消除掉。</p>
+<p>NS: Noise Suppression 噪音抑制</p>
+<p>NLP: Nonlinear Procession 去除残留的回声和背景噪声</p>
+<p>NC: Noise Control</p>
+<p>NR: Noise Reduction 降噪</p>
+<p>CC: Clarity Control 清晰度控制</p>
+<p>VAD: Voice Activity Detection 静音检测。静音检测（VAD）将检测被编码的音频数据是语音还是静音或背景噪声</p>
+<p>DRC: Dynamic Range Control</p>
+<p>AGC: Automatic Gain Control 自动增益控制。不同的设备，录音效果会有较大幅度的变动，自动增益控制（AGC）就是用来处理这种现象的。它提供了一种调整信号为参考音量的方法。这对VOIP（voice over IP）是非常有用的，因为它不需要再手动去调整麦克风增益。第二个好处是，将麦克风增益设置为保守(低)级别，可有效避免削波。</p>
+<p>VBR: Variable Bit-Rate</p>
+<p>CBR: Constant Bit-Rate</p>
+<p>ABR: Average bit-rate</p>
+<p>DTX: Discontinuous Transmission 非连续传输。非连续性传输（DTX）是静音检测（VAD）/变比特率（VBR）操作的额外选项，它能够在背景噪声固定时，完全的停止传输。</p>
+<p>CNG: Comfort Noise Generator 舒适噪音生成。在非变比特率的情况下，检测非语音周期并对用足够的比特数重新生成的背景噪声进行编码。这个叫“舒适噪声生成（CNG）”。</p>
+<p>音频加速器（Audio Accelerator）：即音频处理单元，有些厂家又叫APU(Audio Processing Unit)，好比计算机机的cpu，决定着声卡的音频处理能力。完全意义上的音频加速器由DSP(Digital Singnal Processor)和I/O控制器构成。I/O控制器即是输入/输出控制器，针对声卡的输入/输出进行控制。如果说一块声卡没有DSP，而只是一块I/O卡（比如绝大多数主板上自带的AC97声卡）那它所有的数据处理就只有交由CPU来完成。这将意味着增加CPU的负担，和低下的性能。</p>
+<p>Codec：Codec一词由Coder和Decoder两个英文词组合而成，表示为多媒体数字信号解码器，专门负责模拟信号到数字信号的转换（ADC）以及数字信号到模拟信号的转换（DAC）工作。计算机声卡处理的信号全是数字信号，而声卡接收到的或者最终输出的信号大部份是模拟信号。从外办输入的信号，如CD、话筒等必须经过a/d转换后才能由声卡进行处理，然后又经过d/a转换后最终送入杨声器，被我们的耳朵所听到。因此Codec的质量直接决定着进出声卡的信号质量。</p>
+<p>声卡的工作流程：MIDI、数字输入、模拟输入等信号—&gt;通各种接口输入—&gt;由晶震产生采样频率给Codec进行模/数转换—&gt;交给DSP+I/O器进行信号处理和分配—&gt;再由DAC或Codec进行数/模转换—&gt;最后由放大电路放大—&gt;输出至模拟输出接口</p>
+<p>AC97（Audio Codec 97）：一种规范。</p>
+<p>Amplitude（增益/衰减）:对于一个音频信号进行放大（正增益），或者衰减（负增益），是DSP一个最基本的功能。而这些操作实质上就是对电流脉冲的增强和减小。在电路中，可以通过电阻实现这项功能。</p>
+<p>Filter（滤波器）：滤波器也是DSP的基础功能，所谓滤波器，就是过滤掉符合特定条件的声音，比如常见的频率滤波器。常见的频率滤波器包括低通滤波器（Low pass filter），高通滤波器(High pass filter)，带通滤波器(band pass filter)等。他们都是用来过滤掉特定的频率，比如低通滤波器。<br>低通滤波器，顾名思义就是让低频信号通过，而其他信号则被过滤掉，一般音响系统中习惯使用低通滤波器分离出单独的超重低音通道来，从而组成X.1系统。<br>高通滤波器，就是允许高频信号通过，而将其他信号拒之门外。<br>带通滤波器比较有意思，它会让需要的频段顺利通过，而阻止不需要的频段。<br>陷波滤波器（band reject filter）像一个倒置的带通滤波器，它会阻止需要的频段，而让不需要的频段顺利通过。<br>滤波器对于DSP的重要意义在于能够分离出不同的频段，从而进行相关的操作。</p>
+<p>震荡器：是一个产生波形的设备，它能够发出规则的或者循环的正弦波、方波、三角波和锯齿波。而这些波形拥有不同的用途，比如正弦波可以当作激励来使用。因此在音频数据中添加不同种类的波，就可以制造出各种绚丽的效果来，比如镶边等。</p>
+<p>Delay（延时）：所谓的延时，就是沿着时间轴移动音频数据，从而使得声音听起来要延后一些，在DSP中实现这项功能也是非常简单的。</p>
+<p>ADSR（音色包络）：震荡器产生波形后，如果不加以控制，则这些波形将会一直震荡下去，这当然不是我们需要的。因此，我们需要给波形加上起止的控制，这就是ADSR包络了。A代表Attack，指的是声音从开始发声到最大振幅的过程；D代表Decay，指的是声音从最大振幅开始衰减的一段；S指的是Sustain，指的是声音衰减到一定位置维持住的过程；R代表Release，指的是停止发声后到声音消失的过程。有了ADSR，我们就能够控制一个波形的起止位置，从而实现我们想要的效果。</p>
+<p>Gate门限：Gate应该算是计算机算法中的逻辑术语了。所谓门，就是按照一定的条件处理数据，符合条件的在门的一边，不符合条件的在门的另一边。门在DSP中主要用作按照条件对音频数据进行分离。</p>
+<p>EQ：被称为均衡(Equalizer)，是DSP必备的高档功能之一。EQ基本作用是通过对声音某一个或多个频段进行增益或衰减，达到调整音色的目的。当然，EQ还有一个显著的功能，降噪。因此对于声音的整体音色有着很大的影响。<br>EQ通过将声音中各频率的组成泛音等级加以修改，专为某一类音乐进行优化，增强人们的感觉。常见包括：正常、摇滚、流行、舞曲、古典、柔和、爵士、金属、重低音和自定义。<br>EQ通常包括如下参数：F(requency)，频率――这是用于设定你要进行调整的频率点用的参数；G(ain)，增益――用于调整在你设定好的F值上进行增益或衰减的参数；Q(uantize)――用于设定你要进行增益或衰减的频段“宽度”。要注意的一点是：当你设定的Q值越小的时候，你所处理的频段就越宽，而当你设定的Q值越大的时候，你所处理的频段就越窄。<br>从控制的方式来说，EQ有图形EQ和参量EQ两种。</p>
+<p>SRC：就是Sample Rate Convertor采样频率转换器，intel AC’97规范约定了声卡需要经过这样一个处理过程，即将所有信号重新转换成一个统一的采样率输出。SRC如果进行了非整数倍的转换的话，比如44100-&gt;48000，会有较大的噪声或者谐波出现，这些噪声因转换器的质量高低、算法好坏而定，不优秀的算法会比较严重的影响听感。既然SRC是一个可能破坏音质的过程，为什么会有这么一个产物呢？前面就说过，AC’97是为了节省成本而订，SRC的结果可以为声卡省下一颗Crystal。SRC一般都通过软件运算转换，这样受驱动版本的影响非常之大，例如Live!系列，SRC品质最好的是Windows Server2003 自带的驱动，也有使用硬件SRC的，例如：CS4630音频加速器。硬件SRC的品质往往大大优于软件的SRC，SRC品质的好坏的重要性甚至比Codec的档次更重要。</p>
+<p>Crystal：中文名就是石英晶体振荡器或者简称晶振。常见的声卡都支持44.1kHz和48kHz的信号输入。</p>
+<h3 id="混音技术介绍">0.0.6. 混音技术介绍</h3><p>混音，顾名思义，就是把两路或者多路音频流混合在一起，形成一路音频流。而混流，则是指音视频流的混合，也就是视频画面和声音的对齐，也称混流。</p>
+<p>并非任何两路音频流都可以直接混合。两路音视频流，必须符合以下条件才能混合：</p>
+<ul>
+<li>格式相同，要解压成 PCM 格式。</li>
+<li>采样率相同，要转换成相同的采样率。主流采样率包括：16k Hz、32k Hz、44.1k Hz 和 48k Hz。</li>
+<li>帧长相同，帧长由编码格式决定，PCM 没有帧长的概念，开发者自行决定帧长。为了和主流音频编码格式的帧长保持一致，推荐采用 20ms 为帧长。</li>
+<li>位深（Bit-Depth）或采样格式 (Sample Format) 相同，承载每个采样点数据的 bit 数目要相同。</li>
+<li>声道数相同，必须同样是单声道或者双声道 (立体声)。这样，把格式、采样率、帧长、位深和声道数对齐了以后，两个音频流就可以混合了。</li>
+</ul>
+<p>在混音之前，还需要做回声消除、噪音抑制和静音检测等处理。回声消除和噪音抑制属于语音前处理范畴的工作。在编码之前，采集、语音前处理、混音之前的处理、混音和混音之后的处理应该按顺序进行。静音抑制（VAD，Voice Activity Detect）可做可不做。对于终端混音，是要把采集到的主播声音和从音频文件中读到的伴奏声音混合。如果主播停顿一段时间不发出声音，通过 VAD 检测到了，那么这段时间不混音，直接采用伴奏音乐的数据就好了。然而，为了简单起见，也可以不做 VAD。主播不发声音的期间，继续做混音也可以（主播的声音为零振幅）</p>
+<h3 id="音频重采样">0.0.7. 音频重采样</h3><p>音频系统中可能存在多个音轨，而每个音轨的原始采样率可能是不一致的。比如在播放音乐的过程中，来了一个提示音，就需要把音乐和提示音都混合到codec输出，音乐的原始采样率和提示音的原始采样率可能是不一致的。问题来了，如果codec的采样率设置为音乐的原始采样率的话，那么提示音就会失真。因此最简单见效的解决方法是：codec的采样率固定一个值（44.1KHz/48KHz），所有音轨都重采样到这个采样率，然后才送到codec，保证所有音轨听起来都不失真。</p>
+<p>重采样即是将音频进行重新采样得到新的采样率的音频。</p>
+<h3 id="音频3A处理">0.0.8. 音频3A处理</h3><p>音频3A处理在不同的应用场景三者的处理顺序也不同，如在WebRTC中音频数据回依次经过AEC和NS（noise suppression） 或者 NS 与AECM（AECM 是WebRTC专门为移动端打造的算法，计算量低，而AEC 是为PC打造的）。而在AEC(回声消除算法)，为什么需要这个算法呢？当一个设备在播放声音经过空间中的多次反射会被麦克风再次捕捉并采集到系统当中，这时音频的输入既有空间反射的回声也有本端说话声，如果缺少此模块就意味着通话中说话人一直可以听到自己的声音回来，这是非常差的一种体验，这当然是需要我们避免的。这里AEC的作用就是通过播放的参考信号跟踪出回声并从采集信号中把回声消除掉，随后再经过降噪处理去除噪声。而其中的AECM是在NS模块之后通过获取clean与noise数据进行分析，AEC则是NS模块之前直接获取noise数据进行分析。</p>
+<p>音频数据完成AEC与NS的处理后会进行AGC处理，其包括AAGC（模拟域的自动增益控制）与DAGC（数字域的自动增益控制）。其中AAGC的主要作用是通过系统的采集音量设置接口调整输入信号（大多用于PC端，移动端一般没有输入音量的系统接口），如借助Windows上的的API调整采集音量等参数。AAGC可为输入的音频数据带来明显的质量优化，如提高信噪比，避免输入信号溢出等。但由于我们服务的跨平台要求，我们需要构建一个面向多平台设备的框架，在不同的输入平台和设备都会有不同的输入音量，DAGC可以根据对输入信号的跟踪，尽量的调整信号到达期望大小(幅值或能量)，从而避免不同设备采集带来的音量差异过大。完成AGC处理的音频数据，即可进入Audio Encode进行编码操作。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+
+  
+  
+  
+
+
+
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2021/05/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%99%BD%E5%A4%9C%E8%A1%8Cby%E4%B8%9C%E9%87%8E%E5%9C%AD%E5%90%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1025,365 +1280,6 @@
 
 
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="odcowl">
-      <meta itemprop="description" content="wechat odcowl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="odcowl的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/" class="post-title-link" itemprop="url">数据结构-链表</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-18 17:46:27" itemprop="dateCreated datePublished" datetime="2021-03-18T17:46:27+08:00">2021-03-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-20 01:55:05" itemprop="dateModified" datetime="2021-03-20T01:55:05+08:00">2021-03-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" itemprop="url" rel="index"><span itemprop="name">数据结构</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>此文为<a target="_blank" rel="noopener" href="https://leetcode-cn.com/leetbook/read/linked-list">链表</a>的学习笔记。</p>
-<h1 id="概述">1. 概述</h1><p>与数组相似，链表也是一种<code>线性</code>的数据结构，下图为单链表的例子：<br><img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-12-at-152754.png" class></p>
-<p>链表中的每一个元素实际上是一个单独的对象，而对象之间的链接，则是每个元素中的引用字段构造的。</p>
-<p>链表有两种类型：<code>单链表</code>和<code>双链表</code>，下图为双链表的例子：<br><img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-17-at-161130.png" class></p>
-<h1 id="单链表">2. 单链表</h1><p>单链表中的每个结点不仅包括<code>值</code>，还包括链接到下一个结点的<code>引用字段</code>。通过这种方式，单链表将所有结点按顺序组织起来。</p>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-12-at-152754.png" class>
-<p>如上图中的蓝色箭头则为链接结点的组合方式。</p>
-<p>在大多数情况下，我们将使用头结点（第一个结点）来表示整个列表。</p>
-<h2 id="与数组的不同处">2.1. 与数组的不同处</h2><p>与数组不同，<strong>我们无法在常量时间内访问单链表中的随机元素</strong>。</p>
-<p>如果我们想获得第i个元素，我们<strong>必须从头结点逐个遍历</strong>。我们按照<code>索引</code>来<code>访问元素</code>平均花费<code>O(N)</code>时间，其中N为链表的长度。</p>
-<p>所以，在通过索引访问数据时（与数组相比），性能不好。但是在操作和删除操作时，有链表的好处。</p>
-<h2 id="单链表的添加操作">2.2. 单链表的添加操作</h2><p>如果我们想在给定的结点prev之后添加新值，我们应该：</p>
-<ul>
-<li><p>使用给定值初始化新结点cur</p>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-25-at-163224.png" class>
-</li>
-<li><p>将cur的next字段链接到prev的下一结点next</p>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-25-at-163234.png" class>
-</li>
-<li><p>将prev中的next字段链接到cur</p>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-25-at-163243.png" class>
-</li>
-</ul>
-<p>与<strong>数组</strong>不同，我们不需要将元素移动到插入元素后。所以，我们可以在<code>O(1)</code>的时间复杂度将新结点插入到链表中，十分高效。</p>
-<h3 id="Python-实现（力扣自代的链表定义）">2.2.1. Python 实现（力扣自代的链表定义）</h3><h4 id="单链表添加">2.2.1.1. 单链表添加</h4><p>比如我们想在第二个结点6后插入一个新的值9。<br><img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-12-at-152754.png" class></p>
-<p>我们首先初始化一个值为9的新结点，将结点9链接到结点15，最后将结点6链接到结点9。<br><img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-12-at-154238.png" class></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print(head) </span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;</span></span><br><span class="line">cur = ListNode(9)</span><br><span class="line">cur.next = head.next.next</span><br><span class="line">head.next.next = cur</span><br><span class="line"><span class="comment"># print(head)</span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 9, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;&#125;</span></span><br></pre></td></tr></table></figure>
-<p>插入后的链表：<br><img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-12-at-154238.png" class></p>
-<h4 id="单链表在开头添加结点">2.2.1.2. 单链表在开头添加结点</h4><p>在链表中，我们使用头结点来表示整个列表。</p>
-<ul>
-<li><p>初始化一个新结点cur</p>
-</li>
-<li><p>将新结点链接到我们的原始头结点</p>
-</li>
-<li><p>将cur指定为head</p>
-</li>
-</ul>
-<p>例如，让我们在列表的开头添加一个新结点9。</p>
-<ol>
-<li>我们初始化一个新结点9并将其链接到当前头结点23。</li>
-</ol>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-19-at-125118.png" class>
-<ol>
-<li>指定结点9为新的头结点。</li>
-</ol>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-19-at-125350.png" class>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># print(head) </span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;</span></span><br><span class="line">cur = ListNode(9)</span><br><span class="line">cur.next = head</span><br><span class="line">head = cur</span><br><span class="line"><span class="comment"># print(head)</span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 9, next: ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;&#125;</span></span><br></pre></td></tr></table></figure>
-<h4 id="单链表在末尾添加结点">2.2.1.3. 单链表在末尾添加结点</h4><p>从<code>[23,6,15]</code>到<code>[23,6,15,9]</code>：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># print(head) </span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;</span></span><br><span class="line">cur = ListNode(9)</span><br><span class="line">dum = head</span><br><span class="line"><span class="keyword">while</span> head.next:</span><br><span class="line">    head = head.next</span><br><span class="line">head.next = cur</span><br><span class="line">head = dum</span><br><span class="line"><span class="comment"># print(head)</span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: ListNode&#123;val: 9, next: None&#125;&#125;&#125;&#125;</span></span><br></pre></td></tr></table></figure>
-<h2 id="单链表的删除操作">2.3. 单链表的删除操作</h2><h4 id="删除单链表中的一个结点">2.3.0.1. 删除单链表中的一个结点</h4><p>如果我们想从单链表中删除现有结点<code>cur</code>，可以分两步完成</p>
-<ul>
-<li>找到cur的上一个结点<code>prev</code>及其下一个结点<code>next</code>：</li>
-</ul>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-26-at-203558.png" class>
-<ul>
-<li>接下来链接<code>prev</code>到cur的下一个节点<code>next</code></li>
-</ul>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-26-at-203640.png" class>
-<p>在第一步中，我们需要找出<code>prev</code>和<code>next</code>，使用<code>cur</code>的参考字段很容易找出next，但是我们必须从头结点遍历链表以找出<code>prev</code>，它的平均时间是<code>O(N)</code>，其中N是链表的长度。因此，删除结点的时间复杂度将是<code>O(N)</code>。</p>
-<p>示例：</p>
-<p>尝试把结点6从链表中删去：</p>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/screen-shot-2018-04-12-at-152754.png" class>
-<ul>
-<li><p>从头遍历链表，直到我们找到前一个结点<code>prev</code>即结点23</p>
-</li>
-<li><p>将<code>prev</code>（结点23）与<code>next</code>（结点15）链接</p>
-</li>
-</ul>
-
-<p>另外一个更清晰的解释：</p>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/1613757478-NBOvjn-Picture1.png" class>
-<p>参考：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/shan-chu-lian-biao-de-jie-dian-lcof/solution/mian-shi-ti-18-shan-chu-lian-biao-de-jie-dian-sh-2/">18.删除链表的节点</a></p>
-<ul>
-<li>特例处理： 当应删除头节点 head 时，直接返回 head.next 即可。</li>
-<li>初始化： pre = head , cur = head.next 。</li>
-<li>定位节点： 当 cur 为空 或 cur 节点值等于 val 时跳出。</li>
-<li>保存当前节点索引，即 pre = cur 。</li>
-<li>遍历下一节点，即 cur = cur.next 。</li>
-<li>删除节点： 若 cur 指向某节点，则执行 pre.next = cur.next ；若 cur 指向 nullnull ，代表链表中不包含值为 val 的节点。</li>
-<li>返回值： 返回链表头部节点 head 即可。</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># print(head)</span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;</span></span><br><span class="line"><span class="keyword">if</span> head.val == val:</span><br><span class="line">    <span class="built_in">return</span> head.next</span><br><span class="line">pre, cur = head, head.next</span><br><span class="line"><span class="keyword">while</span> cur and cur.val != val:</span><br><span class="line">    pre, cur = cur, cur.next</span><br><span class="line"><span class="keyword">if</span> cur:</span><br><span class="line">    pre.next = cur.next</span><br><span class="line"><span class="built_in">return</span> head</span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 15, next: None&#125;&#125;</span></span><br></pre></td></tr></table></figure>
-<h4 id="删除链表头结点">2.3.0.2. 删除链表头结点</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># print(head)</span></span><br><span class="line"><span class="comment"># ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;</span></span><br><span class="line"><span class="keyword">if</span> head.val == val:</span><br><span class="line">    <span class="built_in">return</span> head.next</span><br><span class="line"><span class="comment"># ListNode&#123;ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;</span></span><br></pre></td></tr></table></figure>
-<h4 id="删除最后一个结点">2.3.0.3. 删除最后一个结点</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># head = ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: ListNode&#123;val: 15, next: None&#125;&#125;&#125;</span></span><br><span class="line">dummy = pre = head</span><br><span class="line"><span class="keyword">while</span> pre.next.next:</span><br><span class="line">    pre = pre.next</span><br><span class="line">pre.next = None</span><br><span class="line"><span class="built_in">return</span> dummy </span><br><span class="line"><span class="comment"># dummy = ListNode&#123;val: 23, next: ListNode&#123;val: 6, next: None&#125;&#125;</span></span><br></pre></td></tr></table></figure>
-<h1 id="单链表中的快慢指针技巧">3. 单链表中的快慢指针技巧</h1><p>在<strong>链表</strong>题目中，有两种使用双指针的情景</p>
-<ul>
-<li>两个指针<code>从不同位置出发</code>：一个从始端开始，一个从末端开始</li>
-<li>两个指针<code>以不同速度移动</code>：一个指针快些，一个指针慢些</li>
-</ul>
-<p>但对于单链表来说，我们只能在一个方向上遍历链表，所以第一种场景无法实现。第二种情况，也称为快慢指针，是非常有用的。</p>
-<h2 id="题目1-环形链表">3.1. 题目1: 环形链表</h2><p>LeetCode原题<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/linked-list-cycle/">141.环形链表</a></p>
-<p>给定一个链表，判断链表中是否有环。</p>
-<p>如果链表中有某个节点，可以通过连续跟踪 next 指针再次到达，则链表中存在环。 为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。注意：pos 不作为参数进行传递，仅仅是为了标识链表的实际情况。</p>
-<p>如果链表中存在环，则返回 true 。 否则，返回 false 。</p>
-<p>进阶：<br>你能用 O(1)（即，常量）内存解决此问题吗？</p>
-<p>示例1:<br><img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/circularlinkedlist.png" class></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [3,2,0,-4], pos = 1</span><br><span class="line">输出：<span class="literal">true</span></span><br><span class="line">解释：链表中有一个环，其尾部连接到第二个节点。</span><br></pre></td></tr></table></figure>
-<p>示例2:<br><img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/circularlinkedlist_test2.png" class></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2], pos = 0</span><br><span class="line">输出：<span class="literal">true</span></span><br><span class="line">解释：链表中有一个环，其尾部连接到第一个节点。</span><br></pre></td></tr></table></figure>
-<p>示例3:<br><img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/circularlinkedlist_test3.png" class></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1], pos = -1</span><br><span class="line">输出：<span class="literal">false</span></span><br><span class="line">解释：链表中没有环。</span><br></pre></td></tr></table></figure>
-<p>提示：</p>
-<ul>
-<li>链表中节点的数目范围是 [0, 10^4]</li>
-<li>-10^5 &lt;= Node.val &lt;= 10^5</li>
-<li>pos 为 -1 或者链表中的一个 有效索引。</li>
-</ul>
-<h3 id="解法1-set集合遍历链表法">3.1.1. 解法1: set集合遍历链表法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def hasCycle(self, head):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> not head:</span><br><span class="line">            <span class="built_in">return</span> None</span><br><span class="line">        </span><br><span class="line">        s = <span class="built_in">set</span>()</span><br><span class="line">        node = head</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (node):</span><br><span class="line">            <span class="keyword">if</span> node <span class="keyword">in</span> s:</span><br><span class="line">                <span class="built_in">return</span> True</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                s.add(node)</span><br><span class="line">            node = node.next</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> False</span><br></pre></td></tr></table></figure>
-<h3 id="解法2-双指针法（龟兔赛跑）">3.1.2. 解法2: 双指针法（龟兔赛跑）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def hasCycle(self, head):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> not head:</span><br><span class="line">            <span class="built_in">return</span> None</span><br><span class="line">        </span><br><span class="line">        fastnode = head</span><br><span class="line">        slownode = head</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> (fastnode):</span><br><span class="line">            <span class="keyword">if</span> fastnode.next and fastnode.next.next:</span><br><span class="line">                fastnode = fastnode.next.next</span><br><span class="line">                slownode = slownode.next</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="built_in">return</span> False</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> fastnode == slownode:</span><br><span class="line">                <span class="built_in">return</span> True</span><br><span class="line"></span><br><span class="line">        <span class="built_in">return</span> False</span><br></pre></td></tr></table></figure>
-<h3 id="解法3-哈希表（字典）法">3.1.3. 解法3: 哈希表（字典）法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def hasCycle(self, head):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        m = dict()</span><br><span class="line">        <span class="keyword">while</span> head:</span><br><span class="line">            <span class="keyword">if</span> m.get(head):</span><br><span class="line">                <span class="built_in">return</span> True</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                m[head] = 1</span><br><span class="line">            head = head.next</span><br><span class="line">        <span class="built_in">return</span> False</span><br></pre></td></tr></table></figure>
-<h3 id="解法4-链表计数法（牛逼）">3.1.4. 解法4: 链表计数法（牛逼）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def hasCycle(self, head):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :rtype: bool</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        </span><br><span class="line">        count = 0</span><br><span class="line">        <span class="keyword">while</span> head and count &lt;= 10000:</span><br><span class="line">            count += 1</span><br><span class="line">            head = head.next</span><br><span class="line">        <span class="built_in">return</span> count&gt;10000</span><br></pre></td></tr></table></figure>
-<h2 id="题目2：-环形链表2">3.2. 题目2： 环形链表2</h2><p>给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。</p>
-<p>为了表示给定链表中的环，我们使用整数 pos 来表示链表尾连接到链表中的位置（索引从 0 开始）。 如果 pos 是 -1，则在该链表中没有环。注意，pos 仅仅是用于标识环的情况，并不会作为参数传递到函数中。</p>
-<p>说明：不允许修改给定的链表。</p>
-<p>进阶：<br>你是否可以使用 O(1) 空间解决此题？</p>
-<p>示例1:</p>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [3,2,0,-4], pos = 1</span><br><span class="line">输出：返回索引为 1 的链表节点</span><br><span class="line">解释：链表中有一个环，其尾部连接到第二个节点。</span><br></pre></td></tr></table></figure>
-<p>示例2:</p>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/circularlinkedlist_test2.png" class>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2], pos = 0</span><br><span class="line">输出：返回索引为 0 的链表节点</span><br><span class="line">解释：链表中有一个环，其尾部连接到第一个节点。</span><br></pre></td></tr></table></figure>
-<p>示例3:</p>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/circularlinkedlist_test3.png" class>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1], pos = -1</span><br><span class="line">输出：返回 null</span><br><span class="line">解释：链表中没有环。</span><br></pre></td></tr></table></figure>
-<p>提示：</p>
-<ul>
-<li>链表中节点的数目范围在范围 [0, 10^4] 内</li>
-<li>-10^5 &lt;= Node.val &lt;= 10^5</li>
-<li>pos 的值为 -1 或者链表中的一个有效索引</li>
-</ul>
-<h3 id="解法">3.2.1. 解法</h3><p>与<code>环形链表</code>这道题不同之处在于，前者只需要判断链表是否有环，现在需要判断环的入口在哪里。</p>
-<p>参考:<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/linked-list-cycle-ii/solution/142-huan-xing-lian-biao-ii-jian-hua-gong-shi-jia-2/">代码随想录</a></p>
-<p>Ps这个解释的数学推导无比清晰，视频也无比优秀</p>
-<p>假设从头结点到环形入口结点的结数为<code>x</code>， 环形入口到fast/slow指针相遇的结点结数为y，从相遇结点到环形入欧结点结数为z，如图所示：</p>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/3be69ecc0e8948a5c0d74edfaed34d3eb92768ab781c1516bf00e618621eda66-142%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A82.png" class>
-<p>那么<strong>相遇时</strong>：</p>
-<p>slow指针走过的结点数为：x + y</p>
-<p>fast指针走过的结点数为：x + y + n(y+z), 其中n为fast指针在环内走了n圈才遇到slow指针，(y + z) 为一圈内结点的个数</p>
-<p>fast指针一步走两个结点，slow指针一步走一个结点，所以fast指针走过的结点数 = 2 * slow指针走过的结点数</p>
-<p><code>(x + y) * 2 = x + y + n (y + z)</code></p>
-<p>两边消掉一个<code>（x+y）: x + y = n (y + z)</code></p>
-<p>因为我们要找环形的入口，那么要求的是x，因为x表示 头结点到 环形入口节点的的距离。</p>
-<p>所以我们要求x ，将x单独放在左面：x = n (y + z) - y</p>
-<p>在从n(y+z)中提出一个 （y+z）来，整理公式之后为如下公式：x = (n - 1) (y + z) + z 注意这里n一定是大于等于1的，因为 fast指针至少要多走一圈才能相遇slow指针</p>
-<p>这个公式说明什么呢，</p>
-<p>先拿n为1的情况来举例，意味着fast指针在环形里转了一圈之后，就遇到了 slow指针了。</p>
-<p>当 n为1的时候，公式就化解为 x = z</p>
-<p>这就意味着，从头结点出发一个指针，从相遇节点 也出发一个指针，这两个指针每次只走一个节点， 那么当这两个指针相遇的时候就是 环形入口的节点</p>
-<p>也就是在相遇节点处，定义一个指针index1，在头结点处定一个指针index2。</p>
-<p>让index1和index2同时移动，每次移动一个节点， 那么他们相遇的地方就是 环形入口的节点。</p>
-<p>那么 n如果大于1是什么情况呢，就是fast指针在环形转n圈之后才遇到 slow指针。</p>
-<p>其实这种情况和n为1的时候 效果是一样的，一样可以通过这个方法找到 环形的入口节点，只不过，index1 指针在环里 多转了(n-1)圈，然后再遇到index2，相遇点依然是环形的入口节点。</p>
-<p>在参考链接里的动画解释很好。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution:</span><br><span class="line">    def detectCycle(self, head: ListNode) -&gt; ListNode:</span><br><span class="line">        slow, fast = head, head</span><br><span class="line">        <span class="keyword">while</span> fast and fast.next:</span><br><span class="line">            slow = slow.next</span><br><span class="line">            fast = fast.next.next</span><br><span class="line">            <span class="comment"># 如果相遇</span></span><br><span class="line">            <span class="keyword">if</span> slow == fast:</span><br><span class="line">                p = head</span><br><span class="line">                q = slow</span><br><span class="line">                <span class="keyword">while</span> p!=q:</span><br><span class="line">                    p = p.next</span><br><span class="line">                    q = q.next</span><br><span class="line">                <span class="comment">#你也可以return q</span></span><br><span class="line">                <span class="built_in">return</span> p</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> None</span><br></pre></td></tr></table></figure>
-<h2 id="题目3-相交链表">3.3. 题目3: 相交链表</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">160.相交链表</a></p>
-<p>编写一个程序，找到两个单链表相交的起始节点。</p>
-<p>如下面的两个链表：</p>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/160_statement.png" class>
-<p>示例1:</p>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/160_example_1.png" class>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 8, listA = [4,1,8,4,5], listB = [5,0,1,8,4,5], skipA = 2, skipB = 3</span><br><span class="line">输出：Reference of the node with value = 8</span><br><span class="line">输入解释：相交节点的值为 8 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [4,1,8,4,5]，链表 B 为 [5,0,1,8,4,5]。在 A 中，相交节点前有 2 个节点；在 B 中，相交节点前有 3 个节点。</span><br></pre></td></tr></table></figure>
-<p>示例2:</p>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/160_example_2.png" class>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal &#x3D; 2, listA &#x3D; [0,9,1,2,4], listB &#x3D; [3,2,4], skipA &#x3D; 3, skipB &#x3D; 1</span><br><span class="line">输出：Reference of the node with value &#x3D; 2</span><br><span class="line">输入解释：相交节点的值为 2 （注意，如果两个链表相交则不能为 0）。从各自的表头开始算起，链表 A 为 [0,9,1,2,4]，链表 B 为 [3,2,4]。在 A 中，相交节点前有 3 个节点；在 B 中，相交节点前有 1 个节点。</span><br></pre></td></tr></table></figure>
-<p>示例3:</p>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/160_example_3.png" class>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">输入：intersectVal = 0, listA = [2,6,4], listB = [1,5], skipA = 3, skipB = 2</span><br><span class="line">输出：null</span><br><span class="line">输入解释：从各自的表头开始算起，链表 A 为 [2,6,4]，链表 B 为 [1,5]。由于这两个链表不相交，所以 intersectVal 必须为 0，而 skipA 和 skipB 可以是任意值。</span><br><span class="line">解释：这两个链表不相交，因此返回 null。</span><br></pre></td></tr></table></figure>
-<p>注意：</p>
-<ul>
-<li>如果两个链表没有交点，返回 null.</li>
-<li>在返回结果后，两个链表仍须保持原有的结构。</li>
-<li>可假定整个链表结构中没有循环。</li>
-<li>程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。</li>
-</ul>
-<h3 id="解法-1">3.3.1. 解法</h3><p>参考：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/solution/jiao-ni-yong-lang-man-de-fang-shi-zhao-dao-liang-2/">派派</a></p>
-<p>分别为链表A和链表B设置指针A和指针B，然后开始遍历链表，如果遍历完当前链表，则将指针指向另外一个链表的头部继续遍历，直至两个指针相遇。<br>最终两个指针分别走过的路径为：<br>指针A :a+c+b<br>指针B :b+c+a<br>明显 a+c+b = b+c+a,因而如果两个链表相交，则指针A和指针B必定在相交结点相遇。</p>
-<img src="/2021/03/18/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84-%E9%93%BE%E8%A1%A8/lianbiao.png" class>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def getIntersectionNode(self, headA, headB):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type head1, head1: ListNode</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> not headA or not headB:</span><br><span class="line">            <span class="built_in">return</span> None</span><br><span class="line"></span><br><span class="line">        nodeA, nodeB = headA, headB</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> (nodeA != nodeB):</span><br><span class="line">            nodeA = nodeA.next <span class="keyword">if</span> nodeA <span class="keyword">else</span> headB</span><br><span class="line">            nodeB = nodeB.next <span class="keyword">if</span> nodeB <span class="keyword">else</span> headA</span><br><span class="line">            </span><br><span class="line">        <span class="built_in">return</span> nodeA</span><br></pre></td></tr></table></figure>
-<h2 id="题目4-删除链表的倒数第N个结点">3.4. 题目4: 删除链表的倒数第N个结点</h2><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/">19.删除链表的倒数第N个结点</a></p>
-<p>给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。</p>
-<p>进阶：你能尝试使用一趟扫描实现吗？</p>
-<p>示例1:</p>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5], n = 2</span><br><span class="line">输出：[1,2,3,5]</span><br></pre></td></tr></table></figure>
-<p>示例2:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1], n = 1</span><br><span class="line">输出：[]</span><br></pre></td></tr></table></figure>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2], n = 1</span><br><span class="line">输出：[1]</span><br></pre></td></tr></table></figure></p>
-<h3 id="解法：">3.4.1. 解法：</h3><p>参考：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/remove-nth-node-from-end-of-list/solution/chao-ke-ai-dong-hua-jiao-ni-ru-he-shan-chu-lian-bi/">派派</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line">class Solution(object):</span><br><span class="line">    def removeNthFromEnd(self, head, n):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :type n: int</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">if</span> not head:</span><br><span class="line">            <span class="built_in">return</span> head</span><br><span class="line">        </span><br><span class="line">        slownode = ListNode(0)</span><br><span class="line">        slownode.next = head</span><br><span class="line"></span><br><span class="line">        fastnode = slownode</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            fastnode = fastnode.next</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> fastnode.next != None:</span><br><span class="line">            slownode = slownode.next</span><br><span class="line">            fastnode = fastnode.next</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> slownode.next == head:</span><br><span class="line">            head = head.next</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            slownode.next = slownode.next.next</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> head</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-  
-  
-  
-
-
-
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="odcowl">
-      <meta itemprop="description" content="wechat odcowl">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="odcowl的个人博客">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/" class="post-title-link" itemprop="url">92.反转链表2(Medium)-未掌握</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-18 11:55:07" itemprop="dateCreated datePublished" datetime="2021-03-18T11:55:07+08:00">2021-03-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-22 01:23:27" itemprop="dateModified" datetime="2021-05-22T01:23:27+08:00">2021-05-22</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/LeetCode/" itemprop="url" rel="index"><span itemprop="name">LeetCode</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>LeetCode每日一题(2021.03.18)之<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/reverse-linked-list-ii/">反转链表2</a></p>
-<p>给你单链表的头指针 head 和两个整数 left 和 right ，其中 left &lt;= right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。</p>
-<p>示例1:</p>
-<img src="/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/rev2ex2.jpeg" class>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5], left = 2, right = 4</span><br><span class="line">输出：[1,4,3,2,5]</span><br></pre></td></tr></table></figure>
-<p>示例2:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">输入：head = [5], left = 1, right = 1</span><br><span class="line">输出：[5]</span><br></pre></td></tr></table></figure>
-<p><strong>提示</strong>：</p>
-<ul>
-<li>链表中节点数目为 n</li>
-<li>1 &lt;= n &lt;= 500</li>
-<li>-500 &lt;= Node.val &lt;= 500</li>
-<li>1 &lt;= left &lt;= right &lt;= n</li>
-</ul>
-<p><strong>进阶</strong>：<br>你可以使用一趟扫描完成反转吗？</p>
-<h3 id="解法">0.0.1. 解法</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line">class Solution(object):</span><br><span class="line">    def reverseBetween(self, head, left, right):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :type left: int</span></span><br><span class="line"><span class="string">        :type right: int</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        count = 1</span><br><span class="line">        </span><br><span class="line">        dummy = ListNode(0)</span><br><span class="line">        dummy.next = head</span><br><span class="line">        </span><br><span class="line">        pre = dummy</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> pre.next and count &lt; left:</span><br><span class="line">            pre = pre.next</span><br><span class="line">            count += 1</span><br><span class="line"></span><br><span class="line">        cur = pre.next</span><br><span class="line">        tail = cur</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> cur and count &lt;= right:</span><br><span class="line">            nxt = cur.next</span><br><span class="line">            cur.next = pre.next</span><br><span class="line">            pre.next = cur</span><br><span class="line">            tail.next = nxt</span><br><span class="line">            cur = nxt</span><br><span class="line">            count += 1</span><br><span class="line">        <span class="built_in">return</span> dummy.next</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-
-  
-  
-  
-
-
-
-
 
   
   <nav class="pagination">
@@ -1454,7 +1350,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives">
-          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1513,7 +1409,7 @@
 
 <div class="theme-info">
   <div class="powered-by"></div>
-  <span class="post-count">博客全站共34k字</span>
+  <span class="post-count">博客全站共34.7k字</span>
 </div>
 
         

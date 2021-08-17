@@ -83,45 +83,6 @@
       </tags>
   </entry>
   <entry>
-    <title>1052.爱生气的书店老板(Medium)</title>
-    <url>/2021/02/26/1052-%E7%88%B1%E7%94%9F%E6%B0%94%E7%9A%84%E4%B9%A6%E5%BA%97%E8%80%81%E6%9D%BF-Medium/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.02.23)之<a href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/">爱生气的书店老板</a><br>难度：中等</p>
-<h3 id="一、题目">0.0.1. 一、题目</h3><p>今天，书店老板有一家店打算试营业<code>customers.length</code>分钟。每分钟都有一些顾客<code>customers[i]</code>会进入书店，所有这些顾客都会在那一分钟结束后离开。</p>
-<p>在某些时候，书店老板会生气。 如果书店老板在第<code>i</code>分钟生气，那么<code>grumpy[i] = 1</code>，否则<code>grumpy[i] = 0</code>。 当书店老板生气时，那一分钟的顾客就会不满意，不生气则他们是满意的。</p>
-<p>书店老板知道一个秘密技巧，能抑制自己的情绪，可以让自己连续<code>X</code>分钟不生气，但却只能使用一次。</p>
-<p>请你返回这一天营业下来，最多有多少客户能够感到满意的数量。</p>
-<h4 id="示例">0.0.1.1. 示例</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：customers = [1,0,1,2,1,1,7,5], grumpy = [0,1,0,1,0,1,0,1], X = 3</span><br><span class="line">输出：16</span><br><span class="line">解释：</span><br><span class="line">书店老板在最后 3 分钟保持冷静。</span><br><span class="line">感到满意的最大客户数量 = 1 + 1 + 1 + 1 + 7 + 5 = 16.</span><br></pre></td></tr></table></figure>
-<h4 id="提示">0.0.1.2. 提示</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1 &lt;&#x3D; X &lt;&#x3D; customers.length &#x3D;&#x3D; grumpy.length &lt;&#x3D; 20000</span><br><span class="line">0 &lt;&#x3D; customers[i] &lt;&#x3D; 1000</span><br><span class="line">0 &lt;&#x3D; grumpy[i] &lt;&#x3D; 1</span><br></pre></td></tr></table></figure>
-<h3 id="二、我的解法">0.0.2. 二、我的解法</h3><p>我的第一个想法是利用暴力解法。（渣</p>
-<p>通过按顺序替换<code>grumpy</code>里不生气的日期，再把每个新的<code>grumpy</code>和<code>customers</code>点乘求和，保存满意客户的最大数量。注意，<code>grumpy</code>和<code>customers</code>点乘前，需要注意把<code>0（不生气）</code>替换成<code>1</code>，把<code>1（生气）</code>替换成<code>0</code>，这样才能使用点乘。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type customers: List[int]</span></span><br><span class="line"><span class="string">        :type grumpy: List[int]</span></span><br><span class="line"><span class="string">        :type X: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment">#滑动窗口</span></span><br><span class="line">        res = 0</span><br><span class="line">        <span class="comment">#先将grumpy里的1和0替换，方便后面点乘</span></span><br><span class="line">        <span class="comment">#1:不生气，服务客户 0:生气，去你娘滴</span></span><br><span class="line">        grumpy = [1-i <span class="keyword">for</span> i <span class="keyword">in</span> grumpy]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(grumpy)-X+1):</span><br><span class="line">            grumpy_now = grumpy[:i] + [1]*X + grumpy[i+X:]</span><br><span class="line">            <span class="comment">#satis：满意度列表</span></span><br><span class="line">            satis = map(lambda x,y:x*y, grumpy_now, customers)</span><br><span class="line">            <span class="comment">#保留最大res</span></span><br><span class="line">            res = max(res,sum(satis))</span><br><span class="line"></span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure><br>但是这个解法只ac了<code>73/38</code>，查看发现是那种非常长的列表无法通过。</p>
-<h3 id="滑动窗口算法">0.0.3. 滑动窗口算法</h3><p>引用思路来自: <a href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/solution/yong-mi-mi-ji-qiao-wan-liu-zhu-zui-duo-d-py41/">负雪明烛</a></p>
-<p>依然是<code>滑动窗口</code>的思路。</p>
-<h4 id="1-解题思路">0.0.3.1. 1.解题思路</h4><ul>
-<li>将题目分为两部分，第一部分是不做出任何改变会留下的顾客origin，第二部分是每一个<code>不生气窗口X</code>的可以留下的本被赶走的客户数increse。</li>
-<li>得到的客户总数就是 origin + max(increse)</li>
-</ul>
-<p>按照这个思路，我又自己写了一遍代码，<code>ac100%</code>了但是执行用时5.06%…<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type customers: List[int]</span><br><span class="line">        :type grumpy: List[int]</span><br><span class="line">        :type X: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        #滑动窗口</span><br><span class="line">        increase &#x3D; 0</span><br><span class="line">        origin &#x3D; sum(map(lambda x,y:x*y, [1-i for i in grumpy], customers))</span><br><span class="line">        </span><br><span class="line">        for i in range(len(grumpy)-X+1):</span><br><span class="line">            grumpy_now, customers_now &#x3D; grumpy[i:i+X],customers[i:i+X]</span><br><span class="line">            satis &#x3D; 0</span><br><span class="line">            for j in range(len(grumpy_now)):</span><br><span class="line">                if grumpy_now[j] &#x3D;&#x3D; 1:</span><br><span class="line">                    satis +&#x3D; customers_now[j]</span><br><span class="line">            increase &#x3D; max(increase,satis)</span><br><span class="line">        return origin + increase</span><br></pre></td></tr></table></figure><br>所以接下来是我学习上方参考链接的做题方法写的<code>ac100%</code>，248ms(82.24%), 15MB(47.72%)<br>总体分为：</p>
-<ol>
-<li>算毫无作为时满意的客户数量 origin</li>
-<li>算滑动窗口X带来的改变 通过curValue的最大值resValue</li>
-</ol>
-<ul>
-<li>算前X个格子</li>
-<li>算第X到len(grumpy)个格子</li>
-</ul>
-<ol>
-<li>得到结果为origin+resValue<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type customers: List[int]</span><br><span class="line">        :type grumpy: List[int]</span><br><span class="line">        :type X: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        </span><br><span class="line">        #第一步: 计算不做任何改变，满意客户的数量</span><br><span class="line">        origin &#x3D; sum(map(lambda x,y:x*y, [1-i for i in grumpy], customers))</span><br><span class="line">        </span><br><span class="line">        #第二步：计算滑动窗口里可以增加满意客户的数量</span><br><span class="line">        # 2.1 先计算前X个格子的值</span><br><span class="line">        curValue &#x3D; 0</span><br><span class="line">        for i in range(X):</span><br><span class="line">            if grumpy[i] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue +&#x3D; customers[i]</span><br><span class="line">        resValue &#x3D; curValue</span><br><span class="line">        # 2.2 开始向右滑————————————</span><br><span class="line">        for i in range(X,len(grumpy)):</span><br><span class="line">            #先验证左边（左边滑出的那个格子）是否在生气，如果在生气，需要在curValue剪掉</span><br><span class="line">            if grumpy[i-X] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue -&#x3D; customers[i-X]</span><br><span class="line">            #再验证右边（右边新增的那个格子）是否在生气，如果在生气，需要在curValue加上</span><br><span class="line">            if grumpy[i] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue +&#x3D; customers[i]</span><br><span class="line">            #判断当下curValue和史上最大curValue的关系</span><br><span class="line">            resValue &#x3D; max(resValue,curValue)</span><br><span class="line">        </span><br><span class="line">        return origin + resValue</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>滑动窗口</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>1239.串联字符串的最大长度</title>
     <url>/2021/06/18/1239-%E4%B8%B2%E8%81%94%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%9C%80%E5%A4%A7%E9%95%BF%E5%BA%A6/</url>
     <content><![CDATA[<p>LeetCode每日一题之<a href="https://leetcode-cn.com/problems/maximum-length-of-a-concatenated-string-with-unique-characters/">串联字符串的最大长度</a>.<br>难度：中等</p>
@@ -206,6 +167,45 @@
       </tags>
   </entry>
   <entry>
+    <title>1052.爱生气的书店老板(Medium)</title>
+    <url>/2021/02/26/1052-%E7%88%B1%E7%94%9F%E6%B0%94%E7%9A%84%E4%B9%A6%E5%BA%97%E8%80%81%E6%9D%BF-Medium/</url>
+    <content><![CDATA[<p>力扣每日一题系列(2021.02.23)之<a href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/">爱生气的书店老板</a><br>难度：中等</p>
+<h3 id="一、题目">0.0.1. 一、题目</h3><p>今天，书店老板有一家店打算试营业<code>customers.length</code>分钟。每分钟都有一些顾客<code>customers[i]</code>会进入书店，所有这些顾客都会在那一分钟结束后离开。</p>
+<p>在某些时候，书店老板会生气。 如果书店老板在第<code>i</code>分钟生气，那么<code>grumpy[i] = 1</code>，否则<code>grumpy[i] = 0</code>。 当书店老板生气时，那一分钟的顾客就会不满意，不生气则他们是满意的。</p>
+<p>书店老板知道一个秘密技巧，能抑制自己的情绪，可以让自己连续<code>X</code>分钟不生气，但却只能使用一次。</p>
+<p>请你返回这一天营业下来，最多有多少客户能够感到满意的数量。</p>
+<h4 id="示例">0.0.1.1. 示例</h4><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：customers = [1,0,1,2,1,1,7,5], grumpy = [0,1,0,1,0,1,0,1], X = 3</span><br><span class="line">输出：16</span><br><span class="line">解释：</span><br><span class="line">书店老板在最后 3 分钟保持冷静。</span><br><span class="line">感到满意的最大客户数量 = 1 + 1 + 1 + 1 + 7 + 5 = 16.</span><br></pre></td></tr></table></figure>
+<h4 id="提示">0.0.1.2. 提示</h4><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">1 &lt;&#x3D; X &lt;&#x3D; customers.length &#x3D;&#x3D; grumpy.length &lt;&#x3D; 20000</span><br><span class="line">0 &lt;&#x3D; customers[i] &lt;&#x3D; 1000</span><br><span class="line">0 &lt;&#x3D; grumpy[i] &lt;&#x3D; 1</span><br></pre></td></tr></table></figure>
+<h3 id="二、我的解法">0.0.2. 二、我的解法</h3><p>我的第一个想法是利用暴力解法。（渣</p>
+<p>通过按顺序替换<code>grumpy</code>里不生气的日期，再把每个新的<code>grumpy</code>和<code>customers</code>点乘求和，保存满意客户的最大数量。注意，<code>grumpy</code>和<code>customers</code>点乘前，需要注意把<code>0（不生气）</code>替换成<code>1</code>，把<code>1（生气）</code>替换成<code>0</code>，这样才能使用点乘。<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type customers: List[int]</span></span><br><span class="line"><span class="string">        :type grumpy: List[int]</span></span><br><span class="line"><span class="string">        :type X: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment">#滑动窗口</span></span><br><span class="line">        res = 0</span><br><span class="line">        <span class="comment">#先将grumpy里的1和0替换，方便后面点乘</span></span><br><span class="line">        <span class="comment">#1:不生气，服务客户 0:生气，去你娘滴</span></span><br><span class="line">        grumpy = [1-i <span class="keyword">for</span> i <span class="keyword">in</span> grumpy]</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(grumpy)-X+1):</span><br><span class="line">            grumpy_now = grumpy[:i] + [1]*X + grumpy[i+X:]</span><br><span class="line">            <span class="comment">#satis：满意度列表</span></span><br><span class="line">            satis = map(lambda x,y:x*y, grumpy_now, customers)</span><br><span class="line">            <span class="comment">#保留最大res</span></span><br><span class="line">            res = max(res,sum(satis))</span><br><span class="line"></span><br><span class="line">        <span class="built_in">return</span> res</span><br></pre></td></tr></table></figure><br>但是这个解法只ac了<code>73/38</code>，查看发现是那种非常长的列表无法通过。</p>
+<h3 id="滑动窗口算法">0.0.3. 滑动窗口算法</h3><p>引用思路来自: <a href="https://leetcode-cn.com/problems/grumpy-bookstore-owner/solution/yong-mi-mi-ji-qiao-wan-liu-zhu-zui-duo-d-py41/">负雪明烛</a></p>
+<p>依然是<code>滑动窗口</code>的思路。</p>
+<h4 id="1-解题思路">0.0.3.1. 1.解题思路</h4><ul>
+<li>将题目分为两部分，第一部分是不做出任何改变会留下的顾客origin，第二部分是每一个<code>不生气窗口X</code>的可以留下的本被赶走的客户数increse。</li>
+<li>得到的客户总数就是 origin + max(increse)</li>
+</ul>
+<p>按照这个思路，我又自己写了一遍代码，<code>ac100%</code>了但是执行用时5.06%…<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type customers: List[int]</span><br><span class="line">        :type grumpy: List[int]</span><br><span class="line">        :type X: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        #滑动窗口</span><br><span class="line">        increase &#x3D; 0</span><br><span class="line">        origin &#x3D; sum(map(lambda x,y:x*y, [1-i for i in grumpy], customers))</span><br><span class="line">        </span><br><span class="line">        for i in range(len(grumpy)-X+1):</span><br><span class="line">            grumpy_now, customers_now &#x3D; grumpy[i:i+X],customers[i:i+X]</span><br><span class="line">            satis &#x3D; 0</span><br><span class="line">            for j in range(len(grumpy_now)):</span><br><span class="line">                if grumpy_now[j] &#x3D;&#x3D; 1:</span><br><span class="line">                    satis +&#x3D; customers_now[j]</span><br><span class="line">            increase &#x3D; max(increase,satis)</span><br><span class="line">        return origin + increase</span><br></pre></td></tr></table></figure><br>所以接下来是我学习上方参考链接的做题方法写的<code>ac100%</code>，248ms(82.24%), 15MB(47.72%)<br>总体分为：</p>
+<ol>
+<li>算毫无作为时满意的客户数量 origin</li>
+<li>算滑动窗口X带来的改变 通过curValue的最大值resValue</li>
+</ol>
+<ul>
+<li>算前X个格子</li>
+<li>算第X到len(grumpy)个格子</li>
+</ul>
+<ol>
+<li>得到结果为origin+resValue<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def maxSatisfied(self, customers, grumpy, X):</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        :type customers: List[int]</span><br><span class="line">        :type grumpy: List[int]</span><br><span class="line">        :type X: int</span><br><span class="line">        :rtype: int</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        </span><br><span class="line">        #第一步: 计算不做任何改变，满意客户的数量</span><br><span class="line">        origin &#x3D; sum(map(lambda x,y:x*y, [1-i for i in grumpy], customers))</span><br><span class="line">        </span><br><span class="line">        #第二步：计算滑动窗口里可以增加满意客户的数量</span><br><span class="line">        # 2.1 先计算前X个格子的值</span><br><span class="line">        curValue &#x3D; 0</span><br><span class="line">        for i in range(X):</span><br><span class="line">            if grumpy[i] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue +&#x3D; customers[i]</span><br><span class="line">        resValue &#x3D; curValue</span><br><span class="line">        # 2.2 开始向右滑————————————</span><br><span class="line">        for i in range(X,len(grumpy)):</span><br><span class="line">            #先验证左边（左边滑出的那个格子）是否在生气，如果在生气，需要在curValue剪掉</span><br><span class="line">            if grumpy[i-X] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue -&#x3D; customers[i-X]</span><br><span class="line">            #再验证右边（右边新增的那个格子）是否在生气，如果在生气，需要在curValue加上</span><br><span class="line">            if grumpy[i] &#x3D;&#x3D; 1:</span><br><span class="line">                curValue +&#x3D; customers[i]</span><br><span class="line">            #判断当下curValue和史上最大curValue的关系</span><br><span class="line">            resValue &#x3D; max(resValue,curValue)</span><br><span class="line">        </span><br><span class="line">        return origin + resValue</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>滑动窗口</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>224.基本计算器(Hard)</title>
     <url>/2021/03/09/224-%E5%9F%BA%E6%9C%AC%E8%AE%A1%E7%AE%97%E5%99%A8-Hard/</url>
     <content><![CDATA[<p>每日一题系列(2021.03.10)之<a href="https://leetcode-cn.com/problems/basic-calculator/">基本计算器</a><br>难度：困难</p>
@@ -266,6 +266,59 @@
       <tags>
         <tag>栈</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>395.至少有K个重复字符的最长子串(Medium)</title>
+    <url>/2021/02/27/395-%E8%87%B3%E5%B0%91%E6%9C%89K%E4%B8%AA%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2-Medium/</url>
+    <content><![CDATA[<p>力扣每日一题系列(2021.02.27)之<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/">至少有K个重复字符的最长子串</a><br>难度:中等</p>
+<h3 id="一、题目">0.0.1. 一、题目</h3><p>给你一个字符串<code>s</code>和一个整数<code>k</code>,请你找出<code>s</code>中的最长子串,要求该子串中的每一字符出现次数都不少于<code>k</code>.返回这一子串的长度.</p>
+<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;aaabb&quot;</span>, k = 3</span><br><span class="line">输出：3</span><br><span class="line">解释：最长子串为 <span class="string">&quot;aaa&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure></p>
+<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;ababbc&quot;</span>, k = 2</span><br><span class="line">输出：5</span><br><span class="line">解释：最长子串为 <span class="string">&quot;ababb&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 2 次， <span class="string">&#x27;b&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure></p>
+<p>提示:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 104</span><br><span class="line">s 仅由小写英文字母组成</span><br><span class="line">1 &lt;= k &lt;= 105</span><br></pre></td></tr></table></figure></p>
+<h3 id="我的解法-30-31ac">0.0.2. 我的解法(30/31ac)</h3><p>我的想法是先设定一个判断用的函数<code>issubstring</code>用于判断每一个我截取下来的子串,在这个func里,通过<code>哈希表</code>的方法来判断字符重复次数是否大于k,如果全部大于,返回<code>True</code>否则返回<code>False</code>.</p>
+<p>同是判断两个边缘条件: 1)如果整个字符串为<code>True</code>,那就不经过下面的小循环,直接返回<code>len(s)</code> 2)如果<code>k</code>的数量大于<code>len(s)</code>那不可能满足,返回0.</p>
+<p>在接下来的循环中,具体细节如下图:<br></p>
+<p>但是其中<code>continue</code>这个想法是错误的,比如当下的substring可能不是符合条件的,但是后续补充了一些字符之后有可能这个substring是符合的,所以这种简化方法不可取,感觉这道题的用例并不是非常完全,最后这段代码只是遇到了特别长的用例时出现了时间问题,但没有遇到我提到的这个问题.</p>
+<p>接下来是这段代码:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        def issubstring(s,k):</span><br><span class="line">            m = &#123;&#125;</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> s:</span><br><span class="line">                <span class="keyword">if</span> char <span class="keyword">in</span> m:</span><br><span class="line">                    m[char] += 1</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    m[char] = 1</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> m:</span><br><span class="line">                <span class="keyword">if</span> m[char]&lt;k:</span><br><span class="line">                    <span class="built_in">return</span> False</span><br><span class="line">            <span class="built_in">return</span> True</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> issubstring(s,k):</span><br><span class="line">            <span class="built_in">return</span> len(s)</span><br><span class="line">        <span class="keyword">elif</span> k &gt; len(s):</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line"></span><br><span class="line">        maxlen = 0</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+k-1,len(s)):</span><br><span class="line">                subs = s[i:j+1]</span><br><span class="line">                <span class="comment">#print(subs)</span></span><br><span class="line">                <span class="keyword">if</span> issubstring(subs,k):</span><br><span class="line">                    maxlen = max(maxlen,len(subs))</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment">#这个continue的想法是错误的</span></span><br><span class="line">                    <span class="built_in">continue</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> maxlen</span><br></pre></td></tr></table></figure></p>
+<h3 id="递归做法">0.0.3. 递归做法</h3><p>依然是参考了<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/solution/jie-ben-ti-bang-zhu-da-jia-li-jie-di-gui-obla/">负雪明烛</a>的解析,这个递归我一开始有想到过,用split的方法反复切割,但是自己思路不好,就换成了上面那种做法,而且递归我一直学习的很差,得加把劲啊.</p>
+<p>先上她的原版代码:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="keyword">if</span> len(s) &lt; k:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">set</span>(s):</span><br><span class="line">            <span class="keyword">if</span> s.count(c) &lt; k:</span><br><span class="line">                <span class="built_in">return</span> max(self.longestSubstring(t, k) <span class="keyword">for</span> t <span class="keyword">in</span> s.split(c))</span><br><span class="line">        <span class="built_in">return</span> len(s)</span><br></pre></td></tr></table></figure><br>接下来整理整理思路:</p>
+<ul>
+<li>递归的重点: 牢记递归函数的输入输出是什么(这里的输入是字符串,限定条件是<code>k</code>,输出是满足条件的最长字符子串长度)</li>
+<li>递归的终止条件: 如果<code>字符串s</code>的长度小于<code>k</code>,那么一定不存在符合条件的子串,直接返回0</li>
+<li>递归的调用法则: 如果一个<code>字符c</code>在<code>s</code>中出现的次数少于<code>k次</code>,那么所有包含<code>字符c</code>的子字符串一定不符合规定.所以,应该通过某种方法将<code>字符c</code>排除在外,方法:把<code>s</code>按照<code>字符c</code>分割(分割后的每一个子串都不包含<code>字符c</code>),得到很多<code>子串t</code>. 而得到的<code>t</code>,就是未来的<code>s&#39;</code>. 下一步,<code>不含字符c的子串们t</code>就是作为<code>longestSubstring(s, k)</code>的新输入,大问题分割为了小问题,形成递归.</li>
+<li>未进入递归即返回结果的情况: 如果<code>s</code>中的每个字符都满足大于<code>重复次数k</code>次的这个条件,那么直接返回<code>len(s)</code>.</li>
+</ul>
+<p>复杂度分析:</p>
+<ul>
+<li>时间复杂度: O(N*26*26) 因为函数最多执行26次(小写的26个英语字符),for循环遍历一遍是26个字符,循环里面对s分割时间的复杂度为O(N)</li>
+<li>空间复杂度: O(26*26), 函数执行26次,每次开辟26个字符的set空间</li>
+</ul>
+<p>读聪明人的代码就是茅塞顿开的感觉,特别喜欢这个刷题姐姐的讲解</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>递归</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>451.根据字符出现频率排序</title>
+    <url>/2021/07/03/451-%E6%A0%B9%E6%8D%AE%E5%AD%97%E7%AC%A6%E5%87%BA%E7%8E%B0%E9%A2%91%E7%8E%87%E6%8E%92%E5%BA%8F/</url>
+    <content><![CDATA[<p>LeetCode每日一题之<a href="https://leetcode-cn.com/problems/sort-characters-by-frequency/">451.根据字符出现频率排序</a>。</p>
+<p>今天这题比较简单，周六愉快</p>
+<p>给定一个字符串，请将字符串里的字符按照出现的频率降序排列。</p>
+<h3 id="题目">0.0.1. 题目</h3><p>示例 1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;tree&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;eert&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line"><span class="string">&#x27;e&#x27;</span>出现两次，<span class="string">&#x27;r&#x27;</span>和<span class="string">&#x27;t&#x27;</span>都只出现一次。</span><br><span class="line">因此<span class="string">&#x27;e&#x27;</span>必须出现在<span class="string">&#x27;r&#x27;</span>和<span class="string">&#x27;t&#x27;</span>之前。此外，<span class="string">&quot;eetr&quot;</span>也是一个有效的答案。</span><br></pre></td></tr></table></figure></p>
+<p>示例 2:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;cccaaa&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;cccaaa&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line"><span class="string">&#x27;c&#x27;</span>和<span class="string">&#x27;a&#x27;</span>都出现三次。此外，<span class="string">&quot;aaaccc&quot;</span>也是有效的答案。</span><br><span class="line">注意<span class="string">&quot;cacaca&quot;</span>是不正确的，因为相同的字母必须放在一起。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>示例 3:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;Aabb&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;bbAa&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line">此外，<span class="string">&quot;bbaA&quot;</span>也是一个有效的答案，但<span class="string">&quot;Aabb&quot;</span>是不正确的。</span><br><span class="line">注意<span class="string">&#x27;A&#x27;</span>和<span class="string">&#x27;a&#x27;</span>被认为是两种不同的字符。</span><br></pre></td></tr></table></figure>
+<h3 id="我的解法">0.0.2. 我的解法</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def frequencySort(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 哈希表</span></span><br><span class="line">        d = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> not ch <span class="keyword">in</span> d:</span><br><span class="line">                d[ch] = 1</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                d[ch] += 1</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 把字典按value的大小从大到小排序</span></span><br><span class="line">        a = sorted(d.items(), key=lambda x: x[1], reverse=True)</span><br><span class="line">        </span><br><span class="line">        res = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> aa <span class="keyword">in</span> a:</span><br><span class="line">            <span class="comment"># 小坑：出现多次的字母需要+=多次</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(aa[1]):</span><br><span class="line">                res += str(aa[0])</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>但是因为相当于最多遍历了两次字典，时间还是比较慢的<br>平平无奇小代码吧。。</p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
   </entry>
   <entry>
     <title>227.基本计算器2(Medium)</title>
@@ -356,53 +409,52 @@
       </tags>
   </entry>
   <entry>
-    <title>395.至少有K个重复字符的最长子串(Medium)</title>
-    <url>/2021/02/27/395-%E8%87%B3%E5%B0%91%E6%9C%89K%E4%B8%AA%E9%87%8D%E5%A4%8D%E5%AD%97%E7%AC%A6%E7%9A%84%E6%9C%80%E9%95%BF%E5%AD%90%E4%B8%B2-Medium/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.02.27)之<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/">至少有K个重复字符的最长子串</a><br>难度:中等</p>
-<h3 id="一、题目">0.0.1. 一、题目</h3><p>给你一个字符串<code>s</code>和一个整数<code>k</code>,请你找出<code>s</code>中的最长子串,要求该子串中的每一字符出现次数都不少于<code>k</code>.返回这一子串的长度.</p>
-<p>示例1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;aaabb&quot;</span>, k = 3</span><br><span class="line">输出：3</span><br><span class="line">解释：最长子串为 <span class="string">&quot;aaa&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：s = <span class="string">&quot;ababbc&quot;</span>, k = 2</span><br><span class="line">输出：5</span><br><span class="line">解释：最长子串为 <span class="string">&quot;ababb&quot;</span> ，其中 <span class="string">&#x27;a&#x27;</span> 重复了 2 次， <span class="string">&#x27;b&#x27;</span> 重复了 3 次。</span><br></pre></td></tr></table></figure></p>
-<p>提示:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">1 &lt;= s.length &lt;= 104</span><br><span class="line">s 仅由小写英文字母组成</span><br><span class="line">1 &lt;= k &lt;= 105</span><br></pre></td></tr></table></figure></p>
-<h3 id="我的解法-30-31ac">0.0.2. 我的解法(30/31ac)</h3><p>我的想法是先设定一个判断用的函数<code>issubstring</code>用于判断每一个我截取下来的子串,在这个func里,通过<code>哈希表</code>的方法来判断字符重复次数是否大于k,如果全部大于,返回<code>True</code>否则返回<code>False</code>.</p>
-<p>同是判断两个边缘条件: 1)如果整个字符串为<code>True</code>,那就不经过下面的小循环,直接返回<code>len(s)</code> 2)如果<code>k</code>的数量大于<code>len(s)</code>那不可能满足,返回0.</p>
-<p>在接下来的循环中,具体细节如下图:<br></p>
-<p>但是其中<code>continue</code>这个想法是错误的,比如当下的substring可能不是符合条件的,但是后续补充了一些字符之后有可能这个substring是符合的,所以这种简化方法不可取,感觉这道题的用例并不是非常完全,最后这段代码只是遇到了特别长的用例时出现了时间问题,但没有遇到我提到的这个问题.</p>
-<p>接下来是这段代码:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        def issubstring(s,k):</span><br><span class="line">            m = &#123;&#125;</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> s:</span><br><span class="line">                <span class="keyword">if</span> char <span class="keyword">in</span> m:</span><br><span class="line">                    m[char] += 1</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    m[char] = 1</span><br><span class="line">            <span class="keyword">for</span> char <span class="keyword">in</span> m:</span><br><span class="line">                <span class="keyword">if</span> m[char]&lt;k:</span><br><span class="line">                    <span class="built_in">return</span> False</span><br><span class="line">            <span class="built_in">return</span> True</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> issubstring(s,k):</span><br><span class="line">            <span class="built_in">return</span> len(s)</span><br><span class="line">        <span class="keyword">elif</span> k &gt; len(s):</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line"></span><br><span class="line">        maxlen = 0</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(s)):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+k-1,len(s)):</span><br><span class="line">                subs = s[i:j+1]</span><br><span class="line">                <span class="comment">#print(subs)</span></span><br><span class="line">                <span class="keyword">if</span> issubstring(subs,k):</span><br><span class="line">                    maxlen = max(maxlen,len(subs))</span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    <span class="comment">#这个continue的想法是错误的</span></span><br><span class="line">                    <span class="built_in">continue</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> maxlen</span><br></pre></td></tr></table></figure></p>
-<h3 id="递归做法">0.0.3. 递归做法</h3><p>依然是参考了<a href="https://leetcode-cn.com/problems/longest-substring-with-at-least-k-repeating-characters/solution/jie-ben-ti-bang-zhu-da-jia-li-jie-di-gui-obla/">负雪明烛</a>的解析,这个递归我一开始有想到过,用split的方法反复切割,但是自己思路不好,就换成了上面那种做法,而且递归我一直学习的很差,得加把劲啊.</p>
-<p>先上她的原版代码:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def longestSubstring(self, s, k):</span><br><span class="line">        <span class="keyword">if</span> len(s) &lt; k:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br><span class="line">        <span class="keyword">for</span> c <span class="keyword">in</span> <span class="built_in">set</span>(s):</span><br><span class="line">            <span class="keyword">if</span> s.count(c) &lt; k:</span><br><span class="line">                <span class="built_in">return</span> max(self.longestSubstring(t, k) <span class="keyword">for</span> t <span class="keyword">in</span> s.split(c))</span><br><span class="line">        <span class="built_in">return</span> len(s)</span><br></pre></td></tr></table></figure><br>接下来整理整理思路:</p>
+    <title>692.前K个高频单词(Medium)</title>
+    <url>/2021/05/21/692-%E5%89%8DK%E4%B8%AA%E9%AB%98%E9%A2%91%E5%8D%95%E8%AF%8D-Medium/</url>
+    <content><![CDATA[<p>LeetCode每日一题(2021.05.20)之<a href="https://leetcode-cn.com/problems/top-k-frequent-words/">前k个高频单词</a><br>难度: 中等</p>
+<p>给一非空的单词列表，返回前 k 个出现次数最多的单词。</p>
+<p>返回的答案应该按单词出现频率由高到低排序。如果不同的单词有相同出现频率，按字母顺序排序。</p>
+<p>示例1：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: [<span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>, <span class="string">&quot;leetcode&quot;</span>, <span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>, <span class="string">&quot;coding&quot;</span>], k = 2</span><br><span class="line">输出: [<span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>]</span><br><span class="line">解析: <span class="string">&quot;i&quot;</span> 和 <span class="string">&quot;love&quot;</span> 为出现次数最多的两个单词，均为2次。</span><br><span class="line">    注意，按字母顺序 <span class="string">&quot;i&quot;</span> 在 <span class="string">&quot;love&quot;</span> 之前。</span><br></pre></td></tr></table></figure></p>
+<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: [<span class="string">&quot;the&quot;</span>, <span class="string">&quot;day&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;sunny&quot;</span>, <span class="string">&quot;the&quot;</span>, <span class="string">&quot;the&quot;</span>, <span class="string">&quot;the&quot;</span>, <span class="string">&quot;sunny&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;is&quot;</span>], k = 4</span><br><span class="line">输出: [<span class="string">&quot;the&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;sunny&quot;</span>, <span class="string">&quot;day&quot;</span>]</span><br><span class="line">解析: <span class="string">&quot;the&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;sunny&quot;</span> 和 <span class="string">&quot;day&quot;</span> 是出现次数最多的四个单词，</span><br><span class="line">    出现次数依次为 4, 3, 2 和 1 次。</span><br></pre></td></tr></table></figure></p>
+<p>注意：</p>
 <ul>
-<li>递归的重点: 牢记递归函数的输入输出是什么(这里的输入是字符串,限定条件是<code>k</code>,输出是满足条件的最长字符子串长度)</li>
-<li>递归的终止条件: 如果<code>字符串s</code>的长度小于<code>k</code>,那么一定不存在符合条件的子串,直接返回0</li>
-<li>递归的调用法则: 如果一个<code>字符c</code>在<code>s</code>中出现的次数少于<code>k次</code>,那么所有包含<code>字符c</code>的子字符串一定不符合规定.所以,应该通过某种方法将<code>字符c</code>排除在外,方法:把<code>s</code>按照<code>字符c</code>分割(分割后的每一个子串都不包含<code>字符c</code>),得到很多<code>子串t</code>. 而得到的<code>t</code>,就是未来的<code>s&#39;</code>. 下一步,<code>不含字符c的子串们t</code>就是作为<code>longestSubstring(s, k)</code>的新输入,大问题分割为了小问题,形成递归.</li>
-<li>未进入递归即返回结果的情况: 如果<code>s</code>中的每个字符都满足大于<code>重复次数k</code>次的这个条件,那么直接返回<code>len(s)</code>.</li>
+<li>假定 k 总为有效值， 1 ≤ k ≤ 集合元素数。</li>
+<li>输入的单词均由小写字母组成。</li>
 </ul>
-<p>复杂度分析:</p>
-<ul>
-<li>时间复杂度: O(N*26*26) 因为函数最多执行26次(小写的26个英语字符),for循环遍历一遍是26个字符,循环里面对s分割时间的复杂度为O(N)</li>
-<li>空间复杂度: O(26*26), 函数执行26次,每次开辟26个字符的set空间</li>
-</ul>
-<p>读聪明人的代码就是茅塞顿开的感觉,特别喜欢这个刷题姐姐的讲解</p>
+<h3 id="解析">0.0.1. 解析</h3><p>利用双字典排列：</p>
+<ol>
+<li>第一次排列：自带工具collections.Counter计算给出列表words里每一个单词的出现顺序</li>
+<li>第二次排列：按照词频（从大到小）和单词顺序（从小到大）的方式排序，利用lambda</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def topKFrequent(self, words, k):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type words: List[str]</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: List[str]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment">#双排列</span></span><br><span class="line"></span><br><span class="line">        dic = collections.Counter(words)  <span class="comment">#计算词频</span></span><br><span class="line">        res = sorted(dic,key = lambda word:(-dic[word],word)) <span class="comment">#词频倒序，字母正序</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res[:k]</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>LeetCode</category>
       </categories>
-      <tags>
-        <tag>递归</tag>
-      </tags>
   </entry>
   <entry>
-    <title>451.根据字符出现频率排序</title>
-    <url>/2021/07/03/451-%E6%A0%B9%E6%8D%AE%E5%AD%97%E7%AC%A6%E5%87%BA%E7%8E%B0%E9%A2%91%E7%8E%87%E6%8E%92%E5%BA%8F/</url>
-    <content><![CDATA[<p>LeetCode每日一题之<a href="https://leetcode-cn.com/problems/sort-characters-by-frequency/">451.根据字符出现频率排序</a>。</p>
-<p>今天这题比较简单，周六愉快</p>
-<p>给定一个字符串，请将字符串里的字符按照出现的频率降序排列。</p>
-<h3 id="题目">0.0.1. 题目</h3><p>示例 1:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;tree&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;eert&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line"><span class="string">&#x27;e&#x27;</span>出现两次，<span class="string">&#x27;r&#x27;</span>和<span class="string">&#x27;t&#x27;</span>都只出现一次。</span><br><span class="line">因此<span class="string">&#x27;e&#x27;</span>必须出现在<span class="string">&#x27;r&#x27;</span>和<span class="string">&#x27;t&#x27;</span>之前。此外，<span class="string">&quot;eetr&quot;</span>也是一个有效的答案。</span><br></pre></td></tr></table></figure></p>
-<p>示例 2:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;cccaaa&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;cccaaa&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line"><span class="string">&#x27;c&#x27;</span>和<span class="string">&#x27;a&#x27;</span>都出现三次。此外，<span class="string">&quot;aaaccc&quot;</span>也是有效的答案。</span><br><span class="line">注意<span class="string">&quot;cacaca&quot;</span>是不正确的，因为相同的字母必须放在一起。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>示例 3:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入:</span><br><span class="line"><span class="string">&quot;Aabb&quot;</span></span><br><span class="line"></span><br><span class="line">输出:</span><br><span class="line"><span class="string">&quot;bbAa&quot;</span></span><br><span class="line"></span><br><span class="line">解释:</span><br><span class="line">此外，<span class="string">&quot;bbaA&quot;</span>也是一个有效的答案，但<span class="string">&quot;Aabb&quot;</span>是不正确的。</span><br><span class="line">注意<span class="string">&#x27;A&#x27;</span>和<span class="string">&#x27;a&#x27;</span>被认为是两种不同的字符。</span><br></pre></td></tr></table></figure>
-<h3 id="我的解法">0.0.2. 我的解法</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def frequencySort(self, s):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type s: str</span></span><br><span class="line"><span class="string">        :rtype: str</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment"># 哈希表</span></span><br><span class="line">        d = &#123;&#125;</span><br><span class="line">        <span class="keyword">for</span> ch <span class="keyword">in</span> s:</span><br><span class="line">            <span class="keyword">if</span> not ch <span class="keyword">in</span> d:</span><br><span class="line">                d[ch] = 1</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                d[ch] += 1</span><br><span class="line">        </span><br><span class="line">        <span class="comment"># 把字典按value的大小从大到小排序</span></span><br><span class="line">        a = sorted(d.items(), key=lambda x: x[1], reverse=True)</span><br><span class="line">        </span><br><span class="line">        res = <span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="keyword">for</span> aa <span class="keyword">in</span> a:</span><br><span class="line">            <span class="comment"># 小坑：出现多次的字母需要+=多次</span></span><br><span class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(aa[1]):</span><br><span class="line">                res += str(aa[0])</span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>但是因为相当于最多遍历了两次字典，时间还是比较慢的<br>平平无奇小代码吧。。</p>
+    <title>7.整数反转(Easy)</title>
+    <url>/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/</url>
+    <content><![CDATA[<p>LeetCode之<a href="https://leetcode-cn.com/problems/reverse-integer/">整数反转</a><br>难度：简单</p>
+<h3 id="一、题目">0.0.1. 一、题目</h3><p>给你一个 32 位的有符号整数 x ，返回 x 中每位上的数字反转后的结果。</p>
+<p>如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。</p>
+<p>假设环境不允许存储 64 位整数（有符号或无符号）。</p>
+<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：x = 123</span><br><span class="line">输出：321</span><br></pre></td></tr></table></figure></p>
+<p>示例 2：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：x &#x3D; -123</span><br><span class="line">输出：-321</span><br></pre></td></tr></table></figure></p>
+<p>示例 3：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：x = 120</span><br><span class="line">输出：21</span><br></pre></td></tr></table></figure></p>
+<p>示例 4：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：x = 0</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure></p>
+<p>提示：</p>
+<p><code>-2**31 &lt;= x &lt;= 2**31 - 1</code></p>
+<h3 id="二、我的解法">0.0.2. 二、我的解法</h3><p><code>24ms, 83.28%; 12.9MB, 76.51%</code></p>
+<p>因为在Python里，<code>int</code>没有长度，所以将其转换为<code>str</code>来获得其长度信息，代码很简单，主要是为了在第三部分学习他人<strong>简洁的代码</strong>。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def reverse(self, x):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type x: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        flag = False</span><br><span class="line">        <span class="keyword">if</span> x &lt; 0:</span><br><span class="line">            flag = True</span><br><span class="line">            x = -x</span><br><span class="line">        </span><br><span class="line">        n = len(str(x))</span><br><span class="line">        res = 0</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i,ch <span class="keyword">in</span> enumerate(str(x)[::-1]):</span><br><span class="line">            res += int(ch) * (10 ** (n-i-1))</span><br><span class="line"></span><br><span class="line">        res = -res <span class="keyword">if</span> flag <span class="keyword">else</span> res</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> -2**31&lt;res&lt;2**31-1:</span><br><span class="line">            <span class="built_in">return</span> res</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br></pre></td></tr></table></figure>
+<h3 id="三、他人的解法">0.0.3. 三、他人的解法</h3><p>如下参考<a href="https://leetcode-cn.com/problems/reverse-integer/solution/jin-tian-xiao-bai-jie-ti-ta-lai-liao-by-cuive/">Will</a></p>
+ <img src="/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/1610776376-AunReA-%E6%95%B0%E5%AD%97%E5%8F%8D%E8%BD%AC.jpeg" class>
+<p>例子：1234 =&gt; 4321</p>
+<p>这是一个4位的数字，个位数转换后变成了千位，十位变成了百位…</p>
+<p>但是在这道题中，输入数字x的大小无法确定</p>
+<p>思路为每次截取x的最后一位，按照倍数变化操作，通过while来完成</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">	def reverse(self, x):</span><br><span class="line">		a = 0</span><br><span class="line">		<span class="keyword">while</span> x!=0:</span><br><span class="line">			<span class="keyword">if</span> x&gt;0:</span><br><span class="line">				a=a*10+x%10</span><br><span class="line">				x = x//10</span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				a=a*10+x%-10</span><br><span class="line">				x = -(x//-10)</span><br><span class="line">		<span class="built_in">return</span> a if-2**31&lt;a&lt;2**31-1 <span class="keyword">else</span> 0</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>LeetCode</category>
@@ -467,102 +519,6 @@
       </categories>
       <tags>
         <tag>打印矩阵</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>692.前K个高频单词(Medium)</title>
-    <url>/2021/05/21/692-%E5%89%8DK%E4%B8%AA%E9%AB%98%E9%A2%91%E5%8D%95%E8%AF%8D-Medium/</url>
-    <content><![CDATA[<p>LeetCode每日一题(2021.05.20)之<a href="https://leetcode-cn.com/problems/top-k-frequent-words/">前k个高频单词</a><br>难度: 中等</p>
-<p>给一非空的单词列表，返回前 k 个出现次数最多的单词。</p>
-<p>返回的答案应该按单词出现频率由高到低排序。如果不同的单词有相同出现频率，按字母顺序排序。</p>
-<p>示例1：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: [<span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>, <span class="string">&quot;leetcode&quot;</span>, <span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>, <span class="string">&quot;coding&quot;</span>], k = 2</span><br><span class="line">输出: [<span class="string">&quot;i&quot;</span>, <span class="string">&quot;love&quot;</span>]</span><br><span class="line">解析: <span class="string">&quot;i&quot;</span> 和 <span class="string">&quot;love&quot;</span> 为出现次数最多的两个单词，均为2次。</span><br><span class="line">    注意，按字母顺序 <span class="string">&quot;i&quot;</span> 在 <span class="string">&quot;love&quot;</span> 之前。</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入: [<span class="string">&quot;the&quot;</span>, <span class="string">&quot;day&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;sunny&quot;</span>, <span class="string">&quot;the&quot;</span>, <span class="string">&quot;the&quot;</span>, <span class="string">&quot;the&quot;</span>, <span class="string">&quot;sunny&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;is&quot;</span>], k = 4</span><br><span class="line">输出: [<span class="string">&quot;the&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;sunny&quot;</span>, <span class="string">&quot;day&quot;</span>]</span><br><span class="line">解析: <span class="string">&quot;the&quot;</span>, <span class="string">&quot;is&quot;</span>, <span class="string">&quot;sunny&quot;</span> 和 <span class="string">&quot;day&quot;</span> 是出现次数最多的四个单词，</span><br><span class="line">    出现次数依次为 4, 3, 2 和 1 次。</span><br></pre></td></tr></table></figure></p>
-<p>注意：</p>
-<ul>
-<li>假定 k 总为有效值， 1 ≤ k ≤ 集合元素数。</li>
-<li>输入的单词均由小写字母组成。</li>
-</ul>
-<h3 id="解析">0.0.1. 解析</h3><p>利用双字典排列：</p>
-<ol>
-<li>第一次排列：自带工具collections.Counter计算给出列表words里每一个单词的出现顺序</li>
-<li>第二次排列：按照词频（从大到小）和单词顺序（从小到大）的方式排序，利用lambda</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def topKFrequent(self, words, k):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type words: List[str]</span></span><br><span class="line"><span class="string">        :type k: int</span></span><br><span class="line"><span class="string">        :rtype: List[str]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        <span class="comment">#双排列</span></span><br><span class="line"></span><br><span class="line">        dic = collections.Counter(words)  <span class="comment">#计算词频</span></span><br><span class="line">        res = sorted(dic,key = lambda word:(-dic[word],word)) <span class="comment">#词频倒序，字母正序</span></span><br><span class="line">        </span><br><span class="line">        <span class="built_in">return</span> res[:k]</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>7.整数反转(Easy)</title>
-    <url>/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/</url>
-    <content><![CDATA[<p>LeetCode之<a href="https://leetcode-cn.com/problems/reverse-integer/">整数反转</a><br>难度：简单</p>
-<h3 id="一、题目">0.0.1. 一、题目</h3><p>给你一个 32 位的有符号整数 x ，返回 x 中每位上的数字反转后的结果。</p>
-<p>如果反转后整数超过 32 位的有符号整数的范围 [−231,  231 − 1] ，就返回 0。</p>
-<p>假设环境不允许存储 64 位整数（有符号或无符号）。</p>
-<p>示例 1：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：x = 123</span><br><span class="line">输出：321</span><br></pre></td></tr></table></figure></p>
-<p>示例 2：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">输入：x &#x3D; -123</span><br><span class="line">输出：-321</span><br></pre></td></tr></table></figure></p>
-<p>示例 3：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：x = 120</span><br><span class="line">输出：21</span><br></pre></td></tr></table></figure></p>
-<p>示例 4：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：x = 0</span><br><span class="line">输出：0</span><br></pre></td></tr></table></figure></p>
-<p>提示：</p>
-<p><code>-2**31 &lt;= x &lt;= 2**31 - 1</code></p>
-<h3 id="二、我的解法">0.0.2. 二、我的解法</h3><p><code>24ms, 83.28%; 12.9MB, 76.51%</code></p>
-<p>因为在Python里，<code>int</code>没有长度，所以将其转换为<code>str</code>来获得其长度信息，代码很简单，主要是为了在第三部分学习他人<strong>简洁的代码</strong>。</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def reverse(self, x):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type x: int</span></span><br><span class="line"><span class="string">        :rtype: int</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        flag = False</span><br><span class="line">        <span class="keyword">if</span> x &lt; 0:</span><br><span class="line">            flag = True</span><br><span class="line">            x = -x</span><br><span class="line">        </span><br><span class="line">        n = len(str(x))</span><br><span class="line">        res = 0</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span> i,ch <span class="keyword">in</span> enumerate(str(x)[::-1]):</span><br><span class="line">            res += int(ch) * (10 ** (n-i-1))</span><br><span class="line"></span><br><span class="line">        res = -res <span class="keyword">if</span> flag <span class="keyword">else</span> res</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> -2**31&lt;res&lt;2**31-1:</span><br><span class="line">            <span class="built_in">return</span> res</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">return</span> 0</span><br></pre></td></tr></table></figure>
-<h3 id="三、他人的解法">0.0.3. 三、他人的解法</h3><p>如下参考<a href="https://leetcode-cn.com/problems/reverse-integer/solution/jin-tian-xiao-bai-jie-ti-ta-lai-liao-by-cuive/">Will</a></p>
- <img src="/2021/03/10/7-%E6%95%B4%E6%95%B0%E5%8F%8D%E8%BD%AC-Easy/1610776376-AunReA-%E6%95%B0%E5%AD%97%E5%8F%8D%E8%BD%AC.jpeg" class>
-<p>例子：1234 =&gt; 4321</p>
-<p>这是一个4位的数字，个位数转换后变成了千位，十位变成了百位…</p>
-<p>但是在这道题中，输入数字x的大小无法确定</p>
-<p>思路为每次截取x的最后一位，按照倍数变化操作，通过while来完成</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">	def reverse(self, x):</span><br><span class="line">		a = 0</span><br><span class="line">		<span class="keyword">while</span> x!=0:</span><br><span class="line">			<span class="keyword">if</span> x&gt;0:</span><br><span class="line">				a=a*10+x%10</span><br><span class="line">				x = x//10</span><br><span class="line">			<span class="keyword">else</span>:</span><br><span class="line">				a=a*10+x%-10</span><br><span class="line">				x = -(x//-10)</span><br><span class="line">		<span class="built_in">return</span> a if-2**31&lt;a&lt;2**31-1 <span class="keyword">else</span> 0</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>856.转置矩阵(Easy)</title>
-    <url>/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/</url>
-    <content><![CDATA[<p>力扣每日一题系列(2021.02.25)之<a href="https://leetcode-cn.com/problems/transpose-matrix/">转置矩阵</a><br>难度：简单</p>
-<h2 id="一、题目">0.1. 一、题目</h2><p>给你一个二维整数数组 matrix， 返回 matrix 的 转置矩阵 。<br>矩阵的 转置 是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p>
-<p><img src="https://assets.leetcode.com/uploads/2021/02/10/hint_transpose.png" alt="867.转置矩阵"></p>
-<h3 id="示例">0.1.1. 示例</h3><p>示例1:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ 输入: matrix&#x3D;[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">$ 输出: [[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure></p>
-<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">m == matrix.length</span><br><span class="line">n == matrix[i].length</span><br><span class="line">1 &lt;= m, n &lt;= 1000</span><br><span class="line">1 &lt;= m * n &lt;= 105</span><br><span class="line">-10^9 &lt;= matrix[i][j] &lt;= 10^9</span><br></pre></td></tr></table></figure></p>
-<h3 id="我的解法">0.1.2. 我的解法</h3><p>转置矩阵即将M行N列的矩阵，转换成N行M列的矩阵，注意有可能N和M并不相等，所以必须要新建一个result矩阵（否则可能会出现out of range的情况）</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def transpose(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        m,n = len(matrix),len(matrix[0])</span><br><span class="line">        <span class="comment">#m为行数，n为列数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#不需要numpy的矩阵建造方法</span></span><br><span class="line">        new_matrix = [[0 <span class="keyword">for</span> i <span class="keyword">in</span> range(m)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                new_matrix[i][j] = matrix[j][i]</span><br><span class="line">        <span class="built_in">return</span> new_matrix</span><br></pre></td></tr></table></figure>
-<p>这道题的意思就是原来的每一行转换成了后来的每一列，为了数学关系上更清晰，下面图片为解析。可以看出，对于一个相同的元素，新地址（坐标）和旧地址（坐标）就是横纵轴交换的关系：<br><img src="/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/jiexi.png" class title="This is an example image"></p>
-<p>一个错误的思路：（这个思路就是没有考虑到新矩阵的大小关系）<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">	for j in range(i,m):</span><br><span class="line">		matrix[i][j], matrix[j][i] &#x3D;  matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure></p>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>92.反转链表2(Medium)-未掌握</title>
-    <url>/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/</url>
-    <content><![CDATA[<p>LeetCode每日一题(2021.03.18)之<a href="https://leetcode-cn.com/problems/reverse-linked-list-ii/">反转链表2</a></p>
-<p>给你单链表的头指针 head 和两个整数 left 和 right ，其中 left &lt;= right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。</p>
-<p>示例1:</p>
-<img src="/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/rev2ex2.jpeg" class>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5], left = 2, right = 4</span><br><span class="line">输出：[1,4,3,2,5]</span><br></pre></td></tr></table></figure>
-<p>示例2:</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：head = [5], left = 1, right = 1</span><br><span class="line">输出：[5]</span><br></pre></td></tr></table></figure>
-<p><strong>提示</strong>：</p>
-<ul>
-<li>链表中节点数目为 n</li>
-<li>1 &lt;= n &lt;= 500</li>
-<li>-500 &lt;= Node.val &lt;= 500</li>
-<li>1 &lt;= left &lt;= right &lt;= n</li>
-</ul>
-<p><strong>进阶</strong>：<br>你可以使用一趟扫描完成反转吗？</p>
-<h3 id="解法">0.0.1. 解法</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line">class Solution(object):</span><br><span class="line">    def reverseBetween(self, head, left, right):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :type left: int</span></span><br><span class="line"><span class="string">        :type right: int</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        count = 1</span><br><span class="line">        </span><br><span class="line">        dummy = ListNode(0)</span><br><span class="line">        dummy.next = head</span><br><span class="line">        </span><br><span class="line">        pre = dummy</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> pre.next and count &lt; left:</span><br><span class="line">            pre = pre.next</span><br><span class="line">            count += 1</span><br><span class="line"></span><br><span class="line">        cur = pre.next</span><br><span class="line">        tail = cur</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> cur and count &lt;= right:</span><br><span class="line">            nxt = cur.next</span><br><span class="line">            cur.next = pre.next</span><br><span class="line">            pre.next = cur</span><br><span class="line">            tail.next = nxt</span><br><span class="line">            cur = nxt</span><br><span class="line">            count += 1</span><br><span class="line">        <span class="built_in">return</span> dummy.next</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>LeetCode</category>
-      </categories>
-      <tags>
-        <tag>链表</tag>
       </tags>
   </entry>
   <entry>
@@ -742,6 +698,33 @@
       <categories>
         <category>C++学习</category>
       </categories>
+  </entry>
+  <entry>
+    <title>92.反转链表2(Medium)-未掌握</title>
+    <url>/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/</url>
+    <content><![CDATA[<p>LeetCode每日一题(2021.03.18)之<a href="https://leetcode-cn.com/problems/reverse-linked-list-ii/">反转链表2</a></p>
+<p>给你单链表的头指针 head 和两个整数 left 和 right ，其中 left &lt;= right 。请你反转从位置 left 到位置 right 的链表节点，返回 反转后的链表 。</p>
+<p>示例1:</p>
+<img src="/2021/03/18/92-%E5%8F%8D%E8%BD%AC%E9%93%BE%E8%A1%A8-Medium/rev2ex2.jpeg" class>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：head = [1,2,3,4,5], left = 2, right = 4</span><br><span class="line">输出：[1,4,3,2,5]</span><br></pre></td></tr></table></figure>
+<p>示例2:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：head = [5], left = 1, right = 1</span><br><span class="line">输出：[5]</span><br></pre></td></tr></table></figure>
+<p><strong>提示</strong>：</p>
+<ul>
+<li>链表中节点数目为 n</li>
+<li>1 &lt;= n &lt;= 500</li>
+<li>-500 &lt;= Node.val &lt;= 500</li>
+<li>1 &lt;= left &lt;= right &lt;= n</li>
+</ul>
+<p><strong>进阶</strong>：<br>你可以使用一趟扫描完成反转吗？</p>
+<h3 id="解法">0.0.1. 解法</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Definition for singly-linked list.</span></span><br><span class="line"><span class="comment"># class ListNode(object):</span></span><br><span class="line"><span class="comment">#     def __init__(self, val=0, next=None):</span></span><br><span class="line"><span class="comment">#         self.val = val</span></span><br><span class="line"><span class="comment">#         self.next = next</span></span><br><span class="line">class Solution(object):</span><br><span class="line">    def reverseBetween(self, head, left, right):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type head: ListNode</span></span><br><span class="line"><span class="string">        :type left: int</span></span><br><span class="line"><span class="string">        :type right: int</span></span><br><span class="line"><span class="string">        :rtype: ListNode</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        count = 1</span><br><span class="line">        </span><br><span class="line">        dummy = ListNode(0)</span><br><span class="line">        dummy.next = head</span><br><span class="line">        </span><br><span class="line">        pre = dummy</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> pre.next and count &lt; left:</span><br><span class="line">            pre = pre.next</span><br><span class="line">            count += 1</span><br><span class="line"></span><br><span class="line">        cur = pre.next</span><br><span class="line">        tail = cur</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> cur and count &lt;= right:</span><br><span class="line">            nxt = cur.next</span><br><span class="line">            cur.next = pre.next</span><br><span class="line">            pre.next = cur</span><br><span class="line">            tail.next = nxt</span><br><span class="line">            cur = nxt</span><br><span class="line">            count += 1</span><br><span class="line">        <span class="built_in">return</span> dummy.next</span><br></pre></td></tr></table></figure>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>链表</tag>
+      </tags>
   </entry>
   <entry>
     <title>C++PrimerPlus_4.1数组</title>
@@ -945,6 +928,41 @@
       </categories>
   </entry>
   <entry>
+    <title>C++PrimerPlus_4.5共用体union</title>
+    <url>/2021/08/16/C-PrimerPlus-4-5%E5%85%B1%E7%94%A8%E4%BD%93/</url>
+    <content><![CDATA[<p>共用体（union）是一种数据格式。</p>
+<p><strong>它能存储不同的数据类型，但只能同时存储其中一种类型</strong></p>
+<p>共用体的用途是当数据类型可能是1种或者是更多种格式（但不同时使用）时，可节省空间。</p>
+<p>🌰例子：</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    using namespace std;</span><br><span class="line">    </span><br><span class="line">    union one4all</span><br><span class="line">    &#123;</span><br><span class="line">        int int_val;</span><br><span class="line">        long long_val;</span><br><span class="line">        double double_val;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    one4all pail;</span><br><span class="line">    pail.int_val &#x3D; 15;</span><br><span class="line">    cout &lt;&lt; pail.int_val &lt;&lt; endl;</span><br><span class="line">    pail.double_val &#x3D; 12.05;</span><br><span class="line">    cout &lt;&lt; pail.double_val &lt;&lt; endl;</span><br><span class="line">    cout &lt;&lt; pail.int_val &lt;&lt; endl; &#x2F;&#x2F; 输出-1717986918，代表无法输出</span><br><span class="line">    return 0;    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>🌰 例子2:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">int main() &#123;</span><br><span class="line">    using namespace std;</span><br><span class="line">    struct widget</span><br><span class="line">    &#123;</span><br><span class="line">        char brand[20];</span><br><span class="line">        int type;</span><br><span class="line">        </span><br><span class="line">        union id</span><br><span class="line">        &#123;</span><br><span class="line">            long id_num;</span><br><span class="line">            char id_char[20];</span><br><span class="line">        &#125; id_val;</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    widget prize;</span><br><span class="line">    </span><br><span class="line">    prize.brand[0] &#x3D; &#39;z&#39;;</span><br><span class="line">    cout &lt;&lt; &quot;Please enter prize type, 1 or 2 \n&quot;;</span><br><span class="line">    cin &gt;&gt; prize.type;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; prize.type &#x3D; 1;</span><br><span class="line">    &#x2F;&#x2F; prize.id_val.id_num &#x3D; 1;</span><br><span class="line">    &#x2F;&#x2F; prize.id_val.id_char[0] &#x3D; &#39;h&#39;;</span><br><span class="line">    </span><br><span class="line">    if (prize.type &#x3D;&#x3D; 1)</span><br><span class="line">    &#123; &#x2F;&#x2F; 要用打括号括起来，假如if里有几行的话</span><br><span class="line">        cout &lt;&lt; &quot;Please enter prize.id_val in int \n&quot;;</span><br><span class="line">        cin &gt;&gt; prize.id_val.id_num;</span><br><span class="line">        cout &lt;&lt; &quot;Prize.id_val is &quot; &lt;&lt; prize.id_val.id_num &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; &quot;Please enter prize.id_val in char \n&quot;;</span><br><span class="line">        cin &gt;&gt; prize.id_val.id_char;</span><br><span class="line">        cout &lt;&lt; &quot;Prize.id_val is &quot; &lt;&lt; prize.id_val.id_char &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>C++学习</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>C++PrimerPlus_4.6枚举enum</title>
+    <url>/2021/08/16/C-PrimerPlus-4-6%E6%9E%9A%E4%B8%BE/</url>
+    <content><![CDATA[<h1 id="4-6-枚举">1. 4.6 枚举</h1><p>C++的枚举<code>enum</code>工具可以创建符号常量，和<code>const</code>的作用相同。</p>
+<p>例如</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x2F;&#x2F; spectrum 成为新类型的名称，被称为枚举(enumeration)</span><br><span class="line">&#x2F;&#x2F; red,orange,yellow被称为符号常量，被称为枚举量(enumerator)</span><br><span class="line"></span><br><span class="line">enum spectrum &#123;red,orange,yellow&#125;;</span><br><span class="line">&#x2F;&#x2F; 同等于</span><br><span class="line">const int red &#x3D; 0;</span><br><span class="line">const int orange &#x3D; 1;</span><br><span class="line">const int yellow &#x3D; 2;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; 可以用枚举名来生命这种类型的变量</span><br><span class="line">spectrum band;</span><br><span class="line">band &#x3D; blue; </span><br><span class="line"></span><br><span class="line">int color &#x3D; orange; &#x2F;&#x2F; valid</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<h2 id="设置枚举量的值">1.1. 设置枚举量的值</h2><h3 id="可以显式的设置">1.1.1. 可以显式的设置</h3><p><strong>指定的值必须是整数</strong></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">enum bits &#123;one &#x3D; 1, two &#x3D; 2, four &#x3D; 4&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="只显式的定义其中一些">1.1.2. 只显式的定义其中一些</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">enum bigstep &#123;first, second &#x3D; 100, third&#125;;</span><br></pre></td></tr></table></figure>
+<p>first在默认情况下为0，后面没有被初始化的值将比其前面的枚举值大1，因此third=#01。</p>
+<h3 id="可以创建多个值相同的枚举值">1.1.3. 可以创建多个值相同的枚举值</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">enum &#123;zero, null &#x3D; 0, one, numero_one &#x3D; 1&#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="枚举的取值范围">1.2. 枚举的取值范围</h2><p><code>enum bigstep &#123;first, second = 100, thrid&#125;;</code>为例子：</p>
+<ul>
+<li>上限：找到bigstep最大值，他的最小2次幂减去一。这里最大值third=101，最小二次幂为128，因此取值上限是127。</li>
+<li>下限：如果最小值大于0，那么取值下限为0；否则采用和上面一样的方法，但是加上负号。假如最小的枚举量为-6，那么比他小、最大的2次幂为-8，因此下限为-7。</li>
+</ul>
+]]></content>
+      <categories>
+        <category>C++学习</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Hexo/MacOs github不再支持密码验证解决方案2021.8.13更新</title>
     <url>/2021/08/16/Hexo%E5%8D%9A%E5%AE%A2%EF%BC%9Agithub%E4%B8%8D%E5%86%8D%E6%94%AF%E6%8C%81%E5%AF%86%E7%A0%81%E9%AA%8C%E8%AF%81%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%882021-8-13%E6%9B%B4%E6%96%B0/</url>
     <content><![CDATA[<p>8月13日（本来应该是集中隔离最后一天，可恶）github更新了一个东东：</p>
@@ -1010,6 +1028,50 @@
       </categories>
   </entry>
   <entry>
+    <title>Toeic备考记录</title>
+    <url>/2021/05/02/Toeic%E5%A4%87%E8%80%83%E8%AE%B0%E5%BD%95/</url>
+    <content><![CDATA[<h3 id="碎碎念">0.0.1. 碎碎念</h3><p>近日本来想赶着回国前把托业考下来，结果机票熔断了，这就是后话了…</p>
+<p>匆忙的报了4.30号的托业，加上super express correction一共170欧，考点在93区的centrex。</p>
+<p><a href="https://www.etsglobal.org/fr/fr/session/search/ile-de-france/paris?testTypeIds[]=100291&amp;date=2021-05-02&amp;showMap=false">报名地址查询</a></p>
+<p>找工作的时候一直没有一个上得了台面的英语成绩，多年前裸考的雅思5.5写了还不如不写QAQ</p>
+<p>当天13点考完，16点多成绩就发到邮件了，速度超快 930/990，也大于国内六级了，终于有一个普通人都有的英语成绩可以写在cv上了QAQ</p>
+
+<h3 id="备考真题的网站">0.0.2. 备考真题的网站</h3><p><a href="https://www.bilibili.com/video/BV1fh411S7VH/">2021最新托业全套练习</a></p>
+<p><a href="https://www.bilibili.com/video/BV1qo4y1d7xW/">2021托业听力练习含答案</a></p>
+<p><a href="https://www.ets.org/s/toeic/pdf/toeic-listening-reading-sample-test-updated.pdf">sample test</a></p>
+<p><a href="https://global-exam.com/blog/zh/toeic-score-conversion-table/#:~:text=%E5%A6%82%E4%BD%95%E8%A8%88%E7%AE%97%E5%88%86%E6%95%B8%EF%BC%9F,%E5%89%87%E5%B0%87%E7%8D%B2%E5%BE%97495%E5%88%86%E3%80%82">Toeic分数换算表</a></p>
+<p><a href="https://github.com/odcowl/Codes_for_blog/blob/master/toeic/109.pdf">托业的语法句型题目pdf</a></p>
+<div class="pdfobject-container" data-target="https://cdn.jsdelivr.net/gh/odcowl/Codes_for_blog/blob/master/toeic/109.pdf" data-height="500px"></div>
+<p>希望下一步还是可以拿下雅思/托福这种被大众更承认的成绩QAQ</p>
+]]></content>
+      <categories>
+        <category>杂七杂八</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>cv</title>
+    <url>/2021/04/09/cv/</url>
+    <content><![CDATA[<img src="/2021/04/09/cv/FR_yujiaYANG.jpg" class>
+]]></content>
+  </entry>
+  <entry>
+    <title>856.转置矩阵(Easy)</title>
+    <url>/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/</url>
+    <content><![CDATA[<p>力扣每日一题系列(2021.02.25)之<a href="https://leetcode-cn.com/problems/transpose-matrix/">转置矩阵</a><br>难度：简单</p>
+<h2 id="一、题目">0.1. 一、题目</h2><p>给你一个二维整数数组 matrix， 返回 matrix 的 转置矩阵 。<br>矩阵的 转置 是指将矩阵的主对角线翻转，交换矩阵的行索引与列索引。</p>
+<p><img src="https://assets.leetcode.com/uploads/2021/02/10/hint_transpose.png" alt="867.转置矩阵"></p>
+<h3 id="示例">0.1.1. 示例</h3><p>示例1:<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ 输入: matrix&#x3D;[[1,2,3],[4,5,6],[7,8,9]]</span><br><span class="line">$ 输出: [[1,4,7],[2,5,8],[3,6,9]]</span><br></pre></td></tr></table></figure></p>
+<p>示例2:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">输入：matrix = [[1,2,3],[4,5,6]]</span><br><span class="line">输出：[[1,4],[2,5],[3,6]]</span><br></pre></td></tr></table></figure><br>提示：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">m == matrix.length</span><br><span class="line">n == matrix[i].length</span><br><span class="line">1 &lt;= m, n &lt;= 1000</span><br><span class="line">1 &lt;= m * n &lt;= 105</span><br><span class="line">-10^9 &lt;= matrix[i][j] &lt;= 10^9</span><br></pre></td></tr></table></figure></p>
+<h3 id="我的解法">0.1.2. 我的解法</h3><p>转置矩阵即将M行N列的矩阵，转换成N行M列的矩阵，注意有可能N和M并不相等，所以必须要新建一个result矩阵（否则可能会出现out of range的情况）</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">class Solution(object):</span><br><span class="line">    def transpose(self, matrix):</span><br><span class="line">        <span class="string">&quot;&quot;</span><span class="string">&quot;</span></span><br><span class="line"><span class="string">        :type matrix: List[List[int]]</span></span><br><span class="line"><span class="string">        :rtype: List[List[int]]</span></span><br><span class="line"><span class="string">        &quot;</span><span class="string">&quot;&quot;</span></span><br><span class="line">        m,n = len(matrix),len(matrix[0])</span><br><span class="line">        <span class="comment">#m为行数，n为列数</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#不需要numpy的矩阵建造方法</span></span><br><span class="line">        new_matrix = [[0 <span class="keyword">for</span> i <span class="keyword">in</span> range(m)] <span class="keyword">for</span> i <span class="keyword">in</span> range(n)]</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(m):</span><br><span class="line">                new_matrix[i][j] = matrix[j][i]</span><br><span class="line">        <span class="built_in">return</span> new_matrix</span><br></pre></td></tr></table></figure>
+<p>这道题的意思就是原来的每一行转换成了后来的每一列，为了数学关系上更清晰，下面图片为解析。可以看出，对于一个相同的元素，新地址（坐标）和旧地址（坐标）就是横纵轴交换的关系：<br><img src="/2021/02/25/856-%E8%BD%AC%E7%BD%AE%E7%9F%A9%E9%98%B5/jiexi.png" class title="This is an example image"></p>
+<p>一个错误的思路：（这个思路就是没有考虑到新矩阵的大小关系）<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">for i in range(n):</span><br><span class="line">	for j in range(i,m):</span><br><span class="line">		matrix[i][j], matrix[j][i] &#x3D;  matrix[j][i], matrix[i][j]</span><br></pre></td></tr></table></figure></p>
+]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+  </entry>
+  <entry>
     <title>Hexo搭建相关问题</title>
     <url>/2021/02/25/Hexo%E6%90%AD%E5%BB%BA%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%982/</url>
     <content><![CDATA[<h2 id="一、文章创建和发布问题">0.1. 一、文章创建和发布问题</h2><h3 id="常用命令">0.1.1. 常用命令</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo g 【生成静态文件】</span><br><span class="line">$ hexo d 【部署到网站或服务器，部署之前需要先生成静态文件】</span><br><span class="line">$ hexo clean 【清除缓存文件(db.json)和已经生成的静态文件(public)】</span><br></pre></td></tr></table></figure>
@@ -1040,33 +1102,6 @@
       <tags>
         <tag>hexo</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Toeic备考记录</title>
-    <url>/2021/05/02/Toeic%E5%A4%87%E8%80%83%E8%AE%B0%E5%BD%95/</url>
-    <content><![CDATA[<h3 id="碎碎念">0.0.1. 碎碎念</h3><p>近日本来想赶着回国前把托业考下来，结果机票熔断了，这就是后话了…</p>
-<p>匆忙的报了4.30号的托业，加上super express correction一共170欧，考点在93区的centrex。</p>
-<p><a href="https://www.etsglobal.org/fr/fr/session/search/ile-de-france/paris?testTypeIds[]=100291&amp;date=2021-05-02&amp;showMap=false">报名地址查询</a></p>
-<p>找工作的时候一直没有一个上得了台面的英语成绩，多年前裸考的雅思5.5写了还不如不写QAQ</p>
-<p>当天13点考完，16点多成绩就发到邮件了，速度超快 930/990，也大于国内六级了，终于有一个普通人都有的英语成绩可以写在cv上了QAQ</p>
-
-<h3 id="备考真题的网站">0.0.2. 备考真题的网站</h3><p><a href="https://www.bilibili.com/video/BV1fh411S7VH/">2021最新托业全套练习</a></p>
-<p><a href="https://www.bilibili.com/video/BV1qo4y1d7xW/">2021托业听力练习含答案</a></p>
-<p><a href="https://www.ets.org/s/toeic/pdf/toeic-listening-reading-sample-test-updated.pdf">sample test</a></p>
-<p><a href="https://global-exam.com/blog/zh/toeic-score-conversion-table/#:~:text=%E5%A6%82%E4%BD%95%E8%A8%88%E7%AE%97%E5%88%86%E6%95%B8%EF%BC%9F,%E5%89%87%E5%B0%87%E7%8D%B2%E5%BE%97495%E5%88%86%E3%80%82">Toeic分数换算表</a></p>
-<p><a href="https://github.com/odcowl/Codes_for_blog/blob/master/toeic/109.pdf">托业的语法句型题目pdf</a></p>
-<div class="pdfobject-container" data-target="https://cdn.jsdelivr.net/gh/odcowl/Codes_for_blog/blob/master/toeic/109.pdf" data-height="500px"></div>
-<p>希望下一步还是可以拿下雅思/托福这种被大众更承认的成绩QAQ</p>
-]]></content>
-      <categories>
-        <category>杂七杂八</category>
-      </categories>
-  </entry>
-  <entry>
-    <title>cv</title>
-    <url>/2021/04/09/cv/</url>
-    <content><![CDATA[<img src="/2021/04/09/cv/FR_yujiaYANG.jpg" class>
-]]></content>
   </entry>
   <entry>
     <title>向Hexo博客插入Jupyter Notebook的办法</title>
